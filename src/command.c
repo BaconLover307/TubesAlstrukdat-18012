@@ -1,12 +1,21 @@
 #include <stdio.h>
-#include <command.h>
+#include "command.h"
 
 // Main Prosedur untuk command
 void COMMAND() {
-    char input[100];
+    int input;
     while (1) {
+        printf("List command :\n");
+        printf("1. Attack\n");
+        printf("2. Level Up\n");
+        printf("3. Skill\n");
+        printf("4. Undo\n");
+        printf("5. End Turn\n");
+        printf("6. Save\n");
+        printf("7. Move\n");
+        printf("8. Exit\n");
         printf("ENTER COMMAND : ");
-        scanf("%s", input);
+        scanf("%d", input);
         switch(input) {
             case 1 :
                 ATTACK();
@@ -43,20 +52,20 @@ void ATTACK() {
     printf("Bangunan yang digunakan untuk menyerang : ");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
-    while () {
-
-    }
+    // while () {
+    //
+    // }
     printf("Daftar bangunan yang dapat diserang\n");
     // Menampilkan daftar bangunan yang dapat diserang
     printf("Bangunan yang diserang : ");
     int nomorBangunanDiserang;
     scanf("%d", &nomorBangunanDiserang);
-    while () {
-
-    }
+    // while () {
+    //
+    // }
     printf("Jumlah pasukan: ");
     // cek apakah berhasil diambil atau tidak
-    if () {
+    if (1) {
         printf("Bangunan menjadi milikmu!\n");
     } else {
         printf("Bangunan gagal direbut.\n");
@@ -71,10 +80,10 @@ void LEVEL_UP() {
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
     // lakukan pengecekan keberhasilan level up
-    if () {
+    if (1) {
         printf("Level %s-mu meningkat menjadi %d\n");
     } else {
-        pritnf("Jumlah pasukan %s kurang untuk level up\n");
+        printf("Jumlah pasukan %s kurang untuk level up\n");
     }
 }
 
@@ -107,22 +116,22 @@ void MOVE() {
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
     // melakukan validasi input
-    while () {
-
-    }
+    // while () {
+    //
+    // }
 
     printf("Daftar bangunan terdekat :\n");
     // Menampilkan daftar bangunan terdekat
     printf("Bangunan yang akan menerima : ");
     int nomorBangunanDiterima;
-    scanf("%d", nomorBangunanDiterima)
+    scanf("%d", nomorBangunanDiterima);
     printf("Jumlah pasukan : ");
     int jumlahPasukan;
     scanf("%d", jumlahPasukan);
     // melakukan validasi input
-    while () {
-
-    }
+    // while () {
+    //
+    // }
     printf("%d pasukan [...] telah berpindah ke [...]\n");
 }
 
