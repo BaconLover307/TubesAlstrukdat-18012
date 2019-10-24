@@ -205,7 +205,8 @@ void PrintInfo (List L, Bangunan B) {
       printf("Fort ");
     }
 
-    printf("%d ", Tentara(ElmtBan(B, Info(P))));
+    TulisPOINT(Posisi(ElmtBan(B, Info(P))));
+    printf(" %d ", Tentara(ElmtBan(B, Info(P))));
     printf("lv. %d\n", Level(ElmtBan(B, Info(P))));
 
     i++;
