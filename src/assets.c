@@ -34,14 +34,17 @@ void clrscrn() {
 }
 
 void MainM() {
-    print_image("img_mainmenu.txt");
+    print_image("assets//img_mainmenu.txt");
 }
 void Menu() {
-    print_image("img_menu.txt");
+    print_image("assets//img_menu.txt");
 }
 void Credits() {
-    print_image("img_credits.txt");
+    print_image("assets//img_credits.txt");
 }
 void Invalid() {
-    print_image("img_invalid.txt");
+    print_image("assets//img_invalid.txt");
+}
+void Quit() {
+    print_image("assets//img_quit.txt");
 }

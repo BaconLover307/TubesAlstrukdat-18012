@@ -5,7 +5,7 @@
 /* - Anna Elvira Hartoyo      - 13518045 */
 /* - Daniel Riyanto           - 13518075 */
 /* - Faris Muhammad Kautsar   - 13518105 */
-/* - Gregorius Jovan Kresnadi - 13518105 */
+/* - Gregorius Jovan Kresnadi - 13518135 */
 /* File : main.c */
 /* Program Utama */
 /* *
@@ -42,39 +42,42 @@ boolean ExitMenu = false;
 int main() {
 while (!Exit) {
     // todo MainM();
-    printf("#MAINMENU PLACEHOLDER#");
+    printf("#MAINMENU PLACEHOLDER#\n");
     // ASCII Art: MainMenu
     do {
         Exit = false;
-        Menu();
+        //Menu();
+        printf("# MENU PLACEHOLDER #\n");
         //printf("Enter Menu:")
         scanf("%s",&menu);
+        getchar();
         if (strcmp(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
-            printf("#TUT1 PLACEHOLDER#");
-            getchar();
+            clrscrn();
+            printf("#TUT1 PLACEHOLDER#\n");
             getchar(); 
             clrscrn();
             // todo Tutorial2();
-            printf("#TUT2 PLACEHOLDER#");
+            printf("#TUT2 PLACEHOLDER#\n");
             getchar();
             clrscrn();
             ExitMenu = true;
         } else if (menu == "CREDITS") {
             // TODO Credits();
-            printf("#CREDITS PLACEHOLDER#");
+            printf("#CREDITS PLACEHOLDER#\n");
             printf("\n");
             printf("Press enter to go back to main menu...");
             getchar();
         } else if (menu == "QUIT") {
             // TODO Quit();
-            printf("#QUIT PLACEHOLDER#");
+            printf("#QUIT PLACEHOLDER#\n");
             ExitMenu = true;
             Exit = true;
         } else if (menu == "PLAY") {
             // todo maen game
-            printf("#Ceritanya Maen#");
+            printf("#Ceritanya Maen#\n");
+            //getchar(); 
             
 
 

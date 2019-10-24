@@ -31,11 +31,8 @@ typedef struct {
 /* Jika Q adalah Queue, maka akses elemen : */
 #define Warna(P) (P).warna
 #define Skill(P) (P).queueSkill
-#define 
-//#define Tail(Q) (Q).TAIL
+#define ListBgn(P) (P).listBangunan
 //#define InfoHead(Q) (Q).T[(Q).HEAD]
-//#define InfoTail(Q) (Q).T[(Q).TAIL]
-//#define MaxEl(Q) (Q).MaxEl
 
 // $ ********* Prototype *********
 boolean IsLose(listBangunan B);
@@ -56,6 +53,7 @@ void CreatePlayer(Player *P, warna C);
 
 // $ *** Primitif ***
 void updateBangunan (Player *P, listBangunan B);
+/
 
 
 #endif
