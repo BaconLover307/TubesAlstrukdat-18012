@@ -25,7 +25,7 @@
 typedef int indeks; /* indeks baris, kolom */
 typedef int ElType;
 typedef struct {
-    ElType *Mem; /* memori tempat penyimpan elemen (container) */
+    ElType **Mem; /* memori tempat penyimpan elemen (container) */
     int MaxBrs; /* ukuran elemen baris */
     int MaxKol; /* ukuran elemen kolom */
 } MATRIKS;
@@ -44,8 +44,9 @@ void DealokasiMatriks (MATRIKS * M);
 /* F.S. Mem(M) dikembalikan ke system, MaxBrs(M)=0; MaxKol(M)=0 */
 
 /* *** Selektor *** */
-#define MaxBrs(M) (M).MaxBrs
-#define MaxKol(M) (M).MaxKol
+#define MaxBrs(M)   (M).MaxBrs
+#define MaxKol(M)   (M).MaxKol
+#define Mem(M)      (M).Mem
 #define Elmt(M,i,j) (M).Mem[(i)][(j)]
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
