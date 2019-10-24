@@ -190,6 +190,7 @@ void PrintInfo (List L, Bangunan B) {
   int i;
 
   /* ALGORITMA */
+  P = First(L);
   i = 1; //inisialisasi
 
   while (P != Nil) {
@@ -397,41 +398,4 @@ void TambahAllTentara (List L, Bangunan * B) {
 
     P = Next(P);
   }
-}        
-
-/*********************** ATTACK ****************************/
-
-boolean CheckAttackTentara (Bangunan B, urutan X, int N) {
-/* Mengecek apakah bangunan ke-X memiliki jumlah tentara yang >= N */
-/* Jika iya maka True dan sebaliknya */
-
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  return (Tentara(ElmtBan(B, X)) >= N);
-}
-
-void TentaraAttack (Bangunan * B, urutan X, int N) {
-/* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List 
-        Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
-/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */
-
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  Tentara(ElmtBan(*B, X)) -= N;
-
-}
-
-void TentaraAbsolute (Bangunan * B, urutan X) {
-/* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List */
-/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
-        nilai jumlahnya */         
-
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  Tentara(ElmtBan(*B, X)) = abs(Tentara(ElmtBan(*B, X)));
 }        
