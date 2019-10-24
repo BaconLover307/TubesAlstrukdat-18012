@@ -20,12 +20,12 @@
 /* Indeks minimum array */
 #define CharUndef 'Z'
 /* Nama Bangunan yang tidak terdefinisi */
-#define ValUndef 0
+#define ValUndef 0 // ! Untuk Relate (sementara)
 /* Nilai elemen tak terdefinisi */
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;  /* type indeks */
-typedef int ElType;   /* type elemen tabel */
+typedef int ElType;   /* type elemen tabel */ // ! Untuk Relate (sementara)
 
 typedef struct {
   ElType RI[IdxMax + 1]; /* memori tempat penyimpanan elemen (container) */
