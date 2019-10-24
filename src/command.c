@@ -38,17 +38,49 @@ void COMMAND() {
 
 // Prosedur untuk melakukan ATTACK
 void ATTACK() {
+    printf("Daftar bangunan:\n");
+    // Mnampilkan Daftar Bangunan
+    printf("Bangunan yang digunakan untuk menyerang : ");
+    int nomorBangunan;
+    scanf("%d", &nomorBangunan);
+    while () {
 
+    }
+    printf("Daftar bangunan yang dapat diserang\n");
+    // Menampilkan daftar bangunan yang dapat diserang
+    printf("Bangunan yang diserang : ");
+    int nomorBangunanDiserang;
+    scanf("%d", &nomorBangunanDiserang);
+    while () {
+
+    }
+    printf("Jumlah pasukan: ");
+    // cek apakah berhasil diambil atau tidak
+    if () {
+        printf("Bangunan menjadi milikmu!\n");
+    } else {
+        printf("Bangunan gagal direbut.\n");
+    }
 }
 
 // Prosedur untuk Melakukan LEVEL UP
 void LEVEL_UP() {
-
+    printf("Daftar bangunan\n");
+    // Menampilkan daftar Bangunan
+    printf("Bangunan yang akan di level up : ");
+    int nomorBangunan;
+    scanf("%d", &nomorBangunan);
+    // lakukan pengecekan keberhasilan level up
+    if () {
+        printf("Level %s-mu meningkat menjadi %d\n");
+    } else {
+        pritnf("Jumlah pasukan %s kurang untuk level up\n");
+    }
 }
 
 // Prosedur untuk mamakai skill yang sedang dimiliki pemain
 void SKILL() {
-
+    //
 }
 
 // Prosedur untuk melakukan UNDO
@@ -63,13 +95,35 @@ void END_TURN() {
 
 // Prosedur untuk melakukan SAVE
 void SAVE() {
-
+    printf("Lokasi save file: ");
 }
 
 
 // Prosedur untuk melakukan MOVE
 void MOVE() {
+    printf("Daftar bangunan\n");
+    // Menampilkan daftar Bangunan
+    printf("Pilih bangunan : ");
+    int nomorBangunan;
+    scanf("%d", &nomorBangunan);
+    // melakukan validasi input
+    while () {
 
+    }
+
+    printf("Daftar bangunan terdekat :\n");
+    // Menampilkan daftar bangunan terdekat
+    printf("Bangunan yang akan menerima : ");
+    int nomorBangunanDiterima;
+    scanf("%d", nomorBangunanDiterima)
+    printf("Jumlah pasukan : ");
+    int jumlahPasukan;
+    scanf("%d", jumlahPasukan);
+    // melakukan validasi input
+    while () {
+
+    }
+    printf("%d pasukan [...] telah berpindah ke [...]\n");
 }
 
 // Prosedur untuk melakukan EXIT Game
