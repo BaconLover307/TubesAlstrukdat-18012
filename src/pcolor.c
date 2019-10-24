@@ -8,31 +8,35 @@ Created at: 17/10/2019
 #include <stdio.h>
 #include "pcolor.h"
 
+void print_red(char c) {
+    printf("%s%c", RED, c);
+    printf("%s", NORMAL);
+}
 void print_warna(Warna Col, char c) {
     switch (Col)
     {
-    case R:
+    case 'R':
         printf("%s%c", RED, c);
         break;
     
-    case G:
+    case 'G':
         printf("%s%c", GREEN, c);
         break;
     
-    case B:
+    case 'B':
         printf("%s%c", BLUE, c);
         break;
     
-    case C:
+    case 'C':
         printf("%s%c", CYAN, c);
         break;
     
-    case M:
+    case 'M':
         printf("%s%c", MAGENTA, c);
         break;
     
-    case Y:
-        printf("%s%c", GREEN, c);
+    case 'Y':
+        printf("%s%c", YELLOW, c);
         break;
     
     default:

@@ -3,6 +3,7 @@
 /* Definisi Queue   : Model Implementasi Versi III dengan circular buffer */
 
 #include "queue.h"
+#include "string.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,7 +20,7 @@ boolean IsQFull (Queue Q) {
 /* yaitu mengandung elemen sebanyak MaxEl */
 
 int NBQElmt (Queue Q) {
-    if (IsEmpty(Q)) {
+    if (IsQEmpty(Q)) {
         return 0;
     } else if (Tail(Q) < Head(Q)) {
         return (Tail(Q) - Head(Q) + MaxEl(Q) + 1);
@@ -59,7 +60,7 @@ void QAdd (Queue * Q, infotype X) {
     // $ Kamus Lokal
     address i, j;
     // $ Algoritma
-    if (IsEmpty(*Q)) {
+    if (IsQEmpty(*Q)) {
         Head(*Q) = 1;
         Tail(*Q) = 1;
     } else { // * Q tidakkosong

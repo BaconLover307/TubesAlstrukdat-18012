@@ -39,11 +39,11 @@ typedef struct {
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
-boolean IsLose(listBangunan B);
+//boolean IsLose(listBangunan B);
 // Mengirim true jika list kepemilikan bangunan kosong
 
 // $ ***** Creator *****
-void CreatePlayer(Player *P, Warna C);
+void CreatePlayer(Player *P);
 /* I.S. P terdefinisi
 F.S. Sebuah P terbentuk dengan karakter bangunan akan sesuai
 konfigurasi dan warna bangunan sesuai yang dipilih */

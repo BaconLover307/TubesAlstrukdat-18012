@@ -9,17 +9,17 @@ Created at: 17/10/2019
 #include "pcolor.h"
 
 int main() {
-    print_red('Red');
+    print_warna('R','R');
     printf("\n");
-    print_green('Green');
+    print_warna('G','G');
     printf("\n");
-    print_magenta('Magenta');
+    print_warna('B','B');
     printf("\n");
-    print_cyan('Cyan');
+    print_warna('C','C');
     printf("\n");
-    print_yellow('Yellow');
+    print_warna('M','M');
     printf("\n");
-    print_blue('Blue');
+    print_warna('Y','Y');
     printf("\n");
     return 0;
 }

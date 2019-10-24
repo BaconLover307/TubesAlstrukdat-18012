@@ -20,4 +20,4 @@ typedef char Warna;
 #define MAGENTA "\x1B[35m"
 #define CYAN "\x1B[36m"
 
-void print_warna(Warna Col, char c)
+void print_warna(Warna Col, char c);
