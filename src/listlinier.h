@@ -120,26 +120,5 @@ void TambahAllTentara (List L, Bangunan * B);
         Bangunan B terdefinisi */
 /* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya 
         bertambah */       
-
-/*********************** ATTACK ****************************/
-
-boolean CheckAttackTentara (Bangunan B, urutan X, int N);
-/* Mengecek apakah bangunan ke-X memiliki jumlah tentara yang >= N */
-/* Jika iya maka True dan sebaliknya */
-
-void TentaraAttack (List * L, Bangunan * B, urutan X, int N);
-/* I.S. List L terdefinisi 
-        Bangunan B terdefinisi
-        X pasti ada di dalam List 
-        Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
-/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */        
-
-void TentaraAbsolute (List * L, Bangunan * B, urutan X);
-/* I.S. List L terdefinisi
-        Bangunan B terdefinisi
-        X pasti ada di dalam List */
-/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
-        nilai jumlahnya */         
-
-
+         
 #endif

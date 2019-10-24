@@ -105,6 +105,42 @@ void BacaBangunan (Bangunan * B) {
  
 }
 
+/*********************** Tentara Attack ****************************/
+boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
+/* Mengecek apakah bangunan ke-X memiliki jumlah tentara yang >= N */
+/* Jika iya maka True dan sebaliknya */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  return (Tentara(ElmtBan(B, X)) >= N);
+}
+
+void TentaraAttack (Bangunan * B, IdxType X, int N) {
+/* I.S. Bangunan B terdefinisi
+        X pasti ada di dalam List 
+        Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
+/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  Tentara(ElmtBan(*B, X)) -= N;
+
+}
+
+void TentaraAbsolute (Bangunan * B, IdxType X) {
+/* I.S. Bangunan B terdefinisi
+        X pasti ada di dalam List */
+/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
+        nilai jumlahnya */         
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  Tentara(ElmtBan(*B, X)) = abs(Tentara(ElmtBan(*B, X)));
+}   
+
 /*********************** Tentara Invaded **************************/
 void TentaraInvaded (Bangunan * B, IdxType i, int N) {
 /* I.S. Bangunan B terdefinisi 
