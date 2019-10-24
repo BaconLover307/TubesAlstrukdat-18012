@@ -86,6 +86,7 @@ boolean IsEmptyBan (Bangunan B) {
 
 /* *** Test tabel penuh *** */
 boolean IsFullBan (Bangunan B) {
+// ? Entah perlu fungsi ini gak ya?  
 /* Mengirimkan true jika tabel B penuh, mengirimkan false jika tidak */
 
   /* KAMUS LOKAL */
@@ -127,18 +128,6 @@ void TentaraAttack (Bangunan * B, IdxType X, int N) {
   /* ALGORITMA */
   Tentara(ElmtBan(*B, X)) -= N;
 
-}
-
-void TentaraAbsolute (Bangunan * B, IdxType X) {
-/* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List */
-/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
-        nilai jumlahnya */         
-
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  Tentara(ElmtBan(*B, X)) = abs(Tentara(ElmtBan(*B, X)));
 }   
 
 /*********************** Tentara Invaded **************************/
@@ -171,4 +160,16 @@ boolean CanCapture (Bangunan B, IdxType i) {
 
   /* ALGORITMA */
   return (Tentara(ElmtBan(B, i)) <= 0);
+}
+
+void TentaraAbsolute (Bangunan * B, IdxType X) {
+/* I.S. Bangunan B terdefinisi
+        X pasti ada di dalam List */
+/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
+        nilai jumlahnya */         
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  Tentara(ElmtBan(*B, X)) = abs(Tentara(ElmtBan(*B, X)));
 }

@@ -95,6 +95,7 @@ boolean IsEmptyBan (Bangunan B);
 /* Mengirimkan true jika tabel B kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
 boolean IsFullBan (Bangunan B);
+// ? Entah perlu fungsi ini gak ya?  
 /* Mengirimkan true jika tabel B penuh, mengirimkan false jika tidak */
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
@@ -116,12 +117,6 @@ void TentaraAttack (Bangunan * B, IdxType X, int N);
         Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
 /* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */        
 
-void TentaraAbsolute (Bangunan * B, IdxType X);
-/* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List */
-/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
-        nilai jumlahnya */
-
 /*********************** Tentara Invaded **************************/
 void TentaraInvaded (Bangunan * B, IdxType i, int N);
 /* I.S. Bangunan B terdefinisi 
@@ -132,5 +127,10 @@ boolean CanCapture (Bangunan B, IdxType i);
 /* Mengecek apakah Bangunan ke-i memiliki jumlah tentara yang <= 0 */
 /* Jika iya maka true dan sebaliknya */
 
+void TentaraAbsolute (Bangunan * B, IdxType X);
+/* I.S. Bangunan B terdefinisi
+        X pasti ada di dalam List */
+/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
+        nilai jumlahnya */
 
 #endif
