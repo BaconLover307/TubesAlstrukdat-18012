@@ -5,8 +5,10 @@
 #define player_H
 
 #include "boolean.h"
-#include "skill.h"
-#include "bangunan.h"
+//#include "skill.h"
+//#include "bangunan.h"
+#include "queue.h"
+#include "pcolor.h"
 
 //#define Nil 0
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
@@ -17,9 +19,9 @@
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct {
-    Skill queueSkill;       /* queue penyimpan skill */
-    List listBangunan;      /* list penyimpan kepemilikan bangunan */
-    string warna; 
+    Queue queueSkill;       /* queue penyimpan skill */
+    //List listBangunan;      /* list penyimpan kepemilikan bangunan */
+    Warna color; 
 //    boolean stateAttack;       /* menyimpan kondisi giliran */
 //    address TAIL;    /* alamat penambahan */
 //    int MaxEl = 100; /* Max elemen queue */
@@ -29,31 +31,33 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika Q adalah Queue, maka akses elemen : */
-#define Warna(P) (P).warna
+#define Color(P) (P).color
 #define Skill(P) (P).queueSkill
 #define ListBgn(P) (P).listBangunan
 //#define InfoHead(Q) (Q).T[(Q).HEAD]
 
 // $ ********* Prototype *********
+
+// $ *** Condition Check ***
 boolean IsLose(listBangunan B);
-// Mengirim true jika list kosong
+// Mengirim true jika list kepemilikan bangunan kosong
 
-boolean IsFull(Queue Q);
-/* Mengirim true jika tabel penampung elemen Q sudah penuh */
-/* yaitu mengandung elemen sebanyak MaxEl */
-int NBElmt(Queue Q);
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
+// $ ***** Creator *****
+void CreatePlayer(Player *P, Warna C);
+/* I.S. P terdefinisi
+F.S. Sebuah P terbentuk dengan karakter bangunan akan sesuai
+konfigurasi dan warna bangunan sesuai yang dipilih */
 
-// $ *** Kreator ***
-void CreatePlayer(Player *P, warna C);
-/* I.S. P terdefinisi */
-/* F.S. Sebuah P terbentuk dengan karakter bangunan akan sesuai yan salah satu kondisi sbb: */
-/* warna yang telah dipilih */
-/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
+// $ ***** Basic Operators *****
 
-// $ *** Primitif ***
-void updateBangunan (Player *P, listBangunan B);
-/
+// $ *** Color Handling ***
+void SetPlayerWarna(Player *P, Warna C);
+/* I.S. Player terdefinisi
+F.S. Warna bangunan player akan menjadi C */
+
+/* 
+void updateBangunan(Player *P, listBangunan B);
+*/
 
 
 #endif

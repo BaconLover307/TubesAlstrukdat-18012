@@ -7,18 +7,18 @@
 #include <stdlib.h>
 
 /* ********* Prototype ********* */
-boolean IsEmpty (Queue Q) {
+boolean IsQEmpty (Queue Q) {
     return (Head(Q) == Nil) && (Tail(Q) == Nil);
 }
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 
-boolean IsFull (Queue Q) {
+boolean IsQFull (Queue Q) {
     return ((Head(Q) == 1) && (Tail(Q) == MaxEl(Q))) || ((Tail(Q) == Head(Q)-1));
 }
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 
-int NBElmt (Queue Q) {
+int NBQElmt (Queue Q) {
     if (IsEmpty(Q)) {
         return 0;
     } else if (Tail(Q) < Head(Q)) {
@@ -29,7 +29,7 @@ int NBElmt (Queue Q) {
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
 /* *** Kreator *** */
-void CreateEmpty (Queue * Q, int Max) {
+void CreateQueue (Queue * Q, int Max) {
     (*Q).T = (infotype *)malloc((Max + 1) * sizeof(infotype));
     if ((*Q).T != NULL) {
         MaxEl(*Q) = Max;
@@ -46,7 +46,7 @@ void CreateEmpty (Queue * Q, int Max) {
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
 /* *** Destruktor *** */
-void DeAlokasi(Queue * Q) {
+void QDeAlokasi(Queue * Q) {
     MaxEl(*Q) = 0;
     free((*Q).T);
 }
@@ -55,7 +55,7 @@ void DeAlokasi(Queue * Q) {
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void Add (Queue * Q, infotype X) {
+void QAdd (Queue * Q, infotype X) {
     // $ Kamus Lokal
     address i, j;
     // $ Algoritma
@@ -69,14 +69,14 @@ void Add (Queue * Q, infotype X) {
             Tail(*Q)++;
         }
     }
-    InfoTail(*Q) = X;
+    strcpy(InfoTail(*Q), X);
 }
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 
-void Del (Queue * Q, infotype * X) {
-    *X = InfoHead(*Q);
+void QDel (Queue * Q, infotype * X) {
+    strcpy(*X,InfoHead(*Q));
     if (Head(*Q) == Tail(*Q)) { // * Set menjadi queue kosong
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
