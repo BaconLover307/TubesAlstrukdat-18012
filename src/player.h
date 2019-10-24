@@ -30,6 +30,8 @@ typedef struct {
 /* ********* AKSES (Selektor) ********* */
 /* Jika Q adalah Queue, maka akses elemen : */
 #define Warna(P) (P).warna
+#define Skill(P) (P).queueSkill
+#define 
 //#define Tail(Q) (Q).TAIL
 //#define InfoHead(Q) (Q).T[(Q).HEAD]
 //#define InfoTail(Q) (Q).T[(Q).TAIL]
@@ -45,15 +47,15 @@ boolean IsFull(Queue Q);
 int NBElmt(Queue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
-/* *** Kreator *** */
+// $ *** Kreator ***
 void CreatePlayer(Player *P, warna C);
-/* I.S. sembarang */
-/* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
-/* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
+/* I.S. P terdefinisi */
+/* F.S. Sebuah P terbentuk dengan karakter bangunan akan sesuai yan salah satu kondisi sbb: */
+/* warna yang telah dipilih */
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
-/* Proses : Melakukan alokasi, membuat sebuah Q kosong */
-
 
 // $ *** Primitif ***
+void updateBangunan (Player *P, listBangunan B);
+
 
 #endif
