@@ -133,4 +133,18 @@ void TentaraAbsolute (Bangunan * B, IdxType X);
 /* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
         nilai jumlahnya */
 
+/*************************** Level-Up Bangunan ********************************/
+boolean CheckLevelUp (Bangunan B, IdxType X);
+/* Mengecek apakah bangunan tertentu sudah melewati jumlah yang seharusnya 
+   atau belum */
+/* Jika iya maka True dan sebaliknya */
+// ! Jika udah level 4 maka tidak bisa Level Up lagi
+
+void LevelUp (Bangunan B, IdxType X);
+/* I.S. Bangunan B terdefinisi
+        Bangunan ke-X sudah pasti bisa Level-Up */
+/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar 1/2 dari 
+        jumlah sebelumnya.
+        Bangunan ke-X menglami penaikan 1 level. */
+
 #endif
