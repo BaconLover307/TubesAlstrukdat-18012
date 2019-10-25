@@ -7,20 +7,20 @@
 
 #include "boolean.h"
 
-#define Nil ' '
-/* Konstanta untuk mendefinisikan address tak terdefinisi */
+#define QNil ' '
+/* Konstanta untuk mendefinisikan Qaddress tak terdefinisi */
 
-/* Definisi elemen dan address */
-typedef char infotype[2];
-typedef int address;   /* indeks tabel */
+/* Definisi elemen dan Qaddress */
+typedef char infotype[10];
+typedef int Qaddress;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct { infotype * T;   /* tabel penyimpan elemen */
-                 address HEAD;  /* alamat penghapusan */
-                 address TAIL;  /* alamat penambahan */
+                 Qaddress HEAD;  /* alamat penghapusan */
+                 Qaddress TAIL;  /* alamat penambahan */
                  int MaxEl;     /* Max elemen queue */
                } Queue;
-/* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
+/* Definisi Queue kosong: HEAD=QNil; TAIL=QNil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
@@ -62,7 +62,11 @@ void QAdd (Queue * Q, infotype X);
 void QDel (Queue * Q, infotype * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
+/* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
+
+void PrintInfoHead (Queue Q);
+/* I.S. Q mungkin kosong */
+/* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
 
 #endif
