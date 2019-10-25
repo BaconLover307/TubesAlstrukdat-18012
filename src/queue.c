@@ -9,17 +9,20 @@
 
 /* ********* Prototype ********* */
 boolean IsQEmpty (Queue Q) {
-    return (Head(Q) == Nil) && (Tail(Q) == Nil);
-}
 /* Mengirim true jika Q kosong: lihat definisi di atas */
+    return (Head(Q) == QNil) && (Tail(Q) == QNil);
+}
+
 
 boolean IsQFull (Queue Q) {
-    return ((Head(Q) == 1) && (Tail(Q) == MaxEl(Q))) || ((Tail(Q) == Head(Q)-1));
-}
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
+    return ((Head(Q) == 1) && (Tail(Q) == MaxEl(Q))) || ((Tail(Q) == Head(Q)-1));
+}
+
 
 int NBQElmt (Queue Q) {
+/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
     if (IsQEmpty(Q)) {
         return 0;
     } else if (Tail(Q) < Head(Q)) {
@@ -27,39 +30,46 @@ int NBQElmt (Queue Q) {
     } else {return (Tail(Q) - Head(Q) + 1);}
     
 }
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
+
 
 /* *** Kreator *** */
 void CreateQueue (Queue * Q, int Max) {
-    (*Q).T = (infotype *)malloc((Max + 1) * sizeof(infotype));
-    if ((*Q).T != NULL) {
-        MaxEl(*Q) = Max;
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
-    } else { //  ! alokasigagal
-        MaxEl(*Q) = 0;
-    }
-}
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
+    (*Q).T = (infotype *)malloc((Max + 1) * sizeof(infotype));
+    if ((*Q).T != NULL) {
+        MaxEl(*Q) = Max;
+        Head(*Q) = QNil;
+        Tail(*Q) = QNil;
+    } else { //  ! alokasigagal
+        MaxEl(*Q) = 0;
+    }
+}
+
 
 /* *** Destruktor *** */
 void QDeAlokasi(Queue * Q) {
-    MaxEl(*Q) = 0;
-    free((*Q).T);
-}
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
+    MaxEl(*Q) = 0;
+    free((*Q).T);
+}
+
 
 /* *** Primitif Add/Delete *** */
-void QAdd (Queue * Q, infotype X) {
+void QAdd (Queue * Q, infotype X){
+/* Proses: Menambahkan X pada Q dengan aturan FIFO */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
+
     // $ Kamus Lokal
-    address i, j;
+    Qaddress i, j;
     // $ Algoritma
+
     if (IsQEmpty(*Q)) {
         Head(*Q) = 1;
         Tail(*Q) = 1;
@@ -72,20 +82,37 @@ void QAdd (Queue * Q, infotype X) {
     }
     strcpy(InfoTail(*Q), X);
 }
-/* Proses: Menambahkan X pada Q dengan aturan FIFO */
-/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
-/* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
+
 
 void QDel (Queue * Q, infotype * X) {
+/* Proses: Menghapus X pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
+    Q mungkin kosong */
     strcpy(*X,InfoHead(*Q));
     if (Head(*Q) == Tail(*Q)) { // * Set menjadi queue kosong
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+        Head(*Q) = QNil;
+        Tail(*Q) = QNil;
     } else {
         Head(*Q)++;
     }
 }
-/* Proses: Menghapus X pada Q dengan aturan FIFO */
-/* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
-        Q mungkin kosong */
+
+void PrintInfoHead (Queue Q){
+/* I.S. Q mungkin kosong */
+/* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
+
+    // $ Kamus Lokal
+    char skil [10];
+
+    // $ Algoritma
+    if (IsQEmpty(Q)){
+        printf("none");
+    }
+
+    else{
+        strcpy(skil, InfoHead(Q));
+        printf("%s", skil);
+    }
+}
+
