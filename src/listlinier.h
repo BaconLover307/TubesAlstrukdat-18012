@@ -102,13 +102,13 @@ int NbElmtList (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
-boolean CheckTambahTentara (List L, Bangunan B, urutan X);
+boolean CheckTambahTentara (Bangunan B, urutan X);
 /* X pasti ada di dalam List */
 /* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah 
    melewati maksimum penambahan pasukan atau belum */
 /* Jika belum maka true dan sebaliknya */
 
-void TambahTentara (List L, Bangunan * B, urutan X);
+void TambahTentara (Bangunan * B, urutan X);
 /* I.S. List L terdefinisi
         Bangunan B terdefinisi
         X pasti ada di dalam List

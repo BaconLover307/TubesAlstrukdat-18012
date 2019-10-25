@@ -237,77 +237,75 @@ int NbElmtList (List L) {
 }
 
 /*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
-boolean CheckTambahTentara (List L, Bangunan B, urutan X) {
+boolean CheckTambahTentara (Bangunan B, urutan X) {
 /* X pasti ada di dalam List */
 /* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah 
    melewati maksimum penambahan pasukan atau belum */
 /* Jika belum maka true dan sebaliknya */
 
   /* KAMUS LOKAL */
-  address P;
 
   /* ALGORITMA */
-  P = Search(L, X);
-  if (Name(ElmtBan(B, Info(P))) == 'C') {
-    if (Level(ElmtBan(B, Info(P))) == 1) {
-      return (Tentara(ElmtBan(B, Info(P))) < 40);
+  if (Name(ElmtBan(B, X)) == 'C') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 40);
 
-    } else if (Level(ElmtBan(B, Info(P))) == 2) {
-      return (Tentara(ElmtBan(B, Info(P))) < 60);
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 60);
 
-    } else if (Level(ElmtBan(B, Info(P))) == 3) {
-      return (Tentara(ElmtBan(B, Info(P))) < 80);
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 80);
 
-    } else /* Level(ElmtBan(B, Info(P))) == 4 */ {
-      return (Tentara(ElmtBan(B, Info(P))) < 100);
-
-    }
-  } else if (Name(ElmtBan(B, Info(P))) == 'T') {
-    if (Level(ElmtBan(B, Info(P))) == 1) {
-      return (Tentara(ElmtBan(B, Info(P))) < 20);
-
-    } else if (Level(ElmtBan(B, Info(P))) == 2) {
-      return (Tentara(ElmtBan(B, Info(P))) < 30);
-
-    } else if (Level(ElmtBan(B, Info(P))) == 3) {
-      return (Tentara(ElmtBan(B, Info(P))) < 40);
-
-    } else /* Level(ElmtBan(B, Info(P))) == 4 */ {
-      return (Tentara(ElmtBan(B, Info(P))) < 50);
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 100);
 
     }
-  } else if (Name(ElmtBan(B, Info(P))) == 'F') {
-    if (Level(ElmtBan(B, Info(P))) == 1) {
-      return (Tentara(ElmtBan(B, Info(P))) < 20);
+  } else if (Name(ElmtBan(B, X)) == 'T') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 20);
 
-    } else if (Level(ElmtBan(B, Info(P))) == 2) {
-      return (Tentara(ElmtBan(B, Info(P))) < 40);
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 30);
 
-    } else if (Level(ElmtBan(B, Info(P))) == 3) {
-      return (Tentara(ElmtBan(B, Info(P))) < 60);
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 40);
 
-    } else /* Level(ElmtBan(B, Info(P))) == 4 */ {
-      return (Tentara(ElmtBan(B, Info(P))) < 80);
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 50);
 
     }
-  } else /* Name(ElmtBan(B, Info(P))) == 'V' */ {
-    if (Level(ElmtBan(B, Info(P))) == 1) {
-      return (Tentara(ElmtBan(B, Info(P))) < 20);
+  } else if (Name(ElmtBan(B, X)) == 'F') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 20);
 
-    } else if (Level(ElmtBan(B, Info(P))) == 2) {
-      return (Tentara(ElmtBan(B, Info(P))) < 30);
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 40);
 
-    } else if (Level(ElmtBan(B, Info(P))) == 3) {
-      return (Tentara(ElmtBan(B, Info(P))) < 40);
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 60);
 
-    } else /* Level(ElmtBan(B, Info(P))) == 4 */ {
-      return (Tentara(ElmtBan(B, Info(P))) < 50);
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 80);
+
+    }
+  } else /* Name(ElmtBan(B, X)) == 'V' */ {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 30);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 40);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 50);
 
     }
   }
 }
 
-void TambahTentara (List L, Bangunan * B, urutan X) {
+void TambahTentara (Bangunan * B, urutan X) {
 /* I.S. List L terdefinisi
         Bangunan B terdefinisi
         X pasti ada di dalam List
@@ -315,64 +313,62 @@ void TambahTentara (List L, Bangunan * B, urutan X) {
 /* F.S. Bangunan ke-X ditambah jumlah sesuai dengan tipe bangunan itu */
 
   /* KAMUS LOKAL */
-  address P;
 
   /* ALGORITMA */
-  P = Search(L, X);
-  if (Name(ElmtBan(*B, Info(P))) == 'C') {
-    if (Level(ElmtBan(*B, Info(P))) == 1) {
-      Tentara(ElmtBan(*B, Info(P))) += 10;
+  if (Name(ElmtBan(*B, X)) == 'C') {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 10;
 
-    } else if (Level(ElmtBan(*B, Info(P))) == 2) {
-      Tentara(ElmtBan(*B, Info(P))) += 15;
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 15;
 
-    } else if (Level(ElmtBan(*B, Info(P))) == 3) {
-      Tentara(ElmtBan(*B, Info(P))) += 20;
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 20;
 
-    } else /* Level(ElmtBan(*B, Info(P))) == 4 */ {
-      Tentara(ElmtBan(*B, Info(P))) += 25;
-
-    }
-  } else if (Name(ElmtBan(*B, Info(P))) == 'T') {
-    if (Level(ElmtBan(*B, Info(P))) == 1) {
-      Tentara(ElmtBan(*B, Info(P))) += 5;
-
-    } else if (Level(ElmtBan(*B, Info(P))) == 2) {
-      Tentara(ElmtBan(*B, Info(P))) += 10;
-
-    } else if (Level(ElmtBan(*B, Info(P))) == 3) {
-      Tentara(ElmtBan(*B, Info(P))) += 20;
-
-    } else /* Level(ElmtBan(*B, Info(P))) == 4 */ {
-      Tentara(ElmtBan(*B, Info(P))) += 30;
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 25;
 
     }
-  } else if (Name(ElmtBan(*B, Info(P))) == 'F') {
-    if (Level(ElmtBan(*B, Info(P))) == 1) {
-      Tentara(ElmtBan(*B, Info(P))) += 10;
+  } else if (Name(ElmtBan(*B, X)) == 'T') {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 5;
 
-    } else if (Level(ElmtBan(*B, Info(P))) == 2) {
-      Tentara(ElmtBan(*B, Info(P))) += 20;
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 10;
 
-    } else if (Level(ElmtBan(*B, Info(P))) == 3) {
-      Tentara(ElmtBan(*B, Info(P))) += 30;
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 20;
 
-    } else /* Level(ElmtBan(*B, Info(P))) == 4 */ {
-      Tentara(ElmtBan(*B, Info(P))) += 40;
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 30;
 
     }
-  } else /* Name(ElmtBan(*B, Info(P))) == 'V' */ {
-    if (Level(ElmtBan(*B, Info(P))) == 1) {
-      Tentara(ElmtBan(*B, Info(P))) += 5;
+  } else if (Name(ElmtBan(*B, X)) == 'F') {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 10;
 
-    } else if (Level(ElmtBan(*B, Info(P))) == 2) {
-      Tentara(ElmtBan(*B, Info(P))) += 10;
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 20;
 
-    } else if (Level(ElmtBan(*B, Info(P))) == 3) {
-      Tentara(ElmtBan(*B, Info(P))) += 15;
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 30;
 
-    } else /* Level(ElmtBan(*B, Info(P))) == 4 */ {
-      Tentara(ElmtBan(*B, Info(P))) += 20;
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 40;
+
+    }
+  } else /* Name(ElmtBan(*B, X)) == 'V' */ {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 5;
+
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 10;
+
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 15;
+
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 20;
 
     }
   }
@@ -392,8 +388,8 @@ void TambahAllTentara (List L, Bangunan * B) {
   P = First(L);
 
   while (P != Nil) {
-    if (CheckTambahTentara(L, *B, Info(P))) {
-      TambahTentara(L, B, Info(P));
+    if (CheckTambahTentara(*B, Info(P))) {
+      TambahTentara(B, Info(P));
     }
 
     P = Next(P);
