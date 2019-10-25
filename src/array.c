@@ -175,15 +175,88 @@ void TentaraAbsolute (Bangunan * B, IdxType X) {
 }
 
 /*************************** Level-Up Bangunan ********************************/
-boolean CheckLevelUp (Bangunan B, IdxType X);
+boolean CheckLevelUp (Bangunan B, IdxType X) {
 /* Mengecek apakah bangunan tertentu sudah melewati jumlah yang seharusnya 
    atau belum */
 /* Jika iya maka True dan sebaliknya */
 // ! Jika udah level 4 maka tidak bisa Level Up lagi
 
-void LevelUp (Bangunan B, IdxType X);
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  if (Name(ElmtBan(B, X)) == 'C') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) >= 40);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) >= 60);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) >= 80);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return false;
+
+    }
+  } else if (Name(ElmtBan(B, X)) == 'T') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) >= 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) >= 30);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) >= 40);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return false;
+
+    }
+  } else if (Name(ElmtBan(B, X)) == 'F') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) >= 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) >= 40);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) >= 60);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return false;
+
+    }
+  } else /* Name(ElmtBan(B, X)) == 'V' */ {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) >= 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) >= 30);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) >= 40);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return false;
+
+    }
+  }
+}
+
+void LevelUp (Bangunan * B, IdxType X) {
 /* I.S. Bangunan B terdefinisi
         Bangunan ke-X sudah pasti bisa Level-Up */
 /* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar 1/2 dari 
         jumlah sebelumnya.
         Bangunan ke-X menglami penaikan 1 level. */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  if (Tentara(ElmtBan(*B, X)) % 2 == 1) { //apabila jumlah tentaranya ganjil
+    Tentara(ElmtBan(*B, X)) -= 1;
+  }
+
+  Tentara(ElmtBan(*B, X)) /= 2;
+  Level(ElmtBan(*B, X)) += 1;
+}        

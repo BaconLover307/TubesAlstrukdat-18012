@@ -140,7 +140,7 @@ boolean CheckLevelUp (Bangunan B, IdxType X);
 /* Jika iya maka True dan sebaliknya */
 // ! Jika udah level 4 maka tidak bisa Level Up lagi
 
-void LevelUp (Bangunan B, IdxType X);
+void LevelUp (Bangunan * B, IdxType X);
 /* I.S. Bangunan B terdefinisi
         Bangunan ke-X sudah pasti bisa Level-Up */
 /* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar 1/2 dari 
