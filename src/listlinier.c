@@ -131,18 +131,30 @@ void InsertPrio (List * L, address P) {
 /* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
 
   /* KAMUS LOKAL */
-  address Last;
+  address PrecLast, Last;
 
   /* ALGORITMA */
   if (IsEmptyList(*L)) {
     First(*L) = P;
     Next(P) = Nil;
   } else /* !IsEmpty(*L) */ {
+    PrecLast = Nil;
     Last = First(*L);
     while ((Next(Last) != Nil) && (Info(P) >= Info(Last))) {
+      PrecLast = Last;
       Last = Next(Last);
     }
-    InsertAfter(L, P, Last);
+
+    if (Info(P) < Info(Last)) {
+      if (PrecLast == Nil) {
+        Next(P) = First(*L);
+        First(*L) = P;
+      } else /* PrecLast != Nil */ {
+        InsertAfter(L, P, PrecLast);
+      }
+    } else /* Info(P) >= Info(Last) */ {
+      InsertAfter(L, P, Last);
+    }
   }
 }
 

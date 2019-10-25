@@ -67,6 +67,14 @@ int main() {
   if (CanCapture(B, 3)) {
     printf("Bangunan ke-3 berhasil dikuasai.\n");
     TentaraAbsolute(&B, 3);
-    printf("Jumlah tentara pada bangunan ke-3 sekarang adalah %d.\n", Tentara(ElmtBan(B, 3)));
+    printf("Jumlah tentara pada bangunan ke-3 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 3)));
+  }
+
+  if (CheckLevelUp(B, 4)) {
+    printf("Bangunan ke-4 dapat Level Up.\n");
+    LevelUp(&B, 4);
+    printf("Setelah Level Up,\n");
+    printf("Jumlah tentara Bangunan ke-4 sekarang adalah %d.\n", Tentara(ElmtBan(B, 4)));
+    printf("Level Bangunan ke-4 sekarang adalah %d.\n", Level(ElmtBan(B, 4)));
   }
 }

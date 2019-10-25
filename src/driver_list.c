@@ -52,8 +52,40 @@ int main() {
 
   InsVPrio(&L1, 1); InsVPrio(&L1, 3);
   InsVPrio(&L2, 2); InsVPrio(&L2, 4);
-  printf("Pemain 1\n");
+  printf("Pemain ke-1\n");
   printf("Memiliki %d bangunan.\n", NbElmtList(L1));
+  PrintInfo(L1, B);
+  printf("\n");
+
+  printf("Pemain ke-2 mau menyerang bangunan ke-3 yang dimiliki oleh Pemain 1.\n");
+  printf("Tentara sebesar 30 orang dari Bangunan ke-4.\n");
+
+  TentaraAttack(&B, 4, 30);
+  TentaraInvaded(&B, 3, 30);
+  if (CanCapture(B, 3)) {
+    if (Search(L1, 3)) {
+      printf("Bangunan ke-3 yang dimiliki oleh Pemain ke-1 telah dikuasai oleh Pemain ke-2.\n\n");
+      DelP(&L1, 3);
+    }
+    InsVPrio(&L2, 3);
+    TentaraAbsolute(&B, 3);
+  }
+
+  printf("Pemain ke-1\n");
+  PrintInfo(L1, B);
+  printf("\n");
+
+  printf("Pemain ke-2\n");
+  PrintInfo(L2, B);
+  printf("\n");
+
+  TambahAllTentara(L2, &B);
+  printf("Setelah pemain ke-2 mengalami penaikan jumlah tentara.\n");
+  PrintInfo(L2, B);
+  printf("\n");
+
+  printf("Pemain ke-1 mau melakukan Level Up pada bangunan ke-1.\n");
+  LevelUp(&B, 1);
   PrintInfo(L1, B);
 
   return 0;
