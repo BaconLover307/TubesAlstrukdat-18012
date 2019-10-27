@@ -102,9 +102,10 @@ boolean CheckAttack (Graph G, List L, urutan X);
    menyerang bangunan yang tidak dimilikinya atau tidak */
 /* Jika iya maka True dan sebaliknya */
 
-void PrintAttack (Graph G, List L, urutan X);
+void PrintAttack (Graph G, List L, Bangunan B, urutan X);
 /* I.S. Graph G terdefinisi
         List L terdefinisi 
+        Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang bisa diserang maka akan muncul pilihan-
         pilihan bangunan yang dapat diserang
@@ -117,9 +118,10 @@ boolean CheckMove (Graph G, List L, urutan X);
    mengirimkan tentara bangunan lain yang dimilikinya atau tidak */
 /* Jika iya maka True dan sebaliknya */
 
-void PrintMove (Graph G, List L, urutan X);
+void PrintMove (Graph G, List L, Bangunan B, urutan X);
 /* I.S. Graph G terdefinisi
         List L terdefinisi 
+        Bangunan B terdefinisi 
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang memiliki hungan dengan bangunan ke-X
         yang dimiliki oleh pemain itu maka muncul pilihan-pilihan bangunan
