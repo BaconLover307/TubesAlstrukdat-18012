@@ -132,10 +132,15 @@ void MOVE() {
     // while () {
     //
     // }
-    printf("%d pasukan [...] telah berpindah ke [...]\n");
+    printf("%d pasukan [...] telah berpindah ke [...]\n", jumlahPasukan);
 }
 
 // Prosedur untuk melakukan EXIT Game
 void EXIT() {
-    printf("Apakah Anda ingin melakukan save terlebih dahulu ?");
+    char inp;
+    printf("Apakah Anda ingin melakukan save terlebih dahulu? Y/N\n");
+    if (inp == 'Y') {
+        SAVE();
+    }
+    // keluar
 }

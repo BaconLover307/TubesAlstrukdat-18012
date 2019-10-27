@@ -1,4 +1,4 @@
-/* ********** Definisi TYPE MATRIKS dengan indeks dan elemen integer ********** */
+/* ********** Definisi TYPE MATRIKS dengan Mindeks dan elemen integer ********** */
 
 #ifndef MATRIKS_H
 #define MATRIKS_H
@@ -11,15 +11,15 @@
 #define KolMin 1
 #define KolMax 100
 
-typedef int indeks; /* indeks baris, kolom */
-typedef int ElType;
+typedef int Mindeks; /* Mindeks baris, kolom */
+typedef int ElMType;
 typedef struct {
-    ElType Mem[BrsMax+1][KolMax+1];
+    ElMType Mem[BrsMax+1][KolMax+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS;
 /* NBrsEff <= 1 dan NKolEff <= 1 */
-/* Indeks matriks yang digunakan: [BrsMin..BrsMax][KolMin..KolMax] */
+/* Mindeks matriks yang digunakan: [BrsMin..BrsMax][KolMin..KolMax] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
@@ -36,20 +36,20 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M);
 
 /* *** Selektor "DUNIA MATRIKS" *** */
 boolean IsIdxValid (int i, int j);
-/* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
+/* Mengirimkan true jika i, j adalah Mindeks yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
-indeks GetFirstIdxBrs (MATRIKS M);
-/* Mengirimkan indeks baris terkecil M */
-indeks GetFirstIdxKol (MATRIKS M);
-/* Mengirimkan indeks kolom terkecil M */
-indeks GetLastIdxBrs (MATRIKS M);
-/* Mengirimkan indeks baris terbesar M */
-indeks GetLastIdxKol (MATRIKS M);
-/* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j);
-/* Mengirimkan true jika i, j adalah indeks efektif bagi M */
-ElType GetElmtDiagonal (MATRIKS M, indeks i);
+Mindeks GetFirstIdxBrs (MATRIKS M);
+/* Mengirimkan Mindeks baris terkecil M */
+Mindeks GetFirstIdxKol (MATRIKS M);
+/* Mengirimkan Mindeks kolom terkecil M */
+Mindeks GetLastIdxBrs (MATRIKS M);
+/* Mengirimkan Mindeks baris terbesar M */
+Mindeks GetLastIdxKol (MATRIKS M);
+/* Mengirimkan Mindeks kolom terbesar M */
+boolean IsIdxEff (MATRIKS M, Mindeks i, Mindeks j);
+/* Mengirimkan true jika i, j adalah Mindeks efektif bagi M */
+ElMType GetElmtDiagonal (MATRIKS M, Mindeks i);
 /* Mengirimkan elemen M(i,i) */
 
 /* ********** Assignment  MATRIKS ********** */
@@ -88,16 +88,16 @@ MATRIKS KurangMATRIKS (MATRIKS M1, MATRIKS M2);
 MATRIKS KaliMATRIKS (MATRIKS M1, MATRIKS M2);
 /* Prekondisi : Ukuran kolom efektif M1 = ukuran baris efektif M2 */
 /* Mengirim hasil perkalian matriks: salinan M1 * M2 */
-MATRIKS KaliKons (MATRIKS M, ElType X);
+MATRIKS KaliKons (MATRIKS M, ElMType X);
 /* Mengirim hasil perkalian setiap elemen M dengan X */
-void PKaliKons (MATRIKS * M, ElType K);
+void PKaliKons (MATRIKS * M, ElMType K);
 /* I.S. M terdefinisi, K terdefinisi */
 /* F.S. Mengalikan setiap elemen M dengan K */
 
 /* ********** KELOMPOK OPERASI RELASIONAL TERHADAP MATRIKS ********** */
 boolean EQ (MATRIKS M1, MATRIKS M2);
 /* Mengirimkan true jika M1 = M2, yaitu NBElmt(M1) = NBElmt(M2) dan */
-/* untuk setiap i,j yang merupakan indeks baris dan kolom M1(i,j) = M2(i,j) */
+/* untuk setiap i,j yang merupakan Mindeks baris dan kolom M1(i,j) = M2(i,j) */
 /* Juga merupakan strong EQ karena GetFirstIdxBrs(M1) = GetFirstIdxBrs(M2)
    dan GetLastIdxKol(M1) = GetLastIdxKol(M2) */
 boolean NEQ (MATRIKS M1, MATRIKS M2);
@@ -125,7 +125,7 @@ boolean IsSparse (MATRIKS M);
 MATRIKS Inverse1 (MATRIKS M);
 /* Menghasilkan salinan M dengan setiap elemen "di-invers", yaitu dinegasikan (dikalikan -1) */
 /* ********** FUNGSI ANTARA DETERMINAN ********** */
-MATRIKS DelBrsKol(MATRIKS M, indeks Brs, indeks Kol);
+MATRIKS DelBrsKol(MATRIKS M, Mindeks Brs, Mindeks Kol);
 /* I.S. M terdefinisi */
 /* F.S. M berkurang 1 baris dan 1 kolom, sesuai baris dan kolom yang dipilih untuk dibuang */
  /* **********       ********** */

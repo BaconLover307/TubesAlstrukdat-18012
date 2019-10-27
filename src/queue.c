@@ -16,8 +16,8 @@ boolean IsQEmpty (Queue Q) {
 
 boolean IsQFull (Queue Q) {
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
-/* yaitu mengandung elemen sebanyak MaxEl */
-    return ((Head(Q) == 1) && (Tail(Q) == MaxEl(Q))) || ((Tail(Q) == Head(Q)-1));
+/* yaitu mengandung elemen sebanyak MaxQEl */
+    return ((Head(Q) == 1) && (Tail(Q) == MaxQEl(Q))) || ((Tail(Q) == Head(Q)-1));
 }
 
 
@@ -26,7 +26,7 @@ int NBQElmt (Queue Q) {
     if (IsQEmpty(Q)) {
         return 0;
     } else if (Tail(Q) < Head(Q)) {
-        return (Tail(Q) - Head(Q) + MaxEl(Q) + 1);
+        return (Tail(Q) - Head(Q) + MaxQEl(Q) + 1);
     } else {return (Tail(Q) - Head(Q) + 1);}
     
 }
@@ -37,15 +37,15 @@ void CreateQueue (Queue * Q, int Max) {
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
-/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
+/* atau : jika alokasi gagal, Q kosong dg MaxQEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
-    (*Q).T = (infotype *)malloc((Max + 1) * sizeof(infotype));
+    (*Q).T = (Qinfotype *)malloc((Max + 1) * sizeof(Qinfotype));
     if ((*Q).T != NULL) {
-        MaxEl(*Q) = Max;
+        MaxQEl(*Q) = Max;
         Head(*Q) = QNil;
         Tail(*Q) = QNil;
     } else { //  ! alokasigagal
-        MaxEl(*Q) = 0;
+        MaxQEl(*Q) = 0;
     }
 }
 
@@ -54,14 +54,14 @@ void CreateQueue (Queue * Q, int Max) {
 void QDeAlokasi(Queue * Q) {
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
-    MaxEl(*Q) = 0;
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxQEl(Q) diset 0 */
+    MaxQEl(*Q) = 0;
     free((*Q).T);
 }
 
 
 /* *** Primitif Add/Delete *** */
-void QAdd (Queue * Q, infotype X){
+void QAdd (Queue * Q, Qinfotype X){
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
@@ -74,7 +74,7 @@ void QAdd (Queue * Q, infotype X){
         Head(*Q) = 1;
         Tail(*Q) = 1;
     } else { // * Q tidakkosong
-        if (Tail(*Q) == MaxEl(*Q)) { // * Geser elemen smp Head(Q)=1
+        if (Tail(*Q) == MaxQEl(*Q)) { // * Geser elemen smp Head(Q)=1
             Tail(*Q) = 1;
         } else {
             Tail(*Q)++;
@@ -84,7 +84,7 @@ void QAdd (Queue * Q, infotype X){
 }
 
 
-void QDel (Queue * Q, infotype * X) {
+void QDel (Queue * Q, Qinfotype * X) {
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 

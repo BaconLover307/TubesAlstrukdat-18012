@@ -11,11 +11,11 @@
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
-/*
-boolean IsLose(listBangunan B) {
-    return NBBangunan(B) == 0;
-}
-*/
+
+/*boolean IsLose(Player P) {
+    return NBBangunan(ListBgn(P)) == 0;
+}*/
+
 // $ ***** Creator *****
 void CreatePlayer(Player *P) {
     // * Handling Queue Skill
@@ -33,14 +33,14 @@ void SetPlayerWarna(Player *P, Warna C) {
 }
 
 
-// $ ***** Skills ***
-void InstantUpgrade(Player *P, Bangunan *B){
+// $ ***** Skills *****
+//void InstantUpgrade(Player *P, Bangunan *B){
     /* I.S. Player P terdefinisi dan bangunan B terdefinisi
     /* F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
        pada bangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
     /* Pemain mendapat skill ini hanya saat awal permainan */
-
-    address A;
+/*
+    Laddress A;
     
     A = First(ListBgn(*P));
     while (Next(A) != Nil){
@@ -50,7 +50,7 @@ void InstantUpgrade(Player *P, Bangunan *B){
         A = Next(A);
     }
 }
-
+*/
 /*
 void Shield(Player *P) {
     /* I.S.
@@ -80,13 +80,14 @@ void CriticalHit(){
     /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
 
 //}
-
-void InstantReinforcement(Player *P, Bangunan *B){
+//void InstantReinforcement(Player *P, Bangunan *B) {
     /* I.S. Player P dan Bangunan B terdefinisi
     /* F.S. Seluruh bangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.*/
     /* Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki memiliki level 4 */
+    // Kamus Lokal    
+/*
     address A;
-
+    // Algoritma
     A = First(ListBgn(*P));
     while (Next(A) != Nil){
         if (CheckTambahTentara(ListBgn(*P), *B, Info(A))){
@@ -97,15 +98,16 @@ void InstantReinforcement(Player *P, Bangunan *B){
 
  
 }
-
-void Barrage(Player *P, Bangunan *B){
+*/
+//void Barrage(Player *P, Bangunan *B) {
     /* I.S. Player P dan Bangunan B terdefinisi. 
     /* F.S. Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10. 
        Jika jumlah pasukan >= 10, akan dilakukan pengurangan sebanyak 10, tapi jika jumlah pasukan <1,
        jumlah pasukan menjadi 0 */
     /* Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi 10 */
+    // Kamus Lokal
     address A;
-
+    // Algoritma
     A = First(ListBgn(*P));
     while (Next(A) != Nil){
         if (Tentara(ElmtBan(*B, Info(A))) >= 10){
@@ -120,3 +122,4 @@ void Barrage(Player *P, Bangunan *B){
 
 }
 
+*/
