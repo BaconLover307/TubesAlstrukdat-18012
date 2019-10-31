@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "player.h"
 #include "command.h"
 
 // Main Prosedur untuk command
@@ -63,7 +64,10 @@ void ATTACK() {
     // while () {
     //
     // }
+    int jumlahPasukan;
     printf("Jumlah pasukan: ");
+    scanf("%d", &jumlahPasukan);
+
     // cek apakah berhasil diambil atau tidak
     if (1) {
         printf("Bangunan menjadi milikmu!\n");
@@ -89,7 +93,7 @@ void LEVEL_UP() {
 
 // Prosedur untuk mamakai skill yang sedang dimiliki pemain
 void SKILL() {
-    //
+
 }
 
 // Prosedur untuk melakukan UNDO

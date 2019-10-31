@@ -1,8 +1,8 @@
-/* File : player.h */
-/* Definisi ADT Player */
+/* File : gamestete.h */
+/* Definisi ADT Gamestate */
 
-#ifndef player_H
-#define player_H
+#ifndef gamestate_H
+#define gamestate_H
 
 #include "boolean.h"
 //#include "skill.h"
@@ -10,6 +10,8 @@
 #include "queue.h"
 #include "pcolor.h"
 #include "listlinier.h"
+
+/* menunggu adt lain */
 
 
 
