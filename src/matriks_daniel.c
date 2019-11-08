@@ -65,8 +65,8 @@ void BacaMATRIKS (MATRIKS * M, Bangunan B) {
 
   /* ALGORITMA */
   for (i = GetFirstBan(B); i <= GetLastBan(B); i++) {
-    Absis(Posisi(ElmtBan(B, i))) = X;
-    Ordinat(Posisi(ElmtBan(B, i))) = Y;
+    X = Absis(Posisi(ElmtBan(B, i)));
+    Y = Ordinat(Posisi(ElmtBan(B, i)));
 
     Elmt(*M, X, Y) = i;
   }
