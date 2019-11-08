@@ -12,18 +12,28 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmptyBangunan (Bangunan * B) {
-/* I.S. B sembarang */
-/* F.S. Terbentuk tabel B kosong dengan kapasitas IdxMax-IdxMin+1 */
-/* Proses: Inisialisasi semua nama elemen tabel B dengan charUndef */
+void MakeEmptyBangunan (Bangunan * B, int maxel) {
+/* I.S. B sembarang, maxel > 0 */
+/* F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1 */
 
   /* KAMUS LOKAL */
-  int i;
 
   /* ALGORITMA */
-  for (i = IdxMin; i <= IdxMax; i++) {
-    Name(ElmtBan(*B, i)) = CharUndef;
-  }    
+  BI(*B) = (info_bangunan *) malloc ((maxel + 1)* sizeof(info_bangunan));
+  MaxEl(*B) = maxel;
+  Neff(*B) = 0;
+}
+
+void DealokasiBangunan(Bangunan *B) {
+/* I.S. B terdefinisi; */
+/* F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0 */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  free(BI(*B));
+  MaxEl(*B) = 0;
+  Neff(*B) = 0;
 }
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
@@ -32,24 +42,9 @@ int NbElmtBan (Bangunan B) {
 /* Mengirimkan banyaknya elemen efektif tabel */
 
   /* KAMUS LOKAL */
-  int i;
-  boolean found;
 
   /* ALGORITMA */
-  i = IdxMin;
-  found = false;
-  while ((i <= IdxMax) && (!found)) {
-    if (Name(ElmtBan(B, i)) == CharUndef) {
-      found = true;
-    }
-    i++;
-  }
-
-  if (found) {
-    return (i - 2);
-  } else /* !found */ {
-    return (IdxMax);
-  }
+  return Neff(B);
 }
 
 /* *** Selektor INDEKS *** */
@@ -70,7 +65,7 @@ IdxType GetLastBan (Bangunan B) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return NbElmtBan(B);
+  return Neff(B);
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
@@ -81,7 +76,7 @@ boolean IsEmptyBan (Bangunan B) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return (Name(ElmtBan(B, IdxMin)) == CharUndef);    
+  return (Neff(B) == 0);    
 }
 
 /* *** Test tabel penuh *** */
@@ -92,7 +87,7 @@ boolean IsFullBan (Bangunan B) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return (NbElmtBan(B) == IdxMax);
+  return (Neff(B) == MaxEl(B));
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */

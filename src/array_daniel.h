@@ -14,67 +14,60 @@
 #include "point_daniel.h"
 
 /*  Kamus Umum */
-#define IdxMax 29
-/* Indeks maksimum array */
 #define IdxMin 1
 /* Indeks minimum array */
-#define CharUndef 'Z'
-/* Nama Bangunan yang tidak terdefinisi */
 #define ValUndef 0 // ! Untuk Relate (sementara)
 /* Nilai elemen tak terdefinisi */
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;  /* type indeks */
-typedef int ElType;   /* type elemen tabel */ // ! Untuk Relate (sementara)
-
-typedef struct {
-  ElType RI[IdxMax + 1]; /* memori tempat penyimpanan elemen (container) */
-} RELATE; /* class yang menyimpan dengan hubungan bangunan ke-berapa aja */
-// ! Ini untuk sementara doang
+typedef int ElType;   /* type elemen tabel */ 
 
 typedef struct {
   char name; /* tipe bangunan */
   POINT posisi; /* posisi bangunan */
   int level; /* level bangunan */
-  RELATE hubungan; /* hubungan dengan bangunan ke-berapa */ // ! Sementara doang
   int tentara; /* jumlah tentara yang dimiliki bangunan */
 } info_bangunan;
 
 typedef struct {
-  info_bangunan BI[IdxMax+1]; /* memori tempat penyimpan elemen (container) */
+  info_bangunan *BI; /* memori tempat penyimpan elemen (container) */
+  int MaxEl; /* ukuran elemen */
+  int Neff; /* >=0, banyaknya elemen efektif */
 } Bangunan;
 /* Indeks yang digunakan [IdxMin..IdxMax] */
 /* Jika B adalah Bangunan, cara deklarasi dan akses: */
 /* Deklarasi : B : Bangunan */
 /* Maka cara akses:
+   B.Neff  untuk mengetahui banyaknya elemen
    B.BI    untuk mengakses seluruh nilai elemen tabel
    B.BI[i] untuk mengakses elemen ke-i */
 /* Definisi :
    Definisi elemen pertama : B.BI[i] dengan i=1
-   Definisi elemen terakhir yang terdefinisi: T.TI[i] dengan i=T.Neff */
+   Definisi elemen terakhir yang terdefinisi: B.BI[i] dengan i=B.Neff */
 
 /* ********** SELEKTOR ********** */
 /* B adalah Bangunan      */
 /* e adalah info_bangunan */
-/* R adalah Relate        */
+#define Neff(B)       (B).Neff
 #define BI(B)         (B).BI
 #define ElmtBan(B,i)  (B).BI[(i)]
+#define MaxEl(B)      (B).MaxEl
 
 #define Name(e)       (e).name
 #define Posisi(e)     (e).posisi
 #define Level(e)      (e).level
-#define Relate(e)     (e).hubungan
 #define Tentara(e)    (e).tentara
-
-#define RI(R)         (R).RI
-#define ElmtRel(R,i)  (R).RI[(i)]
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmptyBangunan (Bangunan * B);
-/* I.S. B sembarang */
-/* F.S. Terbentuk tabel B kosong dengan kapasitas IdxMax-IdxMin+1 */
-/* Proses: Inisialisasi semua nama elemen tabel B dengan charUndef */
+void MakeEmptyBangunan (Bangunan * B, int maxel);
+/* I.S. B sembarang, maxel > 0 */
+/* F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1 */
+
+void DealokasiBangunan(Bangunan *B);
+/* I.S. B terdefinisi; */
+/* F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */

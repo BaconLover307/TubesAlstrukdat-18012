@@ -16,7 +16,7 @@ int main() {
   ElType X, Y;
 
   /* ALGORITMA */
-  MakeEmptyBangunan(&B);
+  MakeEmptyBangunan(&B, 5);
 
   if (IsEmptyBan(B)) {
     printf("Bangunan masih kosong\n");
