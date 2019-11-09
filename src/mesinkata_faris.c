@@ -82,17 +82,19 @@ void PrintKata (Kata K)
     i++;
   }
 }
-
+ int val = 0;
+  int i = 0;
 int KataToInt (Kata K)
 /* Kata K berisi integer dalam bentuk kata, mengkonversinya ke int */
 {
-  int val = 0;
+ 
   int i = 0;
   while (i<K.Length)
   {
     val *= 10;
     val += (int) (CKata.TabKata[i] - '0');
     ADV();
+    i++;
   }
   return val;
 }
