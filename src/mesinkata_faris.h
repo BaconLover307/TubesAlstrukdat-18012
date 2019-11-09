@@ -4,8 +4,8 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "mesinkar.h"
-#include "matriks.h"
+#include "mesinkar_faris.h"
+#include "matriks_daniel.h"
 
 #define NMax 50
 #define BLANK1 ' '
