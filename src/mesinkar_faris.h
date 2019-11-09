@@ -11,6 +11,8 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
+#include "matriks_daniel.h"
+#include "mesinkar_faris.h"
 /* State Mesin */
 extern char CC;
 
