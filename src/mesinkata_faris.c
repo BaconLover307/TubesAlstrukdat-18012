@@ -25,7 +25,8 @@ void STARTKATA()
           CC karakter pertama sesudah karakter terakhir kata */
 {
   START();
-  ADVKATA();
+  IgnoreBlank();
+  SalinKata();
 }
 
 void ADVKATA()
