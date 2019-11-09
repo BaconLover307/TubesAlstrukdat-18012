@@ -6,6 +6,11 @@
 #define stackt_H
 
 #include "boolean.h"
+#include "player.h"
+#include "array.h"
+#include "queue.h"
+#include "matriks.h"
+#include "listlinier.h"
 
 #define SNil 0
 #define MaxSEl 10000
@@ -14,7 +19,9 @@
 
 typedef int Saddress;   /* indeks tabel */
 typedef struct {
-  
+    Player pemain1;
+    Player pemain2;
+    int turn;
 } Sinfotype;
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
@@ -22,6 +29,7 @@ typedef struct {
 typedef struct {
   Sinfotype T[MaxSEl+1]; /* tabel penyimpan elemen */
   Saddress TOP;  /* alamat TOP: elemen puncak */
+  Sinfotype init; /* kondisi paling awal yang tidak bisa diundo */
 } Stack;
 /* Definisi stack S kosong : S.TOP = SNil */
 /* Elemen yang dipakai menyimpan nilai Stack T[1]..T[MaxSEl] */
@@ -32,6 +40,10 @@ typedef struct {
 /* Definisi akses dengan Selektor : Set dan Get */
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
+#define Init(S) (S).init
+#define P1Info(I) (I).pemain1
+#define P2Info(I) (I).pemain2
+#define TurnInfo(I) (I).turn
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
@@ -59,4 +71,8 @@ void Pop (Stack * S, Sinfotype* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+void ChangeTurn (Stack *S);
+// Mengganti giliran
+// I.S. sembarang
+// F.S. Stack state menjadi kosong, turn berubah
 #endif

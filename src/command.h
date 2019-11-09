@@ -6,30 +6,30 @@
 #define command_H
 
 // Main Prosedur untuk command
-void COMMAND();
+void COMMAND(Stack *gamestate);
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK();
+void ATTACK(Stack *gamestate);
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP();
+void LEVEL_UP(Stack *gamestate);
 
 // Prosedur untuk mamakai skill yang sedang dimiliki pemain
-void SKILL();
+void SKILL(Stack *gamestate);
 
 // Prosedur untuk melakukan UNDO
-void UNDO();
+void UNDO(Stack *gamestate);
 
 // Prosedur untuk melakukan END_TURN
-void END_TURN();
+void END_TURN(Stack *gamestate);
 
 // Prosedur untuk melakukan SAVE
-void SAVE();
+void SAVE(Stack *gamestate);
 
 // Prosedur untuk melakukan MOVE
-void MOVE();
+void MOVE(Stack *gamestate);
 
 // Prosedur untuk melakukan EXIT Game
-void EXIT();
+void EXIT(Stack *gamestate);
 
 #endif

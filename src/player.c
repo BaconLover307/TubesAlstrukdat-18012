@@ -6,15 +6,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "array.h"
 #include "listlinier.h"
 
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
 
-/*boolean IsLose(Player P) {
-    return NBBangunan(ListBgn(P)) == 0;
-}*/
+boolean IsLose(Player P) {
+    return IsEmptyBan(ListBan(P));
+}
 
 // $ ***** Creator *****
 void CreatePlayer(Player *P) {
@@ -22,7 +23,7 @@ void CreatePlayer(Player *P) {
     CreateQueue(&Skill(*P),1000);
     QAdd(&Skill(*P),"IU");
     // * Handling List Bangunan
-    // CreateEmptyList(ListBgn(*P));
+    // CreateEmptyList(ListBan(*P));
 }
 
 // $ ***** Basic Operators *****
@@ -34,15 +35,14 @@ void SetPlayerWarna(Player *P, Warna C) {
 
 
 // $ ***** Skills *****
-//void InstantUpgrade(Player *P, Bangunan *B){
+void InstantUpgrade(Player *P, Bangunan *B){
     /* I.S. Player P terdefinisi dan bangunan B terdefinisi
     /* F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
        pada bangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
     /* Pemain mendapat skill ini hanya saat awal permainan */
-/*
     Laddress A;
     
-    A = First(ListBgn(*P));
+    A = First(ListBan(*P));
     while (Next(A) != Nil){
         if (Level(ElmtBan(*B, Info(A))) <= 4){
             Level(ElmtBan(*B, Info(A)))++;
@@ -50,6 +50,7 @@ void SetPlayerWarna(Player *P, Warna C) {
         A = Next(A);
     }
 }
+/*
 */
 /*
 void Shield(Player *P) {
@@ -88,9 +89,9 @@ void CriticalHit(){
 /*
     address A;
     // Algoritma
-    A = First(ListBgn(*P));
+    A = First(ListBan(*P));
     while (Next(A) != Nil){
-        if (CheckTambahTentara(ListBgn(*P), *B, Info(A))){
+        if (CheckTambahTentara(ListBan(*P), *B, Info(A))){
             Tentara(ElmtBan(*B, Info(A))) += 5;
         }
         A = Next(A);
@@ -106,9 +107,9 @@ void CriticalHit(){
        jumlah pasukan menjadi 0 */
     /* Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi 10 */
     // Kamus Lokal
-    address A;
+/*    address A;
     // Algoritma
-    A = First(ListBgn(*P));
+    A = First(ListBan(*P));
     while (Next(A) != Nil){
         if (Tentara(ElmtBan(*B, Info(A))) >= 10){
             Tentara(ElmtBan(*B, Info(A))) -= 10;;

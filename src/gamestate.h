@@ -13,6 +13,8 @@
 
 /* menunggu adt lain */
 
+void ReadCommand();
+
 
 
 #endif

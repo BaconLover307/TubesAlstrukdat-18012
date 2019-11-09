@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "player.h"
+#include "stackt.h"
 #include "command.h"
 
 // Main Prosedur untuk command
-void COMMAND() {
+void COMMAND(Stack *gamestate) {
     int input;
     while (1) {
         printf("List command :\n");
@@ -19,35 +20,36 @@ void COMMAND() {
         scanf("%d", input);
         switch(input) {
             case 1 :
-                ATTACK();
+                ATTACK(&gamestate);
                 break;
             case 2 :
-                LEVEL_UP();
+                LEVEL_UP(&gamestate);
                 break;
             case 3 :
-                SKILL();
+                SKILL(&gamestate);
                 break;
             case 4 :
-                UNDO();
+                UNDO(&gamestate);
                 break;
             case 5 :
-                END_TURN();
+                END_TURN(&gamestate);
                 break;
             case 6 :
-                SAVE();
+                SAVE(&gamestate);
                 break;
             case 7 :
-                MOVE();
+                MOVE(&gamestate);
                 break;
             case 8 :
-                EXIT();
+                EXIT(&gamestate);
                 break;
         }
     }
 }
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK() {
+void ATTACK(Stack *gamestate)
+{
     printf("Daftar bangunan:\n");
     // Mnampilkan Daftar Bangunan
     printf("Bangunan yang digunakan untuk menyerang : ");
@@ -77,7 +79,8 @@ void ATTACK() {
 }
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP() {
+void LEVEL_UP(Stack *gamestate)
+{
     printf("Daftar bangunan\n");
     // Menampilkan daftar Bangunan
     printf("Bangunan yang akan di level up : ");
@@ -92,28 +95,38 @@ void LEVEL_UP() {
 }
 
 // Prosedur untuk mamakai skill yang sedang dimiliki pemain
-void SKILL() {
-
+void SKILL(Stack *gamestate) {
 }
 
 // Prosedur untuk melakukan UNDO
-void UNDO() {
-
+void UNDO(Stack *gamestate) {
+    // $ Kamus Lokal
+    Sinfotype Buang;
+    
+    if (UsedSkill(InfoSkill(gamestate))) {
+        printf("You cannot Undo past the Skill command!");
+    } else if (IsFirstAct(gamestate)) {
+        printf("You cannot Undo when you haven't done anything!"); 
+    } else {
+        Pop(&gamestate,&Buang);
+    }
 }
 
 // Prosedur untuk melakukan END_TURN
-void END_TURN() {
-
+void END_TURN(Stack *gamestate) {
+    ChangeTurn(&gamestate);
 }
 
 // Prosedur untuk melakukan SAVE
-void SAVE() {
+void SAVE(Stack *gamestate)
+{
     printf("Lokasi save file: ");
 }
 
 
 // Prosedur untuk melakukan MOVE
-void MOVE() {
+void MOVE(Stack *gamestate)
+{
     printf("Daftar bangunan\n");
     // Menampilkan daftar Bangunan
     printf("Pilih bangunan : ");
@@ -140,11 +153,12 @@ void MOVE() {
 }
 
 // Prosedur untuk melakukan EXIT Game
-void EXIT() {
+void EXIT(Stack *gamestate)
+{
     char inp;
     printf("Apakah Anda ingin melakukan save terlebih dahulu? Y/N\n");
     if (inp == 'Y') {
-        SAVE();
+        SAVE(&gamestate);
     }
     // keluar
 }
