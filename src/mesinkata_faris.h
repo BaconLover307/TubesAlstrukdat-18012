@@ -6,7 +6,7 @@
 
 #include "mesinkar_faris.h"
 #include "matriks_daniel.h"
-#include "graph_daniel
+#include "graph_daniel.h"
 
 #define NMax 50
 #define BLANK1 ' '
@@ -14,23 +14,12 @@
 
 typedef struct {
 	char TabKata[NMax+1]; /* container penyimpan kata, indeks yang dipakai [1..NMax] */
-    int Length;
+	int Length;
 } Kata;
 
 /* State Mesin Kata */
 extern boolean EndKata;
 extern Kata CKata;
-
-/* File: mesinkata.c */
-/* Implementasi Mesin Kata: Model Akuisisi Versi I */
-
-#include "mesinkar.h"
-#include "mesinkata.h"
-#include <stdio.h>
-#include "matriks.h"
-
-boolean EndKata;
-Kata CKata;
 
 void IgnoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
