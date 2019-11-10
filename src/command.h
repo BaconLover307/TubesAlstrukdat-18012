@@ -4,6 +4,7 @@
 
 #ifndef command_H
 #define command_H
+#include "main.c"
 
 // Main Prosedur untuk command
 void COMMAND(Stack *gamestate);

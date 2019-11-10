@@ -45,5 +45,5 @@ void ChangeTurn (Stack *S) {
     if (!ET(P1Info(LastState)) && !ET(P2Info(LastState))) {
         TurnInfo(LastState) = TurnInfo(LastState) % 2 + 1;
     }
-    StartTurn(&S,P1Info(LastState),P2Info(LastState),TurnInfo(LastState));
+    StartTurn(S,P1Info(LastState),P2Info(LastState),TurnInfo(LastState));
 }

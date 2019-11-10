@@ -30,7 +30,10 @@ int main(){
     PrintInfoHead(Skill(P1));
     getchar();
 
-
+    QAdd(&Skill(P1), "AB");
+    QAdd(&Skill(P1), "BC");
+    QAdd(&Skill(P1), "CD");
+    PrintQueue(Skill(P1));
 
     
 }

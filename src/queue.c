@@ -1,3 +1,10 @@
+/* NAMA / NIM :                           */
+/* 1. Muhammad Hasan           / 13518015 */
+/* 2. Anna Elvira Hartoyo      / 13518045 */
+/* 3. Daniel Riyanto           / 13518075 */
+/* 4. Faris Muhammad Kautsar   / 13518105 */
+/* 5. Gregorius Jovan Kresnadi / 13518135 */
+
 /* Program          : queue.c */
 /* Deskripsi        : Implementasi ADT Queue */
 /* Definisi Queue   : Model Implementasi Versi III dengan circular buffer */
@@ -85,8 +92,8 @@ void QAdd (Queue * Q, Qinfotype X){
         strcpy(InfoTail(*Q), X);
     }
     
-    else{ // * Q full
-        printf("Anda telah memiliki 10 skill. Tidak bisa menambah skill lagi.\n")
+    else { // * Q full
+        printf("Anda telah memiliki 10 skill. Tidak bisa menambah skill lagi.\n");
     }
 }
 
@@ -123,3 +130,27 @@ void PrintInfoHead (Queue Q){
     }
 }
 
+void PrintQueue(Queue Q)
+{
+    /* I.S. Q mungkin kosong */
+    /* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
+
+    // $ Kamus Lokal
+    Qinfotype skil;
+
+    // $ Algoritma
+    if (IsQEmpty(Q)){
+        printf("[ none ]");
+    } else {
+        printf("[ ");
+        PrintInfoHead(Q);
+        if (NBQElmt(Q) > 1) {
+            for (int i = Head(Q)+1; i <= Tail(Q); i++) {
+                printf(" | ");
+                strcpy(skil, Q.T[i]);
+                printf("%s", skil);
+            }
+        }
+        printf(" ]\n");
+    }
+}

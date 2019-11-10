@@ -5,7 +5,8 @@
 /* 4. Faris Muhammad Kautsar   / 13518105 */
 /* 5. Gregorius Jovan Kresnadi / 13518135 */
 
-/* File body: array.c */
+/* Program          : array.c */
+/* Deskripsi        : Implementasi ADT Array Dinamis */
 
 #include <stdio.h>
 #include "array.h"

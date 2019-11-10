@@ -6,7 +6,6 @@
 
 #include "boolean.h"
 //#include "skill.h"
-//#include "bangunan.h"
 #include "array.h"
 #include "queue.h"
 #include "pcolor.h"
@@ -15,7 +14,7 @@
 typedef struct {
     int Turn;
     Queue queueSkill;       /* queue penyimpan skill */
-    //Bangunan listBangunan;      /* list penyimpan kepemilikan listbangunan */
+    List listBangunan;      /* list penyimpan kepemilikan listbangunan */
     Warna color; 
     boolean extraTurn;
 } Player;
@@ -25,12 +24,13 @@ typedef struct {
 /* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
-// $ ********* AKSES (Selektor) *********
+// ! ********* AKSES (Selektor) *********
 // $ Jika P adalah Player, maka akses elemen :
 #define Color(P) (P).color
 #define Skill(P) (P).queueSkill
 #define ListBan(P) (P).listBangunan
 #define ET(P) (P).extraTurn
+
 
 // $ ********* Prototype *********
 
@@ -57,11 +57,11 @@ void updatelistBangunan(Player *P, listlistBangunan B);
 
 
 // $ *** Skills ****
-//void InstantUpgrade(Player *P, listBangunan *B);
-/* I.S. Player P terdefinisi dan listbangunan B terdefinisi
-/* F.S. Seluruh listbangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
-    pada listbangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
-/* Pemain mendapat skill ini hanya saat awal permainan */
+void InstantUpgrade(Player *P, Bangunan *B);
+// * I.S. Player P terdefinisi dan listbangunan B terdefinisi
+// * F.S. Seluruh listbangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
+// *    pada listbangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
+// * Pemain mendapat skill ini hanya saat awal permainan
 
 
 /* PENDING DULU :(

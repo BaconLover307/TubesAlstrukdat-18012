@@ -19,16 +19,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-/*
 #include "player.h"
+#include "stackt.h"
+#include "command.h"
+#include "array.h"
+/*
 #include "bangunan.h"
 #include "skill.h"
-#include "peta.h"
 #include "configure.h"
-#include "command.h"
+#include "peta.h"
 #include "save.h"
 #include "load.h"
-#include "display.h"
 */
 #include "string.h"
 #include "assets.c"
@@ -49,8 +50,11 @@ while (!Exit) {
         //Menu();
         printf("# MENU PLACEHOLDER #\n");
         //printf("Enter Menu:")
-        scanf("%s",&menu);
-        getchar();
+        scanf(" %s",&menu);
+        printf("Your choice is %s\n",menu);
+        //getchar();
+        
+        // $ ######### TUTORIAL ########
         if (strcmp(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
@@ -63,22 +67,43 @@ while (!Exit) {
             getchar();
             clrscrn();
             ExitMenu = true;
-        } else if (menu == "CREDITS") {
+
+            // $ ######### CREDITS ########
+        } else if (strcmp(menu, "CREDITS") == 0) {
             // TODO Credits();
             printf("#CREDITS PLACEHOLDER#\n");
             printf("\n");
             printf("Press enter to go back to main menu...");
             getchar();
-        } else if (menu == "QUIT") {
+            ExitMenu = true;
+
+            // $ ######### QUIT ########
+        } else if (strcmp(menu, "QUIT") == 0) {
             // TODO Quit();
             printf("#QUIT PLACEHOLDER#\n");
             ExitMenu = true;
             Exit = true;
-        } else if (menu == "PLAY") {
+
+            // $ ######### PLAY GAME #######
+        } else if (strcmp(menu, "PLAY") == 0) {
+            // todo Load Game
+            
             // todo maen game
+            // $ Kamus Lokal : Start Game
+            Stack GameState;
+            Player PlayerOne, PlayerTwo;
+            int Turn = 1;
+
+
             printf("#Ceritanya Maen#\n");
             //getchar(); 
-            
+            StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+            do {
+                COMMAND(&GameState);
+            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo));
+            if (IsLose(PlayerTwo)) {
+                //
+            }
 
 
 

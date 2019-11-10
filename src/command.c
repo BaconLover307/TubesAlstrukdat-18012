@@ -17,31 +17,33 @@ void COMMAND(Stack *gamestate) {
         printf("7. Move\n");
         printf("8. Exit\n");
         printf("ENTER COMMAND : ");
-        scanf("%d", input);
+        scanf("%d", &input);
+        printf("Your choice is : %d\n",input);
+
         switch(input) {
             case 1 :
-                ATTACK(&gamestate);
+                ATTACK(gamestate);
                 break;
             case 2 :
-                LEVEL_UP(&gamestate);
+                LEVEL_UP(gamestate);
                 break;
             case 3 :
-                SKILL(&gamestate);
+                SKILL(gamestate);
                 break;
             case 4 :
-                UNDO(&gamestate);
+                UNDO(gamestate);
                 break;
             case 5 :
-                END_TURN(&gamestate);
+                END_TURN(gamestate);
                 break;
             case 6 :
-                SAVE(&gamestate);
+                SAVE(gamestate);
                 break;
             case 7 :
-                MOVE(&gamestate);
+                MOVE(gamestate);
                 break;
             case 8 :
-                EXIT(&gamestate);
+                EXIT(gamestate);
                 break;
         }
     }
@@ -102,19 +104,20 @@ void SKILL(Stack *gamestate) {
 void UNDO(Stack *gamestate) {
     // $ Kamus Lokal
     Sinfotype Buang;
-    
+    /*
     if (UsedSkill(InfoSkill(gamestate))) {
         printf("You cannot Undo past the Skill command!");
-    } else if (IsFirstAct(gamestate)) {
+    } else if (IsFirstAct(*gamestate)) {
         printf("You cannot Undo when you haven't done anything!"); 
     } else {
-        Pop(&gamestate,&Buang);
-    }
+    */
+        Pop(gamestate,&Buang);
+    //}
 }
 
 // Prosedur untuk melakukan END_TURN
 void END_TURN(Stack *gamestate) {
-    ChangeTurn(&gamestate);
+    ChangeTurn(gamestate);
 }
 
 // Prosedur untuk melakukan SAVE
@@ -157,8 +160,11 @@ void EXIT(Stack *gamestate)
 {
     char inp;
     printf("Apakah Anda ingin melakukan save terlebih dahulu? Y/N\n");
+    scanf(" %c", &inp);
     if (inp == 'Y') {
-        SAVE(&gamestate);
+        SAVE(gamestate);
+    } else if (inp == 'N') {
+        //ExitMenu = true;
     }
     // keluar
 }
