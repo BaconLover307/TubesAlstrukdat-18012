@@ -63,7 +63,7 @@ void QDeAlokasi(Queue * Q) {
 /* *** Primitif Add/Delete *** */
 void QAdd (Queue * Q, Qinfotype X){
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
-/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q mungkin penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 
     // $ Kamus Lokal
@@ -73,14 +73,21 @@ void QAdd (Queue * Q, Qinfotype X){
     if (IsQEmpty(*Q)) {
         Head(*Q) = 1;
         Tail(*Q) = 1;
-    } else { // * Q tidakkosong
+        strcpy(InfoTail(*Q), X);
+    } 
+    
+    else if (!(IsQFull(*Q))) { // * Q tidakkosong
         if (Tail(*Q) == MaxQEl(*Q)) { // * Geser elemen smp Head(Q)=1
             Tail(*Q) = 1;
         } else {
             Tail(*Q)++;
         }
+        strcpy(InfoTail(*Q), X);
     }
-    strcpy(InfoTail(*Q), X);
+    
+    else{ // * Q full
+        printf("Anda telah memiliki 10 skill. Tidak bisa menambah skill lagi.\n")
+    }
 }
 
 

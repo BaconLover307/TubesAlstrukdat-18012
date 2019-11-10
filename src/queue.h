@@ -11,7 +11,7 @@
 /* Konstanta untuk mendefinisikan Qaddress tak terdefinisi */
 
 /* Definisi elemen dan Qaddress */
-typedef char Qinfotype[2];
+typedef char Qinfotype[10];
 typedef int Qaddress;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
