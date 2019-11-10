@@ -1,329 +1,409 @@
-/* Deskripsi        : Implementasi List Linier */
-/* Representasi Laddress dengan pointer */
-/* Linfotype adalah integer */
+/* NAMA / NIM :                           */
+/* 1. Muhammad Hasan           / 13518015 */
+/* 2. Anna Elvira Hartoyo      / 13518045 */
+/* 3. Daniel Riyanto           / 13518075 */
+/* 4. Faris Muhammad Kautsar   / 13518105 */
+/* 5. Gregorius Jovan Kresnadi / 13518135 */
 
-#include "listlinier.h"
-#include <stdio.h>
+/* File body: listlinier.c */
+
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include "listlinier.h"
 
-/* * 
-* typedef int Linfotype;
-* typedef struct tElmtlist *Laddress;
-* typedef struct tElmtlist {
-? 	Linfotype info;
-? 	Laddress next;
-*  } ElmtList;
-* typedef struct {
-?	Laddress First;
-* } List;
-*/
-
-// ! Definisi list
-// ? List kosong : First(L) = Nil
-// ? Setiap elemen dengan Laddress P dapat diacu Info(P), Next(P)
-// ? Elemen terakhir list : jika Laddressnya Last, maka Next(Last)=Nil
-
-// ? #define Info(P) (P)->info
-// ? #define Next(P) (P)->next
-// ? #define First(L) ((L).First)
-
-
-// $ PROTOTYPE
-// $ ****************** TEST LIST KOSONG ******************
-boolean IsEmpty (List L) {
-    return First(L) == Nil;
-}
+/* PROTOTYPE */
+/****************** TEST LIST KOSONG ******************/
+boolean IsEmptyList (List L) {
 /* Mengirim true jika list kosong */
 
-// $ ****************** PEMBUATAN LIST KOSONG ******************
-void CreateEmpty (List *L) {
-    First(*L) = Nil;
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  return (First(L) == Nil);
 }
+
+/****************** PEMBUATAN LIST KOSONG ******************/
+void CreateEmptyList (List * L) {
+// ! Ingat taruh di awal program (untuk 2 player)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 
-// $ ****************** Manajemen Memori ******************
-Laddress Alokasi (Linfotype X) {
-    // $ Kamus Lokal
-    Laddress P;
-    // $ Algoritma
-    P = (Laddress) malloc (sizeof (ElmtList));
-    if (P != Nil) {
-        Info(P) = X;
-        Next(P) = Nil;
-        return P;
-    } else {
-        return Nil;
-    }
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  First(*L) = Nil;
 }
-/* Mengirimkan Laddress hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka Laddress tidak nil, dan misalnya */
+
+/****************** Manajemen Memori ******************/
+address Alokasi (urutan X) {
+/* Mengirimkan address hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 
-void Dealokasi (Laddress *P) {
-    free(*P);
+  /* KAMUS LOKAL */
+  address P;
+
+  /* ALGORITMA */
+  P = malloc (sizeof(address));
+  if (P != NULL) {
+    Info(P) = X;
+    Next(P) = Nil;
+  } else /* P == NULL */ {
+    P = Nil;
+  }
+  return P;
 }
+
+void Dealokasi (address * P) {
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian Laddress P */
+/* Melakukan dealokasi/pengembalian address P */
 
-// $ ****************** PENCARIAN SEBUAH ELEMEN LIST ******************
-Laddress Search (List L, Linfotype X) {
-    // $ Kamus Lokal
-    Laddress P;
-    boolean Found = false;
-    // $ Algoritma
-    if (!IsEmpty(L)) {
-        P = First(L);
-        while (P != Nil && !Found) {
-            if (X == Info(P)) {
-                Found = true;   // Jika Found maka P = Laddress dari harga yang dicari
-            } else {
-                P = Next(P);    // Jika not Found maka P = Nil   
-            }
-        }
-    } else {
-        P = Nil;
-    }
-    return P;
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  free(*P);
 }
+
+/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
+address Search (List L, urutan X) {
 /* Mencari apakah ada elemen list dengan Info(P)= X */
-/* Jika ada, mengirimkan Laddress elemen tersebut. */
+/* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
-// $ ****************** PRIMITIF BERDASARKAN NILAI ******************
+  /* KAMUS LOKAL */
+  address P;
+
+  /* ALGORITMA */
+  if (IsEmptyList(L)) {
+    return Nil;
+  } else /* !IsEmpty(L) */ {
+    P = First(L);
+    while ((Next(P) != Nil) && (Info(P) != X)) {
+      P = Next(P);
+    }
+
+    if (Info(P) == X) {
+      return P;
+    } else /* Info(P) != X */ {
+      return Nil;
+    }
+  }
+}
+
+/****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, Linfotype X) {
-    // $ Kamus Lokal
-    Laddress P = Alokasi(X);
-    // $ Algoritma
-    if (P != Nil) {
-        InsertFirst(L,P);
-    }
-}
+void InsVPrio (List * L, urutan X) {
+// ! Tambah bangunan selalu pakai prosedur ini    
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast (List *L, Linfotype X) {
-    // $ Kamus Lokal
-    Laddress P = Alokasi(X);
-    // $ Algoritma
-    if (P != Nil) {
-        InsertLast(L,P);
-    }
-}
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list di akhir: elemen terakhir yang baru */
+/* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
-// $ *** PENGHAPUSAN ELEMEN ***
-void DelVFirst (List *L, Linfotype *X) {
-    // $ Kamus Lokal
-    Laddress P = Alokasi(*X);
-    // $ Algoritma
-    DelFirst(L,&P);
-    *X = Info(P);
-    Dealokasi(&P); 
-}
-/* I.S. List L tidak kosong  */
-/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen pertama di-dealokasi */
+  /* KAMUS LOKAL */
+  address P;
 
-void DelVLast (List *L, Linfotype *X) {
-    // $ Kamus Lokal
-    Laddress P = Alokasi(*X);
-    // $ Algoritma
-    DelLast(L, &P);
-    *X = Info(P);
-    Dealokasi(&P);
+  /* ALGORITMA */
+  P = Alokasi(X);
+  if (P != Nil) {
+    InsertPrio(L, P);
+  }
 }
-/* I.S. list tidak kosong */
-/* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen terakhir di-dealokasi */
 
-// $ ****************** PRIMITIF BERDASARKAN ALAMAT ******************
+/****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, Laddress P) {
-    // $ Algoritma
-    Next(P) = First(*L);
-    First(*L) = P;
-}
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-Laddress P sebagai elemen pertama */
-
-void InsertAfter (List *L, Laddress P, Laddress Prec) {
-    // $ Algoritma
-    Next(P) = Next(Prec);
-    Next(Prec) = P;
-}
+void InsertAfter (List *L, address P, address Prec) {
 /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
 /*      P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
 
-void InsertLast (List *L, Laddress P) {
-    // $ Kamus Lokal
-    Laddress Last; // Laddress untuk transversal, menjadi Laddress element terakhir
-    // $ Algoritma
-    if (IsEmpty(*L)) {
-        InsertFirst(L,P);
-    } else {
-        Last = First(*L);
-        while (Next(Last) != Nil) {
-            Last = Next(Last);
-        }
-        // Next(Last) = Nil, element terakhir
-        InsertAfter(L,P,Last);
-    }
-}
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. P ditambahkan sebagai elemen terakhir yang baru */
+  /* KAMUS LOKAL */
 
-// $ *** PENGHAPUSAN SEBUAH ELEMEN ***
-void DelFirst (List *L, Laddress *P) {
-    *P = First(*L);
-    First(*L) = Next(First(*L));
-    Next(*P) = Nil;
+  /* ALGORITMA */
+  Next(P) = Next(Prec);
+  Next(Prec) = P;
 }
-/* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* First element yg baru adalah suksesor elemen pertama yang lama */
 
-void DelP (List *L, Linfotype X) {
-    // $ Kamus Lokal
-    Laddress P,Prec,Phead;
-    // $ Algoritma
-    P = Search(*L,X);
-    if (P == First(*L)) {
-        DelFirst(L,&P);
-        Dealokasi(&P);
-    } else if (P != Nil) {
-        Prec = First(*L);
-        Phead = Next(First(*L));
-        while (P != Phead) {
-            Phead = Next(Phead); // Jika not Found maka P = Nil
-            Prec = Next(Prec); // Jika not Found maka P = Nil
-            }
-        DelAfter(L,&P,Prec);
-        }
-}
-/* I.S. Sembarang */
-/* F.S. Jika ada elemen list berLaddress P, dengan Info(P)=X  */
-/* Maka P dihapus dari list dan di-dealokasi */
-/* Jika ada lebih dari satu elemen list dengan Info bernilai X */
-/* maka yang dihapus hanya elemen pertama dengan Info = X */
-/* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
-/* List mungkin menjadi kosong karena penghapusan */
-void DelLast (List *L, Laddress *P) {
-    // $ Kamus Lokal
-    Laddress Last, PrecLast;
-    // $ Algoritma
-    Last = First(*L);
+void InsertPrio (List * L, address P) {
+/* I.S. P sudah dialokasi dan L mungkin kosong */
+/* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
+
+  /* KAMUS LOKAL */
+  address PrecLast, Last;
+
+  /* ALGORITMA */
+  if (IsEmptyList(*L)) {
+    First(*L) = P;
+    Next(P) = Nil;
+  } else /* !IsEmpty(*L) */ {
     PrecLast = Nil;
-    while (Next(Last) != Nil) {
-        PrecLast = Last;
-        Last = Next(Last);
-    } // Next(Last) = Nil, Last element terakhir
-      // PrecLast = sebelum Last
-    *P = Last;
-    if (PrecLast == Nil) {
-        First(*L) = Nil;
-    } else {
-        Next(PrecLast) = Nil;
+    Last = First(*L);
+    while ((Next(Last) != Nil) && (Info(P) >= Info(Last))) {
+      PrecLast = Last;
+      Last = Next(Last);
     }
+
+    if (Info(P) < Info(Last)) {
+      if (PrecLast == Nil) {
+        Next(P) = First(*L);
+        First(*L) = P;
+      } else /* PrecLast != Nil */ {
+        InsertAfter(L, P, PrecLast);
+      }
+    } else /* Info(P) >= Info(Last) */ {
+      InsertAfter(L, P, Last);
+    }
+  }
 }
+
+/*** PENGHAPUSAN SEBUAH ELEMEN ***/
+void DelP (List * L, urutan X) {
+/* I.S. L terdefinisi
+        X pasti ada di dalam List */
+/* F.S. X dihilangkan dari List dan didealokasi */
+/* List mungkin menjadi kosong karena penghapusan */
+
+  /* KAMUS LOKAL */
+  address P, Prec, PDel;
+
+  /* ALGORITMA */
+  P = First(*L);
+  Prec = Nil;
+
+  while (Info(P) != X) {
+    Prec = P;
+    P = Next(P);
+  }
+
+  if (Prec == Nil) {
+    First(*L) = Nil; 
+  } else /* Prec != Nil */ {
+    Next(Prec) = Next(P);
+  }
+
+  Next(P) = Nil;
+  Dealokasi(&P); 
+}
+
+/****************** PROSES SEMUA ELEMEN LIST ******************/
+void PrintInfo (List L, Bangunan B) {
 /* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* Last element baru adalah predesesor elemen terakhir yg lama, */
-/* jika ada */
-void DelAfter (List *L, Laddress *Pdel, Laddress Prec) {
-    // $ Algoritma
-    *Pdel = Next(Prec);
-    Next(Prec) = Next(Next(Prec));
-    Next(*Pdel) = Nil;
-}
-/* I.S. List tidak kosong. Prec adalah anggota list  */
-/* F.S. Menghapus Next(Prec): */
-/*      Pdel adalah alamat elemen list yang dihapus  */
+/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan 
+        elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
+/* Contoh : 
+    1. Castle (1,15) 20 lv. 3
+    2. Tower (1,13) 50 lv. 1
+    3. Castle (3,14) 30 lv. 2                                        */
 
-// $ ****************** PROSES SEMUA ELEMEN LIST ******************
-void PrintInfo (List L) {
-    // $ Kamus Lokal
-    Laddress P = First(L);
-    // $ Algoritma
-    printf("[");
-    if (P != Nil) {
-        printf("%d",Info(P));
-        P = Next(P);
-        while (P != Nil) {
-            printf(",%d",Info(P));
-            P = Next(P);
-        }
+  /* KAMUS LOKAL */
+  address P;
+  int i;
+
+  /* ALGORITMA */
+  P = First(L);
+  i = 1; //inisialisasi
+
+  while (P != Nil) {
+    printf("%d. ", i);
+    
+    if (Name(ElmtBan(B, Info(P))) == 'C') {
+      printf("Castle ");
+    } else if (Name(ElmtBan(B, Info(P))) == 'V') {
+      printf("Village ");
+    } else if (Name(ElmtBan(B, Info(P))) == 'T') {
+      printf("Tower ");
+    } else /* (Name(ElmtBan(B, Info(P))) == 'F') */ {
+      printf("Fort ");
     }
-    printf("]");
-}
-/* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
-int NbElmt (List L) {
-    // $ Kamus Lokal
-    Laddress P = First(L);
-    int count = 0;
-    // $ Algoritma
-    while (P != Nil) {
-        count++;
-        P = Next(P);
-    }
-    return count;
+    TulisPOINT(Posisi(ElmtBan(B, Info(P))));
+    printf(" %d ", Tentara(ElmtBan(B, Info(P))));
+    printf("lv. %d\n", Level(ElmtBan(B, Info(P))));
+
+    i++;
+    P = Next(P);
+  }
 }
 
+int NbElmtList (List L) {
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
-/*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-Linfotype Max (List L) {
-    // $ Kamus Lokal
-    Laddress P = First(L);
-    Linfotype maks = Info(P);
-    // $ Algoritma
-    P = Next(P);
-    while (P != Nil) {
-        if (maks < Info(P)) {
-            maks = Info(P);
-        }
-        P = Next(P);
-    }
-    return maks;
-}
-/* Mengirimkan nilai Info(P) yang maksimum */
+  /* KAMUS LOKAL */
+  address P;
+  int total;
 
-// $ ****************** PROSES TERHADAP LIST ******************/
-void Konkat1 (List *L1, List *L2, List *L3) {
-    // $ Kamus Lokal
-    Laddress Last1;
-    // $ Algoritma
-    CreateEmpty(L3);
-    if (IsEmpty(*L1)) {
-        First(*L3) = First(*L2);
-    } else {
-        First(*L3) = First(*L1);
-        Last1 = First(*L1);
-        while (Next(Last1) != Nil) { // traversal Last1 sampai akhir List1
-            Last1 = Next(Last1);
-        }
-        Next(Last1) = First(*L2);  // hubungkan Last1 dengan First(L2)
+  /* ALGORITMA */
+  if (IsEmptyList(L)) {
+    return 0;
+  } else /* !IsEmpty(L) */ {
+    P = First(L);
+    total = 0;
+    while (P != Nil) {
+      P = Next(P);
+      total++;
     }
-    CreateEmpty(L1);
-    CreateEmpty(L2);
+    return total;
+  }
 }
-/* I.S. L1 dan L2 sembarang */
-/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
-/* Konkatenasi dua buah list : L1 dan L2    */
-/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2) */
-/* dan L1 serta L2 menjadi list kosong.*/
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
+
+/*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
+boolean CheckTambahTentara (Bangunan B, urutan X) {
+/* X pasti ada di dalam List */
+/* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah 
+   melewati maksimum penambahan pasukan atau belum */
+/* Jika belum maka true dan sebaliknya */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  if (Name(ElmtBan(B, X)) == 'C') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 40);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 60);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 80);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 100);
+
+    }
+  } else if (Name(ElmtBan(B, X)) == 'T') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 30);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 40);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 50);
+
+    }
+  } else if (Name(ElmtBan(B, X)) == 'F') {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 40);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 60);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 80);
+
+    }
+  } else /* Name(ElmtBan(B, X)) == 'V' */ {
+    if (Level(ElmtBan(B, X)) == 1) {
+      return (Tentara(ElmtBan(B, X)) < 20);
+
+    } else if (Level(ElmtBan(B, X)) == 2) {
+      return (Tentara(ElmtBan(B, X)) < 30);
+
+    } else if (Level(ElmtBan(B, X)) == 3) {
+      return (Tentara(ElmtBan(B, X)) < 40);
+
+    } else /* Level(ElmtBan(B, X)) == 4 */ {
+      return (Tentara(ElmtBan(B, X)) < 50);
+
+    }
+  }
+}
+
+void TambahTentara (Bangunan * B, urutan X) {
+/* I.S. List L terdefinisi
+        Bangunan B terdefinisi
+        X pasti ada di dalam List
+        CheckTentara bernilai true */
+/* F.S. Bangunan ke-X ditambah jumlah sesuai dengan tipe bangunan itu */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  if (Name(ElmtBan(*B, X)) == 'C') {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 10;
+
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 15;
+
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 20;
+
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 25;
+
+    }
+  } else if (Name(ElmtBan(*B, X)) == 'T') {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 5;
+
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 10;
+
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 20;
+
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 30;
+
+    }
+  } else if (Name(ElmtBan(*B, X)) == 'F') {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 10;
+
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 20;
+
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 30;
+
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 40;
+
+    }
+  } else /* Name(ElmtBan(*B, X)) == 'V' */ {
+    if (Level(ElmtBan(*B, X)) == 1) {
+      Tentara(ElmtBan(*B, X)) += 5;
+
+    } else if (Level(ElmtBan(*B, X)) == 2) {
+      Tentara(ElmtBan(*B, X)) += 10;
+
+    } else if (Level(ElmtBan(*B, X)) == 3) {
+      Tentara(ElmtBan(*B, X)) += 15;
+
+    } else /* Level(ElmtBan(*B, X)) == 4 */ {
+      Tentara(ElmtBan(*B, X)) += 20;
+
+    }
+  }
+
+}
+
+void TambahAllTentara (List L, Bangunan * B) {
+/* I.S. List L terdefinisi
+        Bangunan B terdefinisi */
+/* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya 
+        bertambah */       
+
+  /* KAMUS LOKAL */
+  address P;
+
+  /* ALGORITMA */
+  P = First(L);
+
+  while (P != Nil) {
+    if (CheckTambahTentara(*B, Info(P))) {
+      TambahTentara(B, Info(P));
+    }
+
+    P = Next(P);
+  }
+}        

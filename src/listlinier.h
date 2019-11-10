@@ -1,29 +1,36 @@
-/* File : listlinier.h */
-/* contoh ADT list berkait dengan representasi fisik pointer  */
-/* Representasi Laddress dengan pointer */
-/* Linfotype adalah integer */
+/* NAMA / NIM :                           */
+/* 1. Muhammad Hasan           / 13518015 */
+/* 2. Anna Elvira Hartoyo      / 13518045 */
+/* 3. Daniel Riyanto           / 13518075 */
+/* 4. Faris Muhammad Kautsar   / 13518105 */
+/* 5. Gregorius Jovan Kresnadi / 13518135 */
+
+/* File header: listlinier.h */
+
+/* urutan adalah integer */
 
 #ifndef listlinier_H
 #define listlinier_H
 
 #include "boolean.h"
+#include "array.h"
 
 #define Nil NULL
 
-typedef int Linfotype;
-typedef struct tElmtlist *Laddress;
+typedef int urutan;
+typedef struct tElmtlist *address;
 typedef struct tElmtlist {
-	Linfotype info;
-	Laddress next;
+	urutan info;
+	address next;
 } ElmtList;
 typedef struct {
-	Laddress First;
+	address First;
 } List;
 
 /* Definisi list : */
 /* List kosong : First(L) = Nil */
-/* Setiap elemen dengan Laddress P dapat diacu Info(P), Next(P) */
-/* Elemen terakhir list : jika Laddressnya Last, maka Next(Last)=Nil */
+/* Setiap elemen dengan address P dapat diacu Info(P), Next(P) */
+/* Elemen terakhir list : jika addressnya Last, maka Next(Last)=Nil */
 
 #define Info(P) (P)->info
 #define Next(P) (P)->next
@@ -31,112 +38,87 @@ typedef struct {
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L);
+boolean IsEmptyList (List L);
 /* Mengirim true jika list kosong */
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L);
+void CreateEmptyList (List *L);
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-Laddress Alokasi (Linfotype X);
-/* Mengirimkan Laddress hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka Laddress tidak nil, dan misalnya */
+address Alokasi (urutan X);
+/* Mengirimkan address hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (Laddress *P);
+void Dealokasi (address *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian Laddress P */
+/* Melakukan dealokasi/pengembalian address P */
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-Laddress Search (List L, Linfotype X);
+address Search (List L, urutan X);
 /* Mencari apakah ada elemen list dengan Info(P)= X */
-/* Jika ada, mengirimkan Laddress elemen tersebut. */
+/* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVFirst (List *L, Linfotype X);
+void InsVPrio (List * L, urutan X);
+// ! Tambah bangunan selalu pakai prosedur ini    
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void InsVLast (List *L, Linfotype X);
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list di akhir: elemen terakhir yang baru */
+/* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-
-/*** PENGHAPUSAN ELEMEN ***/
-void DelVFirst (List *L, Linfotype *X);
-/* I.S. List L tidak kosong  */
-/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen pertama di-dealokasi */
-void DelVLast (List *L, Linfotype *X);
-/* I.S. list tidak kosong */
-/* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen terakhir di-dealokasi */
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void InsertFirst (List *L, Laddress P);
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-Laddress P sebagai elemen pertama */
-void InsertAfter (List *L, Laddress P, Laddress Prec);
+void InsertAfter (List *L, address P, address Prec);
 /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
 /*      P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void InsertLast (List *L, Laddress P);
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. P ditambahkan sebagai elemen terakhir yang baru */
+void InsertPrio (List * L, address P);
+/* I.S. P sudah dialokasi */
+/* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
 
 /*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void DelFirst (List *L, Laddress *P);
-/* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelP (List *L, Linfotype X);
-/* I.S. Sembarang */
-/* F.S. Jika ada elemen list berLaddress P, dengan Info(P)=X  */
-/* Maka P dihapus dari list dan di-dealokasi */
-/* Jika ada lebih dari satu elemen list dengan Info bernilai X */
-/* maka yang dihapus hanya elemen pertama dengan Info = X */
-/* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
+void DelP (List * L, urutan X);
+/* I.S. L terdefinisi
+        X pasti ada di dalam List */
+/* F.S. X dihilangkan dari List  */
 /* List mungkin menjadi kosong karena penghapusan */
-void DelLast (List *L, Laddress *P);
-/* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* Last element baru adalah predesesor elemen terakhir yg lama, */
-/* jika ada */
-void DelAfter (List *L, Laddress *Pdel, Laddress Prec);
-/* I.S. List tidak kosong. Prec adalah anggota list  */
-/* F.S. Menghapus Next(Prec): */
-/*      Pdel adalah alamat elemen list yang dihapus  */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void PrintInfo (List L);
-/* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-int NbElmt (List L);
+void PrintInfo (List L, Bangunan B);
+/* I.S. List tidak kosong */
+/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan 
+        elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
+/* Contoh : 
+    1. Castle (1,15) 20 lv. 3
+    2. Tower (1,13) 50 lv. 1
+    3. Castle (3,14) 30 lv. 2                                        */
+int NbElmtList (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
-/*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
-Linfotype Max (List L);
-/* Mengirimkan nilai Info(P) yang maksimum */
+/*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
+boolean CheckTambahTentara (Bangunan B, urutan X);
+/* X pasti ada di dalam List */
+/* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah 
+   melewati maksimum penambahan pasukan atau belum */
+/* Jika belum maka true dan sebaliknya */
 
-/****************** PROSES TERHADAP LIST ******************/
-void Konkat1 (List *L1, List *L2, List *L3);
-/* I.S. L1 dan L2 sembarang */
-/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
-/* Konkatenasi dua buah list : L1 dan L2    */
-/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2) */
-/* dan L1 serta L2 menjadi list kosong.*/
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
+void TambahTentara (Bangunan * B, urutan X);
+/* I.S. List L terdefinisi
+        Bangunan B terdefinisi
+        X pasti ada di dalam List
+        CheckTentara bernilai true */
+/* F.S. Bangunan ke-X ditambah jumlah sesuai dengan tipe bangunan itu */
 
+void TambahAllTentara (List L, Bangunan * B);
+/* I.S. List L terdefinisi
+        Bangunan B terdefinisi */
+/* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya 
+        bertambah */       
+         
 #endif
