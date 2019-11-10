@@ -4,7 +4,14 @@
 
 #ifndef command_H
 #define command_H
-#include "main.c"
+
+#include "boolean.h"
+#include "queue.h"
+#include "matriks.h"
+#include "listlinier.h"
+#include "player.h"
+#include "stackt.h"
+#include "array.h"
 
 // Main Prosedur untuk command
 void COMMAND(Stack *gamestate);
@@ -24,11 +31,11 @@ void UNDO(Stack *gamestate);
 // Prosedur untuk melakukan END_TURN
 void END_TURN(Stack *gamestate);
 
-// Prosedur untuk melakukan SAVE
-void SAVE(Stack *gamestate);
-
 // Prosedur untuk melakukan MOVE
 void MOVE(Stack *gamestate);
+
+// Prosedur untuk melakukan SAVE
+void SAVE(Stack *gamestate);
 
 // Prosedur untuk melakukan EXIT Game
 void EXIT(Stack *gamestate);

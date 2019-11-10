@@ -1,11 +1,9 @@
 #include <stdio.h>
-#include "player.h"
-#include "stackt.h"
 #include "command.h"
 
 // Main Prosedur untuk command
 void COMMAND(Stack *gamestate) {
-    int input;
+    int input = 0;
     while (1) {
         printf("List command :\n");
         printf("1. Attack\n");
@@ -13,8 +11,8 @@ void COMMAND(Stack *gamestate) {
         printf("3. Skill\n");
         printf("4. Undo\n");
         printf("5. End Turn\n");
-        printf("6. Save\n");
-        printf("7. Move\n");
+        printf("6. Move\n");
+        printf("7. Save\n");
         printf("8. Exit\n");
         printf("ENTER COMMAND : ");
         scanf("%d", &input);
@@ -37,10 +35,10 @@ void COMMAND(Stack *gamestate) {
                 END_TURN(gamestate);
                 break;
             case 6 :
-                SAVE(gamestate);
+                MOVE(gamestate);
                 break;
             case 7 :
-                MOVE(gamestate);
+                SAVE(gamestate);
                 break;
             case 8 :
                 EXIT(gamestate);
@@ -81,8 +79,10 @@ void ATTACK(Stack *gamestate)
 }
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP(Stack *gamestate)
-{
+void LEVEL_UP(Stack *gamestate) {
+    // $ Kamus Lokal
+    Player CurrP = GetCurrPlayer(*gamestate);
+    // $ Algoritma
     printf("Daftar bangunan\n");
     // Menampilkan daftar Bangunan
     printf("Bangunan yang akan di level up : ");
@@ -96,8 +96,18 @@ void LEVEL_UP(Stack *gamestate)
     }
 }
 
-// Prosedur untuk mamakai skill yang sedang dimiliki pemain
+// Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate) {
+    printf("Pass\n");
+    // $ Kamus Lokal
+    Player CurrP;
+    CurrP = GetCurrPlayer(*gamestate);
+    // $ Algoritma
+    printf("You have used the skill : ");
+    //PrintInfoHead(Skill(P1Info(Curr(*gamestate))));
+    PrintInfoHead(Skill(CurrP));
+    printf("\n");
+    printf("All your buildings have been Leveled Up!!\n");
 }
 
 // Prosedur untuk melakukan UNDO

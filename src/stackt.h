@@ -74,7 +74,10 @@ void Pop(Stack * S, Sinfotype * X);
 // * I.S. S  tidak mungkin kosong
 // * F.S. X adalah Snilai elemen TOP yang lama, TOP berkurang 1
 
-// $ ************ Fungsi lain ************
+// $ ************ Turn Handling ************
+Player GetCurrPlayer(Stack S);
+// * Mengembalikan Player yang sedang berjalan turn-nya
+
 void ChangeTurn(Stack * S);
 // * Mengganti giliran pemain
 // * I.S. Game sedang berlangsung

@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //#include "boolean.h"
-//#include "player.h"
+#include "player.h"
 #include "stackt.h"
 #include "command.h"
 //#include "array.h"
@@ -101,7 +101,7 @@ while (!Exit) {
             printf("#Ceritanya Maen#\n");
             //getchar(); 
             StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
-            printf("pass");
+            printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
             do {
                 COMMAND(&GameState);
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo));

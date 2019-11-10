@@ -19,7 +19,7 @@ boolean IsLose(Player P) {
 // $ ***** Creator *****
 void CreatePlayer(Player *P) {
     // * Handling Queue Skill
-    CreateQueue(&Skill(*P),1000);
+    CreateQueue(&Skill(*P),10);
     QAdd(&Skill(*P),"IU");
     // * Handling List Bangunan
     // CreateEmptyList(ListBan(*P));
@@ -27,12 +27,18 @@ void CreatePlayer(Player *P) {
 
 // $ ***** Basic Operators *****
 
+
 // $ *** Color Handling ***
 void SetPlayerWarna(Player *P, Warna C) {
     Color(*P) = C;
 }
 
+
 // $ ***** Skills *****
+//void UseSkill(Player) {}
+
+
+
 void InstantUpgrade(Player *P, Bangunan *B) {
     /* I.S. Player P terdefinisi dan bangunan B terdefinisi
     /* F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2

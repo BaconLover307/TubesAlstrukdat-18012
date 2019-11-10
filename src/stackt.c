@@ -15,35 +15,44 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn) {
 }
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
-boolean IsFirstAct (Stack S) {
-    return (Top(S) == SNil); 
+boolean IsFirstAct(Stack S) {
+    return (Top(S) == SNil);
 }
 
-boolean IsFull (Stack S) {
+boolean IsFull(Stack S) {
     return (Top(S) == MaxSEl);
 }
 
 // $ ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push (Stack * S, Sinfotype X) {
+void Push(Stack *S, Sinfotype X) {
     Top(*S) += 1;
     InfoTop(*S) = X;
 }
 
 // $ ************ Menghapus sebuah elemen Stack ************
-void Pop (Stack * S, Sinfotype * X) {
+void Pop(Stack *S, Sinfotype *X) {
     *X = InfoTop(*S);
     Top(*S) -= 1;
 }
 
-// $ ************ Fungsi lain ************
+// $ ************ Turn Handling ************
 
-void ChangeTurn (Stack *S) {
+Player GetCurrPlayer(Stack S) {
+    printf("pass\n");
+    if (TurnInfo(Curr(S)) == 1) {
+        return (P1Info(Curr(S)));
+    } else if (TurnInfo(Curr(S)) == 2) {
+        return (P2Info(Curr(S)));
+    }
+}
+
+void ChangeTurn(Stack *S) {
     // $ Kamus Lokal
     Sinfotype LastState;
     // $ Algoritma
-    Pop(S,&LastState);
+    Pop(S, &LastState);
     if (!ET(P1Info(LastState)) && !ET(P2Info(LastState))) {
         TurnInfo(LastState) = TurnInfo(LastState) % 2 + 1;
     }
-    StartTurn(S,P1Info(LastState),P2Info(LastState),TurnInfo(LastState));
+    StartTurn(S, P1Info(LastState), P2Info(LastState), TurnInfo(LastState));
 }
