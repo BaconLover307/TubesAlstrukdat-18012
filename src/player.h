@@ -7,56 +7,49 @@
 #include "boolean.h"
 //#include "skill.h"
 //#include "bangunan.h"
+#include "array.h"
 #include "queue.h"
 #include "pcolor.h"
 #include "listlinier.h"
 
-//#define Nil 0
-/* Konstanta untuk mendefinisikan address tak terdefinisi */
-
-/* Definisi elemen dan address */
-//typedef int infotype;
-//typedef int address; /* indeks tabel */
-/* Contoh deklarasi variabel bertype Queue : */
-/* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct {
+    int Turn;
     Queue queueSkill;       /* queue penyimpan skill */
-    Bangunan listBangunan;      /* list penyimpan kepemilikan listbangunan */
+    //Bangunan listBangunan;      /* list penyimpan kepemilikan listbangunan */
     Warna color; 
     boolean extraTurn;
+} Player;
 //    boolean stateAttack;       /* menyimpan kondisi giliran */
 //    address TAIL;    /* alamat penambahan */
 //    int MaxEl = 100; /* Max elemen queue */
-} Player;
 /* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
-/* ********* AKSES (Selektor) ********* */
-/* Jika Q adalah Queue, maka akses elemen : */
+// $ ********* AKSES (Selektor) *********
+// $ Jika P adalah Player, maka akses elemen :
 #define Color(P) (P).color
 #define Skill(P) (P).queueSkill
 #define ListBan(P) (P).listBangunan
 #define ET(P) (P).extraTurn
-//#define InfoHead(Q) (Q).T[(Q).HEAD]
 
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
-//boolean IsLose(listlistBangunan B);
-// Mengirim true jika list kepemilikan listbangunan kosong
+boolean IsLose(Player P);
+// * Mengirim true jika list kepemilikan listbangunan kosong
 
 // $ ***** Creator *****
 void CreatePlayer(Player *P);
-/* I.S. P terdefinisi
-F.S. Sebuah P terbentuk dengan karakter listbangunan akan sesuai
-konfigurasi dan warna listbangunan sesuai yang dipilih */
+// * I.S. P terdefinisi
+// * F.S. Sebuah P terbentuk dengan karakter listbangunan akan sesuai
+// * konfigurasi dan warna listbangunan sesuai yang dipilih
 
 // $ ***** Basic Operators *****
 
 // $ *** Color Handling ***
 void SetPlayerWarna(Player *P, Warna C);
-/* I.S. Player terdefinisi
-F.S. Warna listbangunan player akan menjadi C */
+// * I.S. Player terdefinisi
+// * F.S. Warna listbangunan player akan menjadi C
 
 /* 
 void updatelistBangunan(Player *P, listlistBangunan B);

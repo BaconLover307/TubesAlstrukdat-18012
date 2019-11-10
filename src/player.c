@@ -6,8 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "array.h"
-#include "listlinier.h"
 
 // $ ********* Prototype *********
 
@@ -33,9 +31,8 @@ void SetPlayerWarna(Player *P, Warna C) {
     Color(*P) = C;
 }
 
-
 // $ ***** Skills *****
-void InstantUpgrade(Player *P, Bangunan *B){
+void InstantUpgrade(Player *P, Bangunan *B) {
     /* I.S. Player P terdefinisi dan bangunan B terdefinisi
     /* F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
        pada bangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
