@@ -127,24 +127,69 @@ void TentaraAttack (Bangunan * B, IdxType X, int N) {
 }   
 
 /*********************** Tentara Invaded **************************/
-void TentaraInvaded (Bangunan * B, IdxType i, int N) {
+void InvadedShield (Bangunan * B, IdxType i, int N) {
 /* I.S. Bangunan B terdefinisi 
-        i pasti ada di dalam indeks bangunan B */
-/* F.S. Bangunan ke-i mengalami penurunan jumlah tentara sebesar N (mungkin minus) */
+        i pasti ada di dalam indeks bangunan B 
+        Skill Shield itu aktif sekali          */
+/* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus)
+        dengan perhitungan adanya pertahanan */
 
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  if (Name(ElmtBan(*B, i)) == 'T') {
-    Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - (N * 3 / 4);
-  } else if (Name(ElmtBan(*B, i)) == 'F') {
-    if ((Level(ElmtBan(*B, i)) == 3) || (Level(ElmtBan(*B, i)) == 4)) {
-      Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - (N * 3 / 4);
-    } else /* (Level(ElmtBan(*B, i)) == 1) || (Level(ElmtBan(*B, i)) == 2) */ {
-      Tentara(ElmtBan(*B, i)) -= N;
+  if (Tentara(ElmtBan(*B, i)) > N * 3 / 4) {
+    Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - N * 3 / 4;
+  } else /* Tentara(ElmtBan(*B, i)) <= N * 3 / 4 */ {
+    Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) * 4 / 3);
+  }
+}        
+
+void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int Shield, IdxType i, int N) {
+/* I.S. Bangunan B terdefinisi 
+        i pasti ada di dalam indeks bangunan B 
+        Mengetahui skill-skill tertentu aktif atau tidak*/
+/* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus) */
+
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
+  if (Critical_Hit) {
+    if (Tentara(ElmtBan(*B, i)) > 2 * N) {
+      Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - 2 * N;
+    } else /* Tentara(ElmtBan(*B, i) <= 2 * N */ {
+      if (Tentara(ElmtBan(*B, i)) % 2 == 1) {
+        Tentara(ElmtBan(*B, i)) += 1;
+      } 
+
+      Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) / 2);
     }
-  } else /* (Name(ElmtBan(*B, i)) == 'C') || (Name(ElmtBan(*B, i)) == 'V') */ {
-    Tentara(ElmtBan(*B, i)) -= N;
+
+  } else /* !Critical_Hit */ {
+    if (Attack_Up) {
+      Tentara(ElmtBan(*B, i)) -= N;
+
+    } else /* !Attack_Up */ {
+      if (Shield == 2) { // * Skill Shield digunakan 2 kali 
+        /* Tidak ada penurunan jumlah tentara */
+      } else if (Shield == 1) { // * Skill Shield digunaka 1 kali
+        InvadedShield(B, i, N);
+
+      } else /* Shield == 0 */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack
+        if (Name(ElmtBan(*B, i)) == 'T') {
+          InvadedShield(B, i, N);
+        } else if (Name(ElmtBan(*B, i)) == 'F') {
+          if ((Level(ElmtBan(*B, i)) == 3) || (Level(ElmtBan(*B, i)) == 4)) {
+            InvadedShield(B, i, N);
+
+          } else /* (Level(ElmtBan(*B, i)) == 1) || (Level(ElmtBan(*B, i)) == 2) */ {
+            Tentara(ElmtBan(*B, i)) -= N;
+          }
+
+        } else /* (Name(ElmtBan(*B, i)) == 'C') || (Name(ElmtBan(*B, i)) == 'V') */ {
+          Tentara(ElmtBan(*B, i)) -= N;
+        }
+      }
+    }
   }
 }
 
