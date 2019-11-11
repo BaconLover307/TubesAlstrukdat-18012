@@ -7,7 +7,6 @@ int main() {
 	int NB, NK, MaxEl;
  	MATRIKS M;
  	STARTKATA();
-	ADVKATA();
 	NB = KataToInt(CKata);
 	ADVKATA();
 	NK = KataToInt(CKata);
@@ -16,6 +15,7 @@ int main() {
 	ADVKATA();
 	Bangunan B = KataToBangunan(MaxEl);  
 	M = KataToMatriks(NB, NK, B);
-	TulisMATRIKS(M);
+	ADVKATA();
 	Graph G = KataToGraph(NB, NK, MaxEl);
+	TulisMATRIKS(M);
 }
