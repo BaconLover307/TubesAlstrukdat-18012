@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "matriks_daniel.h"
+#include "matriks.h"
 
 int main() {
   /* KAMUS */
@@ -51,6 +51,9 @@ int main() {
 
   BacaMATRIKS(&M, B);
   TulisMATRIKS(M);
+
+  printf("\n");
+  printf("Banyak elemen matriks = %d\n", NBElmtMatriks(M));
 
   return 0;
 }
