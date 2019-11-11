@@ -111,10 +111,18 @@ void TentaraAttack (Bangunan * B, IdxType X, int N);
 /* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */        
 
 /*********************** Tentara Invaded **************************/
-void TentaraInvaded (Bangunan * B, IdxType i, int N);
+void InvadedShield (Bangunan * B, IdxType i, int N);
 /* I.S. Bangunan B terdefinisi 
-        i pasti ada di dalam indeks bangunan B */
-/* F.S. Bangunan ke-i mengalami penurunan jumlah tentara sebesar N (mungkin minus) */
+        i pasti ada di dalam indeks bangunan B 
+        Skill Shield itu aktif sekali          */
+/* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus)
+        dengan perhitungan adanya pertahanan */
+
+void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int Shield, IdxType i, int N);
+/* I.S. Bangunan B terdefinisi 
+        i pasti ada di dalam indeks bangunan B 
+        Mengetahui skill-skill tertentu aktif atau tidak*/
+/* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus) */
 
 boolean CanCapture (Bangunan B, IdxType i);
 /* Mengecek apakah Bangunan ke-i memiliki jumlah tentara yang <= 0 */
