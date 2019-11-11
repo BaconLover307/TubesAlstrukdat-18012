@@ -77,12 +77,12 @@ boolean IsEmptyBan (Bangunan B) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return (Neff(B) == 0);    
+  return (Neff(B) == 0);
 }
 
 /* *** Test tabel penuh *** */
 boolean IsFullBan (Bangunan B) {
-// ? Entah perlu fungsi ini gak ya?  
+// ? Entah perlu fungsi ini gak ya?
 /* Mengirimkan true jika tabel B penuh, mengirimkan false jika tidak */
 
   /* KAMUS LOKAL */
@@ -99,7 +99,7 @@ void BacaBangunan (Bangunan * B) {
 /* Prekondisi : Banyaknya elemen B itu valid */
 /* Proses : membaca banyaknya elemen B dan mengisi semua nilainya dengan Mesin Kata */
 // Todo Menunggu yang kerjain Configure
- 
+
 }
 
 /*********************** Tentara Attack ****************************/
@@ -115,7 +115,7 @@ boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
 
 void TentaraAttack (Bangunan * B, IdxType X, int N) {
 /* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List 
+        X pasti ada di dalam List
         Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
 /* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */
 
@@ -124,12 +124,12 @@ void TentaraAttack (Bangunan * B, IdxType X, int N) {
   /* ALGORITMA */
   Tentara(ElmtBan(*B, X)) -= N;
 
-}   
+}
 
 /*********************** Tentara Invaded **************************/
 void InvadedShield (Bangunan * B, IdxType i, int N) {
-/* I.S. Bangunan B terdefinisi 
-        i pasti ada di dalam indeks bangunan B 
+/* I.S. Bangunan B terdefinisi
+        i pasti ada di dalam indeks bangunan B
         Skill Shield itu aktif sekali          */
 /* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus)
         dengan perhitungan adanya pertahanan */
@@ -142,11 +142,11 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
   } else /* Tentara(ElmtBan(*B, i)) <= N * 3 / 4 */ {
     Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) * 4 / 3);
   }
-}        
+}
 
 void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int Shield, IdxType i, int N) {
-/* I.S. Bangunan B terdefinisi 
-        i pasti ada di dalam indeks bangunan B 
+/* I.S. Bangunan B terdefinisi
+        i pasti ada di dalam indeks bangunan B
         Mengetahui skill-skill tertentu aktif atau tidak*/
 /* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus) */
 
@@ -159,7 +159,7 @@ void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int 
     } else /* Tentara(ElmtBan(*B, i) <= 2 * N */ {
       if (Tentara(ElmtBan(*B, i)) % 2 == 1) {
         Tentara(ElmtBan(*B, i)) += 1;
-      } 
+      }
 
       Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) / 2);
     }
@@ -169,7 +169,7 @@ void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int 
       Tentara(ElmtBan(*B, i)) -= N;
 
     } else /* !Attack_Up */ {
-      if (Shield == 2) { // * Skill Shield digunakan 2 kali 
+      if (Shield == 2) { // * Skill Shield digunakan 2 kali
         /* Tidak ada penurunan jumlah tentara */
       } else if (Shield == 1) { // * Skill Shield digunaka 1 kali
         InvadedShield(B, i, N);
@@ -207,7 +207,7 @@ void TentaraAbsolute (Bangunan * B, IdxType X) {
 /* I.S. Bangunan B terdefinisi
         X pasti ada di dalam List */
 /* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
-        nilai jumlahnya */         
+        nilai jumlahnya */
 
   /* KAMUS LOKAL */
 
@@ -217,7 +217,7 @@ void TentaraAbsolute (Bangunan * B, IdxType X) {
 
 /*************************** Level-Up Bangunan ********************************/
 boolean CheckLevelUp (Bangunan B, IdxType X) {
-/* Mengecek apakah bangunan tertentu sudah melewati jumlah yang seharusnya 
+/* Mengecek apakah bangunan tertentu sudah melewati jumlah yang seharusnya
    atau belum */
 /* Jika iya maka True dan sebaliknya */
 // ! Jika udah level 4 maka tidak bisa Level Up lagi
@@ -287,7 +287,7 @@ boolean CheckLevelUp (Bangunan B, IdxType X) {
 void LevelUp (Bangunan * B, IdxType X) {
 /* I.S. Bangunan B terdefinisi
         Bangunan ke-X sudah pasti bisa Level-Up */
-/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar 1/2 dari 
+/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar 1/2 dari
         jumlah sebelumnya.
         Bangunan ke-X menglami penaikan 1 level. */
 
