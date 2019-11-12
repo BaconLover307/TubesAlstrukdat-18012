@@ -6,7 +6,7 @@
 
 #include "mesinkar_faris.h"
 #include "matriks.h"
-#include "graph_daniel.h"
+#include "graph.h"
 
 #define NMax 50
 #define BLANK1 ' '
@@ -72,9 +72,5 @@ MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B);
 
 Graph KataToGraph(int NB, int NK, int MaxEl);
 /* Membaca file yang telah diberikan menjadi graph. */
-
-
-void KonfigKata();
-/* Proses penuh konfigurasi file config.txt melalui mesinkata */
 
 #endif

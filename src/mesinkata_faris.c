@@ -162,32 +162,14 @@ Graph KataToGraph(int NB, int NK, int MaxEl)
 {
   Graph G;
   int i, j;
-  MakeEmptyGraph(*G, MaxEl);
+  MakeEmptyGraph(&G, MaxEl);
   for (i = 1; i <= NB; i++) {
-    for (j = 1; j <= NK, j++) {
+    for (j = 1; j <= NK; j++) {
       if (KataToInt(CKata) == 1) {
-        TambahRelation (&G, i, j)
+        TambahRelation (&G, i, j);
       }
         ADVKATA(); 
     }
     ADVKATA();
   }
-}
-
-void KonfigKata()
-/* Proses penuh konfigurasi file config.txt dengan menggunakan mesinkata */
-{
-  int NB, NK, MaxEl;
-  MATRIKS M;
-  STARTKATA();
-  ADVKATA();
-  NB = KataToInt(CKata);
-  ADVKATA();
-  NK = KataToInt(CKata);
-  ADVKATA();
-  MaxEl = KataToInt(CKata);
-  ADVKATA();
-  Bangunan B = KataToBangunan(MaxEl);
-  M = KataToMatriks(NB, NK, B);
-  Graph G = KataToGraph(NB, NK, MaxEl);
 }
