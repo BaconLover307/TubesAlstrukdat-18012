@@ -5,7 +5,7 @@
 #define __MESINKATA_H__
 
 #include "mesinkar_faris.h"
-#include "matriks_daniel.h"
+#include "matriks.h"
 #include "graph_daniel.h"
 
 #define NMax 50
