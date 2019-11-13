@@ -49,15 +49,14 @@ while (!Exit) {
     // ASCII Art: MainMenu
     do {
         Exit = false;
-        //Menu();
-        printf("# MENU PLACEHOLDER #\n");
-        //printf("Enter Menu:")
+        Menu();
+        printf("Enter Menu:");
         scanf(" %s",&menu);
         printf("Your choice is %s\n",menu);
         //getchar();
         
         // $ ######### TUTORIAL ########
-        if (strcmp(menu,"TUTORIAL") == 0) {
+        if (strcmpi(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
             clrscrn();
@@ -71,23 +70,22 @@ while (!Exit) {
             ExitMenu = true;
 
             // $ ######### CREDITS ########
-        } else if (strcmp(menu, "CREDITS") == 0) {
-            // TODO Credits();
-            printf("#CREDITS PLACEHOLDER#\n");
+        } else if (strcmpi(menu, "CREDITS") == 0) {
+            Credits();
             printf("\n");
             printf("Press enter to go back to main menu...");
             getchar();
             ExitMenu = true;
 
             // $ ######### QUIT ########
-        } else if (strcmp(menu, "QUIT") == 0) {
+        } else if (strcmpi(menu, "QUIT") == 0) {
             // TODO Quit();
             printf("#QUIT PLACEHOLDER#\n");
             ExitMenu = true;
             Exit = true;
 
             // $ ######### PLAY GAME ########
-        } else if (strcmp(menu, "PLAY") == 0) {
+        } else if (strcmpi(menu, "PLAY") == 0) {
             // todo Load Game
             
             // todo maen game
