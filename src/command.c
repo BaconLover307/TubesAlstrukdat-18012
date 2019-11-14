@@ -4,7 +4,7 @@
 #include "string.h"
 
 // Main Prosedur untuk command
-/*
+
 void COMMAND(Stack *gamestate) {
     int input = 0;
     while (1) {
@@ -49,7 +49,7 @@ void COMMAND(Stack *gamestate) {
         }
     }
 }
-*/
+
 // Prosedur untuk melakukan ATTACK
 void ATTACK(Stack *gamestate)
 {

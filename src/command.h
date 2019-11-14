@@ -9,7 +9,7 @@
 #include "stackt.h"
 
 // Main Prosedur untuk command
-//void COMMAND(Stack *gamestate);
+void COMMAND(Stack *gamestate);
 
 // Prosedur untuk melakukan ATTACK
 void ATTACK(Stack *gamestate);

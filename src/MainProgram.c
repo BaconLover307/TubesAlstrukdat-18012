@@ -106,6 +106,7 @@ while (!Exit) {
             printf("pass\n");
             printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
             do {
+                COMMAND(&GameState);
             /*
                 do {
                     int input = 0;
