@@ -7,10 +7,7 @@
 
 #include "boolean.h"
 #include "player.h"
-#include "array.h"
-#include "queue.h"
 #include "matriks.h"
-#include "listlinier.h"
 
 #define SNil 0
 #define MaxSEl 10000

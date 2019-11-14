@@ -9,6 +9,7 @@
 /* Deskripsi        : Implementasi ADT Array Dinamis */
 
 #include <stdio.h>
+#include <math.h>
 #include "array.h"
 
 /* ********** KONSTRUKTOR ********** */
