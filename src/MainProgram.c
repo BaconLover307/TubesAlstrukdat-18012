@@ -99,9 +99,62 @@ while (!Exit) {
             printf("#Ceritanya Maen#\n");
             //getchar(); 
             StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+            //Player TestP = GetCurrPlayer(GameState);
+            Player TestP = P1Info(Curr(GameState));
+            printf("pass\n");
+            PrintInfoHead(Skill(TestP));
+            printf("pass\n");
             printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
             do {
                 COMMAND(&GameState);
+            /*
+                do {
+                    int input = 0;
+                    while (1) {
+                        printf("List command :\n");
+                        printf("1. Attack\n");
+                        printf("2. Level Up\n");
+                        printf("3. Skill\n");
+                        printf("4. Undo\n");
+                        printf("5. End Turn\n");
+                        printf("6. Move\n");
+                        printf("7. Save\n");
+                        printf("8. Exit\n");
+                        printf("ENTER COMMAND : ");
+                        scanf("%d", &input);
+                        printf("Your choice is : %d\n",input);
+
+                        switch(input) {
+                            case 1 :
+                                ATTACK(&GameState);
+                                break;
+                            case 2 :
+                                LEVEL_UP(&GameState);
+                                break;
+                            case 3 :
+                                SKILL(&GameState);
+                                break;
+                            case 4 :
+                                UNDO(&GameState);
+                                break;
+                            case 5 :    
+                                END_TURN(&GameState);
+                                break;
+                            case 6 :
+                                MOVE(&GameState);
+                                break;
+                            case 7 :
+                                SAVE(&GameState);
+                                break;
+                            case 8 :
+                                EXIT(&GameState);
+                                break;
+                        }
+                    }
+
+                } while (!EndTurn)
+                ChangeTurn(&GameState);
+            */
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo));
             if (IsLose(PlayerTwo)) {
                 //

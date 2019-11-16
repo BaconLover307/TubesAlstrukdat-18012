@@ -5,14 +5,13 @@
 #define player_H
 
 #include "boolean.h"
-//#include "skill.h"
 #include "array.h"
 #include "queue.h"
 #include "pcolor.h"
 #include "listlinier.h"
+//#include "skill.h"
 
 typedef struct {
-    int Turn;
     Queue queueSkill;       /* queue penyimpan skill */
     List listBangunan;      /* list penyimpan kepemilikan listbangunan */
     Warna color; 

@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "command.h"
+#include "string.h"
 
 // Main Prosedur untuk command
+
 void COMMAND(Stack *gamestate) {
     int input = 0;
     while (1) {
@@ -96,17 +99,19 @@ void LEVEL_UP(Stack *gamestate) {
     }
 }
 
+//void abcabc(Stack* gamestate) {
+ //   printf("abcabc masuk\n");
+   // fflush(stdout);
+    //SKILL(*gamestate);
+//}
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate) {
-    printf("Pass\n");
     // $ Kamus Lokal
-    Player CurrP;
-    CurrP = GetCurrPlayer(*gamestate);
+    Player CurrP = GetCurrPlayer(*gamestate);
     // $ Algoritma
     printf("You have used the skill : ");
-    //PrintInfoHead(Skill(P1Info(Curr(*gamestate))));
     PrintInfoHead(Skill(CurrP));
-    printf("\n");
+    
     printf("All your buildings have been Leveled Up!!\n");
 }
 

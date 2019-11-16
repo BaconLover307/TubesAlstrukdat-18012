@@ -6,12 +6,7 @@
 #define command_H
 
 #include "boolean.h"
-#include "queue.h"
-#include "matriks.h"
-#include "listlinier.h"
-#include "player.h"
 #include "stackt.h"
-#include "array.h"
 
 // Main Prosedur untuk command
 void COMMAND(Stack *gamestate);

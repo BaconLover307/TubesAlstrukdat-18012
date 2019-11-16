@@ -3,6 +3,7 @@
 /* Definisi Stack   : Model Implementasi dengan tabel kontigu dan ukuran sama */
 
 #include "stackt.h"
+#include "string.h"
 #include <stdio.h>
 
 // $ ************ Prototype ************
@@ -38,7 +39,6 @@ void Pop(Stack *S, Sinfotype *X) {
 // $ ************ Turn Handling ************
 
 Player GetCurrPlayer(Stack S) {
-    printf("pass\n");
     if (TurnInfo(Curr(S)) == 1) {
         return (P1Info(Curr(S)));
     } else if (TurnInfo(Curr(S)) == 2) {
