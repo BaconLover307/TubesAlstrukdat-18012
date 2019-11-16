@@ -45,7 +45,7 @@ boolean ExitMenu;
 int main() {
 while (!Exit) {
     // todo MainM();
-    printf("#MAINMENU PLACEHOLDER#\n");
+    printf("#TAMPILAN MAIN#\n");
     // ASCII Art: MainMenu
     do {
         Exit = false;
