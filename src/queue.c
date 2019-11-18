@@ -104,12 +104,20 @@ void QDel (Queue * Q, Qinfotype * X) {
 /* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
     Q mungkin kosong */
     strcpy(*X,InfoHead(*Q));
-    if (Head(*Q) == Tail(*Q)) { // * Set menjadi queue kosong
-        Head(*Q) = QNil;
-        Tail(*Q) = QNil;
-    } else {
-        Head(*Q)++;
+    if (!(IsQEmpty(*Q))){
+        if (Head(*Q) == Tail(*Q)) { // * Set menjadi queue kosong
+            Head(*Q) = QNil;
+            Tail(*Q) = QNil;
+        } 
+        else {
+            Head(*Q)++;
+        }
     }
+
+    else{
+        printf("Anda tidak mempunyai skill apa pun\n");
+    }
+
 }
 
 void PrintInfoHead (Queue Q){
