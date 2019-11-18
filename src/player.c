@@ -32,9 +32,11 @@ void SetPlayerWarna(Player *P, Warna C) {
     Color(*P) = C;
 }
 
-
 // $ ***** Skills *****
-//void UseSkill(Player) {}
+void UseSkill(Player P) {
+        
+
+}
 
 
 
