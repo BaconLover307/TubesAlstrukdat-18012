@@ -107,12 +107,31 @@ void LEVEL_UP(Stack *gamestate) {
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate) {
     // $ Kamus Lokal
-    Player CurrP = GetCurrPlayer(*gamestate);
+    Qinfotype temp;
+    Queue Qtemp;
+    Sinfotype buang;
+
+    //Player CurrP = GetCurrPlayer(*gamestate);
+    //printf("%d\n", TurnInfo(CurrP))
     // $ Algoritma
-    printf("You have used the skill : ");
-    PrintInfoHead(Skill(CurrP));
-    
-    printf("All your buildings have been Leveled Up!!\n");
+
+    Qtemp = Skill(GetCurrPlayer(*gamestate));
+    if (IsQEmpty(Qtemp)){
+        printf("You don't have any skill\n");
+        //QAdd(&Qtemp, "IU");
+    }
+
+    else{
+            //PrintQueue(Skill(CurrP));
+            printf("You have used the skill : ");
+            PrintInfoHead(Qtemp);
+            printf("\n");
+            QDel(&Qtemp, &temp);
+            //PrintQueue(Skill(CurrP));
+            printf("All your buildings have been Leveled Up!!\n");
+
+        Skill(GetCurrPlayer(*gamestate)) = Qtemp;
+    }
 }
 
 // Prosedur untuk melakukan UNDO

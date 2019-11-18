@@ -100,9 +100,9 @@ while (!Exit) {
             //getchar(); 
             StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
             //Player TestP = GetCurrPlayer(GameState);
-            Player TestP = P1Info(Curr(GameState));
-            printf("pass\n");
-            PrintInfoHead(Skill(TestP));
+            //Player TestP = P1Info(Curr(GameState));
+            //printf("pass\n");
+            //PrintInfoHead(Skill(TestP));
             printf("pass\n");
             printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
             do {
