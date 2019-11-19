@@ -3,53 +3,6 @@
 #include "command.h"
 #include "string.h"
 
-// Main Prosedur untuk command
-/*
-void COMMAND(Stack *gamestate) {
-    int input = 0;
-    while (1) {
-        printf("List command :\n");
-        printf("1. Attack\n");
-        printf("2. Level Up\n");
-        printf("3. Skill\n");
-        printf("4. Undo\n");
-        printf("5. End Turn\n");
-        printf("6. Move\n");
-        printf("7. Save\n");
-        printf("8. Exit\n");
-        printf("ENTER COMMAND : ");
-        scanf("%d", &input);
-        printf("Your choice is : %d\n",input);
-
-        switch(input) {
-            case 1 :
-                ATTACK(gamestate);
-                break;
-            case 2 :
-                LEVEL_UP(gamestate);
-                break;
-            case 3 :
-                SKILL(gamestate);
-                break;
-            case 4 :
-                UNDO(gamestate);
-                break;
-            case 5 :
-                END_TURN(gamestate);
-                break;
-            case 6 :
-                MOVE(gamestate);
-                break;
-            case 7 :
-                SAVE(gamestate);
-                break;
-            case 8 :
-                EXIT(gamestate);
-                break;
-        }
-    }
-}
-*/
 // Prosedur untuk melakukan ATTACK
 void ATTACK(Stack *gamestate)
 {
@@ -82,7 +35,7 @@ void ATTACK(Stack *gamestate)
 }
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP(Stack *gamestate) {
+void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
     Player CurrP = GetCurrPlayer(*gamestate);
     // $ Algoritma
@@ -105,46 +58,65 @@ void LEVEL_UP(Stack *gamestate) {
     //SKILL(*gamestate);
 //}
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
-void SKILL(Stack *gamestate) {
+void SKILL(Stack *gamestate, Bangunan *databuild) {
+    printf("Debug SKILL\n");
     // $ Kamus Lokal
-    Player CurrP = GetCurrPlayer(*gamestate);
+    Qinfotype usedskill;
+    Queue *Qtemp;
+    Player *CurrP;
+
+    if (TurnInfo(Curr(*gamestate))) {
+        CurrP = &P1Info(Curr(*gamestate));
+    } else {
+        CurrP = &P2Info(Curr(*gamestate));
+    }
+    Qtemp = &Skill(*CurrP);
+    //Btemp = &ListBan(*CurrP);
+
     // $ Algoritma
-    printf("You have used the skill : ");
-    PrintInfoHead(Skill(CurrP));
-    
-    printf("All your buildings have been Leveled Up!!\n");
+    if (IsQEmpty(*Qtemp)) {
+        printf("You don't have any skills!\n");
+    } else {
+        // * Use Skill
+        printf("You have used the skill : ");
+        PrintInfoHead(*Qtemp); printf("\n");
+        QDel(Qtemp, &usedskill);
+        // * Switch
+        if (strcmpi(usedskill,"IU") == 0) {
+            printf("All your buildings have been Leveled Up!!\n");
+            InstantUpgrade(CurrP,databuild);
+        } else if (strcmpi(usedskill,"SH") == 0) {
+            
+        } else if (strcmpi(usedskill,"ET") == 0) {
+
+        } else if (strcmpi(usedskill,"AU") == 0) {
+
+        } else if (strcmpi(usedskill,"CH") == 0) {
+
+        } else if (strcmpi(usedskill,"IR") == 0) {
+
+        } else if (strcmpi(usedskill,"BA") == 0) {
+
+        }
+        ClearStack(gamestate);
+
+    }
 }
 
 // Prosedur untuk melakukan UNDO
 void UNDO(Stack *gamestate) {
     // $ Kamus Lokal
     Sinfotype Buang;
-    /*
-    if (UsedSkill(InfoSkill(gamestate))) {
-        printf("You cannot Undo past the Skill command!");
-    } else if (IsFirstAct(*gamestate)) {
-        printf("You cannot Undo when you haven't done anything!"); 
+    if (IsFirstAct(*gamestate)) {
+        printf("You cannot undo at the moment!\n");
     } else {
-    */
-        Pop(gamestate,&Buang);
-    //}
+        printf("You have undone your past action!\n");
+        Pop(gamestate, &Curr(*gamestate));
+    }
 }
-
-// Prosedur untuk melakukan END_TURN
-void END_TURN(Stack *gamestate) {
-    ChangeTurn(gamestate);
-}
-
-// Prosedur untuk melakukan SAVE
-void SAVE(Stack *gamestate)
-{
-    printf("Lokasi save file: ");
-}
-
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Stack *gamestate)
-{
+void MOVE(Stack *gamestate) { // todo
     printf("Daftar bangunan\n");
     // Menampilkan daftar Bangunan
     printf("Pilih bangunan : ");
@@ -170,16 +142,28 @@ void MOVE(Stack *gamestate)
     printf("%d pasukan [...] telah berpindah ke [...]\n", jumlahPasukan);
 }
 
+// Prosedur untuk melakukan SAVE
+void SAVE(Stack *gamestate) {
+    printf("Lokasi save file: ");
+    // todo SAVEFILE
+}
+
+
+
 // Prosedur untuk melakukan EXIT Game
-void EXIT(Stack *gamestate)
-{
+boolean EXIT(Stack *gamestate) {
     char inp;
-    printf("Apakah Anda ingin melakukan save terlebih dahulu? Y/N\n");
-    scanf(" %c", &inp);
-    if (inp == 'Y') {
-        SAVE(gamestate);
-    } else if (inp == 'N') {
-        //ExitMenu = true;
-    }
-    // keluar
+    printf("Apakah Anda ingin melakukan save terlebih dahulu? ");
+    do {
+        printf("Y/N/C\n");
+        scanf(" %c", &inp);
+        if (inp == 'Y') {
+            SAVE(gamestate);
+            return true;
+        } else if (inp == 'N') {
+            return true;
+        } else if (inp == 'C') {
+            return false;
+        }
+    } while (inp != 'Y' && inp != 'N' && inp != 'C');
 }

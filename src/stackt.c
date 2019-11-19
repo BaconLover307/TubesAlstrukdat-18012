@@ -14,6 +14,14 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn) {
     P2Info(Curr(*S)) = P2;
     TurnInfo(Curr(*S)) = Turn;
 }
+void ClearStack(Stack *S) {
+    Sinfotype temp;
+        printf("pass\n");
+    while(!IsFirstAct(*S)) {
+        printf("pass\n");
+        Pop(S,&temp);
+    }
+}
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
 boolean IsFirstAct(Stack S) {
@@ -55,4 +63,17 @@ void ChangeTurn(Stack *S) {
         TurnInfo(LastState) = TurnInfo(LastState) % 2 + 1;
     }
     StartTurn(S, P1Info(LastState), P2Info(LastState), TurnInfo(LastState));
+}
+
+void PrintCurr(Stack S) {
+    // $ Kamus Lokal
+    Player CurrP = GetCurrPlayer(S);
+    // $ Algoritma
+    printf("[ =====  Player %d  ===== ]\n", TurnInfo(Curr(S))),
+    //printbuilding
+    printf(">= Skill : ");
+    PrintQueue(Skill(CurrP));
+    printf(" =<\n");
+
+
 }

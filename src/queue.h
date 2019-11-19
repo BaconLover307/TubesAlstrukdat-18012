@@ -31,7 +31,7 @@ typedef struct { Qinfotype * T;   /* tabel penyimpan elemen */
 #define InfoTail(Q) (Q).T[(Q).TAIL]
 #define MaxQEl(Q) (Q).MaxQEl
 
-/* ********* Prototype ********* */
+// $ ********* Prototype *********
 boolean IsQEmpty (Queue Q);
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 boolean IsQFull (Queue Q);
@@ -40,7 +40,7 @@ boolean IsQFull (Queue Q);
 int NBQElmt (Queue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
-/* *** Kreator *** */
+// $ *** Kreator ***
 void CreateQueue (Queue * Q, int Max);
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
@@ -48,13 +48,13 @@ void CreateQueue (Queue * Q, int Max);
 /* atau : jika alokasi gagal, Q kosong dg MaxQEl=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
-/* *** Destruktor *** */
+// $ *** Destruktor ***
 void QDeAlokasi(Queue * Q);
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxQEl(Q) diset 0 */
 
-/* *** Primitif Add/Delete *** */
+// $ *** Primitif Add/Delete ***
 void QAdd (Queue * Q, Qinfotype X);
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
@@ -65,13 +65,19 @@ void QDel (Queue * Q, Qinfotype * X);
 /* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
 
+// $ *** Fungsi Lain ***
 void PrintInfoHead (Queue Q);
 /* I.S. Q mungkin kosong */
 /* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
 
 void PrintQueue(Queue Q);
-    // * I.S. Q mungkin kosong
-    // * F.S. Jika Q kosong, menuliskan [ none ] ke layar, jika Q tidak kosong menuliskan
-    // * seluruh elemen Queue ke layar
+// * I.S. Q mungkin kosong
+// * F.S. Jika Q kosong, menuliskan [ none ] ke layar, jika Q tidak kosong menuliskan
+// * seluruh elemen Queue ke layar
+
+void ReplaceQueue(Queue Q, Queue *Qnew);
+// * I.S. Q mungkin kosong, Qnew terdefinisi
+// * F.S. Jika Q kosong, tidak terjadi apa-apa, jika Q tidak kosong memindahkan
+// * seluruh elemen Q ke Qnew
 
 #endif

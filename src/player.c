@@ -7,6 +7,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/*
+? typedef struct {
+*    Queue queueSkill;      queue penyimpan skill
+*    List listBangunan;      list penyimpan kepemilikan listbangunan
+*    Warna color; 
+*    boolean extraTurn;
+? } Player;
+
+! ********* AKSES (Selektor) *********
+? Jika P adalah Player, maka akses elemen :
+* #define Color(P) (P).color
+* #define Skill(P) (P).queueSkill
+* #define ListBan(P) (P).listBangunan
+* #define ET(P) (P).extraTurn
+*/
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
@@ -32,9 +47,11 @@ void SetPlayerWarna(Player *P, Warna C) {
     Color(*P) = C;
 }
 
-
 // $ ***** Skills *****
-//void UseSkill(Player) {}
+void UseSkill(Player P) {
+        
+
+}
 
 
 
