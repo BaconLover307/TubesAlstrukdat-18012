@@ -86,7 +86,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             printf("All your buildings have been Leveled Up!!\n");
             InstantUpgrade(CurrP,databuild);
         } else if (strcmpi(usedskill,"SH") == 0) {
-            
+
         } else if (strcmpi(usedskill,"ET") == 0) {
 
         } else if (strcmpi(usedskill,"AU") == 0) {
@@ -105,6 +105,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
 
 // Prosedur untuk melakukan UNDO
 void UNDO(Stack *gamestate) {
+    puts("ANEH");
     // $ Kamus Lokal
     Sinfotype Buang;
     if (IsFirstAct(*gamestate)) {
