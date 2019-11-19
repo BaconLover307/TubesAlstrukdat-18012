@@ -5,7 +5,7 @@
 /* 4. Faris Muhammad Kautsar   / 13518105 */
 /* 5. Gregorius Jovan Kresnadi / 13518135 */
 
-/* File body : graph.h */
+/* File body : graph.c */
 
 #include <stdlib.h>
 #include <stdio.h>

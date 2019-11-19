@@ -5,13 +5,15 @@
 /* 4. Faris Muhammad Kautsar   / 13518105 */
 /* 5. Gregorius Jovan Kresnadi / 13518135 */
 
-/* File header: graph_test.h */
+/* File header: graph.h */
 
 #ifndef GRAPH_H
 #define GRAPH_H
 
 #include "boolean.h"
 #include "listlinier.h"
+
+#define Nil NULL
 
 typedef struct tElmtGraph *addrGraph;
 typedef struct tElmtGraph2 *addrGraph2;
@@ -43,34 +45,44 @@ typedef struct {
 #define InfoG(P)      (P)->infoG
 #define NextP(P)      (P)->NextParent
 #define FirstChild(P) (P)->FirstChild
-#define FirstG(L) ((L).First)
+#define InfoG2(P2)    (P2)->infoG2
+#define NextChild(P2) (P2)->NextChild
+#define FirstG(L)     ((L).FirstG)
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create Graph kosong  */
-void MakeEmptyGraph (Graph * G, int maxel);
-/* I.S. G sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel G kosong dengan kapasitas maxel + 1 */
+void MakeEmptyGraph (Graph * G);
+/* I.S. sembarang */
+/* F.S. Terbentuk graph kosong */
 
-void DealokasiGraph (Graph * G);
-/* I.S. G terdefinisi; */
-/* F.S. GI(G) dikembalikan ke system, MaxG(G)=0; NeffG(G)=0 */
+/****************** Manajemen Memori ******************/
+addrGraph AlokasiGraph1 (urutan X);
+/* Mengirimkan addrGraph hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addrGraph tidak Nil, dan misalnya */
+/* menghasilkan P, maka Info(P)=X, Next(P)=Nil, FirstChild(P)=Nil */
+/* Jika alokasi gagal, mengirimkan Nil */
 
-/* *** Selektor INDEKS *** */
-IdxType GetFirstGraph (Graph G);
-/* Prekondisi : Graph G tidak kosong */
-/* Mengirimkan indeks elemen G pertama */
-IdxType GetLastGraph (Graph G);
-/* Prekondisi : Graph G tidak kosong */
-/* Mengirimkan indeks elemen G terakhir */
+addrGraph2 AlokasiGraph2 (urutan X);
+/* Mengirimkan addrGraph2 hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addrGraph2 tidak Nil, dan misalnya */
+/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
+/* Jika alokasi gagal, mengirimkan Nil */
 
-/* ********** TEST KOSONG/PENUH ********** */
-/* *** Test tabel kosong *** */
+void DealokasiGraph1 (addrGraph * P);
+/* I.S. P terdefinisi; */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian addrGraph P */
+
+void DealokasiGraph2 (addrGraph2 * P);
+/* I.S. P terdefinisi; */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian addrGraph2 P */
+
+/* ********** TEST GRAPH KOSONG ********** */
 boolean IsEmptyGraph (Graph G);
 /* Mengirimkan true jika Graph G kosong, mengirimkan false jika tidak */
-/* *** Test tabel penuh *** */
-boolean IsFullGraph (Graph G);
-// ? Entah perlu fungsi ini gak ya?  
-/* Mengirimkan true jika Graph G penuh, mengirimkan false jika tidak */
+boolean IsEmptyParent (addrGraph P); 
+/* Mengirimkan true jika addrGraph P kosong, mengirimkan false jika tidak */
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void BacaGraph (Graph * G);
@@ -78,10 +90,6 @@ void BacaGraph (Graph * G);
 // TODO: Prosedur ini dimasukkan ke ADT Mesin Kata
 /* I.S. Graph G terdefinisi */
 /* F.S. Graph G berisi hubungan-hubungan antar bangunan */
-
-void TambahRelation (Graph * G, urutan X, urutan Y);
-/* I.S. Graph G terdefinisi */
-/* F.S. Bangunan ke-X dinyatakan memiliki hubungan dengan bangunan ke-Y */
 
 void TulisGraph (Graph G);
 // ? Untuk debugging doang kayaknya 
@@ -94,6 +102,26 @@ void TulisGraph (Graph G);
 1 0 0
 1 0 0
 */
+
+/*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
+void AddParent (Graph * G, int N);
+/* I.S. Graph G terdefinisi */
+/* F.S. Semua elemen parent dimasukkan ke graph secara berurut */
+
+void AddRelation (Graph * G, urutan X, urutan Y);
+/* I.S. Graph G terdefinisi */
+/* F.S. Bangunan ke-X dinyatakan memiliki hubungan dengan bangunan ke-Y */
+
+/****************** PENCARIAN SEBUAH GRAPH CHILD ******************/
+addrGraph SearchP (Graph G, urutan X);
+/* Mencari apakah ada elemen parent graph dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
+
+addrGraph2 SearchChild (addrGraph P, urutan X);
+/* Mencari apakah ada elemen anak graph dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
 
 /******************* RELATION **********************/
 boolean CheckRelation (Graph G, urutan X, urutan Y);
