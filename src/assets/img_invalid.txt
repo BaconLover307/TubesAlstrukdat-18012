@@ -1,7 +1,6 @@
-               ___                           ___
-              |   | Your input is invalid!! |   |
-              |   |                         |   |
-               |_|      Press enter to       |_|
-                _         try again!          _
-               [_]                           [_]
-
+       ___                           ___
+      |   | Your input is invalid!! |   |
+      |   |                         |   |
+       |_|      Press enter to       |_|
+        _         try again!          _
+       [_]                           [_]

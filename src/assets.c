@@ -42,6 +42,9 @@ void Menu() {
 void Credits() {
     print_image("assets//img_credits.txt");
 }
+void Command() {
+    print_image("assets//img_command.txt");
+}
 void Invalid() {
     print_image("assets//img_invalid.txt");
 }

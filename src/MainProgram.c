@@ -111,13 +111,13 @@ do {
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
                     // * Countdown
                     clrscrn();
-                    printf("                       Starting game in...\n\n");
+                    printf("              Starting game in...\n\n");
                     sleep(1);
-                    printf("                       3...\n\n");
+                    printf("              3...\n\n");
                     sleep(1);
-                    printf("                              2...\n\n");
+                    printf("                     2...\n\n");
                     sleep(1);
-                    printf("                                      1...\n");
+                    printf("                             1...\n");
                     sleep(1);
                     clrscrn();
                 }
@@ -135,16 +135,7 @@ do {
                 do {
                     EndTurn = false;
                     PrintCurr(GameState);
-                    printf("List Command :\n");
-                    printf(">> ATTACK\n");
-                    printf(">> LEVEL_UP\n");
-                    printf(">> SKILL\n");
-                    printf(">> MOVE\n");
-                    printf(">> UNDO\n");
-                    printf(">> END_TURN\n");
-                    printf(">> SAVE\n");
-                    printf(">> EXIT\n");
-                    printf("Enter Command : ");
+                    Command();
                     scanf(" %s",&command);
 					printf("\n");
 
