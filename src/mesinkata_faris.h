@@ -4,7 +4,7 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "mesinkar_faris.h"
+#include "mesinkar.h"
 #include "matriks.h"
 #include "graph.h"
 
@@ -70,7 +70,7 @@ Bangunan KataToBangunan(int MaxEl);
 MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B);
 /* Membaca kata yang telah diberikan menjadi matriks. */
 
-Graph KataToGraph(int NB, int NK, int MaxEl);
+Graph KataToGraph(int MaxEl);
 /* Membaca file yang telah diberikan menjadi graph. */
 
 #endif

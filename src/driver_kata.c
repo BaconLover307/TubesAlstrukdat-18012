@@ -4,18 +4,22 @@
 #include "mesinkata_faris.h"
 
 int main() {
-	int NB, NK, MaxEl;
- 	MATRIKS M;
- 	STARTKATA();
-	NB = KataToInt(CKata);
+	MATRIKS M;
+	STARTKATA();
+	PrintKata(CKata); int NB = KataToInt(CKata);
 	ADVKATA();
-	NK = KataToInt(CKata);
+	PrintKata(CKata); int NK = KataToInt(CKata);
 	ADVKATA();
-	MaxEl = KataToInt(CKata);
+	PrintKata(CKata); int MaxEl = KataToInt(CKata);
 	ADVKATA();
-	Bangunan B = KataToBangunan(MaxEl);  
+ 	PrintKata(CKata); Bangunan B = KataToBangunan(MaxEl);
 	M = KataToMatriks(NB, NK, B);
-	ADVKATA();
-	Graph G = KataToGraph(NB, NK, MaxEl);
+	printf("You're entering this stage!\n");
 	TulisMATRIKS(M);
+	printf("You have written the Matrix!\n");
+	printf("Here's the element count of your matrix: %d\n", NBElmtMatriks(M));
+	printf("You're going to write the graph!\n");
+	Graph G = KataToGraph(MaxEl);
+	printf("Here's the element count of your graph: %d\n", NeffG(G));
+	TulisGraph(G);
 }

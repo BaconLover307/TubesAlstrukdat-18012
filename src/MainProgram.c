@@ -1,6 +1,6 @@
 /* Tubes AlStrukDat */
 /* Kelompok 8 */
-/* Anggota: 
+/* Anggota:
 /* - Muhammad Hasan           - 13518012 */
 /* - Anna Elvira Hartoyo      - 13518045 */
 /* - Daniel Riyanto           - 13518075 */
@@ -12,20 +12,17 @@
 * Nama Program: Avatar World War
 
 * Game Avatar World War adalah game​ turn-based strategy yang
-* mensimulasikan perang dunia. Game ini dimainkan dengan cara 
-* memasukkan perintah melalui command line interface. 
+* mensimulasikan perang dunia. Game ini dimainkan dengan cara
+* memasukkan perintah melalui command line interface.
  */
 // $ ******* INCLUDE FILES ********
 #include <stdio.h>
 #include <stdlib.h>
-#include "stackt.h"
-#include "command.h"
-#include "load.c"
+#include "includes.c"
 /*
 #include "configure.h"
 */
 #include "string.h"
-#include "assets.c"
 
 // $ ***** Variables *****
 char menu[100];
@@ -48,15 +45,15 @@ do {
         scanf(" %s",&menu);
         //printf("Your choice is %s\n",menu);
         //getchar();
-        
+
             // $ ######### TUTORIAL ########
         if (strcmpi(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
             clrscrn();
             printf("#TUT1 PLACEHOLDER#\n");
-            getchar(); 
-            getchar(); 
+            getchar();
+            getchar();
             clrscrn();
             // todo Tutorial2();
             printf("#TUT2 PLACEHOLDER#\n");
@@ -104,11 +101,11 @@ do {
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
                 }
             } while (load != 'Y' && load != 'N');
-            
+
             // todo maen game
 
             printf("#Ceritanya Maen#\n");
-            //getchar(); 
+            //getchar();
             //Player TestP = GetCurrPlayer(GameState);
             //Player TestP = P1Info(Curr(GameState));
             //printf("pass\n");
@@ -130,12 +127,12 @@ do {
                     printf("Enter Command : ");
                     scanf(" %s",&command);
 					printf("\n");
-                    
+
 
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         ATTACK(&GameState);
-                        
+
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                     	LEVEL_UP(&GameState,&DataBangunan);
@@ -165,8 +162,8 @@ do {
                     else if (strcmpi(command, "EXIT") == 0) {
 						ExitMenu = EXIT(&GameState);
 						EndTurn = ExitMenu;
-					
-					} 
+
+					}
 					else Invalid();
 					printf("\n");
 
@@ -187,7 +184,7 @@ do {
             Invalid();
             getchar();
         }
-        
+
     } while (!ExitMenu);
     ExitMenu = false;
 } while (!Exit);
