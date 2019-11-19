@@ -4,7 +4,7 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "mesinkar_faris.h"
+#include "mesinkar.h"
 #include "matriks.h"
 #include "graph.h"
 

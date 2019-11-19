@@ -4,33 +4,21 @@
 #include "mesinkata_faris.h"
 
 int main() {
+	MATRIKS M;
 	STARTKATA();
-	printf("Let's start here!");
-	PrintKata(CKata);
-	printf(" You have printed CKata!");
-}
-/*	printf("Start here!");
-	int NB, NK, MaxEl;
- 	MATRIKS M;
- 	STARTKATA();
- 	printf("Test here 1");
- 	PrintKata(CKata);
-	NB = KataToInt(CKata);
+	PrintKata(CKata); int NB = KataToInt(CKata);
 	ADVKATA();
-	printf("Test here 2");
- 	PrintKata(CKata);
-	NK = KataToInt(CKata);
+	PrintKata(CKata); int NK = KataToInt(CKata);
 	ADVKATA();
-	printf("Test here 3");
- 	PrintKata(CKata);
-	MaxEl = KataToInt(CKata);
+	PrintKata(CKata); int MaxEl = KataToInt(CKata);
 	ADVKATA();
- 	PrintKata(CKata);
-	Bangunan B = KataToBangunan(MaxEl);
-	printf("Test here 4");
+ 	PrintKata(CKata); Bangunan B = KataToBangunan(MaxEl);
+    TulisPOINT(Posisi(ElmtBan(B,7)));
+    printf("%c\n",Name(ElmtBan(B,7)));
 	M = KataToMatriks(NB, NK, B);
-	ADVKATA();
-	Graph G = KataToGraph(NB, NK, MaxEl);
+	printf("You're entering this stage!\n");
 	TulisMATRIKS(M);
-	CLOSE();
-} */
+	printf("You have written the Matrix!\n");
+	printf("%d", NBElmtMatriks(M));
+	Graph G = KataToGraph(NB, NK, MaxEl);
+}

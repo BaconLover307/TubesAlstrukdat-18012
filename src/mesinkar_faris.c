@@ -5,7 +5,6 @@
 #include <stdio.h>
 
 char CC;
-boolean EOP;
 
 static FILE * config;
 static int retval;
@@ -26,14 +25,9 @@ void ADV() {
           CC
    F.S. : CC adalah karakter berikutnya dari CC yang lama. */
 
-    /* Algoritma */        
-  while ((CC = fgetc(config)) != EOF)
-        {
-          retval = fscanf(config,"%c",&CC);
-        }
-}
-
-void CLOSE() {
-/* Pita ditutup. */
+    /* Algoritma */ 
+  retval = fscanf(config,"%c",&CC);       
+  if (CC == EOF) {
     fclose(config);
+  }
 }

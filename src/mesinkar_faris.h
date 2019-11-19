@@ -27,6 +27,4 @@ void ADV();
           CC mungkin = EOF
           Jika  CC = EOF maka config akan menutup */
 
-void CLOSE();
-
 #endif
