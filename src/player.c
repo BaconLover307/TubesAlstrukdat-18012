@@ -86,11 +86,15 @@ void InstantUpgrade(Player *P, Bangunan *B) {
     
     A = First(ListBan(*P));
     while (Next(A) != Nil) {
-        if (Level(ElmtBan(*B, Info(A))) <= 4){
+        if (Level(ElmtBan(*B, Info(A))) < 4){
             Level(ElmtBan(*B, Info(A)))++;
         }
         A = Next(A);
     }
+
+    if (Level(ElmtBan(*B, Info(A))) <= 4){
+            Level(ElmtBan(*B, Info(A)))++;
+        }
 }
 /*
 */
@@ -139,6 +143,8 @@ void InstantReinforcement(Player *P, Bangunan *B) {
         Tentara(ElmtBan(*B, Info(A))) += 5;
         A = Next(A);
     }
+
+    Tentara(ElmtBan(*B, Info(A))) += 5;
 }
 
 
@@ -154,7 +160,7 @@ void Barrage(Player *P, Bangunan *B) {
     A = First(ListBan(*P));
     while (Next(A) != Nil){
         if (Tentara(ElmtBan(*B, Info(A))) >= 10){
-            Tentara(ElmtBan(*B, Info(A))) -= 10;;
+            Tentara(ElmtBan(*B, Info(A))) -= 10;
         }
 
         else{
@@ -163,5 +169,35 @@ void Barrage(Player *P, Bangunan *B) {
         A = Next(A);
     }
 
+    if (Tentara(ElmtBan(*B, Info(A))) >= 10){
+            Tentara(ElmtBan(*B, Info(A))) -= 10;
+        }
+
+        else{
+            Tentara(ElmtBan(*B, Info(A))) = 0;
+        }
+
 }
 
+void checkGetIR(Player *P, Bangunan *B){
+    
+    boolean get;
+    address A;
+
+    get = true;
+    A = First(ListBan(*P));
+    while (Next(A) != Nil && get) {
+        if (Level(ElmtBan(*B, Info(A))) != 4){
+            get = false;
+        }
+
+        A = Next(A);
+    }
+    if (Level(ElmtBan(*B, Info(A))) != 4){
+            get = false;
+        }
+
+    if (get == true){
+        QAdd(&Skill(*P), "IR");
+    }
+}
