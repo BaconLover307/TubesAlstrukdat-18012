@@ -103,11 +103,15 @@ void InstantUpgrade(Player *P, Bangunan *B) {
     
     A = First(ListBan(*P));
     while (Next(A) != Nil) {
-        if (Level(ElmtBan(*B, Info(A))) <= 4){
+        if (Level(ElmtBan(*B, Info(A))) < 4){
             Level(ElmtBan(*B, Info(A)))++;
         }
         A = Next(A);
     }
+
+    if (Level(ElmtBan(*B, Info(A))) <= 4){
+            Level(ElmtBan(*B, Info(A)))++;
+        }
 }
 /*
 */
@@ -138,30 +142,27 @@ void CriticalHit(){
     /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
 
 //}
-//void InstantReinforcement(Player *P, Bangunan *B);
+void InstantReinforcement(Player *P, Bangunan *B) {
     // $ Kamus Lokal    
-/*
     address A;
     // $ Algoritma
     A = First(ListBan(*P));
     while (Next(A) != Nil){
-        if (CheckTambahTentara(ListBan(*P), *B, Info(A))){
-            Tentara(ElmtBan(*B, Info(A))) += 5;
-        }
+        Tentara(ElmtBan(*B, Info(A))) += 5;
         A = Next(A);
     }
 
- 
+    Tentara(ElmtBan(*B, Info(A))) += 5;
 }
-*/
-//void Barrage(Player *P, Bangunan *B) {
+
+void Barrage(Player *P, Bangunan *B) {
     // $ Kamus Lokal
-/*    address A;
+    address A;
     // $ Algoritma
     A = First(ListBan(*P));
     while (Next(A) != Nil){
         if (Tentara(ElmtBan(*B, Info(A))) >= 10){
-            Tentara(ElmtBan(*B, Info(A))) -= 10;;
+            Tentara(ElmtBan(*B, Info(A))) -= 10;
         }
 
         else{
@@ -170,6 +171,35 @@ void CriticalHit(){
         A = Next(A);
     }
 
+    if (Tentara(ElmtBan(*B, Info(A))) >= 10){
+            Tentara(ElmtBan(*B, Info(A))) -= 10;
+        }
+
+        else{
+            Tentara(ElmtBan(*B, Info(A))) = 0;
+        }
+
 }
 
-*/
+void checkGetIR(Player *P, Bangunan *B){
+    
+    boolean get;
+    address A;
+
+    get = true;
+    A = First(ListBan(*P));
+    while (Next(A) != Nil && get) {
+        if (Level(ElmtBan(*B, Info(A))) != 4){
+            get = false;
+        }
+
+        A = Next(A);
+    }
+    if (Level(ElmtBan(*B, Info(A))) != 4){
+            get = false;
+        }
+
+    if (get == true){
+        QAdd(&Skill(*P), "IR");
+    }
+}

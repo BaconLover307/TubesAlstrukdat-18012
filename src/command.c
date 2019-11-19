@@ -92,13 +92,15 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             ExtraTurn(CurrP);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
-
+            
         } else if (strcmpi(usedskill,"CH") == 0) {
 
         } else if (strcmpi(usedskill,"IR") == 0) {
-
+            printf("All your buildings have been added by 5 soldiers.\n");
+            //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
-
+            printf("Soldiers in all your enemy's buildings have been decreased 10\n");
+            //Barrage(CurrP, databuild);  
         }
         ClearStack(gamestate);
 
