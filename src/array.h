@@ -58,15 +58,16 @@ typedef struct {
 #define Level(e)      (e).level
 #define Tentara(e)    (e).tentara
 
-/* ********** KONSTRUKTOR ********** */
-/* Konstruktor : create tabel kosong  */
-void MakeEmptyBangunan (Bangunan * B, int maxel);
-/* I.S. B sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1 */
+// $ ********** KONSTRUKTOR **********
 
+// $ Konstruktor : create tabel kosong
+// * I.S. B sembarang, maxel > 0
+// * F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1
+void MakeEmptyBangunan (Bangunan * B, int maxel);
+
+// * I.S. B terdefinisi;
+// * F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0
 void DealokasiBangunan(Bangunan *B);
-/* I.S. B terdefinisi; */
-/* F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */

@@ -9,10 +9,17 @@
 
 /*
 ? typedef struct {
-*    Queue queueSkill;      queue penyimpan skill
-*    List listBangunan;      list penyimpan kepemilikan listbangunan
-*    Warna color; 
+*    boolean attackUp;
+*    boolean criticalHit;
+*    boolean shield;
 *    boolean extraTurn;
+? } StatusEffect;
+
+? typedef struct {
+*    Queue queueSkill;      queue penyimpan skill
+*    List listBangunan;     list penyimpan kepemilikan listbangunan
+*    Warna color;           warna bangunan pemain
+*    StatusEffect FX;       skill-skill pemain yang sedang aktif
 ? } Player;
 
 ! ********* AKSES (Selektor) *********
@@ -21,7 +28,14 @@
 * #define Skill(P) (P).queueSkill
 * #define ListBan(P) (P).listBangunan
 * #define ET(P) (P).extraTurn
+
+? Jika F adalah FX, maka akses elemen :
+* #define AU(F) (F).attackUp
+* #define CH(F) (F).criticalHit
+* #define SH(F) (F).shield
+* #define ET(F) (F).extraTurn
 */
+
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
@@ -35,6 +49,11 @@ void CreatePlayer(Player *P) {
     // * Handling Queue Skill
     CreateQueue(&Skill(*P),10);
     QAdd(&Skill(*P),"IU");
+    // * Handling Status Effect
+    AU(FX(*P)) = false;
+    CH(FX(*P)) = false;
+    SH(FX(*P)) = false;
+    ET(FX(*P)) = false;
     // * Handling List Bangunan
     CreateEmptyList(&ListBan(*P));
 }
@@ -78,11 +97,9 @@ void UseSkill(Player P) {
 
 
 void InstantUpgrade(Player *P, Bangunan *B) {
-    /* I.S. Player P terdefinisi dan bangunan B terdefinisi
-    /* F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
-       pada bangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
-    /* Pemain mendapat skill ini hanya saat awal permainan */
+    // $ Kamus Lokal
     address A;
+    // $ Algoritma
     
     A = First(ListBan(*P));
     while (Next(A) != Nil) {
@@ -101,12 +118,10 @@ void Shield(Player *P) {
     /* Pemain mendapat skill ini jika sebuah lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
 //}
 
-/*
-void ExtraTurn(){
-    /* I.S.......
-    /* F.S. Setelah end_turn (giliran berkhir), pemain selanjutnya tetap pemain yang sama */
-    /* Pemain mendapat skill ini jika Fort pemain direbut lawan */
-//}
+
+void ExtraTurn(Player *P) {
+    ET(FX(*P)) = true;
+}
 
 /*
 void AttackUp(Player *P){
@@ -123,14 +138,11 @@ void CriticalHit(){
     /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
 
 //}
-//void InstantReinforcement(Player *P, Bangunan *B) {
-    /* I.S. Player P dan Bangunan B terdefinisi
-    /* F.S. Seluruh bangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.*/
-    /* Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki memiliki level 4 */
-    // Kamus Lokal    
+//void InstantReinforcement(Player *P, Bangunan *B);
+    // $ Kamus Lokal    
 /*
     address A;
-    // Algoritma
+    // $ Algoritma
     A = First(ListBan(*P));
     while (Next(A) != Nil){
         if (CheckTambahTentara(ListBan(*P), *B, Info(A))){
@@ -143,14 +155,9 @@ void CriticalHit(){
 }
 */
 //void Barrage(Player *P, Bangunan *B) {
-    /* I.S. Player P dan Bangunan B terdefinisi. 
-    /* F.S. Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10. 
-       Jika jumlah pasukan >= 10, akan dilakukan pengurangan sebanyak 10, tapi jika jumlah pasukan <1,
-       jumlah pasukan menjadi 0 */
-    /* Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi 10 */
-    // Kamus Lokal
+    // $ Kamus Lokal
 /*    address A;
-    // Algoritma
+    // $ Algoritma
     A = First(ListBan(*P));
     while (Next(A) != Nil){
         if (Tentara(ElmtBan(*B, Info(A))) >= 10){

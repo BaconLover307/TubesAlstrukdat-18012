@@ -62,32 +62,36 @@ void ClearStack(Stack *S);
 
 // * Mengirim true jika gamestate paling awal
 boolean IsFirstAct(Stack S);
+
 // * Mengirim true jika tabel penampung Snilai elemen stack penuh
 boolean IsFull(Stack S);
 
 // $ ************ Menambahkan sebuah elemen ke Stack ************
-void Push(Stack *S, Sinfotype X);
+
 // * Menambahkan X sebagai elemen Stack S.
 // * I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh
 // * F.S. X menjadi TOP yang baru,TOP bertambah 1
+void Push(Stack *S, Sinfotype X);
 
 // $ ************ Menghapus sebuah elemen Stack ************
-void Pop(Stack *S, Sinfotype *X);
+
 // * Menghapus X dari Stack S.
 // * I.S. S  tidak mungkin kosong
 // * F.S. X adalah Snilai elemen TOP yang lama, TOP berkurang 1
+void Pop(Stack *S, Sinfotype *X);
 
 // $ ************ Turn Handling ************
-Player GetCurrPlayer(Stack S);
-// * Mengembalikan Player yang sedang berjalan turn-nya
 
-void ChangeTurn(Stack *S);
+// * Mengembalikan Player yang sedang berjalan turn-nya
+Player GetCurrPlayer(Stack S);
+
 // * Mengganti giliran pemain
 // * I.S. Game sedang berlangsung
 // * F.S. Jika salah satu pemain memiliki skill Extra Turn, maka giliran
-// * tidak berubah. Jika tidak, maka giliran akan berubah
+// * 	  tidak berubah. Jika tidak, maka giliran akan berubah
+void ChangeTurn(Stack *S);
 
-void PrintCurr(Stack S);
 // * Menuliskan kondisi yang sedang berlangsung
+void PrintCurr(Stack S);
 
 #endif

@@ -54,13 +54,18 @@ Player GetCurrPlayer(Stack S) {
 
 void ChangeTurn(Stack *S) {
     // $ Kamus Lokal
-    Sinfotype LastState;
-    // $ Algoritma
-    Pop(S, &LastState);
-    if (!ET(P1Info(LastState)) && !ET(P2Info(LastState))) {
-        TurnInfo(LastState) = TurnInfo(LastState) % 2 + 1;
+    Player *CurrP;
+    if (TurnInfo(Curr(*S)) == 1) {
+        CurrP = &P1Info(Curr(*S));
+    } else {
+        CurrP = &P2Info(Curr(*S));
     }
-    StartTurn(S, P1Info(LastState), P2Info(LastState), TurnInfo(LastState));
+    // $ Algoritma
+    if (!ET(FX(*CurrP))) {
+        TurnInfo(Curr(*S)) = TurnInfo(Curr(*S)) % 2 + 1;
+    }
+    ET(FX(*CurrP)) = false;
+    ClearStack(S);
 }
 
 void PrintCurr(Stack S) {
@@ -69,8 +74,14 @@ void PrintCurr(Stack S) {
     // $ Algoritma
     printf("[ =====  Player %d  ===== ]\n", TurnInfo(Curr(S))),
     //printbuilding
-    printf(">= Skill : ");
+    printf(">=  Skill : ");
     PrintQueue(Skill(CurrP));
+    printf("  =<\n");
+    printf(">=  Active Effects : ");
+    if (AU(FX(CurrP))) printf(" [AU] ");
+    if (CH(FX(CurrP))) printf(" [CH] ");
+    if (SH(FX(CurrP))) printf(" [SH] ");
+    if (ET(FX(CurrP))) printf(" [ET] ");
     printf(" =<\n");
 
 

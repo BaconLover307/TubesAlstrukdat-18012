@@ -35,9 +35,12 @@ typedef struct {
 #define MAGENTA "\x1B[35m"
 #define CYAN "\x1B[36m"
 
+// * Inisialisasi Palet Warna
 void MakeBukuWarna(TabColor * ArrWarna);
 
+// * Ngeprint palet warna yang tersedia
 void PrintBukuWarna(TabColor ArrWarna);
 
+// * Print karakter c dengan warna Col
 void print_warna(Warna Col, char c);
 
