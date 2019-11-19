@@ -170,3 +170,18 @@ Graph KataToGraph(int MaxEl)
   }
   return G;
 }
+
+void ExecuteAll() {
+  MATRIKS M;
+  STARTKATA();
+  int NB = KataToInt(CKata);
+  ADVKATA();
+  int NK = KataToInt(CKata);
+  ADVKATA();
+  int MaxEl = KataToInt(CKata);
+  ADVKATA();
+  Bangunan B = KataToBangunan(MaxEl);
+  M = KataToMatriks(NB, NK, B);
+  TulisMATRIKS(M);
+  Graph G = KataToGraph(MaxEl);
+}
