@@ -129,9 +129,9 @@ void TulisGraph (Graph G) {
     }
 
     if (CheckRelation(G, i, NeffG(G))) {
-      printf("0\n");
+      printf("1\n");
     } else /* !CheckRelation(G, i, NeffG(G)) */ {
-      printf("1\n");  
+      printf("0\n");  
     }
   }
 }
