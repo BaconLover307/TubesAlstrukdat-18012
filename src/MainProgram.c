@@ -111,7 +111,6 @@ do {
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
             do {
-                puts("");
             	printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
                 do {
                     EndTurn = false;
@@ -148,7 +147,6 @@ do {
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
-                        puts("SAYA UNDO");
 						UNDO(&GameState);
 
                     }   // $ ######### END_TURN ########
