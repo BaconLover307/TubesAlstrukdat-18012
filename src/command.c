@@ -7,7 +7,8 @@
 void ATTACK(Stack *gamestate)
 {
     printf("Daftar bangunan:\n");
-    // Mnampilkan Daftar Bangunan
+    // Menampilkan Daftar Bangunan
+    int giliran = TurnInfo(Curr(*gamestate)); 
     printf("Bangunan yang digunakan untuk menyerang : ");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
