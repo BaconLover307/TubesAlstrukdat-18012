@@ -85,8 +85,10 @@ do {
             Stack GameState;
             Player PlayerOne, PlayerTwo;
 			Bangunan DataBangunan;
+            TabColor Pallete;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
+            MakeBukuWarna(&Pallete);
             int Turn = 1;
 
             // todo Load Game
@@ -98,13 +100,23 @@ do {
                     LoadFile(GameState);
                 } else if (load == 'N') {
                     //LoadData();
-                    
                     printf("Choose building color for Player 1! \n");
-                    printf("Available colors : ");
-                    
+                    SetPlayerWarna(&PlayerOne,&Pallete);
+                    printf("Choose building color for Player 2! \n");
+                    SetPlayerWarna(&PlayerTwo,&Pallete);
 
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
-
+                    // * Countdown
+                    clrscrn();
+                    printf("                                        Starting game in...\n\n");
+                    sleep(1);
+                    printf("                                        3...\n\n");
+                    sleep(1);
+                    printf("                                               2...\n\n");
+                    sleep(1);
+                    printf("                                                       1...\n");
+                    sleep(1);
+                    clrscrn();
                 }
             } while (load != 'Y' && load != 'N');
 

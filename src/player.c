@@ -43,8 +43,30 @@ void CreatePlayer(Player *P) {
 
 
 // $ *** Color Handling ***
-void SetPlayerWarna(Player *P, Warna C) {
-    Color(*P) = C;
+void SetPlayerWarna(Player *P, TabColor * Palet) {
+    // $ Kamus Lokal
+    boolean Found = false;
+    int i;
+
+    // $ Algoritma
+    PrintBukuWarna(*Palet);
+    printf("\n");
+    printf("Choose your color: ");
+    do {
+        scanf(" %c", &Color(*P));
+        i = 1;
+        while (i<=ColNeff(*Palet) && !Found) {
+            if (ColElmt(*Palet,i) == Color(*P) && Color(*P)!='_') Found = true;
+            i++;
+        }
+        if (!Found) {
+            printf("Please choose an available color from the pallete!\n");
+            PrintBukuWarna(*Palet);
+            printf("\n");
+            printf("Choose your color: ");
+        }
+    } while (!Found);
+    ColElmt(*Palet,i-1) = '_';
 }
 
 // $ ***** Skills *****
