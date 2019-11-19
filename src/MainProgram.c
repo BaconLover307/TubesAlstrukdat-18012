@@ -98,7 +98,13 @@ do {
                     LoadFile(GameState);
                 } else if (load == 'N') {
                     //LoadData();
+                    
+                    printf("Choose building color for Player 1! \n");
+                    printf("Available colors : ");
+                    
+
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+
                 }
             } while (load != 'Y' && load != 'N');
 

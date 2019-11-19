@@ -36,7 +36,7 @@ void CreatePlayer(Player *P) {
     CreateQueue(&Skill(*P),10);
     QAdd(&Skill(*P),"IU");
     // * Handling List Bangunan
-    // CreateEmptyList(ListBan(*P));
+    CreateEmptyList(&ListBan(*P));
 }
 
 // $ ***** Basic Operators *****
