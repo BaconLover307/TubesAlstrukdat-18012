@@ -17,6 +17,9 @@ int main(){
     Qinfotype buangSkill;
     Player CurrP = GetCurrPlayer(S);
     Queue Qcoba1,Qcoba2;
+
+    StartTurn(&S,P1,P2,1);
+    UNDO(&S);
     /*
     printf("Tuliskan warnamu: ");
     scanf("%c",&color1);
@@ -24,13 +27,19 @@ int main(){
     print_warna(Color(P1),'M');
     printf("\n");
     */
-    char skil[2];
+    //char skil[2];
     //COMMAND(&S);
     //printf("pass\n");
     //PrintInfoHead(Skill(P2Info(Curr(S))));
     //printf("\npass\n");
     //SKILL(&S);
     //PrintQueue(Skill(P1Info(Curr(S))));
+    
+    
+    
+    
+    
+    /*
     printf("==========\n");
     CreateQueue(&Qcoba1,10);
     CreateQueue(&Qcoba2,10);
@@ -58,4 +67,6 @@ int main(){
     //strcpy(skil,InfoTail(Skill(P1)));
     //printf("Skill player: %s",skil);
     //getchar();
+    */
+   return 0;
 }

@@ -16,9 +16,7 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn) {
 }
 void ClearStack(Stack *S) {
     Sinfotype temp;
-        printf("pass\n");
     while(!IsFirstAct(*S)) {
-        printf("pass\n");
         Pop(S,&temp);
     }
 }

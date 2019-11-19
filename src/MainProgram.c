@@ -150,6 +150,7 @@ do {
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
+                        //fflush(stdout);
 						UNDO(&GameState);
 
                     }   // $ ######### END_TURN ########
