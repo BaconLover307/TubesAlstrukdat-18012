@@ -43,6 +43,7 @@ int main(){
     PrintQueue(Qcoba2); printf("\n");
     ReplaceQueue(Qcoba1,&Qcoba2);
     PrintQueue(Qcoba2);
+    printf("\n");
     printf("==========\n");
     PrintCurr(S);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
