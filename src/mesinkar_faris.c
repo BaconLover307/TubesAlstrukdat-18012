@@ -26,9 +26,14 @@ void ADV() {
           CC
    F.S. : CC adalah karakter berikutnya dari CC yang lama. */
 
-    /* Algoritma */
-  while (getc(config) != EOF) {
-    retval = fscanf(config,"%c", &CC);
-  }
-  fclose(config);
+    /* Algoritma */        
+  while ((CC = fgetc(config)) != EOF)
+        {
+          retval = fscanf(config,"%c",&CC);
+        }
+}
+
+void CLOSE() {
+/* Pita ditutup. */
+    fclose(config);
 }

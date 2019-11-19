@@ -41,7 +41,7 @@ void ADVKATA()
   IgnoreBlank();
 }
 
-void SalinKata()
+void SalinKata() 
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
    F.S. : CKata berisi kata yang sudah diakuisisi;
@@ -49,27 +49,13 @@ void SalinKata()
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 {
-  int i = 0;
-
-  for (;;)
-  {
-    CKata.TabKata[i] = CC;
-    ADV();
-    if ((CC == BLANK1 ) || (CC == BLANK2))
-    {
-      break;
+    int i = 1;
+    while ((CC != BLANK1) && (CC != BLANK2) && (i <= NMax)) {
+        CKata.TabKata[i] = CC;
+        ADV();
+        i++;
     }
-    else
-    {
-      i++;
-    }
-  }
-  if (i>NMax) {
-    CKata.Length=NMax;
-  }
-  else {
-    CKata.Length = i+1;
-  }
+    CKata.Length = i-1;
 }
 
 void PrintKata (Kata K)
@@ -83,12 +69,11 @@ void PrintKata (Kata K)
     i++;
   }
 }
- int val = 0;
-  int i = 0;
+
 int KataToInt (Kata K)
 /* Kata K berisi integer dalam bentuk kata, mengkonversinya ke int */
 {
- 
+  int val = 0;
   int i = 0;
   while (i<K.Length)
   {
