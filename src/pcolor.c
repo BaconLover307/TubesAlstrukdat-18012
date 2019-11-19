@@ -8,10 +8,26 @@ Created at: 17/10/2019
 #include <stdio.h>
 #include "pcolor.h"
 
-void print_red(char c) {
-    printf("%s%c", RED, c);
-    printf("%s", NORMAL);
+void MakeBukuWarna(TabColor * ArrWarna) {
+    ColNeff(*ArrWarna) = 6;
+    ColElmt(*ArrWarna,1) = 'R';
+    ColElmt(*ArrWarna,2) = 'G';
+    ColElmt(*ArrWarna,3) = 'B';
+    ColElmt(*ArrWarna,4) = 'C';
+    ColElmt(*ArrWarna,5) = 'M';
+    ColElmt(*ArrWarna,6) = 'Y';
 }
+
+void PrintBukuWarna(TabColor ArrWarna) {
+    printf("[ ");
+    print_warna(ColElmt(ArrWarna,1), ColElmt(ArrWarna,1));
+    for (int i = 2; i<= ColNeff(ArrWarna); i++) {
+        printf(" | ");
+        print_warna(ColElmt(ArrWarna,i), ColElmt(ArrWarna,i));
+    }
+    printf(" ]");
+}
+
 void print_warna(Warna Col, char c) {
     switch (Col)
     {

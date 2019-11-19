@@ -60,13 +60,12 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
 //}
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate, Bangunan *databuild) {
-    printf("Debug SKILL\n");
     // $ Kamus Lokal
     Qinfotype usedskill;
     Queue *Qtemp;
     Player *CurrP;
 
-    if (TurnInfo(Curr(*gamestate))) {
+    if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
     } else {
         CurrP = &P2Info(Curr(*gamestate));
@@ -85,19 +84,24 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         // * Switch
         if (strcmpi(usedskill,"IU") == 0) {
             printf("All your buildings have been Leveled Up!!\n");
-            InstantUpgrade(CurrP,databuild);
+            //InstantUpgrade(CurrP,databuild);
+
         } else if (strcmpi(usedskill,"SH") == 0) {
 
         } else if (strcmpi(usedskill,"ET") == 0) {
+            printf("You have gained an Extra Turn!!\n");
+            ExtraTurn(CurrP);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
-
+            
         } else if (strcmpi(usedskill,"CH") == 0) {
 
         } else if (strcmpi(usedskill,"IR") == 0) {
-
+            printf("All your buildings have been added by 5 soldiers.\n");
+            //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
-
+            printf("Soldiers in all your enemy's buildings have been decreased 10\n");
+            //Barrage(CurrP, databuild);  
         }
         ClearStack(gamestate);
 
@@ -106,9 +110,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
 
 // Prosedur untuk melakukan UNDO
 void UNDO(Stack *gamestate) {
-    puts("ANEH");
     // $ Kamus Lokal
-    Sinfotype Buang;
     if (IsFirstAct(*gamestate)) {
         printf("You cannot undo at the moment!\n");
     } else {

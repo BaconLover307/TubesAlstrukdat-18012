@@ -16,9 +16,7 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn) {
 }
 void ClearStack(Stack *S) {
     Sinfotype temp;
-        printf("pass\n");
     while(!IsFirstAct(*S)) {
-        printf("pass\n");
         Pop(S,&temp);
     }
 }
@@ -56,24 +54,38 @@ Player GetCurrPlayer(Stack S) {
 
 void ChangeTurn(Stack *S) {
     // $ Kamus Lokal
-    Sinfotype LastState;
-    // $ Algoritma
-    Pop(S, &LastState);
-    if (!ET(P1Info(LastState)) && !ET(P2Info(LastState))) {
-        TurnInfo(LastState) = TurnInfo(LastState) % 2 + 1;
+    Player *CurrP;
+    if (TurnInfo(Curr(*S)) == 1) {
+        CurrP = &P1Info(Curr(*S));
+    } else {
+        CurrP = &P2Info(Curr(*S));
     }
-    StartTurn(S, P1Info(LastState), P2Info(LastState), TurnInfo(LastState));
+    // $ Algoritma
+    if (!ET(FX(*CurrP))) {
+        TurnInfo(Curr(*S)) = TurnInfo(Curr(*S)) % 2 + 1;
+    }
+    ET(FX(*CurrP)) = false;
+    ClearStack(S);
 }
 
 void PrintCurr(Stack S) {
     // $ Kamus Lokal
     Player CurrP = GetCurrPlayer(S);
     // $ Algoritma
-    printf("[ =====  Player %d  ===== ]\n", TurnInfo(Curr(S))),
+    printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(Curr(S))),
     //printbuilding
-    printf(">= Skill : ");
+    printf("  <= Active Effects =>\n");
+    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
+    if (AU(FX(CurrP))) printf(" [AU] "); else printf(" [  ] ");
+    if (CH(FX(CurrP))) printf(" [CH] "); else printf(" [  ] ");
+    if (SH(FX(CurrP))) printf(" [SH] "); else printf(" [  ] ");
+    if (ET(FX(CurrP))) printf(" [ET] "); else printf(" [  ] ");
+    printf("    || SKILL ");
     PrintQueue(Skill(CurrP));
-    printf(" =<\n");
+    printf("\n");
+    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
+    printf("\n");
+    printf("\n");
 
 
 }

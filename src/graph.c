@@ -5,7 +5,7 @@
 /* 4. Faris Muhammad Kautsar   / 13518105 */
 /* 5. Gregorius Jovan Kresnadi / 13518135 */
 
-/* File body : graph.h */
+/* File header: graph.c */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,76 +14,97 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create Graph kosong  */
-void MakeEmptyGraph (Graph * G, int maxel) {
-/* I.S. G sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel G kosong dengan kapasitas maxel + 1 */
+void MakeEmptyGraph (Graph * G) {
+/* I.S. sembarang */
+/* F.S. Terbentuk graph kosong */
 
   /* KAMUS LOKAL */
-  int i;
 
   /* ALGORITMA */
-  GI(*G) = (List *) malloc ((maxel + 1)* sizeof(List));
-  MaxG(*G) = maxel;
-  NeffG(*G) = 0;
+  FirstG(*G) = Nil;
+}
 
-  for (i = IdxMin; i <= maxel; i++) {
-    CreateEmptyList(&ElmtG(*G, i));
+/****************** Manajemen Memori ******************/
+addrGraph AlokasiGraph1 (urutan X) {
+/* Mengirimkan addrGraph hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addrGraph tidak Nil, dan misalnya */
+/* menghasilkan P, maka InfoG(P)=X, NextP(P)=Nil, FirstChild(P)=Nil */
+/* Jika alokasi gagal, mengirimkan Nil */
+
+  /* KAMUS LOKAL */
+  addrGraph P;
+
+  /* ALGORITMA */
+  P = malloc (sizeof(addrGraph));
+  if (P != NULL) {
+    InfoG(P) = X;
+    NextP(P) = Nil;
+    FirstChild(P) = Nil;
+  } else /* P == NULL */ {
+    P = Nil;
   }
+  return P;
 }
 
-void DealokasiGraph (Graph * G) {
-/* I.S. G terdefinisi; */
-/* F.S. GI(G) dikembalikan ke system, MaxG(G)=0; NeffG(G)=0 */
+addrGraph2 AlokasiGraph2 (urutan X) {
+/* Mengirimkan addrGraph2 hasil alokasi sebuah elemen */
+/* Jika alokasi berhasil, maka addrGraph2 tidak Nil, dan misalnya */
+/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
+/* Jika alokasi gagal, mengirimkan Nil */
+
+  /* KAMUS LOKAL */
+  addrGraph2 P;
+
+  /* ALGORITMA */
+  P = malloc (sizeof(addrGraph2));
+  if (P != NULL) {
+    InfoG2(P) = X;
+    NextChild(P) = Nil;
+  } else /* P == NULL */ {
+    P = Nil;
+  }
+  return P;
+}
+
+void DealokasiGraph1 (addrGraph * P) {
+/* I.S. P terdefinisi; */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian addrGraph P */
 
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  free(GI(*G));
-  MaxG(*G) = 0;
-  NeffG(*G) = 0;
+  free(*P);
 }
 
-/* *** Selektor INDEKS *** */
-IdxType GetFirstGraph (Graph G) {
-/* Prekondisi : Graph G tidak kosong */
-/* Mengirimkan indeks elemen G pertama */
+void DealokasiGraph2 (addrGraph2 * P) {
+/* I.S. P terdefinisi; */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian addrGraph2 P */
 
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return IdxMin;
+  free(*P);
 }
 
-IdxType GetLastGraph (Graph G) {
-/* Prekondisi : Graph G tidak kosong */
-/* Mengirimkan indeks elemen G terakhir */
-
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  return NeffG(G);
-}
-
-/* ********** TEST KOSONG/PENUH ********** */
-/* *** Test tabel kosong *** */
+/* ********** TEST GRAPH KOSONG ********** */
 boolean IsEmptyGraph (Graph G) {
 /* Mengirimkan true jika Graph G kosong, mengirimkan false jika tidak */
 
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return (NeffG(G) == 0);
+  return (FirstG(G) == Nil);
 }
 
-/* *** Test tabel penuh *** */
-boolean IsFullGraph (Graph G) {
-// ? Entah perlu fungsi ini gak ya?  
-/* Mengirimkan true jika Graph G penuh, mengirimkan false jika tidak */
+boolean IsEmptyParent (addrGraph P) {
+/* Mengirimkan true jika addrGraph P kosong, mengirimkan false jika tidak */
 
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  return (NeffG(G) == MaxG(G));
+  return (FirstChild(P) == Nil);
 }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
@@ -92,16 +113,6 @@ void BacaGraph (Graph * G);
 // TODO: Prosedur ini dimasukkan ke ADT Mesin Kata
 /* I.S. Graph G terdefinisi */
 /* F.S. Graph G berisi hubungan-hubungan antar bangunan */
-
-void TambahRelation (Graph * G, urutan X, urutan Y) {
-/* I.S. Graph G terdefinisi */
-/* F.S. Bangunan ke-X dinyatakan memiliki hubungan dengan bangunan ke-Y */
-
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  InsVPrio(&ElmtG(*G, X), Y);
-}
 
 void TulisGraph (Graph G) {
 // ? Untuk debugging doang kayaknya 
@@ -117,23 +128,145 @@ void TulisGraph (Graph G) {
 
   /* KAMUS LOKAL */
   IdxType i, j;
+  addrGraph P;
+  addrGraph2 C;
 
   /* ALGORITMA */
-  for (i = IdxMin; i <= NeffG(G); i++) {
-    for (j = IdxMin; j < NeffG(G); j++) {
-      if (CheckRelation(G, i, j)) {
+  i = 1;
+
+  while (i <= NbElmtGraph(G)) {
+    P = SearchP(G, i);
+    j = 1;
+
+    while (j < NbElmtGraph(G)) {
+      C = SearchChild(P, j);
+      
+      if (C != Nil) {
         printf("1 ");
-      } else /* !CheckRelation(G, i, j) */ {
-        printf("0 ");  
+      } else /* C == Nil */ {
+        printf("0 ");
       }
+
+      j++;
     }
 
-    if (CheckRelation(G, i, NeffG(G))) {
+    C = SearchChild(P, j);
+    if (C != Nil) {
+      printf("1\n");
+    } else /* C == Nil */ {
       printf("0\n");
-    } else /* !CheckRelation(G, i, NeffG(G)) */ {
-      printf("1\n");  
+    }
+
+    i++;
+  }
+}
+
+/****************** PROSES SEMUA ELEMEN PARENT GRAPH ******************/
+int NbElmtGraph (Graph G) {
+/* Mengirimkan banyaknya elemen parent graph; mengirimkan 0 jika graph kosong */
+
+  /* KAMUS LOKAL */
+  addrGraph P;
+  int total;
+
+  /* ALGORITMA */
+  if (IsEmptyGraph(G)) {
+    return 0;
+  } else /* !IsEmptyGraph(G) */ {
+    P = FirstG(G);
+    total = 0;
+    while (P != Nil) {
+      P = NextP(P);
+      total++;
+    }
+    return total;
+  }
+}
+
+/*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
+void AddParent (Graph * G, int N) {
+/* I.S. Graph G terdefinisi */
+/* F.S. Semua elemen parent dimasukkan ke graph secara berurut */
+
+  /* KAMUS LOKAL */
+  int i;
+  addrGraph P, Q;
+
+  /* ALGORITMA */
+  for (i = 1; i <= N; i++) {
+    Q = AlokasiGraph1(i);
+
+    if (Q != Nil) {
+      if (IsEmptyGraph(*G)) {
+        FirstG(*G) = Q;
+        P = FirstG(*G);
+      } else /* !IsEmptyGraph(*G) */ {
+        NextP(P) = Q;
+        P = NextP(P);
+      }
     }
   }
+}
+
+void AddRelation (Graph * G, urutan X, urutan Y) {
+/* I.S. Graph G terdefinisi */
+/* F.S. Bangunan ke-X dinyatakan memiliki hubungan dengan bangunan ke-Y */
+
+  /* KAMUS LOKAL */
+  addrGraph P;
+  addrGraph2 C, Q;
+
+  /* ALGORITMA */
+  P = SearchP(*G, X);
+  Q = AlokasiGraph2(Y); 
+  
+  if (Q != Nil) {
+    if (IsEmptyParent(P)) {
+      FirstChild(P) = Q;
+
+    } else /* !IsEmptyParent(P) */ {
+      C = FirstChild(P);
+      while (NextChild(C) != Nil) {
+        C = NextChild(C);
+      }
+      NextChild(C) = Q;
+    }
+  }
+}
+
+/****************** PENCARIAN SEBUAH GRAPH ******************/
+addrGraph SearchP (Graph G, urutan X) {
+/* Mencari apakah ada elemen parent graph dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
+
+  /* KAMUS LOKAL */
+  addrGraph P;
+
+  /* ALGORITMA */
+  P = FirstG(G);
+  while ((P != Nil) && (InfoG(P) != X)) {
+    P = NextP(P);
+  }
+
+  return P;
+}
+
+addrGraph2 SearchChild (addrGraph P, urutan X) {
+/* Mencari apakah ada elemen anak graph dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
+
+  /* KAMUS LOKAL */
+  addrGraph2 C;
+
+  /* ALGORITMA */
+  C = FirstChild(P);
+  while ((C != Nil) && (InfoG2(C) != X)) {
+    C = NextChild(C);
+  }
+
+  return C;
 }
 
 /******************* RELATION **********************/
@@ -143,13 +276,12 @@ boolean CheckRelation (Graph G, urutan X, urutan Y) {
 /* Jika iya maka True dan sebaliknya */
 
   /* KAMUS LOKAL */
+  addrGraph P;
 
   /* ALGORITMA */
-  if ((Search(ElmtG(G, X), Y)) != Nil) {
-    return true;
-  } else /* Search(ElmtG(G, X), Y)) == Nil */ {
-    return false;
-  }
+  P = SearchP(G, X);
+
+  return (SearchChild(P, Y) != Nil);
 }
 
 /******************* ATTACK *********************/
@@ -159,40 +291,44 @@ boolean CheckAttack (Graph G, List L, urutan X) {
 /* Jika iya maka True dan sebaliknya */
 
   /* KAMUS LOKAL */
-  address PList, PGraph;
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
   boolean same;
 
   /* ALGORITMA */
-  PList = First(L);
-  PGraph = First(ElmtG(G, X));
+  DelP(&L, X);
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
   same = false;
 
-  while ((PGraph != Nil) && (PList != Nil) && (!same)) {
-    if (Info(PGraph) != Info(PList)) {
-
-      if (Info(PGraph) < Info(PList)) {
+  while ((C != Nil) && (P != Nil) && (!same)) {
+    if (InfoG2(C) != Info(P)) {
+      if (InfoG2(C) < Info(P)) {
         same = true;
-      } else /* Info(PGraph) > Info(PList) */ {
-        if (Next(PList) == Nil) {
-          same = true;
-        } else /* Next(PList) != Nil */ {
-          PList = Next(PList);  
+      } else /* InfoG2(C) > Info(P) */ {
+        if (Next(P) == Nil) {
+          return true;
+        } else /* Next(P) != Nil */ {
+          P = Next(P);
         }
-
       }
-    } else /* Info(PGraph) == Info(PList) */ {
-      PList = Next(PList);
-      PGraph = Next(PGraph);
+    } else /* InfoG2(C) == Info(P) */ {
+      P = Next(P);
+      C = NextChild(C);
     }
   }
 
+  P = Alokasi(X);
+  InsertPrio(&L, P);
   return (same);
 }
 
 void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
 /* I.S. Graph G terdefinisi
-        List L terdefinisi
-        Bangunan B terdefinisi 
+        List L terdefinisi 
+        Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang bisa diserang maka akan muncul pilihan-
         pilihan bangunan yang dapat diserang
@@ -200,67 +336,73 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
         diserang" di layar */
 
   /* KAMUS LOKAL */
-  address PList, PGraph;
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
   int i;
 
   /* ALGORITMA */
-  PList = First(L);
-  PGraph = First(ElmtG(G, X));
+  DelP(&L, X);
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
   i = 1;
 
-  while ((PGraph != Nil) && (PList != Nil)) {
-    if (Info(PGraph) != Info(PList)) {
-
-      if (Info(PGraph) < Info(PList)) {
+  while ((C != Nil) && (P != Nil)) {
+    if (InfoG2(C) != Info(P)) {
+      if (InfoG2(C) < Info(P)) {
         printf("%d. ", i);
-    
-        if (Name(ElmtBan(B, Info(PGraph))) == 'C') {
+
+        if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
           printf("Castle ");
-        } else if (Name(ElmtBan(B, Info(PGraph))) == 'V') {
+        } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
           printf("Village ");
-        } else if (Name(ElmtBan(B, Info(PGraph))) == 'T') {
+        } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
           printf("Tower ");
-        } else /* (Name(ElmtBan(B, Info(PGraph))) == 'F') */ {
+        } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
           printf("Fort ");
         }
 
-        TulisPOINT(Posisi(ElmtBan(B, Info(PGraph))));
-        printf(" %d ", Tentara(ElmtBan(B, Info(PGraph))));
-        printf("lv. %d\n", Level(ElmtBan(B, Info(PGraph))));
+        TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
+        printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
+        printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
 
         i++;
-        PGraph = Next(PGraph);
+        C = NextChild(C);
 
-      } else /* Info(PGraph) > Info(PList) */ {
-        PList = Next(PList);
-        
+      } else /* InfoG2(C) > Info(P) */ {
+        P = Next(P);
       }
-    } else /* Info(PGraph) == Info(PList) */ {
-      PList = Next(PList);
-      PGraph = Next(PGraph);
+
+    } else /* InfoG2(C) == Info(P) */ {
+      P = Next(P);
+      C = NextChild(C);
     }
   }
 
-  while (PGraph != Nil) {
+  while (C != Nil) {
     printf("%d. ", i);
     
-    if (Name(ElmtBan(B, Info(PGraph))) == 'C') {
+    if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
       printf("Castle ");
-    } else if (Name(ElmtBan(B, Info(PGraph))) == 'V') {
+    } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
       printf("Village ");
-    } else if (Name(ElmtBan(B, Info(PGraph))) == 'T') {
+    } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
       printf("Tower ");
-    } else /* (Name(ElmtBan(B, Info(PGraph))) == 'F') */ {
+    } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
       printf("Fort ");
     }
 
-    TulisPOINT(Posisi(ElmtBan(B, Info(PGraph))));
-    printf(" %d ", Tentara(ElmtBan(B, Info(PGraph))));
-    printf("lv. %d\n", Level(ElmtBan(B, Info(PGraph))));
+    TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
+    printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
+    printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
 
     i++;
-    PGraph = Next(PGraph);
+    C = NextChild(C);
   }
+
+  P = Alokasi(X);
+  InsertPrio(&L, P);
 }        
 
 /************ MOVE TENTARA ******************/
@@ -270,40 +412,36 @@ boolean CheckMove (Graph G, List L, urutan X) {
 /* Jika iya maka True dan sebaliknya */
 
   /* KAMUS LOKAL */
-  address PList, PGraph;
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
   boolean same;
 
   /* ALGORITMA */
-  PList = First(L);
-  PGraph = First(ElmtG(G, X));
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
   same = false;
 
-  while ((PGraph != Nil) && (PList != Nil) && (!same)) {
-    if (Info(PGraph) != Info(PList)) {
-
-      if (Info(PList) < Info(PGraph)) {
-        same = true;
-      } else /* Info(PList) > Info(PGraph) */ {
-        if (Next(PGraph) == Nil) {
-          same = true;
-        } else /* Next(PGraph) != Nil */ {
-          PGraph = Next(PGraph);  
-        }
-
+  while ((C != Nil) && (P != Nil) && (!same)) {
+    if (InfoG2(C) == Info(P)) {
+      same = true;
+    } else /* InfoG2(C) != Info(P) */ {
+      if (InfoG2(C) < Info(P)) {
+        C = NextChild(C);
+      } else /* InfoG2(C) > Info(P) */ {
+        P = Next(P);
       }
-    } else /* Info(PGraph) == Info(PList) */ {
-      PList = Next(PList);
-      PGraph = Next(PGraph);
     }
   }
 
-  return (same);  
+  return (same);
 }
 
 void PrintMove (Graph G, List L, Bangunan B, urutan X) {
 /* I.S. Graph G terdefinisi
         List L terdefinisi 
-        Bangunan B terdefinisi
+        Bangunan B terdefinisi 
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang memiliki hungan dengan bangunan ke-X
         yang dimiliki oleh pemain itu maka muncul pilihan-pilihan bangunan
@@ -311,66 +449,46 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X) {
         Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di 
         layar */
 
-    /* KAMUS LOKAL */
-  address PList, PGraph;
+  /* KAMUS LOKAL */
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
   int i;
 
   /* ALGORITMA */
-  PList = First(L);
-  PGraph = First(ElmtG(G, X));
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
   i = 1;
 
-  while ((PGraph != Nil) && (PList != Nil)) {
-    if (Info(PGraph) != Info(PList)) {
+  while ((C != Nil) && (P != Nil)) {
+    if (InfoG2(C) == Info(P)) {
+      printf("%d. ", i);
 
-      if (Info(PList) < Info(PGraph)) {
-        printf("%d. ", i);
-    
-        if (Name(ElmtBan(B, Info(PList))) == 'C') {
-          printf("Castle ");
-        } else if (Name(ElmtBan(B, Info(PList))) == 'V') {
-          printf("Village ");
-        } else if (Name(ElmtBan(B, Info(PList))) == 'T') {
-          printf("Tower ");
-        } else /* (Name(ElmtBan(B, Info(PList))) == 'F') */ {
-          printf("Fort ");
-        }
-
-        TulisPOINT(Posisi(ElmtBan(B, Info(PList))));
-        printf(" %d ", Tentara(ElmtBan(B, Info(PList))));
-        printf("lv. %d\n", Level(ElmtBan(B, Info(PList))));
-
-        i++;
-        PList = Next(PList);
-
-      } else /* Info(PList) > Info(PGraph) */ {
-        PGraph = Next(PGraph);
-        
+      if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
+        printf("Castle ");
+      } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
+        printf("Village ");
+      } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
+        printf("Tower ");
+      } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
+        printf("Fort ");
       }
-    } else /* Info(PGraph) == Info(PList) */ {
-      PList = Next(PList);
-      PGraph = Next(PGraph);
+
+      TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
+      printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
+      printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
+
+      i++;
+      C = NextChild(C);
+      P = Next(P);
+
+    } else /* InfoG2(C) != Info(P) */ {
+      if (InfoG2(C) < Info(P)) {
+        C = NextChild(C);
+      } else /* InfoG2(C) > Info(P) */ {
+        P = Next(P);
+      }
     }
-  }
-
-  while (PList != Nil) {
-    printf("%d. ", i);
-    
-    if (Name(ElmtBan(B, Info(PList))) == 'C') {
-      printf("Castle ");
-    } else if (Name(ElmtBan(B, Info(PList))) == 'V') {
-      printf("Village ");
-    } else if (Name(ElmtBan(B, Info(PList))) == 'T') {
-      printf("Tower ");
-    } else /* (Name(ElmtBan(B, Info(PList))) == 'F') */ {
-      printf("Fort ");
-    }
-
-    TulisPOINT(Posisi(ElmtBan(B, Info(PList))));
-    printf(" %d ", Tentara(ElmtBan(B, Info(PList))));
-    printf("lv. %d\n", Level(ElmtBan(B, Info(PList))));
-
-    i++;
-    PList = Next(PList);
   }
 }        

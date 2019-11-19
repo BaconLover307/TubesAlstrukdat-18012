@@ -6,7 +6,7 @@
 /* - Daniel Riyanto           - 13518075 */
 /* - Faris Muhammad Kautsar   - 13518105 */
 /* - Gregorius Jovan Kresnadi - 13518135 */
-/* File : main.c */
+/* File : MainProgram.c */
 /* Program Utama */
 /* *
 * Nama Program: Avatar World War
@@ -40,6 +40,7 @@ do {
     printf("#TAMPILAN MAIN#\n");
     // ASCII Art: MainMenu
     do {
+        ExitMenu = false;
         Menu();
         printf("Enter Menu : ");
         scanf(" %s",&menu);
@@ -85,8 +86,12 @@ do {
             Stack GameState;
             Player PlayerOne, PlayerTwo;
 			Bangunan DataBangunan;
+            TabColor Pallete;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
+            MakeBukuWarna(&Pallete);
+            QAdd(&Skill(PlayerOne),"ET");
+            // ! TEST ExtraTurn
             int Turn = 1;
 
             // todo Load Game
@@ -98,7 +103,23 @@ do {
                     LoadFile(GameState);
                 } else if (load == 'N') {
                     //LoadData();
+                    printf("Choose building color for Player 1! \n");
+                    SetPlayerWarna(&PlayerOne,&Pallete);
+                    printf("Choose building color for Player 2! \n");
+                    SetPlayerWarna(&PlayerTwo,&Pallete);
+
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+                    // * Countdown
+                    clrscrn();
+                    printf("              Starting game in...\n\n");
+                    sleep(1);
+                    printf("              3...\n\n");
+                    sleep(1);
+                    printf("                     2...\n\n");
+                    sleep(1);
+                    printf("                             1...\n");
+                    sleep(1);
+                    clrscrn();
                 }
             } while (load != 'Y' && load != 'N');
 
@@ -111,20 +132,10 @@ do {
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
             do {
-            	printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
                 do {
                     EndTurn = false;
-
-                    printf("List Command :\n");
-                    printf(">> ATTACK\n");
-                    printf(">> LEVEL_UP\n");
-                    printf(">> SKILL\n");
-                    printf(">> MOVE\n");
-                    printf(">> UNDO\n");
-                    printf(">> END_TURN\n");
-                    printf(">> SAVE\n");
-                    printf(">> EXIT\n");
-                    printf("Enter Command : ");
+                    PrintCurr(GameState);
+                    Command();
                     scanf(" %s",&command);
 					printf("\n");
 
@@ -147,6 +158,7 @@ do {
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
+                        //fflush(stdout);
 						UNDO(&GameState);
 
                     }   // $ ######### END_TURN ########
@@ -171,8 +183,7 @@ do {
 					ChangeTurn(&GameState);
 					EndTurn = false;
 				}
-
-            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
+            } while (/*!IsLose(PlayerOne) && !IsLose(PlayerTwo) && */!ExitMenu);
             if (IsLose(PlayerTwo)) {
                 printf("pesan menang P1\n");
             } else if (IsLose(PlayerOne)) {
