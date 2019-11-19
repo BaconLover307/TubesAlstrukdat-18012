@@ -8,6 +8,7 @@ Player P1,P2;
 char color1,color2;
 Stack S;
 int T = 1;
+Bangunan B;
 
 int main(){
     CreatePlayer(&P1);
@@ -46,9 +47,9 @@ int main(){
     printf("==========\n"); printf("\n");
     PrintCurr(S);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
-    SKILL(&S);
+    SKILL(&S,&B);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
-    SKILL(&S);
+    SKILL(&S,&B);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
     printf("==========\n");
     //PrintQueue(Skill(P2Info(Curr(S))));

@@ -10,7 +10,7 @@
 /*
 ? typedef struct {
 *    Queue queueSkill;      queue penyimpan skill
-*   List listBangunan;      list penyimpan kepemilikan listbangunan
+*    List listBangunan;      list penyimpan kepemilikan listbangunan
 *    Warna color; 
 *    boolean extraTurn;
 ? } Player;
