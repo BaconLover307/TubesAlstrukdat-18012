@@ -1,0 +1,20 @@
+Main Program
+- Nerima Warna
+- command
+
+Aktivasi SKill:
+- Semua kecuali Instant Upgrade
+
+Detect: 
+- Semua kecuali Instant Upgrade
+
+Attack :
+- masukan user untuk milih nyerang yang mana
+- ngambil index bangunan
+
+PrintMap
+
+Graph :
+- diganti
+
+Done :

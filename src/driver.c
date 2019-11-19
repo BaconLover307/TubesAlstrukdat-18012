@@ -8,6 +8,7 @@ Player P1,P2;
 char color1,color2;
 Stack S;
 int T = 1;
+Bangunan B;
 
 int main(){
     CreatePlayer(&P1);
@@ -16,6 +17,9 @@ int main(){
     Qinfotype buangSkill;
     Player CurrP = GetCurrPlayer(S);
     Queue Qcoba1,Qcoba2;
+
+    StartTurn(&S,P1,P2,1);
+    UNDO(&S);
     /*
     printf("Tuliskan warnamu: ");
     scanf("%c",&color1);
@@ -23,13 +27,19 @@ int main(){
     print_warna(Color(P1),'M');
     printf("\n");
     */
-    char skil[2];
+    //char skil[2];
     //COMMAND(&S);
     //printf("pass\n");
     //PrintInfoHead(Skill(P2Info(Curr(S))));
     //printf("\npass\n");
     //SKILL(&S);
     //PrintQueue(Skill(P1Info(Curr(S))));
+    
+    
+    
+    
+    
+    /*
     printf("==========\n");
     CreateQueue(&Qcoba1,10);
     CreateQueue(&Qcoba2,10);
@@ -46,9 +56,9 @@ int main(){
     printf("==========\n"); printf("\n");
     PrintCurr(S);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
-    SKILL(&S);
+    SKILL(&S,&B);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
-    SKILL(&S);
+    SKILL(&S,&B);
     PrintQueue(Skill(GetCurrPlayer(S))); printf("\n");
     printf("==========\n");
     //PrintQueue(Skill(P2Info(Curr(S))));
@@ -57,4 +67,6 @@ int main(){
     //strcpy(skil,InfoTail(Skill(P1)));
     //printf("Skill player: %s",skil);
     //getchar();
+    */
+   return 0;
 }

@@ -1,6 +1,6 @@
 /* Tubes AlStrukDat */
 /* Kelompok 8 */
-/* Anggota: 
+/* Anggota:
 /* - Muhammad Hasan           - 13518012 */
 /* - Anna Elvira Hartoyo      - 13518045 */
 /* - Daniel Riyanto           - 13518075 */
@@ -12,27 +12,17 @@
 * Nama Program: Avatar World War
 
 * Game Avatar World War adalah game​ turn-based strategy yang
-* mensimulasikan perang dunia. Game ini dimainkan dengan cara 
-* memasukkan perintah melalui command line interface. 
+* mensimulasikan perang dunia. Game ini dimainkan dengan cara
+* memasukkan perintah melalui command line interface.
  */
 // $ ******* INCLUDE FILES ********
 #include <stdio.h>
 #include <stdlib.h>
-//#include "boolean.h"
-#include "player.h"
-#include "stackt.h"
-#include "command.h"
-//#include "array.h"
+#include "includes.c"
 /*
-#include "bangunan.h"
-#include "skill.h"
 #include "configure.h"
-#include "peta.h"
-#include "save.h"
-#include "load.h"
 */
 #include "string.h"
-#include "assets.c"
 
 // $ ***** Variables *****
 char menu[100];
@@ -40,28 +30,30 @@ boolean Exit;
 // = false;
 boolean ExitMenu;
 // = false;
+boolean EndTurn;
 
 // $ ******* MAIN PROGRAM ********
 int main() {
-while (!Exit) {
+do {
+    Exit = false;
     // todo MainM();
     printf("#TAMPILAN MAIN#\n");
     // ASCII Art: MainMenu
     do {
-        Exit = false;
         Menu();
-        printf("Enter Menu:");
+        printf("Enter Menu : ");
         scanf(" %s",&menu);
-        printf("Your choice is %s\n",menu);
+        //printf("Your choice is %s\n",menu);
         //getchar();
-        
-        // $ ######### TUTORIAL ########
+
+            // $ ######### TUTORIAL ########
         if (strcmpi(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
             clrscrn();
             printf("#TUT1 PLACEHOLDER#\n");
-            getchar(); 
+            getchar();
+            getchar();
             clrscrn();
             // todo Tutorial2();
             printf("#TUT2 PLACEHOLDER#\n");
@@ -69,105 +61,138 @@ while (!Exit) {
             clrscrn();
             ExitMenu = true;
 
-            // $ ######### CREDITS ########
-        } else if (strcmpi(menu, "CREDITS") == 0) {
+        }   // $ ######### CREDITS ########
+        else if (strcmpi(menu, "CREDITS") == 0) {
             Credits();
             printf("\n");
             printf("Press enter to go back to main menu...");
             getchar();
+            getchar();
             ExitMenu = true;
 
-            // $ ######### QUIT ########
-        } else if (strcmpi(menu, "QUIT") == 0) {
+        }   // $ ######### QUIT ########
+        else if (strcmpi(menu, "QUIT") == 0) {
             // TODO Quit();
             printf("#QUIT PLACEHOLDER#\n");
             ExitMenu = true;
             Exit = true;
 
-            // $ ######### PLAY GAME ########
-        } else if (strcmpi(menu, "PLAY") == 0) {
-            // todo Load Game
-            
-            // todo maen game
+        } // $ ######### PLAY GAME ########
+        else if (strcmpi(menu, "PLAY") == 0) {
             // $ Kamus Lokal : Start Game
+            char load;
+            char command[100];
             Stack GameState;
             Player PlayerOne, PlayerTwo;
+			Bangunan DataBangunan;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             int Turn = 1;
 
+            // todo Load Game
+            printf("Do you want to load a previous game? ");
+            do {
+                printf("Y/N\n");
+                scanf(" %c", &load);
+                if (load == 'Y') {
+                    LoadFile(GameState);
+                } else if (load == 'N') {
+                    //LoadData();
+                    
+                    printf("Choose building color for Player 1! \n");
+                    printf("Available colors : ");
+                    
+
+                    StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+
+                }
+            } while (load != 'Y' && load != 'N');
+
+            // todo maen game
+
             printf("#Ceritanya Maen#\n");
-            //getchar(); 
-            StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+            //getchar();
             //Player TestP = GetCurrPlayer(GameState);
             //Player TestP = P1Info(Curr(GameState));
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
-            printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
             do {
-                COMMAND(&GameState);
-            /*
+            	printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
                 do {
-                    int input = 0;
-                    while (1) {
-                        printf("List command :\n");
-                        printf("1. Attack\n");
-                        printf("2. Level Up\n");
-                        printf("3. Skill\n");
-                        printf("4. Undo\n");
-                        printf("5. End Turn\n");
-                        printf("6. Move\n");
-                        printf("7. Save\n");
-                        printf("8. Exit\n");
-                        printf("ENTER COMMAND : ");
-                        scanf("%d", &input);
-                        printf("Your choice is : %d\n",input);
+                    EndTurn = false;
 
-                        switch(input) {
-                            case 1 :
-                                ATTACK(&GameState);
-                                break;
-                            case 2 :
-                                LEVEL_UP(&GameState);
-                                break;
-                            case 3 :
-                                SKILL(&GameState);
-                                break;
-                            case 4 :
-                                UNDO(&GameState);
-                                break;
-                            case 5 :    
-                                END_TURN(&GameState);
-                                break;
-                            case 6 :
-                                MOVE(&GameState);
-                                break;
-                            case 7 :
-                                SAVE(&GameState);
-                                break;
-                            case 8 :
-                                EXIT(&GameState);
-                                break;
-                        }
-                    }
+                    printf("List Command :\n");
+                    printf(">> ATTACK\n");
+                    printf(">> LEVEL_UP\n");
+                    printf(">> SKILL\n");
+                    printf(">> MOVE\n");
+                    printf(">> UNDO\n");
+                    printf(">> END_TURN\n");
+                    printf(">> SAVE\n");
+                    printf(">> EXIT\n");
+                    printf("Enter Command : ");
+                    scanf(" %s",&command);
+					printf("\n");
 
-                } while (!EndTurn)
-                ChangeTurn(&GameState);
-            */
-            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo));
+
+                        // $ ######### ATTACK ########
+                    if (strcmpi(command,"ATTACK") == 0) {
+                        ATTACK(&GameState);
+
+                    }   // $ ######### LEVEL_UP ########
+                    else if (strcmpi(command, "LEVEL_UP") == 0) {
+                    	LEVEL_UP(&GameState,&DataBangunan);
+
+                    }   // $ ######### SKILL ########
+                    else if (strcmpi(command, "SKILL") == 0) {
+                    	SKILL(&GameState,&DataBangunan);
+
+                    }   // $ ######### MOVE ########
+                    else if (strcmpi(command, "MOVE") == 0) {
+						MOVE(&GameState);
+
+                    }   // $ ######### UNDO ########
+                    else if (strcmpi(command, "UNDO") == 0) {
+                        //fflush(stdout);
+						UNDO(&GameState);
+
+                    }   // $ ######### END_TURN ########
+                    else if (strcmpi(command, "END_TURN") == 0) {
+						EndTurn = true;
+
+                    }   // $ ######### SAVE ########
+                    else if (strcmpi(command, "SAVE") == 0) {
+						SAVE(&GameState);
+
+                    }   // $ ######### EXIT ########
+                    else if (strcmpi(command, "EXIT") == 0) {
+						ExitMenu = EXIT(&GameState);
+						EndTurn = ExitMenu;
+
+					}
+					else Invalid();
+					printf("\n");
+
+            	} while (!EndTurn);
+                if (!ExitMenu) {
+					ChangeTurn(&GameState);
+					EndTurn = false;
+				}
+
+            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
             if (IsLose(PlayerTwo)) {
-                //
-            }
-
-
+                printf("pesan menang P1\n");
+            } else if (IsLose(PlayerOne)) {
+                printf("pesan menang P2\n");
+			}
 
         } else {
             Invalid();
             getchar();
         }
-        
-    } while (!ExitMenu);
 
-}
+    } while (!ExitMenu);
+    ExitMenu = false;
+} while (!Exit);
 return 0;
 }

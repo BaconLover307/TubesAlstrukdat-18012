@@ -8,10 +8,10 @@ Created at: 17/10/2019
 #include <stdio.h>
 #include "pcolor.h"
 
-void print_red(char c) {
-    printf("%s%c", RED, c);
-    printf("%s", NORMAL);
-}
+//void MakeBukuWarna(TabColor * ArrWarna) {
+//    Neff(ArrWarna) = 0;
+//}
+
 void print_warna(Warna Col, char c) {
     switch (Col)
     {

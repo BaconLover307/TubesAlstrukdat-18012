@@ -57,7 +57,7 @@ void updatelistBangunan(Player *P, listlistBangunan B);
 // $ *** Skills ****
 void InstantUpgrade(Player *P, Bangunan *B);
 // * I.S. Player P terdefinisi dan listbangunan B terdefinisi
-// * F.S. Seluruh listbangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
+// * F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
 // *    pada listbangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
 // * Pemain mendapat skill ini hanya saat awal permainan
 

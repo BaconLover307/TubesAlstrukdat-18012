@@ -26,4 +26,5 @@ void ADV();
    F.S. : CC adalah karakter berikutnya dari CC yang lama,
           CC mungkin = EOF
           Jika  CC = EOF maka config akan menutup */
+
 #endif

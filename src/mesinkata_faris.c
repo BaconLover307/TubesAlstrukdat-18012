@@ -41,60 +41,54 @@ void ADVKATA()
   IgnoreBlank();
 }
 
-void SalinKata()
+void SalinKata(){
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
    F.S. : CKata berisi kata yang sudah diakuisisi;
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
-{
-  int i = 0;
-
-  for (;;)
-  {
-    CKata.TabKata[i] = CC;
-    ADV();
-    if ((CC == BLANK1 ) || (CC == BLANK2))
-    {
-      break;
+    int i = 1;
+    while ((CC != BLANK1) && (CC != BLANK2) && (i <= NMax)) {
+        CKata.TabKata[i] = CC;
+        ADV();
+        i++;
     }
-    else
-    {
-      i++;
-    }
-  }
-  if (i>NMax) {
-    CKata.Length=NMax;
-  }
-  else {
-    CKata.Length = i+1;
-  }
+    CKata.Length = i;
 }
 
 void PrintKata (Kata K)
 /* I.S. Kata K terdefinisi */
 /* F.S. K tercetak di layar tanpa karakter tambahan di awal maupun di akhir */
 {
-  int i = 0;
+  int i = 1;
   while (i<K.Length)
   {
     printf("%c", K.TabKata[i]);
     i++;
   }
 }
- int val = 0;
-  int i = 0;
+
 int KataToInt (Kata K)
 /* Kata K berisi integer dalam bentuk kata, mengkonversinya ke int */
 {
- 
+  int val = 0;
   int i = 0;
   while (i<K.Length)
   {
-    val *= 10;
-    val += (int) (CKata.TabKata[i] - '0');
-    ADV();
+    val = val * 10;
+    switch (K.TabKata[i]){
+      case '0' : val += 0; break;
+      case '1' : val += 1; break;
+      case '2' : val += 2; break;
+      case '3' : val += 3; break;
+      case '4' : val += 4; break;
+      case '5' : val += 5; break;
+      case '6' : val += 6; break;
+      case '7' : val += 7; break;
+      case '8' : val += 8; break;
+      case '9' : val += 9; break;
+    };
     i++;
   }
   return val;
@@ -103,7 +97,7 @@ int KataToInt (Kata K)
 char KataToChar (Kata K)
 /* K.Length = 1 , mengeluarkan konversi K ke char */
 {
-    return (K.TabKata[0]);
+    return (K.TabKata[1]);
 }
 
 void CopyKata(Kata K1,Kata *K2)
@@ -143,8 +137,10 @@ Bangunan KataToBangunan(int MaxEl)
     ADVKATA();
     Kc = CKata;
     ElmtBan(B, i) = KataToInfo(Ka, Kb, Kc);
-    return B;
+    ADVKATA();
   }
+    Neff(B) = MaxEl;
+    return B;
 }
 
 MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
@@ -157,19 +153,35 @@ MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
   return M;
 }
 
-Graph KataToGraph(int NB, int NK, int MaxEl)
+Graph KataToGraph(int MaxEl)
 /* Membaca file yang telah diberikan menjadi graph. */
 {
   Graph G;
   int i, j;
   MakeEmptyGraph(&G, MaxEl);
-  for (i = 1; i <= NB; i++) {
-    for (j = 1; j <= NK; j++) {
+  NeffG(G) = (MaxEl);
+  for (i = 1; i <= MaxEl; i++) {
+    for (j = 1; j <= MaxEl; j++) {
       if (KataToInt(CKata) == 1) {
         TambahRelation (&G, i, j);
       }
-        ADVKATA(); 
+        ADVKATA();
     }
-    ADVKATA();
   }
+  return G;
+}
+
+void ExecuteAll() {
+  MATRIKS M;
+  STARTKATA();
+  int NB = KataToInt(CKata);
+  ADVKATA();
+  int NK = KataToInt(CKata);
+  ADVKATA();
+  int MaxEl = KataToInt(CKata);
+  ADVKATA();
+  Bangunan B = KataToBangunan(MaxEl);
+  M = KataToMatriks(NB, NK, B);
+  TulisMATRIKS(M);
+  Graph G = KataToGraph(MaxEl);
 }

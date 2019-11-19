@@ -48,20 +48,22 @@ typedef struct {
 
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
-void StartTurn(Stack *S, Player P1, Player P2, int Turn);
+
 // * I.S. sembarang
 // * F.S. Membuat sebuah stack S yang kosong berkapasitas MaxSEl
 // * Memulai turn
+void StartTurn(Stack *S, Player P1, Player P2, int Turn);
 
-void ClearStack(Stack *S);
 // * I.S. Stack terdefinisi, mungkin kosong
 // * F.S. Menghabiskan isi sebuah stack S
+void ClearStack(Stack *S);
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
-boolean IsFirstAct(Stack S);
+
 // * Mengirim true jika gamestate paling awal
-boolean IsFull(Stack S);
+boolean IsFirstAct(Stack S);
 // * Mengirim true jika tabel penampung Snilai elemen stack penuh
+boolean IsFull(Stack S);
 
 // $ ************ Menambahkan sebuah elemen ke Stack ************
 void Push(Stack *S, Sinfotype X);
