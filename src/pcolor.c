@@ -10,20 +10,20 @@ Created at: 17/10/2019
 
 void MakeBukuWarna(TabColor * ArrWarna) {
     ColNeff(*ArrWarna) = 6;
-    Elmt(*ArrWarna,1) = 'R';
-    Elmt(*ArrWarna,2) = 'G';
-    Elmt(*ArrWarna,3) = 'B';
-    Elmt(*ArrWarna,4) = 'C';
-    Elmt(*ArrWarna,5) = 'M';
-    Elmt(*ArrWarna,6) = 'Y';
+    ColElmt(*ArrWarna,1) = 'R';
+    ColElmt(*ArrWarna,2) = 'G';
+    ColElmt(*ArrWarna,3) = 'B';
+    ColElmt(*ArrWarna,4) = 'C';
+    ColElmt(*ArrWarna,5) = 'M';
+    ColElmt(*ArrWarna,6) = 'Y';
 }
 
 void PrintBukuWarna(TabColor ArrWarna) {
     printf("[ ");
-    print_warna(Elmt(ArrWarna,1), Elmt(ArrWarna,1));
+    print_warna(ColElmt(ArrWarna,1), ColElmt(ArrWarna,1));
     for (int i = 2; i<= ColNeff(ArrWarna); i++) {
         printf(" | ");
-        print_warna(Elmt(ArrWarna,i), Elmt(ArrWarna,i));
+        print_warna(ColElmt(ArrWarna,i), ColElmt(ArrWarna,i));
     }
     printf(" ]");
 }

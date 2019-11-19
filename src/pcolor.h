@@ -24,7 +24,7 @@ typedef struct {
 
 #define ColNeff(T) (T).ColNeff
 #define TW(T) (T).TW
-#define Elmt(T, i) (T).TW[(i)]
+#define ColElmt(T, i) (T).TW[(i)]
 
 
 #define NORMAL "\x1B[0m"

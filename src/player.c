@@ -56,7 +56,7 @@ void SetPlayerWarna(Player *P, TabColor * Palet) {
         scanf(" %c", &Color(*P));
         i = 1;
         while (i<=ColNeff(*Palet) && !Found) {
-            if (Elmt(*Palet,i) == Color(*P) && Color(*P)!='_') Found = true;
+            if (ColElmt(*Palet,i) == Color(*P) && Color(*P)!='_') Found = true;
             i++;
         }
         if (!Found) {
@@ -66,7 +66,7 @@ void SetPlayerWarna(Player *P, TabColor * Palet) {
             printf("Choose your color: ");
         }
     } while (!Found);
-    Elmt(*Palet,i-1) = '_';
+    ColElmt(*Palet,i-1) = '_';
 }
 
 // $ ***** Skills *****
