@@ -124,7 +124,7 @@ void CriticalHit(){
     /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
 
 //}
-*/
+
 
 void InstantReinforcement(Player *P, Bangunan *B) {
     /* I.S. Player P dan Bangunan B terdefinisi
@@ -164,3 +164,4 @@ void Barrage(Player *P, Bangunan *B) {
     }
 
 }
+
