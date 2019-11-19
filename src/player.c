@@ -79,12 +79,13 @@ void Shield(Player *P) {
     /* Pemain mendapat skill ini jika sebuah lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
 //}
 
-/*
-void ExtraTurn(){
-    /* I.S.......
+
+void ExtraTurn(Player *P){
+    /* I.S Player P terdefinisi */
     /* F.S. Setelah end_turn (giliran berkhir), pemain selanjutnya tetap pemain yang sama */
     /* Pemain mendapat skill ini jika Fort pemain direbut lawan */
-//}
+    ET(*P) = true;
+}
 
 /*
 void AttackUp(Player *P){
@@ -101,33 +102,32 @@ void CriticalHit(){
     /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
 
 //}
-//void InstantReinforcement(Player *P, Bangunan *B) {
+*/
+
+void InstantReinforcement(Player *P, Bangunan *B) {
     /* I.S. Player P dan Bangunan B terdefinisi
-    /* F.S. Seluruh bangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.*/
+    /* F.S. Seluruh bangunan mendapat tambahan 5 pasukan.*/
     /* Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki memiliki level 4 */
+    
     // Kamus Lokal    
-/*
     address A;
     // Algoritma
     A = First(ListBan(*P));
     while (Next(A) != Nil){
-        if (CheckTambahTentara(ListBan(*P), *B, Info(A))){
-            Tentara(ElmtBan(*B, Info(A))) += 5;
-        }
+        Tentara(ElmtBan(*B, Info(A))) += 5;
         A = Next(A);
     }
-
- 
 }
-*/
-//void Barrage(Player *P, Bangunan *B) {
+
+
+void Barrage(Player *P, Bangunan *B) {
     /* I.S. Player P dan Bangunan B terdefinisi. 
     /* F.S. Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10. 
        Jika jumlah pasukan >= 10, akan dilakukan pengurangan sebanyak 10, tapi jika jumlah pasukan <1,
        jumlah pasukan menjadi 0 */
     /* Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi 10 */
     // Kamus Lokal
-/*    address A;
+    address A;
     // Algoritma
     A = First(ListBan(*P));
     while (Next(A) != Nil){
@@ -142,5 +142,3 @@ void CriticalHit(){
     }
 
 }
-
-*/
