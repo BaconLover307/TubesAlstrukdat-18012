@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* ********* Prototype ********* */
+// $ ********* Prototype *********
 boolean IsQEmpty (Queue Q) {
 /* Mengirim true jika Q kosong: lihat definisi di atas */
     return (Head(Q) == QNil) && (Tail(Q) == QNil);
@@ -39,7 +39,7 @@ int NBQElmt (Queue Q) {
 }
 
 
-/* *** Kreator *** */
+// $ *** Kreator ***
 void CreateQueue (Queue * Q, int Max) {
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
@@ -57,7 +57,7 @@ void CreateQueue (Queue * Q, int Max) {
 }
 
 
-/* *** Destruktor *** */
+// $ *** Destruktor ***
 void QDeAlokasi(Queue * Q) {
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
@@ -67,7 +67,7 @@ void QDeAlokasi(Queue * Q) {
 }
 
 
-/* *** Primitif Add/Delete *** */
+// $ *** Primitif Add/Delete ***
 void QAdd (Queue * Q, Qinfotype X){
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q mungkin penuh */
@@ -120,19 +120,16 @@ void QDel (Queue * Q, Qinfotype * X) {
 
 }
 
+// $ *** Fungsi Lain ***
 void PrintInfoHead (Queue Q){
 /* I.S. Q mungkin kosong */
 /* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
-
     // $ Kamus Lokal
     char skil [10];
-
     // $ Algoritma
     if (IsQEmpty(Q)){
         printf("none");
-    }
-
-    else{
+    } else {
         strcpy(skil, InfoHead(Q));
         printf("%s", skil);
     }
@@ -141,10 +138,8 @@ void PrintInfoHead (Queue Q){
 void PrintQueue(Queue Q) {
     /* I.S. Q mungkin kosong */
     /* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
-
     // $ Kamus Lokal
     Qinfotype skil;
-
     // $ Algoritma
     if (IsQEmpty(Q)){
         printf("[ none ]");
@@ -158,6 +153,20 @@ void PrintQueue(Queue Q) {
                 printf("%s", skil);
             }
         }
-        printf(" ]\n");
+        printf(" ]");
+    }
+}
+
+void ReplaceQueue(Queue Q, Queue *Qnew) {
+    // $ Kamus Lokal
+    Queue Qtemp = Q;
+    Qinfotype temp, buang;
+    // $ Algoritma
+    while (!IsQEmpty(*Qnew)) {
+        QDel(Qnew,&buang);
+    }
+    while (!IsQEmpty(Qtemp)) {
+        QDel(&Qtemp,&temp);
+        QAdd(Qnew,temp);
     }
 }

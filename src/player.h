@@ -9,7 +9,6 @@
 #include "queue.h"
 #include "pcolor.h"
 #include "listlinier.h"
-//#include "skill.h"
 
 typedef struct {
     Queue queueSkill;       /* queue penyimpan skill */

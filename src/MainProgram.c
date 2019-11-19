@@ -103,7 +103,6 @@ while (!Exit) {
             //Player TestP = P1Info(Curr(GameState));
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
-            printf("pass\n");
             printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
             do {
                 COMMAND(&GameState);

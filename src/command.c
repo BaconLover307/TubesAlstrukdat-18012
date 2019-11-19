@@ -23,28 +23,28 @@ void COMMAND(Stack *gamestate) {
 
         switch(input) {
             case 1 :
-                ATTACK(&gamestate);
+                ATTACK(gamestate);
                 break;
             case 2 :
-                LEVEL_UP(&gamestate);
+                LEVEL_UP(gamestate);
                 break;
             case 3 :
-                SKILL(&gamestate);
+                SKILL(gamestate);
                 break;
             case 4 :
-                UNDO(&gamestate);
+                UNDO(gamestate);
                 break;
             case 5 :
-                END_TURN(&gamestate);
+                END_TURN(gamestate);
                 break;
             case 6 :
-                MOVE(&gamestate);
+                MOVE(gamestate);
                 break;
             case 7 :
-                SAVE(&gamestate);
+                SAVE(gamestate);
                 break;
             case 8 :
-                EXIT(&gamestate);
+                EXIT(gamestate);
                 break;
         }
     }
@@ -106,31 +106,39 @@ void LEVEL_UP(Stack *gamestate) {
 //}
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate) {
+    printf("Debug SKILL\n");
     // $ Kamus Lokal
     Qinfotype temp;
     Queue Qtemp;
     Sinfotype buang;
-
+    Player CurrP = P1Info(Curr(*gamestate));
+    //Stack state = *gamestate;
     //Player CurrP = GetCurrPlayer(*gamestate);
-    //printf("%d\n", TurnInfo(CurrP))
     // $ Algoritma
+    Qtemp = Skill(CurrP);
+    if (IsQEmpty(Qtemp)) {
+        printf("You don't have any skills!\n");
+    } else {
+        // * Use Skill
+        printf("You have used the skill : ");
+        PrintInfoHead(Skill(CurrP));
+        printf("\n");
+        QDel(&Qtemp, &temp);
+        printf("All your buildings have been Leveled Up!!\n");
 
-    Qtemp = Skill(GetCurrPlayer(*gamestate));
-    if (IsQEmpty(Qtemp)){
-        printf("You don't have any skill\n");
-        //QAdd(&Qtemp, "IU");
-    }
 
-    else{
-            //PrintQueue(Skill(CurrP));
-            printf("You have used the skill : ");
-            PrintInfoHead(Qtemp);
-            printf("\n");
-            QDel(&Qtemp, &temp);
-            //PrintQueue(Skill(CurrP));
-            printf("All your buildings have been Leveled Up!!\n");
-
-        Skill(GetCurrPlayer(*gamestate)) = Qtemp;
+        // * Update Stack
+        if (TurnInfo(Curr(*gamestate)) == 1) {
+            ReplaceQueue(Qtemp,&Skill(P1Info(Curr(*gamestate))));
+        } else {
+            ReplaceQueue(Qtemp,&Skill(P2Info(Curr(*gamestate))));
+        }
+        //fflush(stdout);
+        //printf("pass\n");
+        //PrintCurr(state);
+        PrintCurr(*gamestate);
+        ClearStack(gamestate);
+        //printf("pass\n");
     }
 }
 
@@ -142,7 +150,7 @@ void UNDO(Stack *gamestate) {
         printf("You cannot undo at the moment!");
     } else {
         printf("You have undone your past action!");
-        Pop(&gamestate,&Curr(*gamestate));
+        Pop(gamestate,&Curr(*gamestate));
     }
 }
 
