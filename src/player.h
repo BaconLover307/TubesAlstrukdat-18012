@@ -33,33 +33,36 @@ typedef struct {
 // $ ********* Prototype *********
 
 // $ *** Condition Check ***
-boolean IsLose(Player P);
+
 // * Mengirim true jika list kepemilikan listbangunan kosong
+boolean IsLose(Player P);
 
 // $ ***** Creator *****
-void CreatePlayer(Player *P);
+
 // * I.S. P terdefinisi
 // * F.S. Sebuah P terbentuk dengan karakter listbangunan akan sesuai
 // * konfigurasi dan warna listbangunan sesuai yang dipilih
+void CreatePlayer(Player *P);
 
 // $ ***** Basic Operators *****
 
 // $ *** Color Handling ***
-void SetPlayerWarna(Player *P, Warna C);
+
 // * I.S. Player terdefinisi
 // * F.S. Warna listbangunan player akan menjadi C
+void SetPlayerWarna(Player *P, TabColor * Palet);
 
 /* 
 void updatelistBangunan(Player *P, listlistBangunan B);
 */
 
-
 // $ *** Skills ****
-void InstantUpgrade(Player *P, Bangunan *B);
+
 // * I.S. Player P terdefinisi dan listbangunan B terdefinisi
 // * F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
 // *    pada listbangunan itu dan tanpa pengurangan jumlah tentara sebanyak M/2 saat kenaikan level*/
 // * Pemain mendapat skill ini hanya saat awal permainan
+void InstantUpgrade(Player *P, Bangunan *B);
 
 
 /* PENDING DULU :(
