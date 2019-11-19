@@ -90,6 +90,8 @@ do {
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
+            QAdd(&Skill(PlayerOne),"ET");
+            // ! TEST ExtraTurn
             int Turn = 1;
 
             // todo Load Game
@@ -130,7 +132,6 @@ do {
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
             do {
-            	printf("Current turn : Player %d\n",TurnInfo(Curr(GameState)));
                 do {
                     EndTurn = false;
                     PrintCurr(GameState);

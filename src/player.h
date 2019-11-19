@@ -60,10 +60,6 @@ void CreatePlayer(Player *P);
 // * F.S. Warna listbangunan player akan menjadi C
 void SetPlayerWarna(Player *P, TabColor * Palet);
 
-/* 
-void updatelistBangunan(Player *P, listlistBangunan B);
-*/
-
 // $ *** Skills ****
 
 // * I.S. Player P terdefinisi dan Bangunan B terdefinisi, game sedang berjalan
@@ -73,9 +69,10 @@ void updatelistBangunan(Player *P, listlistBangunan B);
 void InstantUpgrade(Player *P, Bangunan *B);
 
 // * I.S Player P terdefinisi, game sedang berjalan
-// * F.S. Setelah end_turn (giliran berkhir), pemain selanjutnya tetap pemain yang sama */
-// * Pemain mendapat skill ini jika Fort pemain direbut lawan */
+// * F.S. Setelah end_turn (giliran berkhir), pemain selanjutnya tetap pemain yang sama
+// * Pemain mendapat skill ini jika Fort pemain direbut lawan
 void ExtraTurn(Player *P);
+
 /* PENDING DULU :(
 void Shield(Player *P);
 
@@ -87,19 +84,19 @@ void CriticalHit();
 */
 
 
+// * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan
+// * F.S. Seluruh listbangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.
+// * Pemain mendapat skill ini di akhir gilirannya bila semua listbangunan yang ia miliki memiliki level 4
 void InstantReinforcement(Player *P, Bangunan *B);
-/* I.S. Player P dan Bangunan B terdefinisi
-/* F.S. Seluruh listbangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.*/
-/* Pemain mendapat skill ini di akhir gilirannya bila semua listbangunan yang ia miliki memiliki level 4 */
 
 void checkGetIR(Player *P, Bangunan *B);
 
+// * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan
+// * F.S. Jumlah pasukan pada seluruh listbangunan musuh akan berkurang sebanyak 10. 
+// * 	  Jika jumlah pasukan >= 10, akan dilakukan pengurangan sebanyak 10, tapi jika jumlah pasukan <1,
+// * 	  jumlah pasukan menjadi 0
+// * Pemain mendapat skill ini jika lawan baru saja bertambah listbangunannya menjadi 10
 void Barrage(Player *P, Bangunan *B);
-/* I.S. Player P dan Bangunan B terdefinisi. 
-/* F.S. Jumlah pasukan pada seluruh listbangunan musuh akan berkurang sebanyak 10. 
-    Jika jumlah pasukan >= 10, akan dilakukan pengurangan sebanyak 10, tapi jika jumlah pasukan <1,
-    jumlah pasukan menjadi 0 */
-/* Pemain mendapat skill ini jika lawan baru saja bertambah listbangunannya menjadi 10 */
 
 
 

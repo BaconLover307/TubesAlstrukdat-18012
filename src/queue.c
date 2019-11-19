@@ -142,18 +142,18 @@ void PrintQueue(Queue Q) {
     Qinfotype skil;
     // $ Algoritma
     if (IsQEmpty(Q)){
-        printf("[ none ]");
+        printf("|| -- ||");
     } else {
-        printf("[ ");
+        printf("|| ");
         PrintInfoHead(Q);
+        printf(" ||");
         if (NBQElmt(Q) > 1) {
             for (int i = Head(Q)+1; i <= Tail(Q); i++) {
-                printf(" | ");
+                printf(" <- ");
                 strcpy(skil, Q.T[i]);
                 printf("%s", skil);
             }
         }
-        printf(" ]");
     }
 }
 

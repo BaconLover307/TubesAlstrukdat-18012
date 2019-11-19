@@ -72,17 +72,20 @@ void PrintCurr(Stack S) {
     // $ Kamus Lokal
     Player CurrP = GetCurrPlayer(S);
     // $ Algoritma
-    printf("[ =====  Player %d  ===== ]\n", TurnInfo(Curr(S))),
+    printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(Curr(S))),
     //printbuilding
-    printf(">=  Skill : ");
+    printf("  <= Active Effects =>\n");
+    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
+    if (AU(FX(CurrP))) printf(" [AU] "); else printf(" [  ] ");
+    if (CH(FX(CurrP))) printf(" [CH] "); else printf(" [  ] ");
+    if (SH(FX(CurrP))) printf(" [SH] "); else printf(" [  ] ");
+    if (ET(FX(CurrP))) printf(" [ET] "); else printf(" [  ] ");
+    printf("    || SKILL ");
     PrintQueue(Skill(CurrP));
-    printf("  =<\n");
-    printf(">=  Active Effects : ");
-    if (AU(FX(CurrP))) printf(" [AU] ");
-    if (CH(FX(CurrP))) printf(" [CH] ");
-    if (SH(FX(CurrP))) printf(" [SH] ");
-    if (ET(FX(CurrP))) printf(" [ET] ");
-    printf(" =<\n");
+    printf("\n");
+    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
+    printf("\n");
+    printf("\n");
 
 
 }
