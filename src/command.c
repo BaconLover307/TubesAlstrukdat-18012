@@ -108,37 +108,46 @@ void LEVEL_UP(Stack *gamestate) {
 void SKILL(Stack *gamestate) {
     printf("Debug SKILL\n");
     // $ Kamus Lokal
-    Qinfotype temp;
-    Queue Qtemp;
-    Sinfotype buang;
-    Player CurrP = P1Info(Curr(*gamestate));
-    //Stack state = *gamestate;
-    //Player CurrP = GetCurrPlayer(*gamestate);
+    Qinfotype usedskill;
+    Queue *Qtemp;
+    Player *CurrP;
+    Bangunan *Btemp;
+
+    if (TurnInfo(Curr(*gamestate))) {
+        CurrP = &P1Info(Curr(*gamestate));
+    } else {
+        CurrP = &P2Info(Curr(*gamestate));
+    }
+    Qtemp = &Skill(*CurrP);
+    Btemp = &ListBan(*CurrP);
+
     // $ Algoritma
-    Qtemp = Skill(CurrP);
-    if (IsQEmpty(Qtemp)) {
+    if (IsQEmpty(*Qtemp)) {
         printf("You don't have any skills!\n");
     } else {
         // * Use Skill
         printf("You have used the skill : ");
-        PrintInfoHead(Skill(CurrP));
-        printf("\n");
-        QDel(&Qtemp, &temp);
-        printf("All your buildings have been Leveled Up!!\n");
+        PrintInfoHead(*Qtemp); print("\n");
+        QDel(Qtemp, &usedskill);
+        // * Switch
+        if (strcmpi(usedskill,"IU") == 0) {
+            printf("All your buildings have been Leveled Up!!\n");
+            InstantUpgrade(CurrP,Btemp);
+        } else if (strcmpi(usedskill,"SH") == 0) {
+            
+        } else if (strcmpi(usedskill,"ET") == 0) {
 
+        } else if (strcmpi(usedskill,"AU") == 0) {
 
-        // * Update Stack
-        if (TurnInfo(Curr(*gamestate)) == 1) {
-            ReplaceQueue(Qtemp,&Skill(P1Info(Curr(*gamestate))));
-        } else {
-            ReplaceQueue(Qtemp,&Skill(P2Info(Curr(*gamestate))));
+        } else if (strcmpi(usedskill,"CH") == 0) {
+
+        } else if (strcmpi(usedskill,"IR") == 0) {
+
+        } else if (strcmpi(usedskill,"BA") == 0) {
+
         }
-        //fflush(stdout);
-        //printf("pass\n");
-        //PrintCurr(state);
-        PrintCurr(*gamestate);
         ClearStack(gamestate);
-        //printf("pass\n");
+        
     }
 }
 
