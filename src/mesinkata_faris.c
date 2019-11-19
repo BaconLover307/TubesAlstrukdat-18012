@@ -153,18 +153,35 @@ MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
   return M;
 }
 
-Graph KataToGraph(int NB, int NK, int MaxEl)
+Graph KataToGraph(int MaxEl)
 /* Membaca file yang telah diberikan menjadi graph. */
 {
   Graph G;
   int i, j;
   MakeEmptyGraph(&G, MaxEl);
-  for (i = 1; i <= NB; i++) {
-    for (j = 1; j <= NK; j++) {
+  NeffG(G) = (MaxEl);
+  for (i = 1; i <= MaxEl; i++) {
+    for (j = 1; j <= MaxEl; j++) {
       if (KataToInt(CKata) == 1) {
         TambahRelation (&G, i, j);
-        ADVKATA();
       }
+        ADVKATA();
     }
   }
+  return G;
+}
+
+void ExecuteAll() {
+  MATRIKS M;
+  STARTKATA();
+  int NB = KataToInt(CKata);
+  ADVKATA();
+  int NK = KataToInt(CKata);
+  ADVKATA();
+  int MaxEl = KataToInt(CKata);
+  ADVKATA();
+  Bangunan B = KataToBangunan(MaxEl);
+  M = KataToMatriks(NB, NK, B);
+  TulisMATRIKS(M);
+  Graph G = KataToGraph(MaxEl);
 }

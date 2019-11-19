@@ -122,9 +122,9 @@ void TulisGraph (Graph G) {
   for (i = IdxMin; i <= NeffG(G); i++) {
     for (j = IdxMin; j < NeffG(G); j++) {
       if (CheckRelation(G, i, j)) {
-        printf("0 ");
+        printf("1 ");
       } else /* !CheckRelation(G, i, j) */ {
-        printf("1 ");  
+        printf("0 ");  
       }
     }
 
