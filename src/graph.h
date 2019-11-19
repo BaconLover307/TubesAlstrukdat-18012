@@ -86,7 +86,7 @@ boolean IsEmptyParent (addrGraph P);
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void BacaGraph (Graph * G);
-// ! Ingat MakeEmptyGraph dulu
+// ! Ingat MakeEmptyGraph dan AddParent dulu
 // TODO: Prosedur ini dimasukkan ke ADT Mesin Kata
 /* I.S. Graph G terdefinisi */
 /* F.S. Graph G berisi hubungan-hubungan antar bangunan */
