@@ -33,22 +33,6 @@ typedef struct {
   addrGraph FirstG;
 } Graph;
 
-
-/* Indeks yang digunakan [IdxMin..MaxG] */
-// * IdxMin sudah didefinisi pada ADT Array
-/* Jika G adalah Graph, cara deklarasi dan akses: */
-/* Deklarasi : G : Graph */
-/* Maka cara akses:
-   G.GI     untuk mengakses seluruh List pada Graph G
-   G.GI[i]  untuk mengakses List ke-i
-   G.NeffG  untuk mengetahui banyaknya elemen
-   G.MaxG   untuk mengetahui batas jumlah elemen Graph */
-
-/* Definisi :
-  Graph kosong : G.NeffG = 0
-  Definisi elemen pertama : G.GI[i] dengan i=1
-  Definisi elemen terakhir yang terdefinisi: G.GI[i] dengan i=G.NeffG */
-
 /* Definisi Graph :
   Graph utama (G) kosong : FirstG(G) = Nil
   Graph anak (G2) kosong : FirstChild(G2) = Nil
@@ -110,7 +94,7 @@ boolean IsEmptyParent (addrGraph P);
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void BacaGraph (Graph * G);
-// ! Ingat MakeEmptyGraph dulu
+// ! Ingat MakeEmptyGraph dan AddParent dulu
 // TODO: Prosedur ini dimasukkan ke ADT Mesin Kata
 /* I.S. Graph G terdefinisi */
 /* F.S. Graph G berisi hubungan-hubungan antar bangunan */
