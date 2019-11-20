@@ -102,9 +102,17 @@ void InstantUpgrade(Player *P, Bangunan *B);
 void ExtraTurn(Player *P);
 
 /* PENDING DULU :(
+
+//* I.S.
+//* F.S. Seluruh bangunan yang dimiliki pemain akan memiliki pertahanan selama 2 turn */
+//* Pemain mendapat skill ini jika lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
+/*
 void Shield(Player *P);
 
-
+//* I.S.......
+//* F.S. Pada giliran ini, pertahanan bangunan musuh tidak akan mempengaruhi penyerangan */
+//* Pemain mendapat skill ini jika pemain baru saja menyerang tower lawan dan jumlah towernya menjadi 3 */
+/*
 void AttackUp(Player *P);
 */
 
