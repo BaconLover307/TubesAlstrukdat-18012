@@ -33,7 +33,7 @@ typedef struct {
   addrGraph FirstG;
 } Graph;
 
-<<<<<<< HEAD
+
 /* Indeks yang digunakan [IdxMin..MaxG] */
 // * IdxMin sudah didefinisi pada ADT Array
 /* Jika G adalah Graph, cara deklarasi dan akses: */
@@ -48,7 +48,7 @@ typedef struct {
   Graph kosong : G.NeffG = 0
   Definisi elemen pertama : G.GI[i] dengan i=1
   Definisi elemen terakhir yang terdefinisi: G.GI[i] dengan i=G.NeffG */
-=======
+
 /* Definisi Graph :
   Graph utama (G) kosong : FirstG(G) = Nil
   Graph anak (G2) kosong : FirstChild(G2) = Nil
@@ -56,7 +56,7 @@ typedef struct {
 /* Setiap elemen dengan addrGraph2 P2 dapat diacu InfoG2(P2), NextChild(P2) */
 /* Elemen terakhir graph utama : jika addressnya Last, maka Next(Last)=Nil */
 /* Elemen terakhir graph anak  : jika addressnya Last2, maka Next(Last2)=Nil */
->>>>>>> 0bdff9f36cdb882fc01c647ccd1cdfca9204d75b
+
 
 /* ********** SELEKTOR ********** */
 #define InfoG(P)      (P)->infoG
@@ -98,15 +98,15 @@ void DealokasiGraph2 (addrGraph2 * P);
 /* ********** TEST GRAPH KOSONG ********** */
 boolean IsEmptyGraph (Graph G);
 /* Mengirimkan true jika Graph G kosong, mengirimkan false jika tidak */
-<<<<<<< HEAD
+
 /* *** Test tabel penuh *** */
 boolean IsFullGraph (Graph G);
 // ? Entah perlu fungsi ini gak ya?
 /* Mengirimkan true jika Graph G penuh, mengirimkan false jika tidak */
-=======
-boolean IsEmptyParent (addrGraph P); 
+
+boolean IsEmptyParent (addrGraph P);
 /* Mengirimkan true jika addrGraph P kosong, mengirimkan false jika tidak */
->>>>>>> 0bdff9f36cdb882fc01c647ccd1cdfca9204d75b
+
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void BacaGraph (Graph * G);
