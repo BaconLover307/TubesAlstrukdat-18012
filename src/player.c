@@ -9,6 +9,11 @@
 
 /*
 ? typedef struct {
+*    int duration;       Durasi (turn) efektif Shield, max 2 turn lawan
+*    boolean activeSH;   True jika durasi > 0
+? } Shield;
+
+? typedef struct {
 *    boolean attackUp;
 *    boolean criticalHit;
 *    boolean shield;
@@ -34,7 +39,12 @@
 * #define CH(F) (F).criticalHit
 * #define SH(F) (F).shield
 * #define ET(F) (F).extraTurn
+
+? Jika SH adalah shield, maka akses elemen :
+* #define ActiveSH(SH) (SH).activeSH
+* #define Duration(SH) (SH).duration
 */
+
 
 // $ ********* Prototype *********
 
@@ -52,14 +62,38 @@ void CreatePlayer(Player *P) {
     // * Handling Status Effect
     AU(FX(*P)) = false;
     CH(FX(*P)) = false;
-    SH(FX(*P)) = false;
+    Duration(SH(FX(*P))) = 0;
+    ActiveSH(SH(FX(*P))) = false;
     ET(FX(*P)) = false;
     // * Handling List Bangunan
     CreateEmptyList(&ListBan(*P));
 }
 
-// $ ***** Basic Operators *****
+// $ *** Fungsi Untuk FX Shield ***
+boolean IsSHWornOut(Player P) {
+    return Duration(SH(FX(P))) == 0;
+}
 
+boolean IsSHMax(Player P) {
+    return Duration(SH(FX(P))) == 2;
+}
+void CheckActive(Player *P) {
+    ActiveSH(SH(FX(*P))) = (Duration(SH(FX(*P))) > 0);
+}
+
+void ReduceDurationSH(Player *P) {
+    if (!IsSHWornout(*P)) {
+        Duration(SH(FX(*P))) -= 1;
+    }
+    CheckActive(P);
+}
+
+void ActivateSH(Player *P) {
+    Duration(SH(FX(*P))) = 2;
+    ActiveSH(SH(FX(*P))) = true;
+}
+
+// $ ***** Basic Operators *****
 
 // $ *** Color Handling ***
 void SetPlayerWarna(Player *P, TabColor * Palet) {
@@ -194,6 +228,11 @@ void CheckGetIR(Player *P, Bangunan *B) {
     if (get == true){
         QAdd(&Skill(*P), "IR");
     }
+}
+
+void CheckGetSH(Player P, Queue *Q) {
+    if (NbElmtList(ListBan(P)) == 2) 
+    QAdd(Q, "SH");
 }
 
 void GetCH(Queue *Q) {

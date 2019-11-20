@@ -104,6 +104,8 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             //InstantUpgrade(CurrP,databuild);
 
         } else if (strcmpi(usedskill,"SH") == 0) {
+            ActivateSH(CurrP);
+            printf("All your buildings have been Shielded for 2 turns!!\n");
 
         } else if (strcmpi(usedskill,"ET") == 0) {
             printf("You have gained an Extra Turn!!\n");

@@ -11,9 +11,14 @@
 #include "listlinier.h"
 
 typedef struct {
+    int duration;       // Durasi (turn) efektif Shield
+    boolean activeSH;   // True jika durasi > 0
+} Shield;
+
+typedef struct {
     boolean attackUp;
     boolean criticalHit;
-    boolean shield;
+    Shield  shield;
     boolean extraTurn;
 } StatusEffect;
 
@@ -37,6 +42,10 @@ typedef struct {
 #define SH(F) (F).shield
 #define ET(F) (F).extraTurn
 
+// $ Jika SH adalah shield, maka akses elemen :
+#define ActiveSH(SH) (SH).activeSH
+#define Duration(SH) (SH).duration
+
 
 // $ ********* Prototype *********
 
@@ -51,6 +60,23 @@ boolean IsLose(Player P);
 // * F.S. Sebuah P terbentuk dengan karakter listbangunan akan sesuai
 // *      konfigurasi dan warna listbangunan sesuai yang dipilih
 void CreatePlayer(Player *P);
+
+// $ *** Fungsi Untuk FX Shield ***
+
+// * Mengecek bila durasi shield = 0, jika iya maka True
+boolean IsSHWornOut(Player P);
+
+// * Mengecek bila durasi shield = 2, jika iya maka True
+boolean IsSHMax(Player P);
+
+// * Mengecek durasi shield, jika >0 maka ActiveSH menjadi True
+void CheckActive(Player *P);
+
+// * Mengurangi durasi shield, sekaligus mengupdate ActiveSH
+void ReduceDurationSH(Player *P);
+
+// * Menyalakan Status Effect Shield
+void ActivateSH(Player *P);
 
 // $ ***** Basic Operators *****
 

@@ -59,7 +59,8 @@ int main() {
     printf("Bangunan ke-1 tidak bisa menyerang dengan 100 orang.\n");
   }
 
-  printf("Penyerangan pertama\n");
+  printf("Penyerangan ke-1\n");
+  printf("================\n");
   printf("Skill apapun tidak aktif.\n");
   TentaraAttack(&B, 1, 44);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
@@ -88,6 +89,7 @@ int main() {
 
   printf("\n");
   printf("Penyerangan ke-2\n");
+  printf("================\n");
   printf("Skill apapun tidak aktif.\n");
   TentaraAttack(&B, 1, 44);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
@@ -117,6 +119,7 @@ int main() {
 
   printf("\n");
   printf("Penyerangan ke-3\n");
+  printf("================\n");
   printf("Skill apapun tidak aktif.\n");
   TentaraAttack(&B, 1, 44);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
@@ -145,6 +148,7 @@ int main() {
 
   printf("\n");
   printf("Penyerangan ke-4\n");
+  printf("================\n");
   printf("Skill attack up aktif.\n");
   TentaraAttack(&B, 1, 44);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
@@ -173,6 +177,7 @@ int main() {
 
   printf("\n");
   printf("Penyerangan ke-5\n");
+  printf("================\n");
   printf("Skill critical hit aktif.\n");
   TentaraAttack(&B, 1, 44);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
@@ -201,6 +206,7 @@ int main() {
 
   printf("\n");
   printf("Penyerangan ke-6\n");
+  printf("================\n");
   printf("Skill critical hit aktif.\n");
   TentaraAttack(&B, 1, 15);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
@@ -229,6 +235,7 @@ int main() {
 
   printf("\n");
   printf("Penyerangan ke-7\n");
+  printf("================\n");
   printf("Skill critical hit aktif.\n");
   TentaraAttack(&B, 1, 14);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
