@@ -21,7 +21,6 @@ int main() {
   /* ALGORITMA */
   CreateEmptyList(&L1); CreateEmptyList(&L2);
   MakeEmptyBangunan(&B, 5);
-  Neff(B) = 5;
 
   if (IsEmptyList(L1)) {
     printf("Bangunan pada pemain pertama kosong.\n");
@@ -62,8 +61,9 @@ int main() {
   printf("Pemain ke-2 mau menyerang bangunan ke-3 yang dimiliki oleh Pemain 1.\n");
   printf("Tentara sebesar 30 orang dari Bangunan ke-4.\n");
 
+  /* Udah ada CheckAttackTentara untuk penvalidasian jumlah tentara */ 
   TentaraAttack(&B, 4, 30);
-  TentaraInvaded(&B, 3, false, false, 0, 30);
+  TentaraInvaded(&B, false, false, 0, 3, 30);
   if (CanCapture(B, 3)) {
     if (Search(L1, 3)) {
       printf("Bangunan ke-3 yang dimiliki oleh Pemain ke-1 telah dikuasai oleh Pemain ke-2.\n\n");
