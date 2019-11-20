@@ -108,7 +108,7 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
   }
 }
 
-void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int Shield, IdxType i, int N) {
+void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType i, int N) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -128,12 +128,10 @@ void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int 
       Tentara(ElmtBan(*B, i)) -= N;
 
     } else /* !Attack_Up */ {
-      if (Shield == 2) { // * Skill Shield digunakan 2 kali
-        /* Tidak ada penurunan jumlah tentara */
-      } else if (Shield == 1) { // * Skill Shield digunaka 1 kali
+      if (Shield) { 
         InvadedShield(B, i, N);
 
-      } else /* Shield == 0 */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack
+      } else /* !Shield */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack
         if (Name(ElmtBan(*B, i)) == 'T') {
           InvadedShield(B, i, N);
         } else if (Name(ElmtBan(*B, i)) == 'F') {
