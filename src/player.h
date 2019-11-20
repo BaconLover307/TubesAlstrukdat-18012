@@ -75,8 +75,6 @@ void CheckActive(Player *P);
 // * Mengurangi durasi shield, sekaligus mengupdate ActiveSH
 void ReduceDurationSH(Player *P);
 
-// * Menyalakan Status Effect Shield
-void ActivateSH(Player *P);
 
 // $ ***** Basic Operators *****
 
@@ -106,25 +104,23 @@ void InstantUpgrade(Player *P, Bangunan *B);
 // * Pemain mendapat skill ini jika Fort pemain direbut lawan
 void ExtraTurn(Player *P);
 
-/* PENDING DULU :(
-
-//* I.S.
-//* F.S. Seluruh bangunan yang dimiliki pemain akan memiliki pertahanan selama 2 turn */
-//* Pemain mendapat skill ini jika lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
-/*
+// * I.S. Terdapat SH di Head Skill(*P)
+// * F.S. Seluruh bangunan yang dimiliki pemain akan memiliki pertahanan selama 2 turn
+// * Pemain mendapat skill ini jika lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2
+// * Menyalakan Status Effect Shield
 void Shield(Player *P);
 
-//* I.S.......
+//* I.S. Terdapat AU di Head Skill(*P)
 //* F.S. Pada giliran ini, pertahanan bangunan musuh tidak akan mempengaruhi penyerangan */
 //* Pemain mendapat skill ini jika pemain baru saja menyerang tower lawan dan jumlah towernya menjadi 3 */
-/*
+// * Menyalakan Status Effect AU
 void AttackUp(Player *P);
-*/
 
-// * I.S.......
+// * I.S. Terdapat CH di Head Skill(*P)
 // * F.S. Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang melakukan 
 // *      serangan tepat selanjutnya hanya berkurang 1/2 dari jumlah seharusnya
 // * Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn
+// * Menyalakan Status Effect CH
 void CriticalHit();
 
 // * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan

@@ -19,18 +19,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "includes.c"
+#include "string.h"
 /*
 #include "configure.h"
 */
-#include "string.h"
 
 // $ ***** Variables *****
 char menu[100];
-boolean Exit;
-// = false;
-boolean ExitMenu;
-// = false;
-boolean EndTurn;
+boolean Exit; // = false;
+boolean ExitMenu; // = false;
+boolean EndTurn; // = false;
 
 // $ ******* MAIN PROGRAM ********
 int main() {

@@ -55,6 +55,7 @@ int main() {
   InsVPrio(&L2, 2); InsVPrio(&L2, 4);
   printf("Pemain ke-1\n");
   printf("Memiliki %d bangunan.\n", NbElmtList(L1));
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L1, B);
   printf("\n");
 
@@ -74,20 +75,24 @@ int main() {
   }
 
   printf("Pemain ke-1\n");
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L1, B);
   printf("\n");
 
   printf("Pemain ke-2\n");
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L2, B);
   printf("\n");
 
   TambahAllTentara(L2, &B);
   printf("Setelah pemain ke-2 mengalami penaikan jumlah tentara.\n");
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L2, B);
   printf("\n");
 
   printf("Pemain ke-1 mau melakukan Level Up pada bangunan ke-1.\n");
   LevelUp(&B, 1);
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L1, B);
 
   return 0;

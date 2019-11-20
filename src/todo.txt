@@ -3,8 +3,6 @@ Main Program
 
 Aktivasi SKill:
 - Taro Shield di Attack
-- Attack Up
-- Critical Hit
 
 Detect: 
 - Shield

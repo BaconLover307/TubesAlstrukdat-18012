@@ -90,11 +90,6 @@ void ReduceDurationSH(Player *P) {
     CheckActive(P);
 }
 
-void ActivateSH(Player *P) {
-    Duration(SH(FX(*P))) = 2;
-    ActiveSH(SH(FX(*P))) = true;
-}
-
 // $ ***** Basic Operators *****
 
 // $ *** Color Handling ***
@@ -139,30 +134,30 @@ void InstantUpgrade(Player *P, Bangunan *B) {
     
     A = First(ListBan(*P));
     while (Next(A) != Nil) {
-        if (Level(ElmtBan(*B, Info(A))) < 4){
+        if (Level(ElmtBan(*B, Info(A))) < 4) {
             Level(ElmtBan(*B, Info(A)))++;
         }
         A = Next(A);
     }
-
     if (Level(ElmtBan(*B, Info(A))) <= 4){
             Level(ElmtBan(*B, Info(A)))++;
         }
 }
 
+void Shield(Player *P) {
+    Duration(SH(FX(*P))) = 2;
+    ActiveSH(SH(FX(*P))) = true;
+
 void ExtraTurn(Player *P) {
     ET(FX(*P)) = true;
 }
 
-/*
-void AttackUp(Player *P){
-    /* I.S.......
-    /* F.S. Pada giliran ini, pertahanan bangunan musuh tidak akan mempengaruhi penyerangan */
-    /* Pemain mendapat skill ini jika pemain baru saja menyerang tower lawan dan jumlah towernya menjadi 3 */
-//}
+void AttackUp(Player *P) {
+    AU(FX(*P)) = true;
+}
 
-/* */
-void CriticalHit() {
+void CriticalHit(Player *P) {
+    CH(FX(*P)) = true;
 }
 
 void InstantReinforcement(Player *P, Bangunan *B) {
