@@ -22,26 +22,41 @@ int main() {
   /* ALGORITMA */
   MakeEmptyGraph(&G);
 
-  N = 5;
+  N = 7;
   AddParent(&G, N);
 
-  X = 1; Y = 3;
+  X = 1; Y = 2;
   AddRelation(&G, X, Y);
-  X = 3; Y = 1;
+  X = 2; Y = 1;
   AddRelation(&G, X, Y);
-  X = 2; Y = 5;
-  AddRelation(&G, X, Y);
-  X = 5; Y = 2;
-  AddRelation(&G, X, Y);
-  X = 1; Y = 5;
-  AddRelation(&G, X, Y);
-  X = 5; Y = 1;
+  X = 2; Y = 3;
   AddRelation(&G, X, Y);
   X = 2; Y = 4;
   AddRelation(&G, X, Y);
+  X = 3; Y = 2;
+  AddRelation(&G, X, Y);
+  X = 3; Y = 4;
+  AddRelation(&G, X, Y);
   X = 4; Y = 2;
   AddRelation(&G, X, Y);
-
+  X = 4; Y = 3;
+  AddRelation(&G, X, Y);
+  X = 4; Y = 5;
+  AddRelation(&G, X, Y);
+  X = 4; Y = 6;
+  AddRelation(&G, X, Y);
+  X = 5; Y = 4;
+  AddRelation(&G, X, Y);
+  X = 5; Y = 6;
+  AddRelation(&G, X, Y);
+  X = 6; Y = 4;
+  AddRelation(&G, X, Y);
+  X = 6; Y = 5;
+  AddRelation(&G, X, Y);
+  X = 6; Y = 7;
+  AddRelation(&G, X, Y);
+  X = 7; Y = 6;
+  AddRelation(&G, X, Y);
   TulisGraph(G);
 
   CreateEmptyList(&L1); CreateEmptyList(&L2);
