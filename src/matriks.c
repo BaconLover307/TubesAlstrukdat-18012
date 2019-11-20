@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -16,7 +16,7 @@
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS (int NB, int NK, MATRIKS * M) {
 // ! NB dan NK didapat dari Configure */
-/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK dengan 
+/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK dengan
    elemen yang tidak terdefinisi */
 /* I.S. NB dan NK adalah valid untuk memori matriks yang dibuat */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas MaxBrs + 1 dan MaxKol + 1 */
@@ -29,7 +29,7 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M) {
 
   for (i = 0; i <= NB; i++) {
     (*M).Mem[i] = (int *) malloc ((NK + 1) * sizeof(int *));
-  } 
+  }
 
   MaxBrs(*M) = NB;
   MaxKol(*M) = NK;
@@ -73,7 +73,7 @@ void BacaMATRIKS (MATRIKS * M, Bangunan B) {
 }
 
 void TulisMATRIKS (MATRIKS M) {
-// ? Untuk debugging doang kayaknya 
+// ? Untuk debugging doang kayaknya
 /* I.S. M terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
    dipisahkan sebuah spasi */

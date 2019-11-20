@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -46,7 +46,7 @@ int main() {
   X = 2; Y = 3; MakePOINT(&Posisi(ElmtBan(B, 5)), X, Y);
   Level(ElmtBan(B, 5)) = 1;
   Tentara(ElmtBan(B, 5)) = 40;
-  
+
   Neff(B) = 5;
 
   BacaMATRIKS(&M, B);

@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -115,12 +115,12 @@ void BacaGraph (Graph * G);
 /* F.S. Graph G berisi hubungan-hubungan antar bangunan */
 
 void TulisGraph (Graph G) {
-// ? Untuk debugging doang kayaknya 
+// ? Untuk debugging doang kayaknya
 /* I.S. G terdefinisi */
-/* F.S. Hubungan antar bangunan ditampilkan ke layar. 
+/* F.S. Hubungan antar bangunan ditampilkan ke layar.
         Jika tidak ada hubungan maka muncul '0' di layar.
         Jika ada hubungan maka muncul '1' di layar.       */
-/* Contoh: menulis matriks 3x3 
+/* Contoh: menulis matriks 3x3
 0 1 1
 1 0 0
 1 0 0
@@ -140,7 +140,7 @@ void TulisGraph (Graph G) {
 
     while (j < NbElmtGraph(G)) {
       C = SearchChild(P, j);
-      
+
       if (C != Nil) {
         printf("1 ");
       } else /* C == Nil */ {
@@ -218,8 +218,8 @@ void AddRelation (Graph * G, urutan X, urutan Y) {
 
   /* ALGORITMA */
   P = SearchP(*G, X);
-  Q = AlokasiGraph2(Y); 
-  
+  Q = AlokasiGraph2(Y);
+
   if (Q != Nil) {
     if (IsEmptyParent(P)) {
       FirstChild(P) = Q;
@@ -271,7 +271,7 @@ addrGraph2 SearchChild (addrGraph P, urutan X) {
 
 /******************* RELATION **********************/
 boolean CheckRelation (Graph G, urutan X, urutan Y) {
-/* Mengecek apakah bangunan ke-X memiliki hubungan dengan bangunan ke-Y 
+/* Mengecek apakah bangunan ke-X memiliki hubungan dengan bangunan ke-Y
    atau tidak */
 /* Jika iya maka True dan sebaliknya */
 
@@ -327,12 +327,12 @@ boolean CheckAttack (Graph G, List L, urutan X) {
 
 void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
 /* I.S. Graph G terdefinisi
-        List L terdefinisi 
+        List L terdefinisi
         Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang bisa diserang maka akan muncul pilihan-
         pilihan bangunan yang dapat diserang
-        Jika tidak ada maka muncul "Tidak ada bangunan yang dapat 
+        Jika tidak ada maka muncul "Tidak ada bangunan yang dapat
         diserang" di layar */
 
   /* KAMUS LOKAL */
@@ -382,7 +382,7 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
 
   while (C != Nil) {
     printf("%d. ", i);
-    
+
     if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
       printf("Castle ");
     } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
@@ -403,7 +403,7 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
 
   P = Alokasi(X);
   InsertPrio(&L, P);
-}        
+}
 
 /************ MOVE TENTARA ******************/
 boolean CheckMove (Graph G, List L, urutan X) {
@@ -440,13 +440,13 @@ boolean CheckMove (Graph G, List L, urutan X) {
 
 void PrintMove (Graph G, List L, Bangunan B, urutan X) {
 /* I.S. Graph G terdefinisi
-        List L terdefinisi 
-        Bangunan B terdefinisi 
+        List L terdefinisi
+        Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang memiliki hungan dengan bangunan ke-X
         yang dimiliki oleh pemain itu maka muncul pilihan-pilihan bangunan
         yang dapat ditambahkan jumlah tentaranya.
-        Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di 
+        Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di
         layar */
 
   /* KAMUS LOKAL */
@@ -491,4 +491,4 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X) {
       }
     }
   }
-}        
+}
