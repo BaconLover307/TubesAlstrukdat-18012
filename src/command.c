@@ -8,18 +8,22 @@ void ATTACK(Stack *gamestate)
 {
     printf("Daftar bangunan:\n");
     // Menampilkan Daftar Bangunan
-    int giliran = TurnInfo(Curr(*gamestate)); 
+    // PrintInfo(Li, B) - dari driver_list.c
+    int giliran = TurnInfo(Curr(*gamestate));
     printf("Bangunan yang digunakan untuk menyerang : ");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
+    // validasi input
     // while () {
     //
     // }
     printf("Daftar bangunan yang dapat diserang\n");
     // Menampilkan daftar bangunan yang dapat diserang
+    // PrintInfo(lj, B) - dari driver_list.c
     printf("Bangunan yang diserang : ");
     int nomorBangunanDiserang;
     scanf("%d", &nomorBangunanDiserang);
+    // validasi input
     // while () {
     //
     // }
@@ -27,6 +31,19 @@ void ATTACK(Stack *gamestate)
     printf("Jumlah pasukan: ");
     scanf("%d", &jumlahPasukan);
 
+    /*
+    -- A hint from driver_list.c
+    TentaraAttack(&B, 4, 30);
+    TentaraInvaded(&B, false, false, 0, 3, 30);
+    if (CanCapture(B, 3)) {
+      if (Search(L1, 3)) {
+        printf("Bangunan ke-3 yang dimiliki oleh Pemain ke-1 telah dikuasai oleh Pemain ke-2.\n\n");
+        DelP(&L1, 3);
+      }
+      InsVPrio(&L2, 3);
+      TentaraAbsolute(&B, 3);
+    }
+    */
     // cek apakah berhasil diambil atau tidak
     if (1) {
         printf("Bangunan menjadi milikmu!\n");
@@ -93,7 +110,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             ExtraTurn(CurrP);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
-            
+
         } else if (strcmpi(usedskill,"CH") == 0) {
 
         } else if (strcmpi(usedskill,"IR") == 0) {
@@ -101,7 +118,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
             printf("Soldiers in all your enemy's buildings have been decreased 10\n");
-            //Barrage(CurrP, databuild);  
+            //Barrage(CurrP, databuild);
         }
         ClearStack(gamestate);
 
