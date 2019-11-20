@@ -19,18 +19,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "includes.c"
+#include "string.h"
 /*
 #include "configure.h"
 */
-#include "string.h"
 
 // $ ***** Variables *****
 char menu[100];
-boolean Exit;
-// = false;
-boolean ExitMenu;
-// = false;
-boolean EndTurn;
+boolean Exit; // = false;
+boolean ExitMenu; // = false;
+boolean EndTurn; // = false;
 
 // $ ******* MAIN PROGRAM ********
 int main() {
@@ -90,13 +88,13 @@ do {
             char command[100];
             Stack GameState;
             Player PlayerOne, PlayerTwo;
-			Bangunan DataBangunan;
+			Bangunan *DataBangunan;
             TabColor Pallete;
+            int config; // todo MASUKIN CONFIGURASI
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
-            QAdd(&Skill(PlayerOne),"ET");
-            // ! TEST ExtraTurn
+            MakeEmptyBangunan(DataBangunan,config);
             int Turn = 1;
 
             // todo Load Game
@@ -138,7 +136,24 @@ do {
             //PrintInfoHead(Skill(TestP));
             do {
                 do {
+                    // $$ Inisiasi Turn
+                    // $ Kamus Turn
                     EndTurn = false;
+                    Player *CurrP;
+                    Player *EnemyP;
+                    Queue *Qcurr;
+                    Queue *Qenemy;
+                    if (TurnInfo(Curr(GameState)) == 1) {
+                        CurrP = &P1Info(Curr(GameState));
+                        EnemyP = &P2Info(Curr(GameState));
+                    } else {
+                        CurrP = &P2Info(Curr(GameState));
+                        EnemyP = &P1Info(Curr(GameState));
+                    }
+                    Qcurr = &Skill(*CurrP);
+                    Qenemy = &Skill(*EnemyP);
+
+                    // $ Display Status
                     PrintCurr(GameState);
                     Command();
                     int idxCommand = 0;
@@ -151,28 +166,34 @@ do {
 
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
+                        Push(&GameState,Curr(GameState));
                         ATTACK(&GameState);
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
+                        Push(&GameState,Curr(GameState));
                     	LEVEL_UP(&GameState,&DataBangunan);
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
+                        Push(&GameState,Curr(GameState));
                     	SKILL(&GameState,&DataBangunan);
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
+                        Push(&GameState,Curr(GameState));
 						MOVE(&GameState);
+
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
-                        //fflush(stdout);
 						UNDO(&GameState);
 
                     }   // $ ######### END_TURN ########
                     else if (strcmpi(command, "END_TURN") == 0) {
 						EndTurn = true;
+                        // ! Detector Skill Instant Reinforcement
+                        CheckGetIR(CurrP,DataBangunan);
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {

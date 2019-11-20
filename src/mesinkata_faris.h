@@ -21,56 +21,56 @@ typedef struct {
 extern boolean EndKata;
 extern Kata CKata;
 
-void IgnoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK1 atau CC ≠ BLANK2 */
+void IgnoreBlank();
 
-void STARTKATA();
 /* I.S. : CC sembarang
    F.S. : EndKata = true, dan CC = MARK;
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
+void STARTKATA();
 
-void ADVKATA();
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
           CC adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika CC = MARK, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
+void ADVKATA();
 
-void SalinKata();
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
    F.S. : CKata berisi kata yang sudah diakuisisi;
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+void SalinKata();
 
-void PrintKata (Kata K);
 /* I.S. Kata K terdefinisi */
 /* F.S. K tercetak di layar tanpa karakter tambahan di awal maupun di akhir */
+void PrintKata (Kata K);
 
-int KataToInt (Kata K);
 /* Kata K berisi integer dalam bentuk kata, mengkonversinya ke int */
+int KataToInt (Kata K);
 
-char KataToChar (Kata K);
 /* K.Length = 1 , mengeluarkan konversi K ke char */
+char KataToChar (Kata K);
 
-void CopyKata(Kata K1,Kata *K2);
 /* I.S. K1 terdefinsi, K2 sembarang */
 /* F.S. K2 merupakan copyan dari K1, berisi sama dengan K1 */
+void CopyKata(Kata K1,Kata *K2);
 
-info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3);
 /* Membaca kata yang telah diberikan menjadi bagian info_bangunan dalam array. */
+info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3);
 
-Bangunan KataToBangunan(int MaxEl);
 /* Membaca kata yang telah diberikan menjadi array bangunan. */
+Bangunan KataToBangunan(int MaxEl);
 
-MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B);
 /* Membaca kata yang telah diberikan menjadi matriks. */
+MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B);
 
-Graph KataToGraph(int MaxEl);
 /* Membaca file yang telah diberikan menjadi graph. */
+Graph KataToGraph(int MaxEl);
 
 #endif

@@ -14,9 +14,6 @@
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
 void MakeEmptyBangunan (Bangunan * B, int maxel) {
-/* I.S. B sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1 */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -26,9 +23,6 @@ void MakeEmptyBangunan (Bangunan * B, int maxel) {
 }
 
 void DealokasiBangunan(Bangunan *B) {
-/* I.S. B terdefinisi; */
-/* F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0 */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -40,8 +34,6 @@ void DealokasiBangunan(Bangunan *B) {
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
 int NbElmtBan (Bangunan B) {
-/* Mengirimkan banyaknya elemen efektif tabel */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -50,9 +42,6 @@ int NbElmtBan (Bangunan B) {
 
 /* *** Selektor INDEKS *** */
 IdxType GetFirstBan (Bangunan B) {
-/* Prekondisi : Tabel B tidak kosong */
-/* Mengirimkan indeks elemen B pertama */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -60,9 +49,6 @@ IdxType GetFirstBan (Bangunan B) {
 }
 
 IdxType GetLastBan (Bangunan B) {
-/* Prekondisi : Tabel B tidak kosong */
-/* Mengirimkan indeks elemen B terakhir */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -72,8 +58,6 @@ IdxType GetLastBan (Bangunan B) {
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
 boolean IsEmptyBan (Bangunan B) {
-/* Mengirimkan true jika tabel B kosong, mengirimkan false jika tidak */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -83,8 +67,6 @@ boolean IsEmptyBan (Bangunan B) {
 /* *** Test tabel penuh *** */
 boolean IsFullBan (Bangunan B) {
 // ? Entah perlu fungsi ini gak ya?
-/* Mengirimkan true jika tabel B penuh, mengirimkan false jika tidak */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -94,19 +76,12 @@ boolean IsFullBan (Bangunan B) {
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
 /* *** Mendefinisikan isi tabel dari pembacaan *** */
 void BacaBangunan (Bangunan * B) {
-/* I.S. B sembarang */
-/* F.S. Tabel B terdefinisi */
-/* Prekondisi : Banyaknya elemen B itu valid */
-/* Proses : membaca banyaknya elemen B dan mengisi semua nilainya dengan Mesin Kata */
 // Todo Menunggu yang kerjain Configure
 
 }
 
-/*********************** Tentara Attack ****************************/
+//$ ******************** Tentara Attack ****************************/
 boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
-/* Mengecek apakah bangunan ke-X memiliki jumlah tentara yang >= N */
-/* Jika iya maka True dan sebaliknya */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -114,11 +89,6 @@ boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
 }
 
 void TentaraAttack (Bangunan * B, IdxType X, int N) {
-/* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List
-        Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
-/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -126,14 +96,8 @@ void TentaraAttack (Bangunan * B, IdxType X, int N) {
 
 }
 
-/*********************** Tentara Invaded **************************/
+//$ ******************** Tentara Invaded **************************/
 void InvadedShield (Bangunan * B, IdxType i, int N) {
-/* I.S. Bangunan B terdefinisi
-        i pasti ada di dalam indeks bangunan B
-        Skill Shield itu aktif sekali          */
-/* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus)
-        dengan perhitungan adanya pertahanan */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -144,12 +108,7 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
   }
 }
 
-void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int Shield, IdxType i, int N) {
-/* I.S. Bangunan B terdefinisi
-        i pasti ada di dalam indeks bangunan B
-        Mengetahui skill-skill tertentu aktif atau tidak*/
-/* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus) */
-
+void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType i, int N) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -169,12 +128,10 @@ void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int 
       Tentara(ElmtBan(*B, i)) -= N;
 
     } else /* !Attack_Up */ {
-      if (Shield == 2) { // * Skill Shield digunakan 2 kali
-        /* Tidak ada penurunan jumlah tentara */
-      } else if (Shield == 1) { // * Skill Shield digunaka 1 kali
+      if (Shield) { 
         InvadedShield(B, i, N);
 
-      } else /* Shield == 0 */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack
+      } else /* !Shield */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack
         if (Name(ElmtBan(*B, i)) == 'T') {
           InvadedShield(B, i, N);
         } else if (Name(ElmtBan(*B, i)) == 'F') {
@@ -194,9 +151,6 @@ void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, int 
 }
 
 boolean CanCapture (Bangunan B, IdxType i) {
-/* Mengecek apakah Bangunan ke-i memiliki jumlah tentara yang <= 0 */
-/* Jika iya maka true dan sebaliknya */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -204,24 +158,15 @@ boolean CanCapture (Bangunan B, IdxType i) {
 }
 
 void TentaraAbsolute (Bangunan * B, IdxType X) {
-/* I.S. Bangunan B terdefinisi
-        X pasti ada di dalam List */
-/* F.S. Bangunan ke-X yang memiliki jumlah tentara <= 0 dimutlakkan
-        nilai jumlahnya */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
   Tentara(ElmtBan(*B, X)) = abs(Tentara(ElmtBan(*B, X)));
 }
 
-/*************************** Level-Up Bangunan ********************************/
+//$ ************************ Level-Up Bangunan ********************************/
 boolean CheckLevelUp (Bangunan B, IdxType X) {
-/* Mengecek apakah bangunan tertentu sudah melewati jumlah yang seharusnya
-   atau belum */
-/* Jika iya maka True dan sebaliknya */
 // ! Jika udah level 4 maka tidak bisa Level Up lagi
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -285,12 +230,6 @@ boolean CheckLevelUp (Bangunan B, IdxType X) {
 }
 
 void LevelUp (Bangunan * B, IdxType X) {
-/* I.S. Bangunan B terdefinisi
-        Bangunan ke-X sudah pasti bisa Level-Up */
-/* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar 1/2 dari
-        jumlah sebelumnya.
-        Bangunan ke-X menglami penaikan 1 level. */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */

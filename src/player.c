@@ -9,6 +9,11 @@
 
 /*
 ? typedef struct {
+*    int duration;       Durasi (turn) efektif Shield, max 2 turn lawan
+*    boolean activeSH;   True jika durasi > 0
+? } Shield;
+
+? typedef struct {
 *    boolean attackUp;
 *    boolean criticalHit;
 *    boolean shield;
@@ -34,7 +39,12 @@
 * #define CH(F) (F).criticalHit
 * #define SH(F) (F).shield
 * #define ET(F) (F).extraTurn
+
+? Jika SH adalah shield, maka akses elemen :
+* #define ActiveSH(SH) (SH).activeSH
+* #define Duration(SH) (SH).duration
 */
+
 
 // $ ********* Prototype *********
 
@@ -52,16 +62,41 @@ void CreatePlayer(Player *P) {
     // * Handling Status Effect
     AU(FX(*P)) = false;
     CH(FX(*P)) = false;
-    SH(FX(*P)) = false;
+    Duration(SH(FX(*P))) = 0;
+    ActiveSH(SH(FX(*P))) = false;
     ET(FX(*P)) = false;
     // * Handling List Bangunan
     CreateEmptyList(&ListBan(*P));
+    // * Handling Warna Default, Normal
+    LoadPlayerWarna(P,'X');
+}
+
+// $ *** Fungsi Untuk FX Shield ***
+boolean IsSHWornOut(Player P) {
+    return Duration(SH(FX(P))) == 0;
+}
+
+boolean IsSHMax(Player P) {
+    return Duration(SH(FX(P))) == 2;
+}
+void CheckActive(Player *P) {
+    ActiveSH(SH(FX(*P))) = (Duration(SH(FX(*P))) > 0);
+}
+
+void ReduceDurationSH(Player *P) {
+    if (!IsSHWornout(*P)) {
+        Duration(SH(FX(*P))) -= 1;
+    }
+    CheckActive(P);
 }
 
 // $ ***** Basic Operators *****
 
-
 // $ *** Color Handling ***
+void LoadPlayerWarna(Player *P, Warna C) {
+    Color(*P) = C;
+}
+
 void SetPlayerWarna(Player *P, TabColor * Palet) {
     // $ Kamus Lokal
     boolean Found = false;
@@ -89,12 +124,8 @@ void SetPlayerWarna(Player *P, TabColor * Palet) {
 }
 
 // $ ***** Skills *****
-void UseSkill(Player P) {
-        
 
-}
-
-
+// $ *** Use Skill ***
 
 void InstantUpgrade(Player *P, Bangunan *B) {
     // $ Kamus Lokal
@@ -103,45 +134,32 @@ void InstantUpgrade(Player *P, Bangunan *B) {
     
     A = First(ListBan(*P));
     while (Next(A) != Nil) {
-        if (Level(ElmtBan(*B, Info(A))) < 4){
+        if (Level(ElmtBan(*B, Info(A))) < 4) {
             Level(ElmtBan(*B, Info(A)))++;
         }
         A = Next(A);
     }
-
     if (Level(ElmtBan(*B, Info(A))) <= 4){
             Level(ElmtBan(*B, Info(A)))++;
         }
 }
-/*
-*/
-/*
-void Shield(Player *P) {
-    /* I.S.
-    /* F.S. Seluruh bangunan yang dimiliki pemain akan memiliki pertahanan selama 2 turn */
-    /* Pemain mendapat skill ini jika sebuah lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
-//}
 
+void Shield(Player *P) {
+    Duration(SH(FX(*P))) = 2;
+    ActiveSH(SH(FX(*P))) = true;
 
 void ExtraTurn(Player *P) {
     ET(FX(*P)) = true;
 }
 
-/*
-void AttackUp(Player *P){
-    /* I.S.......
-    /* F.S. Pada giliran ini, pertahanan bangunan musuh tidak akan mempengaruhi penyerangan */
-    /* Pemain mendapat skill ini jika pemain baru saja menyerang tower lawan dan jumlah towernya menjadi 3 */
-//}
+void AttackUp(Player *P) {
+    AU(FX(*P)) = true;
+}
 
-/*
-void CriticalHit(){
-    /* I.S.......
-    /* F.S. Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang melakukan 
-       serangan tepat selanjutnya hanya berkurang 1/2 dari jumlah seharusnya*/
-    /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
+void CriticalHit(Player *P) {
+    CH(FX(*P)) = true;
+}
 
-//}
 void InstantReinforcement(Player *P, Bangunan *B) {
     // $ Kamus Lokal    
     address A;
@@ -151,7 +169,6 @@ void InstantReinforcement(Player *P, Bangunan *B) {
         Tentara(ElmtBan(*B, Info(A))) += 5;
         A = Next(A);
     }
-
     Tentara(ElmtBan(*B, Info(A))) += 5;
 }
 
@@ -181,25 +198,35 @@ void Barrage(Player *P, Bangunan *B) {
 
 }
 
-void checkGetIR(Player *P, Bangunan *B){
-    
+// $ *** Detect Skill ***
+
+void CheckGetIR(Player *P, Bangunan *B) {
+    // Kamus Lokal
     boolean get;
     address A;
-
+    // Algoritma
     get = true;
     A = First(ListBan(*P));
     while (Next(A) != Nil && get) {
         if (Level(ElmtBan(*B, Info(A))) != 4){
             get = false;
         }
-
         A = Next(A);
     }
     if (Level(ElmtBan(*B, Info(A))) != 4){
-            get = false;
-        }
+        get = false;
+    }
 
     if (get == true){
         QAdd(&Skill(*P), "IR");
     }
+}
+
+void CheckGetSH(Player P, Queue *Q) {
+    if (NbElmtList(ListBan(P)) == 2) 
+    QAdd(Q, "SH");
+}
+
+void GetCH(Queue *Q) {
+    QAdd(Q, "CH");
 }

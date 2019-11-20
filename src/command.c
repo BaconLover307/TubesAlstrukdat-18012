@@ -4,9 +4,24 @@
 #include "string.h"
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Stack *gamestate)
-{
-    printf("Daftar bangunan:\n");
+void ATTACK(Stack *gamestate) {
+    // $ Kamus Lokal
+    Player *CurrP;
+    Player *EnemyP;
+    List *Lcurr;
+    Queue *Lenemy;
+    if (TurnInfo(Curr(*gamestate)) == 1)
+    {
+        CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
+    }
+    else
+    {
+        CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
+    }
+    // $ Algoritma
+    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
     // Menampilkan Daftar Bangunan
     // PrintInfo(Li, B) - dari driver_list.c
     int giliran = TurnInfo(Curr(*gamestate));
@@ -55,59 +70,81 @@ void ATTACK(Stack *gamestate)
 // Prosedur untuk Melakukan LEVEL UP
 void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
-    Player CurrP = GetCurrPlayer(*gamestate);
+    Player *CurrP;
+    Player *EnemyP;
+    List *Lcurr;
+    Queue *Lenemy;
+    if (TurnInfo(Curr(*gamestate)) == 1) {
+        CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
+    } else {
+        CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
+    }
+    Lcurr = &ListBan(*CurrP);
+    Lenemy = &ListBan(*EnemyP);
+
     // $ Algoritma
-    printf("Daftar bangunan\n");
-    // Menampilkan daftar Bangunan
+    // * Menampilkan daftar Bangunan
+    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
+    PrintInfo(*Lcurr, *databuild);
+    prinf("\n");
+    // * User Input
     printf("Bangunan yang akan di level up : ");
+    prinf("\n");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
-    // lakukan pengecekan keberhasilan level up
-    if (1) {
-        printf("Level %s-mu meningkat menjadi %d\n");
+    // * Melakukan pengecekan keberhasilan level up
+    if (CheckLevelUp(*databuild,nomorBangunan)) {
+        LevelUp(databuild,nomorBangunan);
+        printf("Level %s-mu meningkat menjadi %d\n",  Name(ElmtBan(*databuild,nomorBangunan)), Level(ElmtBan(*databuild,nomorBangunan)));
     } else {
-        printf("Jumlah pasukan %s kurang untuk level up\n");
+        printf("Jumlah pasukan %s kurang untuk Level Up!\n", Name(ElmtBan(*databuild,nomorBangunan)));
     }
 }
 
-//void abcabc(Stack* gamestate) {
- //   printf("abcabc masuk\n");
-   // fflush(stdout);
-    //SKILL(*gamestate);
-//}
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
     Qinfotype usedskill;
-    Queue *Qtemp;
     Player *CurrP;
+    Player *EnemyP;
+    Queue *Qcurr;
+    Queue *Qenemy;
 
     if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
     } else {
         CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
     }
-    Qtemp = &Skill(*CurrP);
+    Qcurr = &Skill(*CurrP);
+    Qenemy = &Skill(*EnemyP);
     //Btemp = &ListBan(*CurrP);
 
     // $ Algoritma
-    if (IsQEmpty(*Qtemp)) {
+    if (IsQEmpty(*Qcurr)) {
         printf("You don't have any skills!\n");
     } else {
         // * Use Skill
         printf("You have used the skill : ");
-        PrintInfoHead(*Qtemp); printf("\n");
-        QDel(Qtemp, &usedskill);
+        PrintInfoHead(*Qcurr); printf("\n");
+        QDel(Qcurr, &usedskill);
         // * Switch
         if (strcmpi(usedskill,"IU") == 0) {
             printf("All your buildings have been Leveled Up!!\n");
-            //InstantUpgrade(CurrP,databuild);
+            InstantUpgrade(CurrP,databuild);
 
         } else if (strcmpi(usedskill,"SH") == 0) {
+            Shield(CurrP);
+            printf("All your buildings have been Shielded for 2 turns!!\n");
 
         } else if (strcmpi(usedskill,"ET") == 0) {
             printf("You have gained an Extra Turn!!\n");
             ExtraTurn(CurrP);
+            // ! Detector Skill Critical Hit
+            GetCH(Qenemy);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
 
@@ -118,7 +155,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
             printf("Soldiers in all your enemy's buildings have been decreased 10\n");
-            //Barrage(CurrP, databuild);
+            //Barrage(EnemyP, databuild);
         }
         ClearStack(gamestate);
 

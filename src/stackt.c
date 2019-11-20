@@ -78,7 +78,7 @@ void PrintCurr(Stack S) {
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
     if (AU(FX(CurrP))) printf(" [AU] "); else printf(" [  ] ");
     if (CH(FX(CurrP))) printf(" [CH] "); else printf(" [  ] ");
-    if (SH(FX(CurrP))) printf(" [SH] "); else printf(" [  ] ");
+    if (ActiveSH(SH(FX(CurrP)))) printf(" [SH] "); else printf(" [  ] ");
     if (ET(FX(CurrP))) printf(" [ET] "); else printf(" [  ] ");
     printf("    || SKILL ");
     PrintQueue(Skill(CurrP));
@@ -86,6 +86,4 @@ void PrintCurr(Stack S) {
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
     printf("\n");
     printf("\n");
-
-
 }
