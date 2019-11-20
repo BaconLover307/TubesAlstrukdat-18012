@@ -43,7 +43,12 @@ do {
         ExitMenu = false;
         Menu();
         printf("Enter Menu : ");
-        scanf(" %s",&menu);
+        // Lakukan Input dengan 'mesinkata'
+        int idxMenu = 0;
+        do {
+            scanf("%c", menu + idxMenu);
+        } while (menu[idxMenu++] != '\n');
+        menu[--idxMenu] = '\0';
         //printf("Your choice is %s\n",menu);
         //getchar();
 
@@ -136,7 +141,11 @@ do {
                     EndTurn = false;
                     PrintCurr(GameState);
                     Command();
-                    scanf(" %s",&command);
+                    int idxCommand = 0;
+                    do {
+                        scanf("%c", command + idxCommand);
+                    } while (command[idxCommand++] != '\n');
+                    command[--idxCommand] = '\0';
 					printf("\n");
 
 
