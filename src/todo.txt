@@ -1,12 +1,16 @@
 Main Program
-- Nerima Warna
 - command
 
 Aktivasi SKill:
-- Semua kecuali Instant Upgrade
+- Taro Shield di Attack
+- Attack Up
+- Critical Hit
 
 Detect: 
-- Semua kecuali Instant Upgrade
+- Shield
+- Extra Turn
+- Attack Up
+- Barrage
 
 Attack :
 - masukan user untuk milih nyerang yang mana

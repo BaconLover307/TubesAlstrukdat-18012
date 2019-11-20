@@ -11,9 +11,14 @@
 #include "listlinier.h"
 
 typedef struct {
+    int duration;       // Durasi (turn) efektif Shield
+    boolean activeSH;   // True jika durasi > 0
+} Shield;
+
+typedef struct {
     boolean attackUp;
     boolean criticalHit;
-    boolean shield;
+    Shield  shield;
     boolean extraTurn;
 } StatusEffect;
 
@@ -37,6 +42,10 @@ typedef struct {
 #define SH(F) (F).shield
 #define ET(F) (F).extraTurn
 
+// $ Jika SH adalah shield, maka akses elemen :
+#define ActiveSH(SH) (SH).activeSH
+#define Duration(SH) (SH).duration
+
 
 // $ ********* Prototype *********
 
@@ -52,15 +61,39 @@ boolean IsLose(Player P);
 // *      konfigurasi dan warna listbangunan sesuai yang dipilih
 void CreatePlayer(Player *P);
 
+// $ *** Fungsi Untuk FX Shield ***
+
+// * Mengecek bila durasi shield = 0, jika iya maka True
+boolean IsSHWornOut(Player P);
+
+// * Mengecek bila durasi shield = 2, jika iya maka True
+boolean IsSHMax(Player P);
+
+// * Mengecek durasi shield, jika >0 maka ActiveSH menjadi True
+void CheckActive(Player *P);
+
+// * Mengurangi durasi shield, sekaligus mengupdate ActiveSH
+void ReduceDurationSH(Player *P);
+
+// * Menyalakan Status Effect Shield
+void ActivateSH(Player *P);
+
 // $ ***** Basic Operators *****
 
 // $ *** Color Handling ***
 
 // * I.S. Player terdefinisi
 // * F.S. Warna listbangunan player akan menjadi C
+void LoadPlayerWarna(Player *P, Warna C);
+
+
+// * I.S. Player terdefinisi, TabColor terdefinisi dan tidak kosong
+// * F.S. Warna bangunan player saat didisplay akan sesuai dengan yang dipilih pengguna
 void SetPlayerWarna(Player *P, TabColor * Palet);
 
-// $ *** Skills ****
+// $ ***** Skills ******
+
+// $ *** Use Skill ***
 
 // * I.S. Player P terdefinisi dan Bangunan B terdefinisi, game sedang berjalan
 // * F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
@@ -74,22 +107,30 @@ void InstantUpgrade(Player *P, Bangunan *B);
 void ExtraTurn(Player *P);
 
 /* PENDING DULU :(
+
+//* I.S.
+//* F.S. Seluruh bangunan yang dimiliki pemain akan memiliki pertahanan selama 2 turn */
+//* Pemain mendapat skill ini jika lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
+/*
 void Shield(Player *P);
 
-
+//* I.S.......
+//* F.S. Pada giliran ini, pertahanan bangunan musuh tidak akan mempengaruhi penyerangan */
+//* Pemain mendapat skill ini jika pemain baru saja menyerang tower lawan dan jumlah towernya menjadi 3 */
+/*
 void AttackUp(Player *P);
-
-void CriticalHit();
-
 */
 
+// * I.S.......
+// * F.S. Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang melakukan 
+// *      serangan tepat selanjutnya hanya berkurang 1/2 dari jumlah seharusnya
+// * Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn
+void CriticalHit();
 
 // * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan
 // * F.S. Seluruh listbangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.
 // * Pemain mendapat skill ini di akhir gilirannya bila semua listbangunan yang ia miliki memiliki level 4
 void InstantReinforcement(Player *P, Bangunan *B);
-
-void checkGetIR(Player *P, Bangunan *B);
 
 // * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan
 // * F.S. Jumlah pasukan pada seluruh listbangunan musuh akan berkurang sebanyak 10. 
@@ -98,6 +139,10 @@ void checkGetIR(Player *P, Bangunan *B);
 // * Pemain mendapat skill ini jika lawan baru saja bertambah listbangunannya menjadi 10
 void Barrage(Player *P, Bangunan *B);
 
+// $ *** Detect Skill ***
 
+void CheckGetIR(Player *P, Bangunan *B);
+
+void GetCH(Queue *Q);
 
 #endif
