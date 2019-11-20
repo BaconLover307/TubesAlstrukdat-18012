@@ -133,17 +133,3 @@ void PrintQueue(Queue Q) {
         }
     }
 }
-
-void ReplaceQueue(Queue Q, Queue *Qnew) {
-    // $ Kamus Lokal
-    Queue Qtemp = Q;
-    Qinfotype temp, buang;
-    // $ Algoritma
-    while (!IsQEmpty(*Qnew)) {
-        QDel(Qnew,&buang);
-    }
-    while (!IsQEmpty(Qtemp)) {
-        QDel(&Qtemp,&temp);
-        QAdd(Qnew,temp);
-    }
-}

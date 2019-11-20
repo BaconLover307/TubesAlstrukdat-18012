@@ -181,14 +181,6 @@ void DelP (List * L, urutan X) {
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L, Bangunan B) {
-/* I.S. List tidak kosong */
-/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan
-        elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
-/* Contoh :
-    1. Castle (1,15) 20 lv. 3
-    2. Tower (1,13) 50 lv. 1
-    3. Castle (3,14) 30 lv. 2                                        */
-
   /* KAMUS LOKAL */
   address P;
   int i;
@@ -198,16 +190,16 @@ void PrintInfo (List L, Bangunan B) {
   i = 1; //inisialisasi
 
   while (P != Nil) {
-    printf("%d. ", i);
+    printf(" || - [%d.] ", i);
 
     if (Name(ElmtBan(B, Info(P))) == 'C') {
-      printf("Castle ");
+      printf("Castle  ");
     } else if (Name(ElmtBan(B, Info(P))) == 'V') {
       printf("Village ");
     } else if (Name(ElmtBan(B, Info(P))) == 'T') {
-      printf("Tower ");
+      printf("Tower   ");
     } else /* (Name(ElmtBan(B, Info(P))) == 'F') */ {
-      printf("Fort ");
+      printf("Fort    ");
     }
 
     TulisPOINT(Posisi(ElmtBan(B, Info(P))));

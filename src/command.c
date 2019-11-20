@@ -4,9 +4,24 @@
 #include "string.h"
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Stack *gamestate)
-{
-    printf("Daftar bangunan:\n");
+void ATTACK(Stack *gamestate) {
+    // $ Kamus Lokal
+    Player *CurrP;
+    Player *EnemyP;
+    List *Lcurr;
+    Queue *Lenemy;
+    if (TurnInfo(Curr(*gamestate)) == 1)
+    {
+        CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
+    }
+    else
+    {
+        CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
+    }
+    // $ Algoritma
+    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
     // Menampilkan Daftar Bangunan
     // PrintInfo(Li, B) - dari driver_list.c
     int giliran = TurnInfo(Curr(*gamestate));
@@ -56,24 +71,35 @@ void ATTACK(Stack *gamestate)
 void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
     Player *CurrP;
+    Player *EnemyP;
+    List *Lcurr;
+    Queue *Lenemy;
     if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
     } else {
         CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
     }
-    
+    Lcurr = &ListBan(*CurrP);
+    Lenemy = &ListBan(*EnemyP);
+
     // $ Algoritma
-    printf("Daftar bangunan\n");
-    // Menampilkan daftar Bangunan
+    // * Menampilkan daftar Bangunan
+    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
+    PrintInfo(*Lcurr, *databuild);
+    prinf("\n");
+    // * User Input
     printf("Bangunan yang akan di level up : ");
+    prinf("\n");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
-    // lakukan pengecekan keberhasilan level up
+    // * Melakukan pengecekan keberhasilan level up
     if (CheckLevelUp(*databuild,nomorBangunan)) {
-        printf("Level %s-mu meningkat menjadi %d\n",  Name(ElmtBan(*databuild,nomorBangunan)));
         LevelUp(databuild,nomorBangunan);
+        printf("Level %s-mu meningkat menjadi %d\n",  Name(ElmtBan(*databuild,nomorBangunan)), Level(ElmtBan(*databuild,nomorBangunan)));
     } else {
-        printf("Jumlah pasukan %s kurang untuk level up\n", Name(ElmtBan(*databuild,nomorBangunan)));
+        printf("Jumlah pasukan %s kurang untuk Level Up!\n", Name(ElmtBan(*databuild,nomorBangunan)));
     }
 }
 
@@ -108,10 +134,10 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         // * Switch
         if (strcmpi(usedskill,"IU") == 0) {
             printf("All your buildings have been Leveled Up!!\n");
-            //InstantUpgrade(CurrP,databuild);
+            InstantUpgrade(CurrP,databuild);
 
         } else if (strcmpi(usedskill,"SH") == 0) {
-            ActivateSH(CurrP);
+            Shield(CurrP);
             printf("All your buildings have been Shielded for 2 turns!!\n");
 
         } else if (strcmpi(usedskill,"ET") == 0) {

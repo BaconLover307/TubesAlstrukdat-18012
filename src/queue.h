@@ -78,9 +78,5 @@ void PrintInfoHead (Queue Q);
 // * seluruh elemen Queue ke layar
 void PrintQueue(Queue Q);
 
-void ReplaceQueue(Queue Q, Queue *Qnew);
-// * I.S. Q mungkin kosong, Qnew terdefinisi
-// * F.S. Jika Q kosong, tidak terjadi apa-apa, jika Q tidak kosong memindahkan
-// * seluruh elemen Q ke Qnew
 
 #endif
