@@ -122,7 +122,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
             printf("Soldiers in all your enemy's buildings have been decreased 10\n");
-            //Barrage(CurrP, databuild);
+            //Barrage(EnemyP, databuild);
         }
         ClearStack(gamestate);
 
