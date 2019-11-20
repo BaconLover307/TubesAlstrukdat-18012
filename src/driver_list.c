@@ -68,9 +68,9 @@ int main() {
     if (Search(L1, 3)) {
       printf("Bangunan ke-3 yang dimiliki oleh Pemain ke-1 telah dikuasai oleh Pemain ke-2.\n\n");
       DelP(&L1, 3);
+      InsVPrio(&L2, 3);
+      TentaraAbsolute(&B, 3);
     }
-    InsVPrio(&L2, 3);
-    TentaraAbsolute(&B, 3);
   }
 
   printf("Pemain ke-1\n");
