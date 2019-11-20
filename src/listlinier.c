@@ -26,9 +26,6 @@ boolean IsEmptyList (List L) {
 /****************** PEMBUATAN LIST KOSONG ******************/
 void CreateEmptyList (List * L) {
 // ! Ingat taruh di awal program (untuk 2 player)
-/* I.S. sembarang             */
-/* F.S. Terbentuk list kosong */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -37,11 +34,6 @@ void CreateEmptyList (List * L) {
 
 /****************** Manajemen Memori ******************/
 address Alokasi (urutan X) {
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   address P;
 

@@ -67,6 +67,8 @@ void CreatePlayer(Player *P) {
     ET(FX(*P)) = false;
     // * Handling List Bangunan
     CreateEmptyList(&ListBan(*P));
+    // * Handling Warna Default, Normal
+    LoadPlayerWarna(P,'X');
 }
 
 // $ *** Fungsi Untuk FX Shield ***
@@ -96,6 +98,10 @@ void ActivateSH(Player *P) {
 // $ ***** Basic Operators *****
 
 // $ *** Color Handling ***
+void LoadPlayerWarna(Player *P, Warna C) {
+    Color(*P) = C;
+}
+
 void SetPlayerWarna(Player *P, TabColor * Palet) {
     // $ Kamus Lokal
     boolean Found = false;
@@ -143,15 +149,6 @@ void InstantUpgrade(Player *P, Bangunan *B) {
             Level(ElmtBan(*B, Info(A)))++;
         }
 }
-/*
-*/
-/*
-void Shield(Player *P) {
-    /* I.S.
-    /* F.S. Seluruh bangunan yang dimiliki pemain akan memiliki pertahanan selama 2 turn */
-    /* Pemain mendapat skill ini jika sebuah lawan menyerang, bangunan pemain berkurang 1, menjadi sisa 2 */
-//}
-
 
 void ExtraTurn(Player *P) {
     ET(FX(*P)) = true;

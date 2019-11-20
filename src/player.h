@@ -84,6 +84,11 @@ void ActivateSH(Player *P);
 
 // * I.S. Player terdefinisi
 // * F.S. Warna listbangunan player akan menjadi C
+void LoadPlayerWarna(Player *P, Warna C);
+
+
+// * I.S. Player terdefinisi, TabColor terdefinisi dan tidak kosong
+// * F.S. Warna bangunan player saat didisplay akan sesuai dengan yang dipilih pengguna
 void SetPlayerWarna(Player *P, TabColor * Palet);
 
 // $ ***** Skills ******

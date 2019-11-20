@@ -159,23 +159,27 @@ do {
 
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
+                        Push(&GameState,Curr(GameState));
                         ATTACK(&GameState);
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
+                        Push(&GameState,Curr(GameState));
                     	LEVEL_UP(&GameState,&DataBangunan);
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
+                        Push(&GameState,Curr(GameState));
                     	SKILL(&GameState,&DataBangunan);
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
+                        Push(&GameState,Curr(GameState));
 						MOVE(&GameState);
+
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
-                        //fflush(stdout);
 						UNDO(&GameState);
 
                     }   // $ ######### END_TURN ########

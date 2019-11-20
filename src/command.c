@@ -55,7 +55,13 @@ void ATTACK(Stack *gamestate)
 // Prosedur untuk Melakukan LEVEL UP
 void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
-    Player CurrP = GetCurrPlayer(*gamestate);
+    Player *CurrP;
+    if (TurnInfo(Curr(*gamestate)) == 1) {
+        CurrP = &P1Info(Curr(*gamestate));
+    } else {
+        CurrP = &P2Info(Curr(*gamestate));
+    }
+    
     // $ Algoritma
     printf("Daftar bangunan\n");
     // Menampilkan daftar Bangunan
@@ -63,10 +69,11 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
     // lakukan pengecekan keberhasilan level up
-    if (1) {
-        printf("Level %s-mu meningkat menjadi %d\n");
+    if (CheckLevelUp(*databuild,nomorBangunan)) {
+        printf("Level %s-mu meningkat menjadi %d\n",  Name(ElmtBan(*databuild,nomorBangunan)));
+        LevelUp(databuild,nomorBangunan);
     } else {
-        printf("Jumlah pasukan %s kurang untuk level up\n");
+        printf("Jumlah pasukan %s kurang untuk level up\n", Name(ElmtBan(*databuild,nomorBangunan)));
     }
 }
 
