@@ -158,12 +158,12 @@ Graph KataToGraph(int MaxEl)
 {
   Graph G;
   int i, j;
-  MakeEmptyGraph(&G, MaxEl);
-  NeffG(G) = (MaxEl);
+  MakeEmptyGraph(&G);
+  AddParent(&G,MaxEl);
   for (i = 1; i <= MaxEl; i++) {
     for (j = 1; j <= MaxEl; j++) {
       if (KataToInt(CKata) == 1) {
-        TambahRelation (&G, i, j);
+        AddRelation(&G, i, j);
       }
         ADVKATA();
     }
