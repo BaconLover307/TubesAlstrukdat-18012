@@ -93,7 +93,7 @@ void QAdd (Queue * Q, Qinfotype X){
     }
 
     else { // * Q full
-        printf("Anda telah memiliki 10 skill. Tidak bisa menambah skill lagi.\n");
+        printf("Your Skill queue is Full!\n");
     }
 }
 

@@ -70,34 +70,34 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     }
 }
 
-//void abcabc(Stack* gamestate) {
- //   printf("abcabc masuk\n");
-   // fflush(stdout);
-    //SKILL(*gamestate);
-//}
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
     Qinfotype usedskill;
-    Queue *Qtemp;
     Player *CurrP;
+    Player *EnemyP;
+    Queue *Qcurr;
+    Queue *Qenemy;
 
     if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
     } else {
         CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
     }
-    Qtemp = &Skill(*CurrP);
+    Qcurr = &Skill(*CurrP);
+    Qenemy = &Skill(*EnemyP);
     //Btemp = &ListBan(*CurrP);
 
     // $ Algoritma
-    if (IsQEmpty(*Qtemp)) {
+    if (IsQEmpty(*Qcurr)) {
         printf("You don't have any skills!\n");
     } else {
         // * Use Skill
         printf("You have used the skill : ");
-        PrintInfoHead(*Qtemp); printf("\n");
-        QDel(Qtemp, &usedskill);
+        PrintInfoHead(*Qcurr); printf("\n");
+        QDel(Qcurr, &usedskill);
         // * Switch
         if (strcmpi(usedskill,"IU") == 0) {
             printf("All your buildings have been Leveled Up!!\n");
@@ -108,6 +108,8 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         } else if (strcmpi(usedskill,"ET") == 0) {
             printf("You have gained an Extra Turn!!\n");
             ExtraTurn(CurrP);
+            // ! Detector Skill Critical Hit
+            GetCH(Qenemy);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
 

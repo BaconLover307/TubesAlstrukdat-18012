@@ -85,13 +85,13 @@ do {
             char command[100];
             Stack GameState;
             Player PlayerOne, PlayerTwo;
-			Bangunan DataBangunan;
+			Bangunan *DataBangunan;
             TabColor Pallete;
+            int config; // todo MASUKIN CONFIGURASI
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
-            QAdd(&Skill(PlayerOne),"ET");
-            // ! TEST ExtraTurn
+            MakeEmptyBangunan(DataBangunan,config);
             int Turn = 1;
 
             // todo Load Game
@@ -133,7 +133,24 @@ do {
             //PrintInfoHead(Skill(TestP));
             do {
                 do {
+                    // $$ Inisiasi Turn
+                    // $ Kamus Turn
                     EndTurn = false;
+                    Player *CurrP;
+                    Player *EnemyP;
+                    Queue *Qcurr;
+                    Queue *Qenemy;
+                    if (TurnInfo(Curr(GameState)) == 1) {
+                        CurrP = &P1Info(Curr(GameState));
+                        EnemyP = &P2Info(Curr(GameState));
+                    } else {
+                        CurrP = &P2Info(Curr(GameState));
+                        EnemyP = &P1Info(Curr(GameState));
+                    }
+                    Qcurr = &Skill(*CurrP);
+                    Qenemy = &Skill(*EnemyP);
+
+                    // $ Display Status
                     PrintCurr(GameState);
                     Command();
                     scanf(" %s",&command);
@@ -164,6 +181,8 @@ do {
                     }   // $ ######### END_TURN ########
                     else if (strcmpi(command, "END_TURN") == 0) {
 						EndTurn = true;
+                        // ! Detector Skill Instant Reinforcement
+                        CheckGetIR(CurrP,DataBangunan);
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {

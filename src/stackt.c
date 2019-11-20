@@ -86,6 +86,4 @@ void PrintCurr(Stack S) {
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
     printf("\n");
     printf("\n");
-
-
 }

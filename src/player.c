@@ -89,12 +89,8 @@ void SetPlayerWarna(Player *P, TabColor * Palet) {
 }
 
 // $ ***** Skills *****
-void UseSkill(Player P) {
-        
 
-}
-
-
+// $ *** Use Skill ***
 
 void InstantUpgrade(Player *P, Bangunan *B) {
     // $ Kamus Lokal
@@ -134,14 +130,10 @@ void AttackUp(Player *P){
     /* Pemain mendapat skill ini jika pemain baru saja menyerang tower lawan dan jumlah towernya menjadi 3 */
 //}
 
-/*
-void CriticalHit(){
-    /* I.S.......
-    /* F.S. Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang melakukan 
-       serangan tepat selanjutnya hanya berkurang 1/2 dari jumlah seharusnya*/
-    /* Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn */
+/* */
+void CriticalHit() {
+}
 
-//}
 void InstantReinforcement(Player *P, Bangunan *B) {
     // $ Kamus Lokal    
     address A;
@@ -151,7 +143,6 @@ void InstantReinforcement(Player *P, Bangunan *B) {
         Tentara(ElmtBan(*B, Info(A))) += 5;
         A = Next(A);
     }
-
     Tentara(ElmtBan(*B, Info(A))) += 5;
 }
 
@@ -181,25 +172,30 @@ void Barrage(Player *P, Bangunan *B) {
 
 }
 
-void checkGetIR(Player *P, Bangunan *B){
-    
+// $ *** Detect Skill ***
+
+void CheckGetIR(Player *P, Bangunan *B) {
+    // Kamus Lokal
     boolean get;
     address A;
-
+    // Algoritma
     get = true;
     A = First(ListBan(*P));
     while (Next(A) != Nil && get) {
         if (Level(ElmtBan(*B, Info(A))) != 4){
             get = false;
         }
-
         A = Next(A);
     }
     if (Level(ElmtBan(*B, Info(A))) != 4){
-            get = false;
-        }
+        get = false;
+    }
 
     if (get == true){
         QAdd(&Skill(*P), "IR");
     }
+}
+
+void GetCH(Queue *Q) {
+    QAdd(Q, "CH");
 }

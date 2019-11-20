@@ -8,21 +8,13 @@ boolean EndKata;
 Kata CKata;
 
 void IgnoreBlank()
-/* Mengabaikan satu atau beberapa BLANK
-   I.S. : CC sembarang
-   F.S. : CC ≠ BLANK1 atau CC ≠ BLANK2 */
 {
-  while ((CC == BLANK1)||(CC == BLANK2))
-  {
+  while ((CC == BLANK1)||(CC == BLANK2)) {
     ADV();
   }
 }
 
 void STARTKATA()
-/* I.S. : CC sembarang
-   F.S. : EndKata = true, dan CC = MARK;
-          atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
-          CC karakter pertama sesudah karakter terakhir kata */
 {
   START();
   IgnoreBlank();
@@ -30,24 +22,14 @@ void STARTKATA()
 }
 
 void ADVKATA()
-/* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
-   F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
-          CC adalah karakter pertama dari kata berikutnya, mungkin MARK
-          Jika CC = MARK, EndKata = true.
-   Proses : Akuisisi kata menggunakan procedure SalinKata */
 {
   IgnoreBlank();
   SalinKata();
   IgnoreBlank();
 }
 
-void SalinKata(){
-/* Mengakuisisi kata, menyimpan dalam CKata
-   I.S. : CC adalah karakter pertama dari kata
-   F.S. : CKata berisi kata yang sudah diakuisisi;
-          CC = BLANK atau CC = MARK;
-          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
-          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+void SalinKata()
+{
     int i = 1;
     while ((CC != BLANK1) && (CC != BLANK2) && (i <= NMax)) {
         CKata.TabKata[i] = CC;
@@ -58,8 +40,6 @@ void SalinKata(){
 }
 
 void PrintKata (Kata K)
-/* I.S. Kata K terdefinisi */
-/* F.S. K tercetak di layar tanpa karakter tambahan di awal maupun di akhir */
 {
   int i = 1;
   while (i<K.Length)
@@ -70,7 +50,6 @@ void PrintKata (Kata K)
 }
 
 int KataToInt (Kata K)
-/* Kata K berisi integer dalam bentuk kata, mengkonversinya ke int */
 {
   int val = 0;
   int i = 0;
@@ -95,14 +74,11 @@ int KataToInt (Kata K)
 }
 
 char KataToChar (Kata K)
-/* K.Length = 1 , mengeluarkan konversi K ke char */
 {
     return (K.TabKata[1]);
 }
 
 void CopyKata(Kata K1,Kata *K2)
-/* I.S. K1 terdefinsi, K2 sembarang */
-/* F.S. K2 merupakan copyan dari K1, berisi sama dengan K1 */
 {
     (*K2).Length = K1.Length;
     int i,len = K1.Length;
@@ -113,7 +89,6 @@ void CopyKata(Kata K1,Kata *K2)
 }
 
 info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
-/* Membaca kata yang telah diberikan menjadi bagian info_bangunan dalam array. */
 {
   info_bangunan info;
   Name(info) = KataToChar(K1);
@@ -124,7 +99,6 @@ info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
 }
 
 Bangunan KataToBangunan(int MaxEl)
-/* Membaca kata yang telah diberikan menjadi array bangunan. */
 {
   Bangunan B;
   int i;
@@ -144,7 +118,6 @@ Bangunan KataToBangunan(int MaxEl)
 }
 
 MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
-/* Membaca kata yang telah diberikan menjadi matriks. */
 {
   MATRIKS M;
   int i;
@@ -154,7 +127,6 @@ MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
 }
 
 Graph KataToGraph(int MaxEl)
-/* Membaca file yang telah diberikan menjadi graph. */
 {
   Graph G;
   int i, j;

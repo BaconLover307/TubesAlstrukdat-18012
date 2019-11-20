@@ -60,7 +60,9 @@ void CreatePlayer(Player *P);
 // * F.S. Warna listbangunan player akan menjadi C
 void SetPlayerWarna(Player *P, TabColor * Palet);
 
-// $ *** Skills ****
+// $ ***** Skills ******
+
+// $ *** Use Skill ***
 
 // * I.S. Player P terdefinisi dan Bangunan B terdefinisi, game sedang berjalan
 // * F.S. Seluruh bangunan yang dimiliki pemain P akan naik 1 level secara instan tanpa perlu ada jumlah tentara M/2
@@ -78,18 +80,18 @@ void Shield(Player *P);
 
 
 void AttackUp(Player *P);
-
-void CriticalHit();
-
 */
 
+// * I.S.......
+// * F.S. Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang melakukan 
+// *      serangan tepat selanjutnya hanya berkurang 1/2 dari jumlah seharusnya
+// * Pemain mendapat skill ini jika lawan baru saja mengaktifkan extra turn
+void CriticalHit();
 
 // * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan
 // * F.S. Seluruh listbangunan mendapat tambahan 5 pasukan jika jumlah tentara setelah ditambah tidak melebihi batas maksimum.
 // * Pemain mendapat skill ini di akhir gilirannya bila semua listbangunan yang ia miliki memiliki level 4
 void InstantReinforcement(Player *P, Bangunan *B);
-
-void checkGetIR(Player *P, Bangunan *B);
 
 // * I.S. Player P dan Bangunan B terdefinisi, game sedang berjalan
 // * F.S. Jumlah pasukan pada seluruh listbangunan musuh akan berkurang sebanyak 10. 
@@ -98,6 +100,10 @@ void checkGetIR(Player *P, Bangunan *B);
 // * Pemain mendapat skill ini jika lawan baru saja bertambah listbangunannya menjadi 10
 void Barrage(Player *P, Bangunan *B);
 
+// $ *** Detect Skill ***
 
+void CheckGetIR(Player *P, Bangunan *B);
+
+void GetCH(Queue *Q);
 
 #endif
