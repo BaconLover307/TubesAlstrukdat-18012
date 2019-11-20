@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */

@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -35,7 +35,7 @@ int NBQElmt (Queue Q) {
     } else if (Tail(Q) < Head(Q)) {
         return (Tail(Q) - Head(Q) + MaxQEl(Q) + 1);
     } else {return (Tail(Q) - Head(Q) + 1);}
-    
+
 }
 
 
@@ -81,8 +81,8 @@ void QAdd (Queue * Q, Qinfotype X){
         Head(*Q) = 1;
         Tail(*Q) = 1;
         strcpy(InfoTail(*Q), X);
-    } 
-    
+    }
+
     else if (!(IsQFull(*Q))) { // * Q tidakkosong
         if (Tail(*Q) == MaxQEl(*Q)) { // * Geser elemen smp Head(Q)=1
             Tail(*Q) = 1;
@@ -91,7 +91,7 @@ void QAdd (Queue * Q, Qinfotype X){
         }
         strcpy(InfoTail(*Q), X);
     }
-    
+
     else { // * Q full
         printf("Anda telah memiliki 10 skill. Tidak bisa menambah skill lagi.\n");
     }
@@ -101,14 +101,14 @@ void QAdd (Queue * Q, Qinfotype X){
 void QDel (Queue * Q, Qinfotype * X) {
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
+/* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
     Q mungkin kosong */
     strcpy(*X,InfoHead(*Q));
     if (!(IsQEmpty(*Q))){
         if (Head(*Q) == Tail(*Q)) { // * Set menjadi queue kosong
             Head(*Q) = QNil;
             Tail(*Q) = QNil;
-        } 
+        }
         else {
             Head(*Q)++;
         }
