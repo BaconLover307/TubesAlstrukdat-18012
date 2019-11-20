@@ -47,6 +47,8 @@ int main() {
   Level(ElmtBan(B, 5)) = 1;
   Tentara(ElmtBan(B, 5)) = 33;
 
+  Neff(B) = 5; /* ini seharusnya gak perlu lagi kalau udah ada Configure */
+
   printf("Jumlah bangunan = %d\n", NbElmtBan(B));
 
   if (CheckAttackTentara(B, 1, 30)) {
@@ -228,7 +230,7 @@ int main() {
   printf("\n");
   printf("Penyerangan ke-7\n");
   printf("Skill critical hit aktif.\n");
-  TentaraAttack(&B, 1, 15);
+  TentaraAttack(&B, 1, 14);
   printf("Jumlah tentara pada bangunan ke-1 sekarang adalah %d.\n\n", Tentara(ElmtBan(B, 1)));
 
   TentaraInvaded(&B, true, false, 0, 5, 14);
