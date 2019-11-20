@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -66,7 +66,7 @@ address Search (List L, urutan X);
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVPrio (List * L, urutan X);
-// ! Tambah bangunan selalu pakai prosedur ini    
+// ! Tambah bangunan selalu pakai prosedur ini
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
@@ -92,9 +92,9 @@ void DelP (List * L, urutan X);
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L, Bangunan B);
 /* I.S. List tidak kosong */
-/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan 
+/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan
         elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
-/* Contoh : 
+/* Contoh :
     1. Castle (1,15) 20 lv. 3
     2. Tower (1,13) 50 lv. 1
     3. Castle (3,14) 30 lv. 2                                        */
@@ -104,7 +104,7 @@ int NbElmtList (List L);
 /*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
 boolean CheckTambahTentara (Bangunan B, urutan X);
 /* X pasti ada di dalam List */
-/* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah 
+/* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah
    melewati maksimum penambahan pasukan atau belum */
 /* Jika belum maka true dan sebaliknya */
 
@@ -118,7 +118,7 @@ void TambahTentara (Bangunan * B, urutan X);
 void TambahAllTentara (List L, Bangunan * B);
 /* I.S. List L terdefinisi
         Bangunan B terdefinisi */
-/* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya 
-        bertambah */       
-         
+/* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya
+        bertambah */
+
 #endif

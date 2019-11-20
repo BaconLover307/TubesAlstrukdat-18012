@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -33,6 +33,22 @@ typedef struct {
   addrGraph FirstG;
 } Graph;
 
+
+/* Indeks yang digunakan [IdxMin..MaxG] */
+// * IdxMin sudah didefinisi pada ADT Array
+/* Jika G adalah Graph, cara deklarasi dan akses: */
+/* Deklarasi : G : Graph */
+/* Maka cara akses:
+   G.GI     untuk mengakses seluruh List pada Graph G
+   G.GI[i]  untuk mengakses List ke-i
+   G.NeffG  untuk mengetahui banyaknya elemen
+   G.MaxG   untuk mengetahui batas jumlah elemen Graph */
+
+/* Definisi :
+  Graph kosong : G.NeffG = 0
+  Definisi elemen pertama : G.GI[i] dengan i=1
+  Definisi elemen terakhir yang terdefinisi: G.GI[i] dengan i=G.NeffG */
+
 /* Definisi Graph :
   Graph utama (G) kosong : FirstG(G) = Nil
   Graph anak (G2) kosong : FirstChild(G2) = Nil
@@ -40,6 +56,7 @@ typedef struct {
 /* Setiap elemen dengan addrGraph2 P2 dapat diacu InfoG2(P2), NextChild(P2) */
 /* Elemen terakhir graph utama : jika addressnya Last, maka Next(Last)=Nil */
 /* Elemen terakhir graph anak  : jika addressnya Last2, maka Next(Last2)=Nil */
+
 
 /* ********** SELEKTOR ********** */
 #define InfoG(P)      (P)->infoG
@@ -81,8 +98,15 @@ void DealokasiGraph2 (addrGraph2 * P);
 /* ********** TEST GRAPH KOSONG ********** */
 boolean IsEmptyGraph (Graph G);
 /* Mengirimkan true jika Graph G kosong, mengirimkan false jika tidak */
-boolean IsEmptyParent (addrGraph P); 
+
+/* *** Test tabel penuh *** */
+boolean IsFullGraph (Graph G);
+// ? Entah perlu fungsi ini gak ya?
+/* Mengirimkan true jika Graph G penuh, mengirimkan false jika tidak */
+
+boolean IsEmptyParent (addrGraph P);
 /* Mengirimkan true jika addrGraph P kosong, mengirimkan false jika tidak */
+
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void BacaGraph (Graph * G);
@@ -92,12 +116,12 @@ void BacaGraph (Graph * G);
 /* F.S. Graph G berisi hubungan-hubungan antar bangunan */
 
 void TulisGraph (Graph G);
-// ? Untuk debugging doang kayaknya 
+// ? Untuk debugging doang kayaknya
 /* I.S. G terdefinisi */
-/* F.S. Hubungan antar bangunan ditampilkan ke layar. 
+/* F.S. Hubungan antar bangunan ditampilkan ke layar.
         Jika tidak ada hubungan maka muncul '0' di layar.
         Jika ada hubungan maka muncul '1' di layar.       */
-/* Contoh: menulis matriks 3x3 
+/* Contoh: menulis matriks 3x3
 0 1 1
 1 0 0
 1 0 0
@@ -129,7 +153,7 @@ addrGraph2 SearchChild (addrGraph P, urutan X);
 
 /******************* RELATION **********************/
 boolean CheckRelation (Graph G, urutan X, urutan Y);
-/* Mengecek apakah bangunan ke-X memiliki hubungan dengan bangunan ke-Y 
+/* Mengecek apakah bangunan ke-X memiliki hubungan dengan bangunan ke-Y
    atau tidak */
 /* Jika iya maka True dan sebaliknya */
 
@@ -141,12 +165,12 @@ boolean CheckAttack (Graph G, List L, urutan X);
 
 void PrintAttack (Graph G, List L, Bangunan B, urutan X);
 /* I.S. Graph G terdefinisi
-        List L terdefinisi 
+        List L terdefinisi
         Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang bisa diserang maka akan muncul pilihan-
         pilihan bangunan yang dapat diserang
-        Jika tidak ada maka muncul "Tidak ada bangunan yang dapat 
+        Jika tidak ada maka muncul "Tidak ada bangunan yang dapat
         diserang" di layar */
 
 /************ MOVE TENTARA ******************/
@@ -157,13 +181,13 @@ boolean CheckMove (Graph G, List L, urutan X);
 
 void PrintMove (Graph G, List L, Bangunan B, urutan X);
 /* I.S. Graph G terdefinisi
-        List L terdefinisi 
-        Bangunan B terdefinisi 
+        List L terdefinisi
+        Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang memiliki hungan dengan bangunan ke-X
         yang dimiliki oleh pemain itu maka muncul pilihan-pilihan bangunan
         yang dapat ditambahkan jumlah tentaranya.
-        Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di 
+        Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di
         layar */
 
-#endif  
+#endif

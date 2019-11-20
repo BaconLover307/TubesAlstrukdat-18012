@@ -1,5 +1,5 @@
 /* NAMA / NIM :                           */
-/* 1. Muhammad Hasan           / 13518015 */
+/* 1. Muhammad Hasan           / 13518012 */
 /* 2. Anna Elvira Hartoyo      / 13518045 */
 /* 3. Daniel Riyanto           / 13518075 */
 /* 4. Faris Muhammad Kautsar   / 13518105 */
@@ -58,15 +58,16 @@ typedef struct {
 #define Level(e)      (e).level
 #define Tentara(e)    (e).tentara
 
-/* ********** KONSTRUKTOR ********** */
-/* Konstruktor : create tabel kosong  */
-void MakeEmptyBangunan (Bangunan * B, int maxel);
-/* I.S. B sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1 */
+// $ ********** KONSTRUKTOR **********
 
+// $ Konstruktor : create tabel kosong
+// * I.S. B sembarang, maxel > 0
+// * F.S. Terbentuk tabel B kosong dengan kapasitas maxel + 1
+void MakeEmptyBangunan (Bangunan * B, int maxel);
+
+// * I.S. B terdefinisi;
+// * F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0
 void DealokasiBangunan(Bangunan *B);
-/* I.S. B terdefinisi; */
-/* F.S. BI(B) dikembalikan ke system, MaxEl(B)=0; Neff(B)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */

@@ -70,10 +70,10 @@ void PrintInfoHead (Queue Q);
 /* I.S. Q mungkin kosong */
 /* F.S. Jika Q kosong, menuliskan none ke layar, jika Q tidak kosong menuliskan elemen head ke layar */
 
-void PrintQueue(Queue Q);
 // * I.S. Q mungkin kosong
-// * F.S. Jika Q kosong, menuliskan [ none ] ke layar, jika Q tidak kosong menuliskan
+// * F.S. Jika Q kosong, menuliskan [--] ke layar, jika Q tidak kosong menuliskan
 // * seluruh elemen Queue ke layar
+void PrintQueue(Queue Q);
 
 void ReplaceQueue(Queue Q, Queue *Qnew);
 // * I.S. Q mungkin kosong, Qnew terdefinisi
