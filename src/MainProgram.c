@@ -145,7 +145,7 @@ do {
                     LoadFile(GameState);
                 } else if (load == 'N') {
                     //LoadData();
-                    // ! MakeEmptyBangunan(&DataBangunan, 100);
+                    MakeEmptyBangunan(&DataBangunan, 100);
                     printf("Choose building color for Player 1! \n");
                     SetPlayerWarna(&PlayerOne,&Pallete);
                     printf("Choose building color for Player 2! \n");
@@ -240,7 +240,7 @@ do {
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
-						MOVE(&GameState,&DataBangunan);
+						MOVE(&GameState,DataBangunan, RelasiBan);
 
 
                     }   // $ ######### UNDO ########

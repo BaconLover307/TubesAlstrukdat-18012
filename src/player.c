@@ -46,19 +46,19 @@
 */
 
 
-// $ ********* Prototype *********
+// $ ******************* Prototype *******************
 
-// $ *** Condition Check ***
+// $ ************* Condition Check *************
 
 boolean IsLose(Player P) {
     return IsEmptyList(ListBan(P));
 }
 
-// $ ***** Creator *****
+// $ *************** Creator ***************
 void CreatePlayer(Player *P) {
     // * Handling Queue Skill
     CreateQueue(&Skill(*P),10);
-    QAdd(&Skill(*P),"IU");
+    CheckGetIU(&Skill(*P));
     // * Handling Status Effect
     AU(FX(*P)) = false;
     CH(FX(*P)) = false;
@@ -71,7 +71,7 @@ void CreatePlayer(Player *P) {
     LoadPlayerWarna(P,'X');
 }
 
-// $ *** Fungsi Untuk FX Shield ***
+// $ ************* Fungsi Untuk FX Shield *************
 boolean IsSHWornOut(Player P) {
     return Duration(SH(FX(P))) == 0;
 }
@@ -90,9 +90,9 @@ void ReduceDurationSH(Player *P) {
     CheckActive(P);
 }
 
-// $ ***** Basic Operators *****
+// $ *************** Basic Operators ***************
 
-// $ *** Color Handling ***
+// $ ************* Color Handling *************
 void LoadPlayerWarna(Player *P, Warna C) {
     Color(*P) = C;
 }
@@ -123,9 +123,9 @@ void SetPlayerWarna(Player *P, TabColor * Palet) {
     ColElmt(*Palet,i-1) = '_';
 }
 
-// $ ***** Skills *****
+// $ *************** Skills ***************
 
-// $ *** Use Skill ***
+// $ ************* Use Skill *************
 
 void InstantUpgrade(Player *P, Bangunan *B) {
     // $ Kamus Lokal
@@ -201,7 +201,44 @@ void Barrage(Player *P, Player *E, Bangunan *B) {
 
 }
 
-// $ *** Detect Skill ***
+// $ ************* Detect Skill *************
+
+void CheckGetIU(Queue *Q) {
+    QAdd(Q, "IU");
+}
+
+void CheckGetSH(Player P, Queue *Q) {
+    if (NbElmtList(ListBan(P)) == 2) 
+    QAdd(Q, "SH");
+}
+
+void CheckGetET(Queue *Q) {
+    QAdd(Q, "ET");
+}
+
+void CheckGetAU(Player P, Queue *Q, Bangunan databuild) {
+    // $ KAMUS LOKAL
+    address Adr;
+    int totalT;
+    List L = ListBan(P);
+
+    // $ ALGORITMA
+    if (!IsEmptyList(L)) {
+        Adr = First(L);
+        totalT = 0;
+        while (Adr != Nil) {
+            if (Name(ElmtBan(databuild,Info(Adr))) == "T")
+            totalT++;
+            Adr = Next(Adr);
+        }
+    }
+    if (totalT == 3) QAdd(Q, "AU");
+}
+
+
+void CheckGetCH(Queue *Q) {
+    QAdd(Q, "CH");
+}
 
 void CheckGetIR(Player *P, Bangunan *B) {
     // Kamus Lokal
@@ -225,11 +262,7 @@ void CheckGetIR(Player *P, Bangunan *B) {
     }
 }
 
-void CheckGetSH(Player P, Queue *Q) {
-    if (NbElmtList(ListBan(P)) == 2) 
-    QAdd(Q, "SH");
-}
-
-void GetCH(Queue *Q) {
-    QAdd(Q, "CH");
+void CheckGetBA(Player P, Queue *Q) {
+    if (NbElmtList(ListBan(P)) == 10)
+    QAdd(Q, "BA");
 }

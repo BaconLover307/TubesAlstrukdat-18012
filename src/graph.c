@@ -421,7 +421,7 @@ boolean CheckMove (Graph G, List L, urutan X) {
   return (same);
 }
 
-void PrintMove (Graph G, List L, Bangunan B, urutan X) {
+void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count) {
 /* I.S. Graph G terdefinisi
         List L terdefinisi
         Bangunan B terdefinisi
@@ -474,4 +474,42 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X) {
       }
     }
   }
+  *Count = i - 1;
+}
+
+
+int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos) {
+    // Fungsi untuk mendapatkan Idx bangunan move yang diinginkan
+
+    /* KAMUS LOKAL */
+    address P;
+    addrGraph Q;
+    addrGraph2 C;
+    int i;
+
+    /* ALGORITMA */
+    P = First(L);
+    Q = SearchP(G, X);
+    C = FirstChild(Q);
+    i = 1;
+
+    while ((C != Nil) && (P != Nil)) {
+      if (InfoG2(C) == Info(P)) {
+
+        if (i == pos) {
+            return InfoG2(C);
+        }
+        i++;
+
+        C = NextChild(C);
+        P = Next(P);
+
+      } else /* InfoG2(C) != Info(P) */ {
+        if (InfoG2(C) < Info(P)) {
+          C = NextChild(C);
+        } else /* InfoG2(C) > Info(P) */ {
+          P = Next(P);
+        }
+      }
+    }
 }
