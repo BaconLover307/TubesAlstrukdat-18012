@@ -46,26 +46,26 @@ typedef struct {
    Definisi elemen terakhir yang terdefinisi: B.BI[i] dengan i=B.Neff */
 
 // ? Define Konstanta Global Tentara Maksimal
-#define MaxC1 40 
-#define MaxC2 60 
-#define MaxC3 80 
+#define MaxC1 40
+#define MaxC2 60
+#define MaxC3 80
 #define MaxC4 100
- 
+
 #define MaxT1 20
-#define MaxT2 30 
-#define MaxT3 40 
-#define MaxT4 50 
- 
-#define MaxF1 20 
-#define MaxF2 40 
-#define MaxF3 60 
-#define MaxF4 80 
- 
-#define MaxV1 20 
-#define MaxV2 30 
-#define MaxV3 40 
-#define MaxV4 50 
- 
+#define MaxT2 30
+#define MaxT3 40
+#define MaxT4 50
+
+#define MaxF1 20
+#define MaxF2 40
+#define MaxF3 60
+#define MaxF4 80
+
+#define MaxV1 20
+#define MaxV2 30
+#define MaxV3 40
+#define MaxV4 50
+
 
 /* ********** SELEKTOR ********** */
 /* B adalah Bangunan      */
@@ -108,7 +108,7 @@ IdxType GetFirstBan (Bangunan B);
 IdxType GetLastBan (Bangunan B);
 
 // * Mengirimkan Jumlah maksimal tentara pada gedung (B,X)
-int GetMaxTentara(Bangunan B, urutan X);
+int GetMaxTentara(Bangunan B, IdxType X);
 
   /* ********** TEST KOSONG/PENUH ********** */
   /* *** Test tabel kosong *** */
