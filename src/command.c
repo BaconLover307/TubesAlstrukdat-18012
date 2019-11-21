@@ -23,7 +23,7 @@ void ATTACK(Stack *gamestate, Bangunan *databuild) {
     
     // $ Algoritma
     // * Bangunan Pemain
-    printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
+    printf(" __\n[__] ==== List of Buildings  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr,*databuild);
     int giliran = TurnInfo(Curr(*gamestate));
     printf("Bangunan yang digunakan untuk menyerang : ");
@@ -31,8 +31,8 @@ void ATTACK(Stack *gamestate, Bangunan *databuild) {
     do {
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1) {
-            printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
-            printf("Bangunan yang digunakan untuk menyerang : ");
+            printf("Input is not valid! Silakan input index bangunan yang tersedia.\n");
+            printf("Choose building to attack : ");
         } else {printf("\n");}
     } while (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1);
     // * Ambil Bangunan Pemain
@@ -40,14 +40,14 @@ void ATTACK(Stack *gamestate, Bangunan *databuild) {
     int idxBangunanCurr = Info(Pcurr);
 
     // * Bangunan Lawan
-    printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate))%2+1);
+    printf(" __\n[__] ==== List of Buildings  ==== [P%d]\n", TurnInfo(Curr(*gamestate))%2+1);
     PrintInfo(*Lenemy,*databuild);
     printf("Bangunan yang diserang : ");
     int nomorBangunanDiserang;
     do {
         scanf("%d", &nomorBangunanDiserang);
         if (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1) {
-            printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
+            printf("Input is not valid! Silakan input index bangunan yang tersedia.\n");
             printf("Bangunan yang digunakan untuk menyerang : ");
         } else {printf("\n");}
     } while (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1);
@@ -96,7 +96,7 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
 
     // $ Algoritma
     // * Menampilkan daftar Bangunan
-    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
+    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr, *databuild);
     printf("\n");
     // * User Input
@@ -201,7 +201,7 @@ void MOVE(Stack *gamestate, Bangunan *databuild) { // todo
     }
     // $ Algoritma
     // * Bangunan Pemain
-    printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
+    printf(" __\n[__] ==== List of Buildings  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr,*databuild);
     int giliran = TurnInfo(Curr(*gamestate));
     printf("Bangunan yang digunakan untuk menyerang : ");
@@ -209,7 +209,7 @@ void MOVE(Stack *gamestate, Bangunan *databuild) { // todo
     do {
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1) {
-            printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
+            printf("Input is not valid! Silakan input index bangunan yang tersedia.\n");
             printf("Bangunan yang digunakan untuk menyerang : ");
         } else {printf("\n");}
     } while (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1);
@@ -229,7 +229,7 @@ void MOVE(Stack *gamestate, Bangunan *databuild) { // todo
     // while () {
     //
     // }
-    printf("%d pasukan [...] telah berpindah ke [...]\n", jumlahPasukan);
+    printf("%d soldier(s) [...] has been moved to [...]\n", jumlahPasukan);
 }
 
 // Prosedur untuk melakukan SAVE
@@ -243,7 +243,7 @@ void SAVE(Stack *gamestate) {
 // Prosedur untuk melakukan EXIT Game
 boolean EXIT(Stack *gamestate) {
     char inp;
-    printf("Apakah Anda ingin melakukan save terlebih dahulu? ");
+    printf("Do you want to save the game before exit?");
     do {
         printf("Y/N/C\n");
         scanf(" %c", &inp);
