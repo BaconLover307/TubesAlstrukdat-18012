@@ -35,7 +35,7 @@ int main() {
 do {
     Exit = false;
     // todo MainM();
-    printf("#TAMPILAN MAIN#\n");
+    printf(LAN MAIN#\n");
     // ASCII Art: MainMenu
     do {
         ExitMenu = false;
@@ -167,17 +167,17 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
-                        ATTACK(&GameState);
+                        ATTACK(&GameState, DataBangunan);
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	LEVEL_UP(&GameState,&DataBangunan);
+                    	LEVEL_UP(&GameState, DataBangunan);
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	SKILL(&GameState,&DataBangunan);
+                    	SKILL(&GameState, DataBangunan);
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {

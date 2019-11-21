@@ -173,7 +173,7 @@ void InstantReinforcement(Player *P, Bangunan *B) {
     Tentara(ElmtBan(*B, Info(A))) += 5;
 }
 
-void Barrage(Player *P, Palyer *E, Bangunan *B) {
+void Barrage(Player *P, Player *E, Bangunan *B) {
     // $ Kamus Lokal
     address A;
     // $ Algoritma

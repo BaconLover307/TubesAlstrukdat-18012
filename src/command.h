@@ -10,7 +10,7 @@
 
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Stack *gamestate);
+void ATTACK(Stack *gamestate, Bangunan *databuild);
 
 // Prosedur untuk Melakukan LEVEL UP
 void LEVEL_UP(Stack *gamestate, Bangunan *databuild);

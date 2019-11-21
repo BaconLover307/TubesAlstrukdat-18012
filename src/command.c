@@ -95,10 +95,10 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // * Menampilkan daftar Bangunan
     printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr, *databuild);
-    prinf("\n");
+    printf("\n");
     // * User Input
     printf("Bangunan yang akan di level up : ");
-    prinf("\n");
+    printf("\n");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
     // * Melakukan pengecekan keberhasilan level up
@@ -161,7 +161,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             printf("All your buildings have been added by 5 soldiers.\n");
             //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
-            Barrage(EnemyP, databuild);
+            Barrage(CurrP, EnemyP, databuild);
             printf("Soldiers in all your enemy's buildings have been decreased by 10\n");
         }
         ClearStack(gamestate);
