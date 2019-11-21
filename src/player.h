@@ -160,14 +160,8 @@ void CheckGetCH(Queue *Q);
 // * Selipin di END_TURN di MainProgram
 void CheckGetIR(Player *P, Bangunan *B);
 
-<<<<<<< HEAD
-void CheckGetSH(Player P, Queue *Q);
-
-void GetCH(Queue *Q);
-=======
 // * Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi 10 bangunan.
 // * Selipin di Capture. Masukin P sendiri, Q lawan
 void CheckGetBA(Player P, Queue *Q);
->>>>>>> 943afc102f34e7cf3606dfeafff5672ec3f2b284
 
 #endif
