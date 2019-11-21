@@ -10,11 +10,11 @@ TabColor Pallete;
 
  // $ Algo
 int main() {
-    printf("================================================================================\n");
+    printf("========Inisialisasi==============================================================\n");
     printf("Inisialisasi Player dengan CreatePlayer(P) \n");
     CreatePlayer(&P1);
     CreatePlayer(&P2);
-    printf("================================================================================\n");
+    printf("========Color Handling============================================================\n");
     MakeBukuWarna(&Pallete);
     printf("Set color for Player 1\n");
     SetPlayerWarna(&P1,&Pallete);
@@ -25,5 +25,11 @@ int main() {
     SetPlayerWarna(&P2,&Pallete);
     print_warna(Color(P2),'2');
     printf("\n"); printf("\n");
-    printf("================================================================================\n");
+    printf("Load color untuk Player 2, warna Hijau\n");
+    LoadPlayerWarna(&P2, 'G');
+    print_warna(Color(P2),'2');
+    printf("\n"); printf("\n");
+    printf("==================================================================================\n");
+
+
 }

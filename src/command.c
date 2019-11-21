@@ -53,7 +53,7 @@ void ATTACK(Stack *gamestate, Bangunan *databuild) {
     printf("Jumlah pasukan: ");
     scanf("%d", &jumlahPasukan);
 
-    TentaraAttack(databuild, , jumlahPasukan);
+    TentaraAttack(databuild, idx, jumlahPasukan);
     /*
     -- A hint from driver_list.c
     TentaraInvaded(&B, false, false, 0, 3, 30);
