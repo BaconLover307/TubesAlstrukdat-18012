@@ -183,9 +183,14 @@ void PrintInfo (List L, Bangunan B) {
       printf("Fort    ");
     }
 
+    if (Tentara(ElmtBan(B, Info(P))) < 10) {
+    	printf("0");
+    }
+    printf("%d ", Tentara(ElmtBan(B, Info(P))));
+
+    printf("lv. %d ", Level(ElmtBan(B, Info(P))));
     TulisPOINT(Posisi(ElmtBan(B, Info(P))));
-    printf(" %d ", Tentara(ElmtBan(B, Info(P))));
-    printf("lv. %d\n", Level(ElmtBan(B, Info(P))));
+    printf("\n");
 
     i++;
     P = Next(P);
@@ -225,58 +230,58 @@ boolean CheckTambahTentara (Bangunan B, urutan X) {
   /* ALGORITMA */
   if (Name(ElmtBan(B, X)) == 'C') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxC1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 60);
+      return (Tentara(ElmtBan(B, X)) < MaxC2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 80);
+      return (Tentara(ElmtBan(B, X)) < MaxC3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 100);
+      return (Tentara(ElmtBan(B, X)) < MaxC3);
 
     }
   } else if (Name(ElmtBan(B, X)) == 'T') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxT1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 30);
+      return (Tentara(ElmtBan(B, X)) < MaxT2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxT3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 50);
+      return (Tentara(ElmtBan(B, X)) < MaxT4);
 
     }
   } else if (Name(ElmtBan(B, X)) == 'F') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxF1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxF2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 60);
+      return (Tentara(ElmtBan(B, X)) < MaxF3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 80);
+      return (Tentara(ElmtBan(B, X)) < MaxF4);
 
     }
   } else /* Name(ElmtBan(B, X)) == 'V' */ {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxV1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 30);
+      return (Tentara(ElmtBan(B, X)) < MaxV2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxV3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 50);
+      return (Tentara(ElmtBan(B, X)) < MaxV4);
 
     }
   }
