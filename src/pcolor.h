@@ -10,9 +10,11 @@ print_xxx(c) will print c with xxx color. Import this header to use the declared
 We only provide 8 colors. Feel free to modify/add colors if you want to.
 **/
 
+#ifndef PCOLOR_H
+#define PCOLOR_H
 
-// ?  Definisi elemen dan koleksi objek
-typedef char Warna;   // * tipe warna
+    // ?  Definisi elemen dan koleksi objek
+    typedef char Warna; // * tipe warna
 typedef int IdxType;  // * tipe indeks
 #define TotalColor 6 
 
@@ -44,3 +46,4 @@ void PrintBukuWarna(TabColor ArrWarna);
 // * Print karakter c dengan warna Col
 void print_warna(Warna Col, char c);
 
+#endif

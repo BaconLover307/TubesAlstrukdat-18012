@@ -18,10 +18,10 @@
 // $ ******* INCLUDE FILES ********
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 #include "includes.c"
-#include "command.c"
 #include "string.h"
-#include "mesinkata_faris.h"
 
 // $ ***** Variables *****
 char menu[100];
@@ -184,15 +184,10 @@ do {
             sleep(1);
             printf("                             1...\n");
             sleep(1);
-            clrscrn();
             */
-            //getchar();
-            //Player TestP = GetCurrPlayer(GameState);
-            //Player TestP = P1Info(Curr(GameState));
-            //printf("pass\n");
-            //PrintInfoHead(Skill(TestP));
+            clrscrn();
             do {
-                    getchar();
+                getchar();
                 do {
                     // $$ Inisiasi Turn
                     // $ Kamus Turn
@@ -201,6 +196,7 @@ do {
                     Player *EnemyP;
                     Queue *Qcurr;
                     Queue *Qenemy;
+                    List *Lcurr;
                     if (TurnInfo(Curr(GameState)) == 1) {
                         CurrP = &P1Info(Curr(GameState));
                         EnemyP = &P2Info(Curr(GameState));
@@ -210,10 +206,14 @@ do {
                     }
                     Qcurr = &Skill(*CurrP);
                     Qenemy = &Skill(*EnemyP);
+                    Lcurr = &ListBan(*CurrP);
 
                     // $ Display Status
                     PrintMap(MapBlueprint, *DataBangunan, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
+                    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(GameState)));
+                    PrintInfo(*Lcurr,*DataBangunan);
+                    printf("\n");
                     Command();
                     int idxCommand = 0;
                     do {
@@ -226,7 +226,7 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
-                        ATTACK(&GameState,DataBangunan);
+                        ATTACK(&GameState,DataBangunan, RelasiBan);
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {

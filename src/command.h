@@ -7,10 +7,11 @@
 
 #include "boolean.h"
 #include "stackt.h"
+#include "graph.h"
 
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Stack *gamestate, Bangunan *databuild);
+void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi);
 
 // Prosedur untuk Melakukan LEVEL UP
 void LEVEL_UP(Stack *gamestate, Bangunan *databuild);

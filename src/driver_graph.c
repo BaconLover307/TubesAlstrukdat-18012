@@ -60,8 +60,8 @@ int main() {
   TulisGraph(G);
 
   CreateEmptyList(&L1); CreateEmptyList(&L2);
-  MakeEmptyBangunan(&B, 5);
-  Neff(B) = 5;
+  MakeEmptyBangunan(&B, 7);
+  Neff(B) = 7;
 
   Name(ElmtBan(B, 1)) = 'C';
   X = 10; Y = 1; MakePOINT(&Posisi(ElmtBan(B, 1)), X, Y);
@@ -93,11 +93,11 @@ int main() {
 
   X = 1;
   if (CheckAttack(G, L1, X)) {
-    printf("Bangunan ke-1 dapat menyerang lawan.\n");
+    printf("Bangunan ke-%d dapat menyerang lawan.\n",X);
+    printf("Daftar bangunan yang dapat diserang oleh bangunan ke-%d:\n",X);
+    PrintAttack(G, L1, B, X);
   }
 
-  printf("Daftar bangunan yang dapat diserang oleh bangunan ke-1:\n");
-  PrintAttack(G, L1, B, X);
 
   printf("Daftar bangunan terdekat dengan bangunan ke-2:\n");
   PrintMove(G, L1, B, 2);
