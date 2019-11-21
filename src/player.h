@@ -133,7 +133,7 @@ void InstantReinforcement(Player *P, Bangunan *B);
 // * 	  Jika jumlah pasukan >= 10, akan dilakukan pengurangan sebanyak 10, tapi jika jumlah pasukan <1,
 // * 	  jumlah pasukan menjadi 0
 // * Pemain mendapat skill ini jika lawan baru saja bertambah listbangunannya menjadi 10
-void Barrage(Player *P, Bangunan *B);
+void Barrage(Player *P, Player *E, Bangunan *B);
 
 // $ *** Detect Skill ***
 
