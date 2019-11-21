@@ -10,7 +10,7 @@
 #include "matriks.h"
 
 #define SNil 0
-#define MaxSEl 1000
+#define MaxSEl 100
 /* SNil adalah stack dengan elemen kosong . */
 /* Karena indeks dalam bhs C dimulai 0 maka tabel dg indeks 0 tidak dipakai */
 

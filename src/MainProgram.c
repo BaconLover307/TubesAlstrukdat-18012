@@ -52,11 +52,11 @@ void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
             else {
                 ElType Mem = Elmt(M,(i-1),(j-1));
                 char C = Name(ElmtBan(B,Mem));
-                if (Search(listBangunan(One), Mem) != Nil) {
-                    printWarna(Color(One), C);
+                if (Search(ListBan(One), Mem) != Nil) {
+                    print_warna(Color(One), C);
                 }
-                else if (Search(listBangunan(Two), Mem) != Nil) {
-                    printWarna(Color(Two), C);
+                else if (Search(ListBan(Two), Mem) != Nil) {
+                    print_warna(Color(Two), C);
                 }
                 else {
                     printf("%c", C);
@@ -128,20 +128,10 @@ do {
             TabColor Pallete;
             MATRIKS MapBlueprint;
             Graph RelasiBan;
-            int Baris,Kolom,CountBan;
+            int Baris, Kolom, CountBan, Turn;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
-            STARTKATA();
-            Baris = KataToInt(CKata);
-            ADVKATA();
-            Kolom = KataToInt(CKata);
-            ADVKATA();
-            CountBan = KataToInt(CKata);
-            ADVKATA();
-            DataBangunan = KataToBangunan(CountBan);
-            MapBlueprint = KataToMatriks(Baris, Kolom, DataBangunan);
-            RelasiBan = KataToGraph(CountBan);
 
             // todo Load Game
             printf("Do you want to load a previous game? ");
@@ -156,31 +146,46 @@ do {
                     SetPlayerWarna(&PlayerOne,&Pallete);
                     printf("Choose building color for Player 2! \n");
                     SetPlayerWarna(&PlayerTwo,&Pallete);
+                    // * CONFIGURE
+                    STARTKATA();
+                    Baris = KataToInt(CKata);
+                    ADVKATA();
+                    Kolom = KataToInt(CKata);
+                    ADVKATA();
+                    CountBan = KataToInt(CKata);
+                    ADVKATA();
+                    *DataBangunan = KataToBangunan(CountBan);
+                    MapBlueprint = KataToMatriks(Baris, Kolom, *DataBangunan);
+                    RelasiBan = KataToGraph(CountBan);
+                    // * Bangunan pertama pemain                    
+                    InsVPrio(&ListBan(PlayerOne),1);
+                    InsVPrio(&ListBan(PlayerTwo),2);
 
+                    // * AKHIRNYA MULAI
+                    Turn = 1;
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
-                    // * Countdown
-                    clrscrn();
-                    printf("              Starting game in...\n\n");
-                    sleep(1);
-                    printf("              3...\n\n");
-                    sleep(1);
-                    printf("                     2...\n\n");
-                    sleep(1);
-                    printf("                             1...\n");
-                    sleep(1);
-                    clrscrn();
                 }
             } while (load != 'Y' && load != 'N');
 
             // todo maen game
-
-            printf("#Ceritanya Maen#\n");
+            // * Countdown
+            clrscrn();
+            printf("              Starting game in...\n\n");
+            sleep(1);
+            printf("              3...\n\n");
+            sleep(1);
+            printf("                     2...\n\n");
+            sleep(1);
+            printf("                             1...\n");
+            sleep(1);
+            clrscrn();
             //getchar();
             //Player TestP = GetCurrPlayer(GameState);
             //Player TestP = P1Info(Curr(GameState));
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
             do {
+                    getchar();
                 do {
                     // $$ Inisiasi Turn
                     // $ Kamus Turn
@@ -200,6 +205,7 @@ do {
                     Qenemy = &Skill(*EnemyP);
 
                     // $ Display Status
+                    PrintMap(MapBlueprint, *DataBangunan, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
                     Command();
                     int idxCommand = 0;
@@ -213,22 +219,34 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
+                        ATTACK(&GameState, DataBangunan);
+=======
                         ATTACK(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
+                    	LEVEL_UP(&GameState, DataBangunan);
+=======
                     	LEVEL_UP(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
+                    	SKILL(&GameState, DataBangunan);
+=======
                     	SKILL(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
-						MOVE(&GameState);
+						MOVE(&GameState,DataBangunan);
 
 
                     }   // $ ######### UNDO ########

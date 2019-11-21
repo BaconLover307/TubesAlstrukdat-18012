@@ -18,6 +18,9 @@ void ATTACK(Stack *gamestate, Bangunan *databuild) {
         CurrP = &P2Info(Curr(*gamestate));
         EnemyP = &P1Info(Curr(*gamestate));
     }
+    Lcurr = &ListBan(*CurrP);
+    Lenemy = &ListBan(*EnemyP);
+    
     // $ Algoritma
     // * Bangunan Pemain
     printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
@@ -104,9 +107,9 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // * Melakukan pengecekan keberhasilan level up
     if (CheckLevelUp(*databuild,nomorBangunan)) {
         LevelUp(databuild,nomorBangunan);
-        printf("Level %s-mu meningkat menjadi %d\n",  Name(ElmtBan(*databuild,nomorBangunan)), Level(ElmtBan(*databuild,nomorBangunan)));
+        printf("Level %c-mu meningkat menjadi %d\n",  Name(ElmtBan(*databuild,nomorBangunan)), Level(ElmtBan(*databuild,nomorBangunan)));
     } else {
-        printf("Jumlah pasukan %s kurang untuk Level Up!\n", Name(ElmtBan(*databuild,nomorBangunan)));
+        printf("Jumlah pasukan %c kurang untuk Level Up!\n", Name(ElmtBan(*databuild,nomorBangunan)));
     }
 }
 
@@ -158,10 +161,11 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         } else if (strcmpi(usedskill,"CH") == 0) {
 
         } else if (strcmpi(usedskill,"IR") == 0) {
+            InstantReinforcement(CurrP, databuild);
             printf("All your buildings have been added by 5 soldiers.\n");
-            //InstantReinforcement(CurrP, databuild);
+            
         } else if (strcmpi(usedskill,"BA") == 0) {
-            Barrage(EnemyP, databuild);
+            Barrage(CurrP, EnemyP, databuild);
             printf("Soldiers in all your enemy's buildings have been decreased by 10\n");
         }
         ClearStack(gamestate);
