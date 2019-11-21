@@ -49,19 +49,19 @@ typedef struct {
 
 // $ ********* Prototype *********
 
-// $ *** Condition Check ***
+// $ ************* Condition Check *************
 
 // * Mengirim true jika list kepemilikan listbangunan kosong
 boolean IsLose(Player P);
 
-// $ ***** Creator *****
+// $ *************** Creator ***************
 
 // * I.S. P terdefinisi
 // * F.S. Sebuah P terbentuk dengan karakter listbangunan akan sesuai
 // *      konfigurasi dan warna listbangunan sesuai yang dipilih
 void CreatePlayer(Player *P);
 
-// $ *** Fungsi Untuk FX Shield ***
+// $ ************* Fungsi Untuk FX Shield *************
 
 // * Mengecek bila durasi shield = 0, jika iya maka True
 boolean IsSHWornOut(Player P);
@@ -75,10 +75,9 @@ void CheckActive(Player *P);
 // * Mengurangi durasi shield, sekaligus mengupdate ActiveSH
 void ReduceDurationSH(Player *P);
 
+// $ *************** Basic Operators ***************
 
-// $ ***** Basic Operators *****
-
-// $ *** Color Handling ***
+// $ ************* Color Handling *************
 
 // * I.S. Player terdefinisi
 // * F.S. Warna listbangunan player akan menjadi C
@@ -137,10 +136,38 @@ void Barrage(Player *P, Player *E, Bangunan *B);
 
 // $ *** Detect Skill ***
 
+// * Pemain tidak akan mendapat skill ini selain dari daftar skill awal.
+// * Tinggal selipin di CreatePlayer, masukin Q sendiri, dah...
+void CheckGetIU(Queue *Q);
+
+// * Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain berkurang 1 menjadi sisa 2
+// * Selipin di Capture, masukinnya P lawan dan Q lawan juga
+void CheckGetSH(Player P, Queue *Q);
+
+// * Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
+// * Selipin di Capture, kalo yang direbut Fort. Masukin Q lawan.
+void CheckGetET(Queue *Q);
+
+// * Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan jumlah towernya menjadi 3.
+// * Selipin di Capture, kalo yang direbut Tower. Masukin Q sendiri.
+void CheckGetAU(Player P, Queue *Q, Banguan databuild);
+
+// * Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
+// * Selipin di Skill bagian Extra Turn, di command.c. Masukin Q lawan
+void CheckGetCH(Queue *Q);
+
+// * Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki memiliki level 4
+// * Selipin di END_TURN di MainProgram
 void CheckGetIR(Player *P, Bangunan *B);
 
+<<<<<<< HEAD
 void CheckGetSH(Player P, Queue *Q);
 
 void GetCH(Queue *Q);
+=======
+// * Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi 10 bangunan.
+// * Selipin di Capture. Masukin P sendiri, Q lawan
+void CheckGetBA(Player P, Queue *Q);
+>>>>>>> 943afc102f34e7cf3606dfeafff5672ec3f2b284
 
 #endif

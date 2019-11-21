@@ -17,9 +17,11 @@ void MakeEmptyBangunan (Bangunan * B, int maxel) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  BI(*B) = (info_bangunan *) malloc ((maxel + 1)* sizeof(info_bangunan));
-  MaxEl(*B) = maxel;
-  Neff(*B) = 0;
+  if (maxel > 0) {
+    BI(*B) = (info_bangunan *) malloc ((maxel + 1)* sizeof(info_bangunan));
+    MaxEl(*B) = maxel;
+    Neff(*B) = 0;
+  }
 }
 
 void DealokasiBangunan(Bangunan *B) {
@@ -118,18 +120,12 @@ int GetMaxTentara(Bangunan B, IdxType X) {
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
 boolean IsEmptyBan (Bangunan B) {
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
   return (Neff(B) == 0);
 }
 
 /* *** Test tabel penuh *** */
 boolean IsFullBan (Bangunan B) {
 // ? Entah perlu fungsi ini gak ya?
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
   return (Neff(B) == MaxEl(B));
 }
 
@@ -142,9 +138,6 @@ void BacaBangunan (Bangunan * B) {
 
 //$ ******************** Tentara Attack ****************************/
 boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
   return (Tentara(ElmtBan(B, X)) >= N);
 }
 

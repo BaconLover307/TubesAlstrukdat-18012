@@ -112,12 +112,11 @@ do {
             printf("\n");
             printf("Press enter to go back to main menu...");
             getchar();
-            getchar();
             ExitMenu = true;
 
         }   // $ ######### QUIT ########
         else if (strcmpi(menu, "QUIT") == 0) {
-            Quit();
+            QuitImg();
             ExitMenu = true;
             Exit = true;
 
@@ -128,7 +127,7 @@ do {
             char command[100];
             Stack GameState;
             Player PlayerOne, PlayerTwo;
-			Bangunan *DataBangunan;
+			Bangunan DataBangunan;
             TabColor Pallete;
             MATRIKS MapBlueprint;
             Graph RelasiBan;
@@ -146,7 +145,7 @@ do {
                     LoadFile(GameState);
                 } else if (load == 'N') {
                     //LoadData();
-                    MakeEmptyBangunan(DataBangunan, 100);
+                    MakeEmptyBangunan(&DataBangunan, 100);
                     printf("Choose building color for Player 1! \n");
                     SetPlayerWarna(&PlayerOne,&Pallete);
                     printf("Choose building color for Player 2! \n");
@@ -159,8 +158,8 @@ do {
                     ADVKATA();
                     CountBan = KataToInt(CKata);
                     ADVKATA();
-                    *DataBangunan = KataToBangunan(CountBan);
-                    MapBlueprint = KataToMatriks(Baris, Kolom, *DataBangunan);
+                    DataBangunan = KataToBangunan(CountBan);
+                    MapBlueprint = KataToMatriks(Baris, Kolom, DataBangunan);
                     RelasiBan = KataToGraph(CountBan);
                     // * Bangunan pertama pemain
                     InsVPrio(&ListBan(PlayerOne),1);
@@ -209,10 +208,10 @@ do {
                     Lcurr = &ListBan(*CurrP);
 
                     // $ Display Status
-                    PrintMap(MapBlueprint, *DataBangunan, PlayerOne, PlayerTwo);
+                    PrintMap(MapBlueprint, DataBangunan, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
                     printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(GameState)));
-                    PrintInfo(*Lcurr,*DataBangunan);
+                    PrintInfo(*Lcurr,DataBangunan);
                     printf("\n");
                     Command();
                     int idxCommand = 0;
@@ -226,17 +225,17 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
-                        ATTACK(&GameState,DataBangunan, RelasiBan);
+                        ATTACK(&GameState,&DataBangunan, RelasiBan);
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	LEVEL_UP(&GameState,DataBangunan);
+                    	LEVEL_UP(&GameState,&DataBangunan);
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	SKILL(&GameState,DataBangunan);
+                    	SKILL(&GameState,&DataBangunan);
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
@@ -252,7 +251,7 @@ do {
                     else if (strcmpi(command, "END_TURN") == 0) {
 						EndTurn = true;
                         // ! Detector Skill Instant Reinforcement
-                        CheckGetIR(CurrP,DataBangunan);
+                        CheckGetIR(CurrP,&DataBangunan);
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {
