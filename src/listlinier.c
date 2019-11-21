@@ -38,7 +38,8 @@ address Alokasi (urutan X) {
   address P;
 
   /* ALGORITMA */
-  P = malloc (sizeof(address));
+  P = (address) malloc (sizeof(ElmtList));
+  //P = malloc (sizeof(address));
   if (P != NULL) {
     Info(P) = X;
     Next(P) = Nil;
@@ -49,10 +50,6 @@ address Alokasi (urutan X) {
 }
 
 void Dealokasi (address * P) {
-/* I.S. P terdefinisi */
-/* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -61,10 +58,6 @@ void Dealokasi (address * P) {
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address Search (List L, urutan X) {
-/* Mencari apakah ada elemen list dengan Info(P)= X */
-/* Jika ada, mengirimkan address elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   address P;
 
@@ -89,11 +82,6 @@ address Search (List L, urutan X) {
 /*** PENAMBAHAN ELEMEN ***/
 void InsVPrio (List * L, urutan X) {
 // ! Tambah bangunan selalu pakai prosedur ini
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
-/* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-
   /* KAMUS LOKAL */
   address P;
 
@@ -107,10 +95,6 @@ void InsVPrio (List * L, urutan X) {
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
 void InsertAfter (List *L, address P, address Prec) {
-/* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
-/*      P sudah dialokasi  */
-/* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -119,9 +103,6 @@ void InsertAfter (List *L, address P, address Prec) {
 }
 
 void InsertPrio (List * L, address P) {
-/* I.S. P sudah dialokasi dan L mungkin kosong */
-/* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
-
   /* KAMUS LOKAL */
   address PrecLast, Last;
 
@@ -202,9 +183,14 @@ void PrintInfo (List L, Bangunan B) {
       printf("Fort    ");
     }
 
+    if (Tentara(ElmtBan(B, Info(P))) < 10) {
+    	printf("0");
+    }
+    printf("%d ", Tentara(ElmtBan(B, Info(P))));
+
+    printf("lv. %d ", Level(ElmtBan(B, Info(P))));
     TulisPOINT(Posisi(ElmtBan(B, Info(P))));
-    printf(" %d ", Tentara(ElmtBan(B, Info(P))));
-    printf("lv. %d\n", Level(ElmtBan(B, Info(P))));
+    printf("\n");
 
     i++;
     P = Next(P);
@@ -244,58 +230,58 @@ boolean CheckTambahTentara (Bangunan B, urutan X) {
   /* ALGORITMA */
   if (Name(ElmtBan(B, X)) == 'C') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxC1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 60);
+      return (Tentara(ElmtBan(B, X)) < MaxC2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 80);
+      return (Tentara(ElmtBan(B, X)) < MaxC3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 100);
+      return (Tentara(ElmtBan(B, X)) < MaxC3);
 
     }
   } else if (Name(ElmtBan(B, X)) == 'T') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxT1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 30);
+      return (Tentara(ElmtBan(B, X)) < MaxT2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxT3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 50);
+      return (Tentara(ElmtBan(B, X)) < MaxT4);
 
     }
   } else if (Name(ElmtBan(B, X)) == 'F') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxF1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxF2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 60);
+      return (Tentara(ElmtBan(B, X)) < MaxF3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 80);
+      return (Tentara(ElmtBan(B, X)) < MaxF4);
 
     }
   } else /* Name(ElmtBan(B, X)) == 'V' */ {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxV1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 30);
+      return (Tentara(ElmtBan(B, X)) < MaxV2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxV3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 50);
+      return (Tentara(ElmtBan(B, X)) < MaxV4);
 
     }
   }

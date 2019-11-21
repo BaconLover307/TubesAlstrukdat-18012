@@ -55,6 +55,66 @@ IdxType GetLastBan (Bangunan B) {
   return Neff(B);
 }
 
+int GetMaxTentara(Bangunan B, urutan X) {
+	if (Name(ElmtBan(B, X)) == 'C') {
+		if (Level(ElmtBan(B, X)) == 1) {
+		return MaxC1;
+
+		} else if (Level(ElmtBan(B, X)) == 2) {
+		return MaxC2;
+
+		} else if (Level(ElmtBan(B, X)) == 3) {
+		return MaxC3;
+
+		} else /* Level(ElmtBan(B, X)) == 4 */ {
+		return MaxC4;
+
+		}
+	} else if (Name(ElmtBan(B, X)) == 'T') {
+		if (Level(ElmtBan(B, X)) == 1) {
+		return MaxT1;
+
+		} else if (Level(ElmtBan(B, X)) == 2) {
+		return MaxT2;
+
+		} else if (Level(ElmtBan(B, X)) == 3) {
+		return MaxT3;
+
+		} else /* Level(ElmtBan(B, X)) == 4 */ {
+		return MaxT4;
+
+		}
+	} else if (Name(ElmtBan(B, X)) == 'F') {
+		if (Level(ElmtBan(B, X)) == 1) {
+		return MaxF1;
+
+		} else if (Level(ElmtBan(B, X)) == 2) {
+		return MaxF2;
+
+		} else if (Level(ElmtBan(B, X)) == 3) {
+		return MaxF3;
+
+		} else /* Level(ElmtBan(B, X)) == 4 */ {
+		return MaxF4;
+
+		}
+	} else /* Name(ElmtBan(B, X)) == 'V' */ {
+		if (Level(ElmtBan(B, X)) == 1) {
+		return MaxV1;
+
+		} else if (Level(ElmtBan(B, X)) == 2) {
+		return MaxV2;
+
+		} else if (Level(ElmtBan(B, X)) == 3) {
+		return MaxV3;
+
+		} else /* Level(ElmtBan(B, X)) == 4 */ {
+		return MaxV4;
+
+		}
+	}
+}
+
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
 boolean IsEmptyBan (Bangunan B) {
@@ -172,13 +232,13 @@ boolean CheckLevelUp (Bangunan B, IdxType X) {
   /* ALGORITMA */
   if (Name(ElmtBan(B, X)) == 'C') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) >= 40);
+      return (Tentara(ElmtBan(B, X)) >= MaxC1/2);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) >= 60);
+      return (Tentara(ElmtBan(B, X)) >= MaxC2/2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) >= 80);
+      return (Tentara(ElmtBan(B, X)) >= MaxC3/2);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
       return false;
@@ -186,13 +246,13 @@ boolean CheckLevelUp (Bangunan B, IdxType X) {
     }
   } else if (Name(ElmtBan(B, X)) == 'T') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) >= 20);
+      return (Tentara(ElmtBan(B, X)) >= MaxT1/2);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) >= 30);
+      return (Tentara(ElmtBan(B, X)) >= MaxT2/2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) >= 40);
+      return (Tentara(ElmtBan(B, X)) >= MaxT3/2);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
       return false;
@@ -200,43 +260,39 @@ boolean CheckLevelUp (Bangunan B, IdxType X) {
     }
   } else if (Name(ElmtBan(B, X)) == 'F') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) >= 20);
+      return (Tentara(ElmtBan(B, X)) >= MaxF1/2);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) >= 40);
+      return (Tentara(ElmtBan(B, X)) >= MaxF2/2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) >= 60);
+      return (Tentara(ElmtBan(B, X)) >= MaxF3/2);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
       return false;
 
     }
-  } else /* Name(ElmtBan(B, X)) == 'V' */ {
+  } else if (Name(ElmtBan(B, X)) == 'V') /* Name(ElmtBan(B, X)) == 'V' */ {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) >= 20);
+      return (Tentara(ElmtBan(B, X)) >= MaxV1/2);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) >= 30);
+      return (Tentara(ElmtBan(B, X)) >= MaxV2/2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) >= 40);
+      return (Tentara(ElmtBan(B, X)) >= MaxV3/2);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
       return false;
 
     }
-  }
+  } else {return false;}
 }
 
 void LevelUp (Bangunan * B, IdxType X) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  if (Tentara(ElmtBan(*B, X)) % 2 == 1) { //apabila jumlah tentaranya ganjil
-    Tentara(ElmtBan(*B, X)) -= 1;
-  }
-
-  Tentara(ElmtBan(*B, X)) /= 2;
+  Tentara(ElmtBan(*B, X)) = GetMaxTentara(*B,X)/2;
   Level(ElmtBan(*B, X)) += 1;
 }

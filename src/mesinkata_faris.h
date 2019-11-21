@@ -8,7 +8,7 @@
 #include "matriks.h"
 #include "graph.h"
 
-#define NMax 50
+#define NMax 500
 #define BLANK1 ' '
 #define BLANK2 '\n'
 
@@ -72,5 +72,7 @@ MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B);
 
 /* Membaca file yang telah diberikan menjadi graph. */
 Graph KataToGraph(int MaxEl);
+
+void ExecuteAll();
 
 #endif

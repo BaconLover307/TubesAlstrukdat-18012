@@ -4,51 +4,58 @@
 #include "string.h"
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Stack *gamestate) {
+void ATTACK(Stack *gamestate, Bangunan *databuild) {
     // $ Kamus Lokal
     Player *CurrP;
     Player *EnemyP;
     List *Lcurr;
-    Queue *Lenemy;
-    if (TurnInfo(Curr(*gamestate)) == 1)
-    {
+    List *Lenemy;
+    if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
         EnemyP = &P2Info(Curr(*gamestate));
     }
-    else
-    {
+    else {
         CurrP = &P2Info(Curr(*gamestate));
         EnemyP = &P1Info(Curr(*gamestate));
     }
     // $ Algoritma
-    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
-    // Menampilkan Daftar Bangunan
-    // PrintInfo(Li, B) - dari driver_list.c
+    // * Bangunan Pemain
+    printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
+    PrintInfo(*Lcurr,*databuild);
     int giliran = TurnInfo(Curr(*gamestate));
     printf("Bangunan yang digunakan untuk menyerang : ");
     int nomorBangunan;
-    scanf("%d", &nomorBangunan);
-    // validasi input
-    // while () {
-    //
-    // }
-    printf("Daftar bangunan yang dapat diserang\n");
-    // Menampilkan daftar bangunan yang dapat diserang
-    // PrintInfo(lj, B) - dari driver_list.c
+    do {
+        scanf("%d", &nomorBangunan);
+        if (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1) {
+            printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
+            printf("Bangunan yang digunakan untuk menyerang : ");
+        } else {printf("\n");}
+    } while (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1);
+    // * Ambil Bangunan Pemain
+    address Pcurr = Search(*Lcurr,nomorBangunan);
+    int idxBangunanCurr = Info(Pcurr);
+
+    // * Bangunan Lawan
+    printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate))%2+1);
+    PrintInfo(*Lenemy,*databuild);
     printf("Bangunan yang diserang : ");
     int nomorBangunanDiserang;
-    scanf("%d", &nomorBangunanDiserang);
-    // validasi input
-    // while () {
-    //
-    // }
+    do {
+        scanf("%d", &nomorBangunanDiserang);
+        if (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1) {
+            printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
+            printf("Bangunan yang digunakan untuk menyerang : ");
+        } else {printf("\n");}
+    } while (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1);
+    // * Jumlah Pasukan
     int jumlahPasukan;
     printf("Jumlah pasukan: ");
     scanf("%d", &jumlahPasukan);
 
+    TentaraAttack(databuild, , jumlahPasukan);
     /*
     -- A hint from driver_list.c
-    TentaraAttack(&B, 4, 30);
     TentaraInvaded(&B, false, false, 0, 3, 30);
     if (CanCapture(B, 3)) {
       if (Search(L1, 3)) {
@@ -154,8 +161,8 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             printf("All your buildings have been added by 5 soldiers.\n");
             //InstantReinforcement(CurrP, databuild);
         } else if (strcmpi(usedskill,"BA") == 0) {
-            printf("Soldiers in all your enemy's buildings have been decreased 10\n");
-            //Barrage(EnemyP, databuild);
+            Barrage(EnemyP, databuild);
+            printf("Soldiers in all your enemy's buildings have been decreased by 10\n");
         }
         ClearStack(gamestate);
 
