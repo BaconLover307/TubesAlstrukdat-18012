@@ -15,8 +15,6 @@
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmptyList (List L) {
-/* Mengirim true jika list kosong */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */

@@ -51,3 +51,9 @@ void Invalid() {
 void Quit() {
     print_image("assets//img_quit.txt");
 }
+void P1Wins() {
+    print_image("assets//img_p1wins.txt");
+}
+void P2Wins() {
+    print_image("assets//img_p2wins.txt");
+}

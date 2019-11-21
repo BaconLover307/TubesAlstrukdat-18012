@@ -226,29 +226,17 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
-<<<<<<< HEAD
-                        ATTACK(&GameState, DataBangunan);
-=======
                         ATTACK(&GameState,DataBangunan);
->>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
-<<<<<<< HEAD
-                    	LEVEL_UP(&GameState, DataBangunan);
-=======
                     	LEVEL_UP(&GameState,DataBangunan);
->>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
-<<<<<<< HEAD
-                    	SKILL(&GameState, DataBangunan);
-=======
                     	SKILL(&GameState,DataBangunan);
->>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
@@ -285,11 +273,11 @@ do {
 					ChangeTurn(&GameState);
 					EndTurn = false;
 				}
-            } while (/*!IsLose(PlayerOne) && !IsLose(PlayerTwo) && */!ExitMenu);
+            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
             if (IsLose(PlayerTwo)) {
-                printf("pesan menang P1\n");
+                P1Wins();
             } else if (IsLose(PlayerOne)) {
-                printf("pesan menang P2\n");
+                P2Wins();
 			}
 
         } else {
