@@ -60,7 +60,3 @@ void P1Wins() {
 void P2Wins() {
     print_image("assets//img_p2wins.txt");
 }
-
-void Quit(){
-    print_image("assets//img_quit.txt");
-}

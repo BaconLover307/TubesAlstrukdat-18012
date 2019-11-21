@@ -376,3 +376,9 @@ void TambahAllTentara (List L, Bangunan * B) {
     P = Next(P);
   }
 }
+
+
+void capture(List *L1, List *L2, address P){
+  DelP(L2, Info(P));
+  InsertPrio(L1, P);
+}

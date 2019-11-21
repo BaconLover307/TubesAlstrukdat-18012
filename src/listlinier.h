@@ -133,4 +133,6 @@ void TambahTentara (Bangunan * B, urutan X);
         bertambah */
 void TambahAllTentara (List L, Bangunan * B);
 
+void capture(List *L1, List *L2, address P);
+
 #endif
