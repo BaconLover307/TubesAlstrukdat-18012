@@ -15,9 +15,6 @@
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create Graph kosong  */
 void MakeEmptyGraph (Graph * G) {
-/* I.S. sembarang */
-/* F.S. Terbentuk graph kosong */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -26,16 +23,11 @@ void MakeEmptyGraph (Graph * G) {
 
 /****************** Manajemen Memori ******************/
 addrGraph AlokasiGraph1 (urutan X) {
-/* Mengirimkan addrGraph hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addrGraph tidak Nil, dan misalnya */
-/* menghasilkan P, maka InfoG(P)=X, NextP(P)=Nil, FirstChild(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   addrGraph P;
-
   /* ALGORITMA */
-  P = malloc (sizeof(addrGraph));
+  P = (addrGraph) malloc (sizeof(ElmtGraph));
+  //P = malloc (sizeof(addrGraph));
   if (P != NULL) {
     InfoG(P) = X;
     NextP(P) = Nil;
@@ -56,7 +48,8 @@ addrGraph2 AlokasiGraph2 (urutan X) {
   addrGraph2 P;
 
   /* ALGORITMA */
-  P = malloc (sizeof(addrGraph2));
+  P = (addrGraph2) malloc (sizeof(ElmtGraph2));
+  //P = malloc (sizeof(addrGraph2));
   if (P != NULL) {
     InfoG2(P) = X;
     NextChild(P) = Nil;
@@ -66,7 +59,7 @@ addrGraph2 AlokasiGraph2 (urutan X) {
   return P;
 }
 
-void DealokasiGraph1 (addrGraph * P) {
+void DealokasiGraph1 (addrGraph * G) {
 /* I.S. P terdefinisi; */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addrGraph P */
@@ -74,10 +67,10 @@ void DealokasiGraph1 (addrGraph * P) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  free(*P);
+  free(*G);
 }
 
-void DealokasiGraph2 (addrGraph2 * P) {
+void DealokasiGraph2 (addrGraph2 * G2) {
 /* I.S. P terdefinisi; */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addrGraph2 P */
@@ -85,7 +78,7 @@ void DealokasiGraph2 (addrGraph2 * P) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  free(*P);
+  free(*G2);
 }
 
 /* ********** TEST GRAPH KOSONG ********** */
@@ -116,16 +109,6 @@ void BacaGraph (Graph * G);
 
 void TulisGraph (Graph G) {
 // ? Untuk debugging doang kayaknya
-/* I.S. G terdefinisi */
-/* F.S. Hubungan antar bangunan ditampilkan ke layar.
-        Jika tidak ada hubungan maka muncul '0' di layar.
-        Jika ada hubungan maka muncul '1' di layar.       */
-/* Contoh: menulis matriks 3x3
-0 1 1
-1 0 0
-1 0 0
-*/
-
   /* KAMUS LOKAL */
   IdxType i, j;
   addrGraph P;

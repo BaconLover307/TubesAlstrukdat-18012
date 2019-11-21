@@ -99,8 +99,8 @@ int main() {
   printf("Daftar bangunan yang dapat diserang oleh bangunan ke-1:\n");
   PrintAttack(G, L1, B, X);
 
-  printf("Daftar bangunan terdekat dengan bangunan ke-1:\n");
-  PrintMove(G, L1, B, X);
+  printf("Daftar bangunan terdekat dengan bangunan ke-2:\n");
+  PrintMove(G, L1, B, 2);
 
   return 0;
 }

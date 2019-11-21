@@ -13,12 +13,12 @@
 typedef struct {
     int duration;       // Durasi (turn) efektif Shield
     boolean activeSH;   // True jika durasi > 0
-} Shield;
+} ShieldFX;
 
 typedef struct {
     boolean attackUp;
     boolean criticalHit;
-    Shield  shield;
+    ShieldFX  shield;
     boolean extraTurn;
 } StatusEffect;
 

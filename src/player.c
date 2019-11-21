@@ -11,12 +11,12 @@
 ? typedef struct {
 *    int duration;       Durasi (turn) efektif Shield, max 2 turn lawan
 *    boolean activeSH;   True jika durasi > 0
-? } Shield;
+? } ShieldFX;
 
 ? typedef struct {
 *    boolean attackUp;
 *    boolean criticalHit;
-*    boolean shield;
+*    ShieldFX shield;
 *    boolean extraTurn;
 ? } StatusEffect;
 
@@ -84,7 +84,7 @@ void CheckActive(Player *P) {
 }
 
 void ReduceDurationSH(Player *P) {
-    if (!IsSHWornout(*P)) {
+    if (!IsSHWornOut(*P)) {
         Duration(SH(FX(*P))) -= 1;
     }
     CheckActive(P);
@@ -147,6 +147,7 @@ void InstantUpgrade(Player *P, Bangunan *B) {
 void Shield(Player *P) {
     Duration(SH(FX(*P))) = 2;
     ActiveSH(SH(FX(*P))) = true;
+}
 
 void ExtraTurn(Player *P) {
     ET(FX(*P)) = true;

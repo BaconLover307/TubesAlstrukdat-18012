@@ -65,7 +65,7 @@ void QAdd (Queue * Q, Qinfotype X);
 //* Proses: Menghapus X pada Q dengan aturan FIFO */
 //* I.S. Q tidak mungkin kosong */
 //* F.S. X = QNilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
-        Q mungkin kosong */
+// *     Q mungkin kosong
 void QDel (Queue * Q, Qinfotype * X);
 
 // $ *** Fungsi Lain ***

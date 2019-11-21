@@ -38,7 +38,8 @@ address Alokasi (urutan X) {
   address P;
 
   /* ALGORITMA */
-  P = malloc (sizeof(address));
+  P = (address) malloc (sizeof(ElmtList));
+  //P = malloc (sizeof(address));
   if (P != NULL) {
     Info(P) = X;
     Next(P) = Nil;
@@ -49,10 +50,6 @@ address Alokasi (urutan X) {
 }
 
 void Dealokasi (address * P) {
-/* I.S. P terdefinisi */
-/* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -61,10 +58,6 @@ void Dealokasi (address * P) {
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address Search (List L, urutan X) {
-/* Mencari apakah ada elemen list dengan Info(P)= X */
-/* Jika ada, mengirimkan address elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   address P;
 
@@ -89,11 +82,6 @@ address Search (List L, urutan X) {
 /*** PENAMBAHAN ELEMEN ***/
 void InsVPrio (List * L, urutan X) {
 // ! Tambah bangunan selalu pakai prosedur ini
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
-/* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-
   /* KAMUS LOKAL */
   address P;
 
@@ -107,10 +95,6 @@ void InsVPrio (List * L, urutan X) {
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
 void InsertAfter (List *L, address P, address Prec) {
-/* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
-/*      P sudah dialokasi  */
-/* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -119,9 +103,6 @@ void InsertAfter (List *L, address P, address Prec) {
 }
 
 void InsertPrio (List * L, address P) {
-/* I.S. P sudah dialokasi dan L mungkin kosong */
-/* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
-
   /* KAMUS LOKAL */
   address PrecLast, Last;
 
