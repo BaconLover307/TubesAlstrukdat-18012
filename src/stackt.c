@@ -8,11 +8,12 @@
 
 // $ ************ Prototype ************
 // $ *** Konstruktor/Kreator ***
-void StartTurn(Stack *S, Player P1, Player P2, int Turn) {
+void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild) {
     Top(*S) = SNil;
     P1Info(Curr(*S)) = P1;
     P2Info(Curr(*S)) = P2;
     TurnInfo(Curr(*S)) = Turn;
+    DataB(Curr(*S)) = DataBuild;
 }
 void ClearStack(Stack *S) {
     Sinfotype temp;
@@ -83,6 +84,8 @@ void ChangeTurn(Stack *S, Bangunan *B) {
 void PrintCurr(Stack S) {
     // $ Kamus Lokal
     Player CurrP = GetCurrPlayer(S);
+    Bangunan DataBuild = DataB(Curr(S));
+    List Lcurr = ListBan(CurrP);
     // $ Algoritma
     printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(Curr(S))),
     //printbuilding
@@ -96,5 +99,49 @@ void PrintCurr(Stack S) {
     PrintQueue(Skill(CurrP));
     printf("\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
+    printf("\n");
+    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(S)));
+    PrintInfo(Lcurr, DataBuild);
+    printf("\n");
+}
+void PrintTop(Sinfotype top)
+{
+    // $ Kamus Lokal
+    Player CurrP;
+    if (TurnInfo(top) == 1) {
+        CurrP = P1Info(top);
+    } else {
+        CurrP = P2Info(top);
+    }
+    Bangunan DataBuild = DataB(top);
+    List Lcurr = ListBan(CurrP);
+    // $ Algoritma
+    printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(top)),
+        //printbuilding
+        printf("  <= Active Effects =>\n");
+    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
+    if (AU(FX(CurrP)))
+        printf(" [AU] ");
+    else
+        printf(" [  ] ");
+    if (CH(FX(CurrP)))
+        printf(" [CH] ");
+    else
+        printf(" [  ] ");
+    if (ActiveSH(SH(FX(CurrP))))
+        printf(" [SH] ");
+    else
+        printf(" [  ] ");
+    if (ET(FX(CurrP)))
+        printf(" [ET] ");
+    else
+        printf(" [  ] ");
+    printf("    || SKILL ");
+    PrintQueue(Skill(CurrP));
+    printf("\n");
+    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
+    printf("\n");
+    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(top));
+    PrintInfo(Lcurr, DataBuild);
     printf("\n");
 }

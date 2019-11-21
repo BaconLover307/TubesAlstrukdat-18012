@@ -166,7 +166,7 @@ do {
 
                     // * AKHIRNYA MULAI
                     Turn = 1;
-                    StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
+                    StartTurn(&GameState,PlayerOne,PlayerTwo,Turn,DataBangunan);
                 }
             } while (load != 'Y' && load != 'N');
 
@@ -194,6 +194,7 @@ do {
                 Queue *Qcurr;
                 Queue *Qenemy;
                 List *Lcurr;
+                Bangunan *StateDataB;
                 if (TurnInfo(Curr(GameState)) == 1) {
                     CurrP = &P1Info(Curr(GameState));
                     EnemyP = &P2Info(Curr(GameState));
@@ -204,15 +205,24 @@ do {
                 Qcurr = &Skill(*CurrP);
                 Qenemy = &Skill(*EnemyP);
                 Lcurr = &ListBan(*CurrP);
-                TambahAllTentara(*Lcurr, &DataBangunan);
+                StateDataB = &DataB(Curr(GameState));
+                TambahAllTentara(*Lcurr, StateDataB);
                 do {
-                    
+                    if (TurnInfo(Curr(GameState)) == 1) {
+                        CurrP = &P1Info(Curr(GameState));
+                        EnemyP = &P2Info(Curr(GameState));
+                    } else {
+                        CurrP = &P2Info(Curr(GameState));
+                        EnemyP = &P1Info(Curr(GameState));
+                    }
+                    Qcurr = &Skill(*CurrP);
+                    Qenemy = &Skill(*EnemyP);
+                    Lcurr = &ListBan(*CurrP);
+                    StateDataB = &DataB(Curr(GameState));
                     // $ Display Status
-                    PrintMap(MapBlueprint, DataBangunan, PlayerOne, PlayerTwo);
+                    PrintMap(MapBlueprint, *StateDataB, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
-                    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(Curr(GameState)));
-                    PrintInfo(*Lcurr,DataBangunan);
-                    printf("\n");
+                    
                     Command();
                     int idxCommand = 0;
                     do {
@@ -225,36 +235,40 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
-                        ATTACK(&GameState,&DataBangunan, RelasiBan);
+                        ATTACK(&GameState,StateDataB, RelasiBan);
                         getchar();
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	LEVEL_UP(&GameState,&DataBangunan);
+                        printf("==============INFOTOP BEFORE================\n");
+                        PrintTop(InfoTop(GameState));
+                    	LEVEL_UP(&GameState);
+                        printf("==============INFOTOP AFTER================\n");
+                        PrintTop(InfoTop(GameState));
                         getchar();
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	SKILL(&GameState,&DataBangunan);
+                    	SKILL(&GameState,StateDataB);
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
-						MOVE(&GameState,&DataBangunan, RelasiBan);
+						MOVE(&GameState,StateDataB, RelasiBan);
                         getchar();
 
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
-						UNDO(&GameState,);
+						UNDO(&GameState);
 
                     }   // $ ######### END_TURN ########
                     else if (strcmpi(command, "END_TURN") == 0) {
 						EndTurn = true;
                         // ! Detector Skill Instant Reinforcement
-                        CheckGetIR(CurrP,&DataBangunan);
+                        CheckGetIR(CurrP,StateDataB);
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {
@@ -273,7 +287,7 @@ do {
 
             	} while (!EndTurn);
                 if (!ExitMenu) {
-					ChangeTurn(&GameState,&DataBangunan);
+					ChangeTurn(&GameState,StateDataB);
 					EndTurn = false;
 				}
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);

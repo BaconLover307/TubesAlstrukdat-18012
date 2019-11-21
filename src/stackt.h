@@ -19,6 +19,7 @@ typedef struct {
     Player pemain1;
     Player pemain2;
     int turn;
+    Bangunan databuild;
 } Sinfotype;
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
@@ -26,7 +27,7 @@ typedef struct {
 typedef struct {
   Sinfotype T[MaxSEl+1]; /* tabel penyimpan elemen */
   Saddress TOP;  /* alamat TOP: elemen puncak */
-  Sinfotype curr; /* turn yang sedang berlangsung */
+  Sinfotype curr; /* kondisi turn yang sedang berlangsung */
 } Stack;
 /* Definisi stack S kosong : S.TOP = SNil */
 /* Elemen yang dipakai menyimpan nilai Stack T[1]..T[MaxSEl] */
@@ -35,13 +36,15 @@ typedef struct {
    /* S.TOP adalah alamat elemen TOP */
 
 // $ ********* AKSES (Selektor) *********
-// $ Jika S adalah Stack dan I adalah Infotop, maka akses elemen :
+// $ Jika S adalah Stack dan I adalah Infotype, maka akses elemen :
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
 #define Curr(S) (S).curr
+
 #define P1Info(I) (I).pemain1
 #define P2Info(I) (I).pemain2
 #define TurnInfo(I) (I).turn
+#define DataB(I) (I).databuild
 
 // $ ************ Prototype ************ */
 // $ *** Konstruktor/Kreator *** */
@@ -52,7 +55,7 @@ typedef struct {
 // * I.S. sembarang
 // * F.S. Membuat sebuah stack S yang kosong berkapasitas MaxSEl
 // * Memulai turn
-void StartTurn(Stack *S, Player P1, Player P2, int Turn);
+void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild);
 
 // * I.S. Stack terdefinisi, mungkin kosong
 // * F.S. Menghabiskan isi sebuah stack S
@@ -93,5 +96,6 @@ void ChangeTurn(Stack *S, Bangunan *B);
 
 // * Menuliskan kondisi yang sedang berlangsung
 void PrintCurr(Stack S);
+void PrintTop(Sinfotype top);
 
 #endif

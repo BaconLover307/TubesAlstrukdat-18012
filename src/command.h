@@ -14,7 +14,7 @@
 void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi);
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP(Stack *gamestate, Bangunan *databuild);
+void LEVEL_UP(Stack *gamestate);
 
 // Prosedur untuk mamakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate, Bangunan *databuild);

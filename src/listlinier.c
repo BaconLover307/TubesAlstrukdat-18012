@@ -76,6 +76,16 @@ address Search (List L, urutan X) {
   }
 }
 
+urutan GetInfo(List L, int i) {
+	address P = First(L);
+	i--;
+	while (i>0) {
+		P = Next(P);
+		i--;
+	}
+	return Info(P);
+}
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVPrio (List * L, urutan X) {

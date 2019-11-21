@@ -92,12 +92,13 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
 }
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
+void LEVEL_UP(Stack *gamestate) {
     // $ Kamus Lokal
     Player *CurrP;
     Player *EnemyP;
     List *Lcurr;
     List *Lenemy;
+    Bangunan *databuild;
     if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
         EnemyP = &P2Info(Curr(*gamestate));
@@ -105,8 +106,10 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
         CurrP = &P2Info(Curr(*gamestate));
         EnemyP = &P1Info(Curr(*gamestate));
     }
+    printf("+++++ Turn %d +++++", TurnInfo(Curr(*gamestate)));
     Lcurr = &ListBan(*CurrP);
     Lenemy = &ListBan(*EnemyP);
+    databuild = &DataB(Curr(*gamestate));
 
     // $ Algoritma
     // * Menampilkan daftar Bangunan
@@ -118,23 +121,25 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     int nomorBangunan;
     printf("Choose the building you want to level-up : ");
     scanf("%d", &nomorBangunan);
+
+    urutan nopilihan = GetInfo(*Lcurr, nomorBangunan);
     
     // * Melakukan pengecekan keberhasilan level up
-    char namaBuilding = Name(ElmtBan(*databuild, nomorBangunan));
-    if (CheckLevelUp(*databuild,nomorBangunan)) {
-        LevelUp(databuild,nomorBangunan);
+    char namaBuilding = Name(ElmtBan(*databuild, nopilihan));
+    if (CheckLevelUp(*databuild,nopilihan)) {
+        LevelUp(databuild,nopilihan);
         if (namaBuilding == 'C') { printf("Your Castle ");
         } else if (namaBuilding == 'V') { printf("Your Village ");
         } else if (namaBuilding == 'T') { printf("Your Tower ");
         } else /*(namaBuilding == 'T')*/ {printf("Your Fort ");}
-        printf("has been leveled up to level %d!\n", Level(ElmtBan(*databuild,nomorBangunan)));
+        printf("has been leveled up to level %d!\n", Level(ElmtBan(*databuild,nopilihan)));
     } else {
         printf("You don't have enough soldiers at ");
         if (namaBuilding == 'C') { printf("your Castle ");
         } else if (namaBuilding == 'V') { printf("your Village ");
         } else if (namaBuilding == 'T') { printf("your Tower ");
         } else /*(namaBuilding == 'T')*/ {printf("your Fort ");}
-        printf("to Level Up the building!\n", Name(ElmtBan(*databuild,nomorBangunan)));
+        printf("to Level Up the building!\n", Name(ElmtBan(*databuild,nopilihan)));
     }
 }
 
@@ -215,11 +220,17 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
 // Prosedur untuk melakukan UNDO
 void UNDO(Stack *gamestate) {
     // $ Kamus Lokal
+    Sinfotype *curr;
+    curr = &Curr(*gamestate);
+    // $ Algoritma
+    PrintTop(InfoTop(*gamestate));
+    PrintCurr(*gamestate);
     if (IsFirstAct(*gamestate)) {
         printf("You cannot Undo at the moment!\n");
     } else {
         printf("You have undone your past action!\n");
         Pop(gamestate, &Curr(*gamestate));
+    PrintCurr(*gamestate);
     }
 }
 
