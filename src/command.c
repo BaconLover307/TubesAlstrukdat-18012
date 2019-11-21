@@ -52,7 +52,7 @@ void ATTACK(Stack *gamestate, Bangunan *databuild) {
     int jumlahPasukan;
     printf("Jumlah pasukan: ");
     scanf("%d", &jumlahPasukan);
-
+    int idx = 1;
     TentaraAttack(databuild, idx, jumlahPasukan);
     /*
     -- A hint from driver_list.c
@@ -80,7 +80,7 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     Player *CurrP;
     Player *EnemyP;
     List *Lcurr;
-    Queue *Lenemy;
+    List *Lenemy;
     if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
         EnemyP = &P2Info(Curr(*gamestate));
@@ -95,10 +95,10 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     // * Menampilkan daftar Bangunan
     printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr, *databuild);
-    prinf("\n");
+    printf("\n");
     // * User Input
     printf("Bangunan yang akan di level up : ");
-    prinf("\n");
+    printf("\n");
     int nomorBangunan;
     scanf("%d", &nomorBangunan);
     // * Melakukan pengecekan keberhasilan level up

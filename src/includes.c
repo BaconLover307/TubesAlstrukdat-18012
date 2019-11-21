@@ -1,7 +1,7 @@
 #include "array.c"
 #include "assets.c"
 #include "boolean.h"
-#include "command.c"
+//#include "command.c"
 #include "graph.c"
 #include "listlinier.c"
 #include "load.c"

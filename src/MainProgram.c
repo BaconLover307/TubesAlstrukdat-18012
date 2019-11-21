@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "includes.c"
+#include "command.c"
 #include "string.h"
 /*
 #include "configure.h"
@@ -34,8 +35,7 @@ boolean EndTurn; // = false;
 int main() {
 do {
     Exit = false;
-    // todo MainM();
-    printf("#TAMPILAN MAIN#\n");
+    MainM();
     // ASCII Art: MainMenu
     do {
         ExitMenu = false;
@@ -56,7 +56,6 @@ do {
             // todo Tutorial1();
             clrscrn();
             printf("#TUT1 PLACEHOLDER#\n");
-            getchar();
             getchar();
             clrscrn();
             // todo Tutorial2();
@@ -167,17 +166,17 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
-                        ATTACK(&GameState,&DataBangunan);
+                        ATTACK(&GameState,DataBangunan);
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	LEVEL_UP(&GameState,&DataBangunan);
+                    	LEVEL_UP(&GameState,DataBangunan);
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
-                    	SKILL(&GameState,&DataBangunan);
+                    	SKILL(&GameState,DataBangunan);
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
