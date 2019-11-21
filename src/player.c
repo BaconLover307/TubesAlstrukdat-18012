@@ -193,8 +193,8 @@ void CheckGetIU(Queue *Q) {
     QAdd(Q, "IU");
 }
 
-void CheckGetSH(Player P, Queue *Q) {
-    if (NbElmtList(ListBan(P)) == 2) 
+void CheckGetSH(Player *P, Queue *Q) {
+    if (NbElmtList(ListBan(*P)) == 2) 
     QAdd(Q, "SH");
 }
 
