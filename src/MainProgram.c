@@ -29,6 +29,45 @@ boolean Exit; // = false;
 boolean ExitMenu; // = false;
 boolean EndTurn; // = false;
 
+// $ ******* MAP PRINTING FUNCTION ********
+void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
+    int i, j;
+    for (i = 1; i <= (MaxBrs(M) + 2); i++) {
+        for (j = 1; j < (MaxKol(M) + 2); j++) {
+            if (i == 1) {
+                printf("+");
+            }
+            else if (i == (MaxBrs(M) + 2)) {
+                printf("+");
+            }
+            else if (j == 1) {
+                printf("+");
+            }
+            else if (i == (MaxKol(M) + 2)) {
+                printf("+");
+            }
+            else if ((Elmt(M,(i-1),(j-1))) == 0) {
+                printf(" ");
+            }
+            else {
+                ElType Mem = Elmt(M,(i-1),(j-1));
+                char C = Name(ElmtBan(B,Mem));
+                if (Search(listBangunan(One), Mem) != Nil) {
+                    printWarna(Color(One), C);
+                }
+                else if (Search(listBangunan(Two), Mem) != Nil) {
+                    printWarna(Color(Two), C);
+                }
+                else {
+                    printf("%c", C);
+                }
+            }
+        }
+        printf("+\n");
+    }
+}
+
+
 // $ ******* MAIN PROGRAM ********
 int main() {
 do {
