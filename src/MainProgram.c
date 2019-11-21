@@ -52,11 +52,11 @@ void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
             else {
                 ElType Mem = Elmt(M,(i-1),(j-1));
                 char C = Name(ElmtBan(B,Mem));
-                if (Search(listBangunan(One), Mem) != Nil) {
-                    printWarna(Color(One), C);
+                if (Search(ListBan(One), Mem) != Nil) {
+                    print_warna(Color(One), C);
                 }
-                else if (Search(listBangunan(Two), Mem) != Nil) {
-                    printWarna(Color(Two), C);
+                else if (Search(ListBan(Two), Mem) != Nil) {
+                    print_warna(Color(Two), C);
                 }
                 else {
                     printf("%c", C);
@@ -164,29 +164,28 @@ do {
                     // * AKHIRNYA MULAI
                     Turn = 1;
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
-                    // * Countdown
-                    clrscrn();
-                    printf("              Starting game in...\n\n");
-                    sleep(1);
-                    printf("              3...\n\n");
-                    sleep(1);
-                    printf("                     2...\n\n");
-                    sleep(1);
-                    printf("                             1...\n");
-                    sleep(1);
-                    clrscrn();
                 }
             } while (load != 'Y' && load != 'N');
 
             // todo maen game
-
-            printf("#Ceritanya Maen#\n");
+            // * Countdown
+            clrscrn();
+            printf("              Starting game in...\n\n");
+            sleep(1);
+            printf("              3...\n\n");
+            sleep(1);
+            printf("                     2...\n\n");
+            sleep(1);
+            printf("                             1...\n");
+            sleep(1);
+            clrscrn();
             //getchar();
             //Player TestP = GetCurrPlayer(GameState);
             //Player TestP = P1Info(Curr(GameState));
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
             do {
+                    getchar();
                 do {
                     // $$ Inisiasi Turn
                     // $ Kamus Turn
@@ -206,10 +205,10 @@ do {
                     Qenemy = &Skill(*EnemyP);
 
                     // $ Display Status
+                    PrintMap(MapBlueprint, *DataBangunan, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
                     Command();
                     int idxCommand = 0;
-                    getchar();
                     do {
                         scanf("%c", command + idxCommand);
                     } while (command[idxCommand++] != '\n');
