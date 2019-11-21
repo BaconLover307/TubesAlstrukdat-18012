@@ -82,7 +82,6 @@ do {
     do {
         ExitMenu = false;
         Menu();
-        printf("Enter Menu : ");
         // Lakukan Input dengan 'mesinkata'
         int idxMenu = 0;
         do {
@@ -110,7 +109,7 @@ do {
         else if (strcmpi(menu, "CREDITS") == 0) {
             Credits();
             printf("\n");
-            printf("Press enter to go back to main menu...");
+            printf("Press enter to go back to the main menu...");
             getchar();
             ExitMenu = true;
 
@@ -185,28 +184,29 @@ do {
             sleep(1);
             */
             clrscrn();
+            getchar();
             do {
-                getchar();
+                // $$ Inisiasi Turn
+                // $ Kamus Turn
+                EndTurn = false;
+                Player *CurrP;
+                Player *EnemyP;
+                Queue *Qcurr;
+                Queue *Qenemy;
+                List *Lcurr;
+                if (TurnInfo(Curr(GameState)) == 1) {
+                    CurrP = &P1Info(Curr(GameState));
+                    EnemyP = &P2Info(Curr(GameState));
+                } else {
+                    CurrP = &P2Info(Curr(GameState));
+                    EnemyP = &P1Info(Curr(GameState));
+                }
+                Qcurr = &Skill(*CurrP);
+                Qenemy = &Skill(*EnemyP);
+                Lcurr = &ListBan(*CurrP);
+                TambahAllTentara(*Lcurr, &DataBangunan);
                 do {
-                    // $$ Inisiasi Turn
-                    // $ Kamus Turn
-                    EndTurn = false;
-                    Player *CurrP;
-                    Player *EnemyP;
-                    Queue *Qcurr;
-                    Queue *Qenemy;
-                    List *Lcurr;
-                    if (TurnInfo(Curr(GameState)) == 1) {
-                        CurrP = &P1Info(Curr(GameState));
-                        EnemyP = &P2Info(Curr(GameState));
-                    } else {
-                        CurrP = &P2Info(Curr(GameState));
-                        EnemyP = &P1Info(Curr(GameState));
-                    }
-                    Qcurr = &Skill(*CurrP);
-                    Qenemy = &Skill(*EnemyP);
-                    Lcurr = &ListBan(*CurrP);
-
+                    
                     // $ Display Status
                     PrintMap(MapBlueprint, DataBangunan, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
@@ -226,11 +226,13 @@ do {
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
                         ATTACK(&GameState,&DataBangunan, RelasiBan);
+                        getchar();
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
                     	LEVEL_UP(&GameState,&DataBangunan);
+                        getchar();
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
@@ -241,11 +243,12 @@ do {
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
 						MOVE(&GameState,&DataBangunan, RelasiBan);
+                        getchar();
 
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {
-						UNDO(&GameState);
+						UNDO(&GameState,);
 
                     }   // $ ######### END_TURN ########
                     else if (strcmpi(command, "END_TURN") == 0) {
@@ -256,20 +259,21 @@ do {
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {
 						SAVE(&GameState);
+                        getchar();
 
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
 						ExitMenu = EXIT(&GameState);
 						EndTurn = ExitMenu;
+                        getchar();
 
 					}
 					else Invalid();
 					printf("\n");
-                    getchar();
 
             	} while (!EndTurn);
                 if (!ExitMenu) {
-					ChangeTurn(&GameState);
+					ChangeTurn(&GameState,&DataBangunan);
 					EndTurn = false;
 				}
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);

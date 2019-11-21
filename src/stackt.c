@@ -52,19 +52,31 @@ Player GetCurrPlayer(Stack S) {
     }
 }
 
-void ChangeTurn(Stack *S) {
+void ChangeTurn(Stack *S, Bangunan *B) {
     // $ Kamus Lokal
-    Player *CurrP;
+    Player *CurrP, *EnemyP;
+    List *Lcurr, *Lenemy;
     if (TurnInfo(Curr(*S)) == 1) {
         CurrP = &P1Info(Curr(*S));
+        EnemyP = &P2Info(Curr(*S));
     } else {
         CurrP = &P2Info(Curr(*S));
+        EnemyP = &P1Info(Curr(*S));
     }
+    Lcurr = &ListBan(*CurrP);
+    Lenemy = &ListBan(*EnemyP);
     // $ Algoritma
     if (!ET(FX(*CurrP))) {
         TurnInfo(Curr(*S)) = TurnInfo(Curr(*S)) % 2 + 1;
+        //printf("Changing turns"); sleep(1);printf(".");sleep(1);printf(".");sleep(1);printf("\n\n");
     }
+    // ! Reset FX Extra Turn
     ET(FX(*CurrP)) = false;
+    // ! Reset FX Attack Up
+    AU(FX(*CurrP)) = false;
+    // ! Reduce Shield
+    ReduceDurationSH(EnemyP);
+    // * Clear Stack
     ClearStack(S);
 }
 

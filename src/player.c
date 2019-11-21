@@ -123,6 +123,47 @@ void SetPlayerWarna(Player *P, TabColor * Palet) {
     ColElmt(*Palet,i-1) = '_';
 }
 
+// $ ************* Special Function: Capture *************
+void Capture(Player *P, Player *E, address A, Bangunan *B) {
+	// $ Kamus Lokal
+	List *LP, *LE;
+	LP = &ListBan(*P);
+	LE = &ListBan(*E);
+	Queue *QP, *QE;
+	QP = &Skill(*P);
+	QE = &Skill(*E);
+  	// $ Algoritma
+	TentaraAbsolute(B, Info(A));
+	DelP(LE, Info(A));
+  	InsertPrio(LP, A);
+    ResetLevel(B, Info(A));
+    
+	// ! DEBUG SKILL
+	printf("TO DELETE!! Jumlah Bangunanmu : %d\n", NbElmtList(*LP));
+	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*LE));
+	// ! Deteksi Skill SH, ilangin ifnya
+	if (NbElmtList(*LE) == 2) {
+		printf("\n The enemy has gained the skill: SH!!\n");
+		CheckGetSH(*E, QE);
+	}
+	// ! Deteksi Skill ET
+	if (Name(ElmtBan(*B,Info(A))) == 'F') {
+		printf("\n The enemy has gained the skill: ET!!\n");
+		CheckGetET(QE);
+	}
+	// ! Deteksi Skill AU
+	if (Name(ElmtBan(*B,Info(A))) == 'T') {
+		printf("\n You have gained the skill: AU!!\n");
+		CheckGetAU(*P, QP, *B);
+	}
+	// ! Deteksi Skill BA, ilangin ifnya
+	if (NbElmtList(*LE) == 10) {
+		printf("\n The enemy has gained the skill: BA!!\n");
+		CheckGetBA(*P, QE);
+	}	
+}
+
+
 // $ *************** Skills ***************
 
 // $ ************* Use Skill *************
@@ -181,7 +222,7 @@ void Barrage(Player *P, Player *E, Bangunan *B) {
     while (A != Nil) {
         Tentara(ElmtBan(*B, Info(A))) -= 10;
         if (CanCapture(*B, Info(A))) {
-            Capture(&ListBan(*P), &ListBan(*E), A, B);
+            Capture(P, E, A, B);
         }
         A = Next(A);
     }
@@ -213,7 +254,7 @@ void CheckGetAU(Player P, Queue *Q, Bangunan databuild) {
         Adr = First(L);
         totalT = 0;
         while (Adr != Nil) {
-            if (Name(ElmtBan(databuild,Info(Adr))) == "T")
+            if (Name(ElmtBan(databuild,Info(Adr))) == 'T')
             totalT++;
             Adr = Next(Adr);
         }

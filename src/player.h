@@ -88,6 +88,14 @@ void LoadPlayerWarna(Player *P, Warna C);
 // * F.S. Warna bangunan player saat didisplay akan sesuai dengan yang dipilih pengguna
 void SetPlayerWarna(Player *P, TabColor * Palet);
 
+// $ ************* Special Function: Capture *************
+
+// * I.S. P1, P2, B terdefinisi, A menunjuk address list di ListBan(P1)
+// *      yang akan di capture, jumlah tentara di bangunannya negatif
+// * F.S. Bangunan beraddress A di ListBan(P1) menjadi milik P2,
+// *      jumlah tentara menjadi positif, terdapat pemicu skill
+void Capture(Player *P1, Player *P2, address A, Bangunan *B);
+
 // $ ***** Skills ******
 
 // $ *** Use Skill ***

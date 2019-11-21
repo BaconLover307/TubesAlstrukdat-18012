@@ -89,7 +89,7 @@ Player GetCurrPlayer(Stack S);
 // * I.S. Game sedang berlangsung
 // * F.S. Jika salah satu pemain memiliki skill Extra Turn, maka giliran
 // * 	  tidak berubah. Jika tidak, maka giliran akan berubah
-void ChangeTurn(Stack *S);
+void ChangeTurn(Stack *S, Bangunan *B);
 
 // * Menuliskan kondisi yang sedang berlangsung
 void PrintCurr(Stack S);

@@ -377,39 +377,3 @@ void TambahAllTentara (List L, Bangunan * B) {
   }
 }
 
-void Capture(Player *P1, Player *P2, address A, Bangunan *B) {
-	// $ Kamus Lokal
-	List *L1, *L2;
-	L1 = &ListBan(*P1);
-	L2 = &ListBan(*P2);
-	Queue *Q1, *Q2;
-	Q1 = &Skill(*P1);
-	Q2 = &Skill(*P2);
-  	// $ Algoritma
-	TentaraAbsolute(B, Info(A));
-	DelP(L2, Info(A));
-  	InsertPrio(L1, A);
-	// ! DEBUG SKILL
-	printf("TO DELETE!! Jumlah Bangunanmu : %d\n", NbElmtList(*L1));
-	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*L2));
-	// ! Deteksi Skill SH, ilangin ifnya
-	if (NbElmtList(*L2) == 2) {
-		printf("\n The enemy has gained the skill: SH!!\n");
-		CheckGetSH(*P2, Q2);
-	}
-	// ! Deteksi Skill ET
-	if (Name(ElmtBan(*B,Info(A))) == 'F') {
-		printf("\n The enemy has gained the skill: ET!!\n");
-		CheckGetET(Q2);
-	}
-	// ! Deteksi Skill AU
-	if (Name(ElmtBan(*B,Info(A))) == 'T') {
-		printf("\n You have gained the skill: AU!!\n");
-		CheckGetAU(*P1, Q1, *B);
-	}
-	// ! Deteksi Skill BA, ilangin ifnya
-	if (NbElmtList(*L2) == 10) {
-		printf("\n The enemy has gained the skill: BA!!\n");
-		CheckGetBA(*P1, Q2);
-	}	
-}

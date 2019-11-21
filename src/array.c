@@ -286,6 +286,10 @@ void LevelUp (Bangunan * B, IdxType X) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  Tentara(ElmtBan(*B, X)) = GetMaxTentara(*B,X)/2;
+  Tentara(ElmtBan(*B, X)) -= GetMaxTentara(*B,X)/2;
   Level(ElmtBan(*B, X)) += 1;
+}
+
+void ResetLevel (Bangunan * B, IdxType X) {
+  Level(ElmtBan(*B, X)) == 1;
 }
