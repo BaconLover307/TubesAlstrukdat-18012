@@ -33,18 +33,23 @@ boolean EndTurn; // = false;
 void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
     int i, j;
     for (i = 1; i <= (MaxBrs(M) + 2); i++) {
-        for (j = 1; j < (MaxKol(M) + 2); j++) {
+        for (j = 1; j < (MaxKol(M) + 3); j++) {
+            //printf("%d%d",i,j);
             if (i == 1) {
                 printf("+");
+                if(j == (MaxKol(M) + 2)) {
+                    printf("++\n");
+                }
             }
             else if (i == (MaxBrs(M) + 2)) {
                 printf("+");
+                if(j == (MaxKol(M) + 2)) printf("++\n");
             }
             else if (j == 1) {
-                printf("+");
+                printf("+ ");
             }
-            else if (i == (MaxKol(M) + 2)) {
-                printf("+");
+            else if (j == (MaxKol(M) + 2)) {
+                printf(" +\n");
             }
             else if ((Elmt(M,(i-1),(j-1))) == 0) {
                 printf(" ");
@@ -63,8 +68,8 @@ void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
                 }
             }
         }
-        printf("+\n");
     }
+    printf("\n");
 }
 
 
@@ -169,6 +174,7 @@ do {
 
             // todo maen game
             // * Countdown
+            /*
             clrscrn();
             printf("              Starting game in...\n\n");
             sleep(1);
@@ -179,6 +185,7 @@ do {
             printf("                             1...\n");
             sleep(1);
             clrscrn();
+            */
             //getchar();
             //Player TestP = GetCurrPlayer(GameState);
             //Player TestP = P1Info(Curr(GameState));
@@ -259,17 +266,18 @@ do {
 					}
 					else Invalid();
 					printf("\n");
+                    getchar();
 
             	} while (!EndTurn);
                 if (!ExitMenu) {
 					ChangeTurn(&GameState);
 					EndTurn = false;
 				}
-            } while (/*!IsLose(PlayerOne) && !IsLose(PlayerTwo) && */!ExitMenu);
+            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
             if (IsLose(PlayerTwo)) {
-                printf("pesan menang P1\n");
+                P1Wins();
             } else if (IsLose(PlayerOne)) {
-                printf("pesan menang P2\n");
+                P2Wins();
 			}
 
         } else {
