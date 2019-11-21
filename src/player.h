@@ -142,7 +142,7 @@ void CheckGetIU(Queue *Q);
 
 // * Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain berkurang 1 menjadi sisa 2
 // * Selipin di Capture, masukinnya P lawan dan Q lawan juga
-void CheckGetSH(Player *P, Queue *Q);
+void CheckGetSH(Player P, Queue *Q);
 
 // * Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
 // * Selipin di Capture, kalo yang direbut Fort. Masukin Q lawan.

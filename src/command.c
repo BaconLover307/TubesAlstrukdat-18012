@@ -155,10 +155,12 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         QDel(Qcurr, &usedskill);
         // * Switch
         if (strcmpi(usedskill,"IU") == 0) {
-            printf("All your buildings have been Leveled Up!!\n");
+            printf("!!! INSTANT UPGRADE !!!\n");
             InstantUpgrade(CurrP,databuild);
+            printf("All your buildings have been Leveled Up!!\n");
 
         } else if (strcmpi(usedskill,"SH") == 0) {
+            printf("!!! SHIELD UP !!!\n");
             Shield(CurrP);
             printf("All your buildings have been Shielded for 2 turns!!\n");
 
@@ -169,16 +171,25 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             CheckGetCH(Qenemy);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
+            printf("!!! ATTACK UP !!!\n");
+            AttackUp(CurrP);
+            printf("Your attacks for this turn ignore building defenses!!\n");
 
         } else if (strcmpi(usedskill,"CH") == 0) {
+            printf("!!! CRITICAL HIT IMMINENT !!!\n");
+            CriticalHit(CurrP);
+            printf("Your next attack will be twice as effective!!\n");
+
 
         } else if (strcmpi(usedskill,"IR") == 0) {
+            printf("!!! INSTANT REINFORCEMENT !!!\n");
             InstantReinforcement(CurrP, databuild);
-            printf("All your buildings have been added by 5 soldiers.\n");
+            printf("All your buildings have been added by 5 soldiers!!\n");
 
         } else if (strcmpi(usedskill,"BA") == 0) {
+            printf("!!! BARRAGE !!!\n");
             Barrage(CurrP, EnemyP, databuild);
-            printf("Soldiers in all your enemy's buildings have been decreased by 10\n");
+            printf("Soldiers in all your enemy's buildings have been decreased by 10!!\n");
         }
         ClearStack(gamestate);
 

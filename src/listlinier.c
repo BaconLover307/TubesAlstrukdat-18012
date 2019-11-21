@@ -394,22 +394,22 @@ void Capture(Player *P1, Player *P2, address A, Bangunan *B) {
 	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*L2));
 	// ! Deteksi Skill SH, ilangin ifnya
 	if (NbElmtList(*L2) == 2) {
+		printf("\n The enemy has gained the skill: SH!!\n");
 		CheckGetSH(*P2, Q2);
-		printf("TO DELETE!! Lawan mendapat skill SH!!");
 	}
 	// ! Deteksi Skill ET
 	if (Name(ElmtBan(*B,Info(A))) == 'F') {
+		printf("\n The enemy has gained the skill: ET!!\n");
 		CheckGetET(Q2);
-		printf("TO DELETE!! Lawan mendapat skill ET!!");
 	}
 	// ! Deteksi Skill AU
 	if (Name(ElmtBan(*B,Info(A))) == 'T') {
-		CheckGetAU(*P1, Q2, *B);
-		printf("TO DELETE!! Kamu mendapat skill AU!!");
+		printf("\n You have gained the skill: AU!!\n");
+		CheckGetAU(*P1, Q1, *B);
 	}
 	// ! Deteksi Skill BA, ilangin ifnya
 	if (NbElmtList(*L2) == 10) {
+		printf("\n The enemy has gained the skill: BA!!\n");
 		CheckGetBA(*P1, Q2);
-		printf("TO DELETE!! Lawan mendapat skill BA!!");
 	}	
 }

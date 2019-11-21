@@ -96,7 +96,7 @@ void QDel (Queue * Q, Qinfotype * X) {
     }
 
     else{
-        printf("Anda tidak mempunyai skill apa pun\n");
+        printf("Your Skill queue is empty...\n");
     }
 
 }
