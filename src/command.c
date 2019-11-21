@@ -23,7 +23,7 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
     Lenemy = &ListBan(*EnemyP);
 
     // $ Algoritma
-    
+
     // * Bangunan Pemain
     printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr,*databuild);
@@ -37,14 +37,14 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
             printf("Bangunan yang digunakan untuk menyerang : ");
         } else {printf("\n");}
     } while (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1);
-    
+
     // * Ambil Bangunan Pemain
     address Pcurr = Search(*Lcurr,nomorBangunan);
     int idxBangunanCurr = Info(Pcurr);
 
     PrintAttack(relasi, *Lcurr, *databuild, idxBangunanCurr);
     // * Bangunan Lawan
-    sleep(10);
+    // sleep(10);
     printf("pass\n");
     printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate))%2+1);
     PrintInfo(*Lenemy,*databuild);
@@ -61,8 +61,8 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
     int jumlahPasukan;
     printf("Masukkan Jumlah pasukan untuk menyerang : ");
     while (1) {
-        scanf("%d", &jumlahPasukan < Tentara(ElmtBan(DataBangunan, idxBangunanCurr)));
-        if (jumlahPasukan > 0 && jumlahPasukan <) break;
+        scanf("%d", &jumlahPasukan);
+        if (jumlahPasukan > 0 && jumlahPasukan < Tentara(ElmtBan(*databuild, idxBangunanCurr))) break;
         puts("jumlah pasukan tidak valid");
     }
     int idx = 1;
