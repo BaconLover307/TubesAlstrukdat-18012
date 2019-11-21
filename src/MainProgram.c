@@ -117,8 +117,7 @@ do {
 
         }   // $ ######### QUIT ########
         else if (strcmpi(menu, "QUIT") == 0) {
-            // TODO Quit();
-            printf("#QUIT PLACEHOLDER#\n");
+            Quit();
             ExitMenu = true;
             Exit = true;
 
