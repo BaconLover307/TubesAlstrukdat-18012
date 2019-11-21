@@ -184,11 +184,15 @@ do {
             sleep(1);
             printf("                             1...\n");
             sleep(1);
-            */
             clrscrn();
-            getchar();
-
+            */
+            //getchar();
+            //Player TestP = GetCurrPlayer(GameState);
+            //Player TestP = P1Info(Curr(GameState));
+            //printf("pass\n");
+            //PrintInfoHead(Skill(TestP));
             do {
+                    getchar();
                 do {
                     // $$ Inisiasi Turn
                     // $ Kamus Turn
@@ -222,25 +226,34 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
+                        ATTACK(&GameState, DataBangunan);
+=======
                         ATTACK(&GameState,DataBangunan);
-                        getchar();
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
+                    	LEVEL_UP(&GameState, DataBangunan);
+=======
                     	LEVEL_UP(&GameState,DataBangunan);
-                        getchar();
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
+                    	SKILL(&GameState, DataBangunan);
+=======
                     	SKILL(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
 						MOVE(&GameState,DataBangunan);
-                        getchar();
 
 
                     }   // $ ######### UNDO ########
@@ -250,7 +263,6 @@ do {
                     }   // $ ######### END_TURN ########
                     else if (strcmpi(command, "END_TURN") == 0) {
 						EndTurn = true;
-                        printf("Changing turn to Player %d...", TurnInfo(Curr(GameState))%2+1);
                         // ! Detector Skill Instant Reinforcement
                         CheckGetIR(CurrP,DataBangunan);
 
@@ -265,6 +277,7 @@ do {
 
 					}
 					else Invalid();
+					printf("\n");
                     getchar();
 
             	} while (!EndTurn);
