@@ -108,7 +108,7 @@ IdxType GetFirstBan (Bangunan B);
 IdxType GetLastBan (Bangunan B);
 
 // * Mengirimkan Jumlah maksimal tentara pada gedung (B,X)
-int GetMaxTentara(Bangunan B, urutan X);
+int GetMaxTentara(Bangunan B, IdxType X);
 
   /* ********** TEST KOSONG/PENUH ********** */
   /* *** Test tabel kosong *** */
