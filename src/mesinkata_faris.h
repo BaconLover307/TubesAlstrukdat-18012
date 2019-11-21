@@ -73,6 +73,4 @@ MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B);
 /* Membaca file yang telah diberikan menjadi graph. */
 Graph KataToGraph(int MaxEl);
 
-void ExecuteAll();
-
 #endif
