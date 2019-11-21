@@ -147,6 +147,7 @@ do {
                     LoadFile(GameState);
                 } else if (load == 'N') {
                     //LoadData();
+                    MakeEmptyBangunan(DataBangunan, 100);
                     printf("Choose building color for Player 1! \n");
                     SetPlayerWarna(&PlayerOne,&Pallete);
                     printf("Choose building color for Player 2! \n");
@@ -162,7 +163,7 @@ do {
                     *DataBangunan = KataToBangunan(CountBan);
                     MapBlueprint = KataToMatriks(Baris, Kolom, *DataBangunan);
                     RelasiBan = KataToGraph(CountBan);
-                    // * Bangunan pertama pemain                    
+                    // * Bangunan pertama pemain
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
 

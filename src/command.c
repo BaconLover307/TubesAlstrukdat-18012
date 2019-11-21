@@ -21,7 +21,7 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
     }
     Lcurr = &ListBan(*CurrP);
     Lenemy = &ListBan(*EnemyP);
-    
+
     // $ Algoritma
     
     // * Bangunan Pemain
@@ -54,13 +54,17 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
         scanf("%d", &nomorBangunanDiserang);
         if (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1) {
             printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
-            printf("Bangunan yang digunakan untuk menyerang : ");
+            printf("Bangunan yang diserang : ");
         } else {printf("\n");}
     } while (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1);
     // * Jumlah Pasukan
     int jumlahPasukan;
-    printf("Jumlah pasukan: ");
-    scanf("%d", &jumlahPasukan);
+    printf("Masukkan Jumlah pasukan untuk menyerang : ");
+    while (1) {
+        scanf("%d", &jumlahPasukan < Tentara(ElmtBan(DataBangunan, idxBangunanCurr)));
+        if (jumlahPasukan > 0 && jumlahPasukan <) break;
+        puts("jumlah pasukan tidak valid");
+    }
     int idx = 1;
     TentaraAttack(databuild, idx, jumlahPasukan);
     /*
@@ -169,7 +173,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         } else if (strcmpi(usedskill,"IR") == 0) {
             InstantReinforcement(CurrP, databuild);
             printf("All your buildings have been added by 5 soldiers.\n");
-            
+
         } else if (strcmpi(usedskill,"BA") == 0) {
             Barrage(CurrP, EnemyP, databuild);
             printf("Soldiers in all your enemy's buildings have been decreased by 10\n");

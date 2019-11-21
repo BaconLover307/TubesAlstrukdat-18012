@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "includes.c"
 #include "listlinier.h"
 
 int main() {
@@ -62,7 +63,7 @@ int main() {
   printf("Pemain ke-2 mau menyerang bangunan ke-3 yang dimiliki oleh Pemain 1.\n");
   printf("Tentara sebesar 30 orang dari Bangunan ke-4.\n");
 
-  /* Udah ada CheckAttackTentara untuk penvalidasian jumlah tentara */ 
+  /* Udah ada CheckAttackTentara untuk penvalidasian jumlah tentara */
   TentaraAttack(&B, 4, 30);
   TentaraInvaded(&B, false, false, 0, 3, 30);
   if (CanCapture(B, 3)) {
