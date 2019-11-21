@@ -133,6 +133,10 @@ void TambahTentara (Bangunan * B, urutan X);
         bertambah */
 void TambahAllTentara (List L, Bangunan * B);
 
-void capture(List *L1, List *L2, address P);
+// * I.S. P1, P2, B terdefinisi, A menunjuk address list di ListBan(P1)
+// *      yang akan di capture, jumlah tentara di bangunannya negatif
+// * F.S. Bangunan beraddress A di ListBan(P1) menjadi milik P2,
+// *      jumlah tentara menjadi positif, terdapat pemicu skill
+void Capture(Player *P1, Player *P2, address A, Bangunan *B);
 
 #endif

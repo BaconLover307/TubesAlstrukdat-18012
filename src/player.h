@@ -149,8 +149,8 @@ void CheckGetSH(Player P, Queue *Q);
 void CheckGetET(Queue *Q);
 
 // * Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan jumlah towernya menjadi 3.
-// * Selipin di Capture, kalo yang direbut Tower. Masukin Q sendiri.
-void CheckGetAU(Player P, Queue *Q, Banguan databuild);
+// * Selipin di Capture, kalo yang direbut Tower. Masukin P & Q sendiri.
+void CheckGetAU(Player P, Queue *Q, Bangunan databuild);
 
 // * Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 // * Selipin di Skill bagian Extra Turn, di command.c. Masukin Q lawan

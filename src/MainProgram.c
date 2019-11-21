@@ -240,7 +240,7 @@ do {
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
-						MOVE(&GameState,DataBangunan, RelasiBan);
+						MOVE(&GameState,&DataBangunan, RelasiBan);
 
 
                     }   // $ ######### UNDO ########

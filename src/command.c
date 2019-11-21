@@ -164,7 +164,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             printf("You have gained an Extra Turn!!\n");
             ExtraTurn(CurrP);
             // ! Detector Skill Critical Hit
-            GetCH(Qenemy);
+            CheckGetCH(Qenemy);
 
         } else if (strcmpi(usedskill,"AU") == 0) {
 

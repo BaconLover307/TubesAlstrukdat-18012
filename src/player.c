@@ -178,27 +178,13 @@ void Barrage(Player *P, Player *E, Bangunan *B) {
     address A;
     // $ Algoritma
     A = First(ListBan(*E));
-    while (Next(A) != Nil){
-        if (Tentara(ElmtBan(*B, Info(A))) > 10){
-            Tentara(ElmtBan(*B, Info(A))) -= 10;
-        }
-
-        else{
-            Tentara(ElmtBan(*B, Info(A))) = 0;
-            capture(&ListBan(*P), &ListBan(*E), A);       
+    while (A != Nil) {
+        Tentara(ElmtBan(*B, Info(A))) -= 10;
+        if (CanCapture(*B, Info(A))) {
+            Capture(&ListBan(*P), &ListBan(*E), A, B);
         }
         A = Next(A);
     }
-
-    if (Tentara(ElmtBan(*B, Info(A))) > 10){
-            Tentara(ElmtBan(*B, Info(A))) -= 10;
-        }
-
-        else{
-            Tentara(ElmtBan(*B, Info(A))) = 0;
-            capture(&ListBan(*P), &ListBan(*E), A);
-        }
-
 }
 
 // $ ************* Detect Skill *************
