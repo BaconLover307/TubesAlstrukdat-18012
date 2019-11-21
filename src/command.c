@@ -54,15 +54,16 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
         scanf("%d", &nomorBangunanDiserang);
         if (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1) {
             printf("Input is not valid! Please input given index of buildings.\n");
-            printf("Choose a building to attack : ");
+            printf("Choose a building you want to attack : ");
         } else {printf("\n");}
     } while (nomorBangunanDiserang > NbElmtList(*Lcurr) || nomorBangunanDiserang < 1);
     // * Jumlah Pasukan
     int jumlahPasukan;
-    printf("Amount of soldiers use for attack : ");
     while (1) {
+        printf("Amount of soldiers use for attack : ");
         scanf("%d", &jumlahPasukan);
-        if (jumlahPasukan > 0 && jumlahPasukan < Tentara(ElmtBan(*databuild, idxBangunanCurr))) break;
+        if (jumlahPasukan > 0 && jumlahPasukan < Tentara(ElmtBan(*databuild, idxBangunanCurr)))
+            break;
         puts("Amount of soldiers is not valid!");
     }
     int idx = 1;
@@ -110,9 +111,8 @@ void LEVEL_UP(Stack *gamestate, Bangunan *databuild) {
     PrintInfo(*Lcurr, *databuild);
     printf("\n");
     // * User Input
-    printf(" : ");
-    printf("\n");
     int nomorBangunan;
+    printf("Choose the building you want to level-up : ");
     scanf("%d", &nomorBangunan);
     // * Melakukan pengecekan keberhasilan level up
     if (CheckLevelUp(*databuild,nomorBangunan)) {
@@ -195,51 +195,95 @@ void UNDO(Stack *gamestate) {
 }
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Stack *gamestate, Bangunan *databuild) { // todo
+void MOVE(Stack *gamestate, Bangunan *databuild, Graph relasi) { // todo
     // $ Kamus Lokal
     Player *CurrP;
-    Player *EnemyP;
     List *Lcurr;
-    List *Lenemy;
     if (TurnInfo(Curr(*gamestate)) == 1) {
         CurrP = &P1Info(Curr(*gamestate));
-        EnemyP = &P2Info(Curr(*gamestate));
-    }
-    else {
+    } else {
         CurrP = &P2Info(Curr(*gamestate));
-        EnemyP = &P1Info(Curr(*gamestate));
     }
+    Lcurr = &ListBan(*CurrP);
     // $ Algoritma
     // * Bangunan Pemain
     printf(" __\n[__] ==== List of Buildings  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr,*databuild);
     int giliran = TurnInfo(Curr(*gamestate));
-    printf("Choose a building which you want to use for attack : ");
     int nomorBangunan;
     do {
+        printf("Choose a building to move : ");
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1) {
             printf("Input is not valid! Please input given index of buildings.\n");
-            printf("Choose a building which you want to use for attack : ");
         } else {printf("\n");}
     } while (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1);
     // * Ambil Bangunan Pemain
     address Pcurr = Search(*Lcurr,nomorBangunan);
     int idxBangunanCurr = Info(Pcurr);
 
-    printf("List of Nearest Buildings :\n");
     // Menampilkan daftar bangunan terdekat
-    printf("Choose a building which will receive the soldiers : ");
+    int jumlahBangunanTerdekat;
+    printf("List of Nearest Buildings :\n");
+    PrintMove(relasi, *Lcurr, *databuild, idxBangunanCurr, &jumlahBangunanTerdekat);
+    if (jumlahBangunanTerdekat == 0) {
+        puts("....");
+        sleep(1);
+        puts("It seems that this building does not have any other connected building.");
+        puts("press enter to go back to the main menu.");
+        getchar();
+        return;
+    }
     int nomorBangunanDiterima;
-    scanf("%d", nomorBangunanDiterima);
-    printf("Amount of soldiers : ");
+    while (1) {
+        printf("Choose a building which will receive the soldiers : ");
+        scanf("%d", nomorBangunanDiterima);
+        if (0 < nomorBangunanDiterima && nomorBangunanDiterima <= jumlahBangunanTerdekat)
+            break;
+        puts("Index input is invalid!");
+    }
+    int idxBangunanAcc = GetIdxMove(relasi, *Lcurr, *databuild, idxBangunanCurr, nomorBangunanDiterima);
     int jumlahPasukan;
-    scanf("%d", jumlahPasukan);
-    // melakukan validasi input
-    // while () {
-    //
-    // }
-    printf("%d soldier(s) [...] has been moved to [...]\n", jumlahPasukan);
+    while (1) {
+        printf("Enter your desired amount of soldiers : ");
+        scanf("%d", jumlahPasukan);
+        if (0 < jumlahPasukan && jumlahPasukan <= Tentara(ElmtBan(*databuild, idxBangunanCurr)))
+            break;
+        puts("Input of amount soldiers is invalid!");
+    }
+    Tentara(ElmtBan(*databuild, idxBangunanCurr)) -= jumlahPasukan;
+    Tentara(ElmtBan(*databuild, idxBangunanAcc)) += jumlahPasukan;
+    printf("%d soldier(s) from ", jumlahPasukan);
+    char namaBuilding = Name(ElmtBan(*databuild, idxBangunanCurr));
+    if (namaBuilding == 'C') {
+      printf("Castle ");
+    } else if (namaBuilding == 'V') {
+      printf("Village ");
+    } else if (namaBuilding == 'T') {
+      printf("Tower ");
+    } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
+      printf("Fort ");
+    }
+
+    TulisPOINT(Posisi(ElmtBan(*databuild, idxBangunanCurr)));
+
+    printf("has been moved to ");
+
+    namaBuilding = Name(ElmtBan(*databuild, idxBangunanAcc));
+    if (namaBuilding == 'C') {
+      printf("Castle ");
+    } else if (namaBuilding == 'V') {
+      printf("Village ");
+    } else if (namaBuilding == 'T') {
+      printf("Tower ");
+    } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
+      printf("Fort ");
+    }
+
+    TulisPOINT(Posisi(ElmtBan(*databuild, idxBangunanAcc)));
+
+    puts("");
+
 }
 
 // Prosedur untuk melakukan SAVE

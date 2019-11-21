@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "graph.h"
+#include "includes.c"
 
 int main() {
   /* KAMUS */
@@ -100,7 +101,8 @@ int main() {
 
 
   printf("Daftar bangunan terdekat dengan bangunan ke-2:\n");
-  PrintMove(G, L1, B, 2);
+  int temp;
+  PrintMove(G, L1, B, 2, &temp);
 
   return 0;
 }

@@ -182,6 +182,8 @@ boolean CheckMove (Graph G, List L, urutan X);
         yang dapat ditambahkan jumlah tentaranya.
         Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di
         layar */
-void PrintMove (Graph G, List L, Bangunan B, urutan X);
+void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count);
+
+int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos);
 
 #endif
