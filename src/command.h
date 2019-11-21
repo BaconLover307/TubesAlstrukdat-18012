@@ -25,7 +25,7 @@ void UNDO(Stack *gamestate);
 boolean END_TURN(Stack *gamestate);
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Stack *gamestate);
+void MOVE(Stack *gamestate, Bangunan *databuild);
 
 // Prosedur untuk melakukan SAVE
 void SAVE(Stack *gamestate);
