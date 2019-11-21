@@ -83,7 +83,7 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
     // cek apakah berhasil diambil atau tidak
     if (1) {
         printf("The building is yours now!\n");
-        CheckGetSH(EnemyP, &Skill(*EnemyP));
+        //CheckGetSH(EnemyP, &Skill(*EnemyP));
 
     } else {
         printf("You failed to grab the building.\n");
