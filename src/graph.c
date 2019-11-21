@@ -337,13 +337,13 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
         printf("%d. ", i);
 
         if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
-          printf("Castle ");
+          printf("Castle  ");
         } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
           printf("Village ");
         } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
-          printf("Tower ");
+          printf("Tower   ");
         } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
-          printf("Fort ");
+          printf("Fort    ");
         }
 
         TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
