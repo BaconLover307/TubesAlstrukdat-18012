@@ -89,20 +89,10 @@ do {
             TabColor Pallete;
             MATRIKS MapBlueprint;
             Graph RelasiBan;
-            int Baris,Kolom,CountBan;
+            int Baris, Kolom, CountBan, Turn;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
-            STARTKATA();
-            Baris = KataToInt(CKata);
-            ADVKATA();
-            Kolom = KataToInt(CKata);
-            ADVKATA();
-            CountBan = KataToInt(CKata);
-            ADVKATA();
-            DataBangunan = KataToBangunan(CountBan);
-            MapBlueprint = KataToMatriks(Baris, Kolom, DataBangunan);
-            RelasiBan = KataToGraph(CountBan);
 
             // todo Load Game
             printf("Do you want to load a previous game? ");
@@ -117,7 +107,23 @@ do {
                     SetPlayerWarna(&PlayerOne,&Pallete);
                     printf("Choose building color for Player 2! \n");
                     SetPlayerWarna(&PlayerTwo,&Pallete);
+                    // * CONFIGURE
+                    STARTKATA();
+                    Baris = KataToInt(CKata);
+                    ADVKATA();
+                    Kolom = KataToInt(CKata);
+                    ADVKATA();
+                    CountBan = KataToInt(CKata);
+                    ADVKATA();
+                    *DataBangunan = KataToBangunan(CountBan);
+                    MapBlueprint = KataToMatriks(Baris, Kolom, *DataBangunan);
+                    RelasiBan = KataToGraph(CountBan);
+                    // * Bangunan pertama pemain                    
+                    InsVPrio(&ListBan(PlayerOne),1);
+                    InsVPrio(&ListBan(PlayerTwo),2);
 
+                    // * AKHIRNYA MULAI
+                    Turn = 1;
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
                     // * Countdown
                     clrscrn();
@@ -164,6 +170,7 @@ do {
                     PrintCurr(GameState);
                     Command();
                     int idxCommand = 0;
+                    getchar();
                     do {
                         scanf("%c", command + idxCommand);
                     } while (command[idxCommand++] != '\n');
@@ -189,7 +196,7 @@ do {
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
-						MOVE(&GameState);
+						MOVE(&GameState,DataBangunan);
 
 
                     }   // $ ######### UNDO ########
