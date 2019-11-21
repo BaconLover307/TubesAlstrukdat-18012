@@ -61,8 +61,9 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
     int jumlahPasukan;
     printf("Masukkan Jumlah pasukan untuk menyerang : ");
     while (1) {
-        scanf("%d", &jumlahPasukan < Tentara(ElmtBan(DataBangunan, idxBangunanCurr)));
-        if (jumlahPasukan > 0 && jumlahPasukan <) break;
+        scanf("%d", &jumlahPasukan);
+        if (jumlahPasukan > 0 && jumlahPasukan < Tentara(ElmtBan(*databuild, idxBangunanCurr)))
+            break;
         puts("jumlah pasukan tidak valid");
     }
     int idx = 1;

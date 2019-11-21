@@ -17,6 +17,7 @@ void MakeEmptyBangunan (Bangunan * B, int maxel) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
+  printf("HAH\n");
   BI(*B) = (info_bangunan *) malloc ((maxel + 1)* sizeof(info_bangunan));
   MaxEl(*B) = maxel;
   Neff(*B) = 0;
