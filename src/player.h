@@ -139,6 +139,8 @@ void Barrage(Player *P, Player *E, Bangunan *B);
 
 void CheckGetIR(Player *P, Bangunan *B);
 
+void CheckGetSH(Player P, Queue *Q);
+
 void GetCH(Queue *Q);
 
 #endif
