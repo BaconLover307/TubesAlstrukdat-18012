@@ -184,7 +184,9 @@ void Barrage(Player *P, Player *E, Bangunan *B) {
         }
 
         else{
-            Tentara(ElmtBan(*B, Info(A))) = 0;          
+            Tentara(ElmtBan(*B, Info(A))) = 0;
+            DelP(&ListBan(*E), Info(A));
+            InsertPrio(&ListBan(*P), A);       
         }
         A = Next(A);
     }

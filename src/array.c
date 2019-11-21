@@ -55,7 +55,7 @@ IdxType GetLastBan (Bangunan B) {
   return Neff(B);
 }
 
-int GetMaxTentara(Bangunan B, urutan X) {
+int GetMaxTentara(Bangunan B, IdxType X) {
 	if (Name(ElmtBan(B, X)) == 'C') {
 		if (Level(ElmtBan(B, X)) == 1) {
 		return MaxC1;

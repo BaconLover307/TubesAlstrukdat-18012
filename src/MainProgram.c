@@ -19,10 +19,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "includes.c"
+#include "command.c"
 #include "string.h"
-/*
-#include "configure.h"
-*/
+#include "mesinkata_faris.h"
 
 // $ ***** Variables *****
 char menu[100];
@@ -30,12 +29,50 @@ boolean Exit; // = false;
 boolean ExitMenu; // = false;
 boolean EndTurn; // = false;
 
+// $ ******* MAP PRINTING FUNCTION ********
+void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
+    int i, j;
+    for (i = 1; i <= (MaxBrs(M) + 2); i++) {
+        for (j = 1; j < (MaxKol(M) + 2); j++) {
+            if (i == 1) {
+                printf("+");
+            }
+            else if (i == (MaxBrs(M) + 2)) {
+                printf("+");
+            }
+            else if (j == 1) {
+                printf("+");
+            }
+            else if (i == (MaxKol(M) + 2)) {
+                printf("+");
+            }
+            else if ((Elmt(M,(i-1),(j-1))) == 0) {
+                printf(" ");
+            }
+            else {
+                ElType Mem = Elmt(M,(i-1),(j-1));
+                char C = Name(ElmtBan(B,Mem));
+                if (Search(ListBan(One), Mem) != Nil) {
+                    print_warna(Color(One), C);
+                }
+                else if (Search(ListBan(Two), Mem) != Nil) {
+                    print_warna(Color(Two), C);
+                }
+                else {
+                    printf("%c", C);
+                }
+            }
+        }
+        printf("+\n");
+    }
+}
+
+
 // $ ******* MAIN PROGRAM ********
 int main() {
 do {
     Exit = false;
-    // todo MainM();
-    printf(LAN MAIN#\n");
+    MainM();
     // ASCII Art: MainMenu
     do {
         ExitMenu = false;
@@ -56,7 +93,6 @@ do {
             // todo Tutorial1();
             clrscrn();
             printf("#TUT1 PLACEHOLDER#\n");
-            getchar();
             getchar();
             clrscrn();
             // todo Tutorial2();
@@ -90,12 +126,12 @@ do {
             Player PlayerOne, PlayerTwo;
 			Bangunan *DataBangunan;
             TabColor Pallete;
-            int config; // todo MASUKIN CONFIGURASI
+            MATRIKS MapBlueprint;
+            Graph RelasiBan;
+            int Baris, Kolom, CountBan, Turn;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
-            MakeEmptyBangunan(DataBangunan,config);
-            int Turn = 1;
 
             // todo Load Game
             printf("Do you want to load a previous game? ");
@@ -110,31 +146,46 @@ do {
                     SetPlayerWarna(&PlayerOne,&Pallete);
                     printf("Choose building color for Player 2! \n");
                     SetPlayerWarna(&PlayerTwo,&Pallete);
+                    // * CONFIGURE
+                    STARTKATA();
+                    Baris = KataToInt(CKata);
+                    ADVKATA();
+                    Kolom = KataToInt(CKata);
+                    ADVKATA();
+                    CountBan = KataToInt(CKata);
+                    ADVKATA();
+                    *DataBangunan = KataToBangunan(CountBan);
+                    MapBlueprint = KataToMatriks(Baris, Kolom, *DataBangunan);
+                    RelasiBan = KataToGraph(CountBan);
+                    // * Bangunan pertama pemain                    
+                    InsVPrio(&ListBan(PlayerOne),1);
+                    InsVPrio(&ListBan(PlayerTwo),2);
 
+                    // * AKHIRNYA MULAI
+                    Turn = 1;
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn);
-                    // * Countdown
-                    clrscrn();
-                    printf("              Starting game in...\n\n");
-                    sleep(1);
-                    printf("              3...\n\n");
-                    sleep(1);
-                    printf("                     2...\n\n");
-                    sleep(1);
-                    printf("                             1...\n");
-                    sleep(1);
-                    clrscrn();
                 }
             } while (load != 'Y' && load != 'N');
 
             // todo maen game
-
-            printf("#Ceritanya Maen#\n");
+            // * Countdown
+            clrscrn();
+            printf("              Starting game in...\n\n");
+            sleep(1);
+            printf("              3...\n\n");
+            sleep(1);
+            printf("                     2...\n\n");
+            sleep(1);
+            printf("                             1...\n");
+            sleep(1);
+            clrscrn();
             //getchar();
             //Player TestP = GetCurrPlayer(GameState);
             //Player TestP = P1Info(Curr(GameState));
             //printf("pass\n");
             //PrintInfoHead(Skill(TestP));
             do {
+                    getchar();
                 do {
                     // $$ Inisiasi Turn
                     // $ Kamus Turn
@@ -154,6 +205,7 @@ do {
                     Qenemy = &Skill(*EnemyP);
 
                     // $ Display Status
+                    PrintMap(MapBlueprint, *DataBangunan, PlayerOne, PlayerTwo);
                     PrintCurr(GameState);
                     Command();
                     int idxCommand = 0;
@@ -167,22 +219,34 @@ do {
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
                         ATTACK(&GameState, DataBangunan);
+=======
+                        ATTACK(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
                     	LEVEL_UP(&GameState, DataBangunan);
+=======
+                    	LEVEL_UP(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
                         Push(&GameState,Curr(GameState));
+<<<<<<< HEAD
                     	SKILL(&GameState, DataBangunan);
+=======
+                    	SKILL(&GameState,DataBangunan);
+>>>>>>> bd474bb5adf7e3e576ae3b32d23c80a00d6cb896
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,Curr(GameState));
-						MOVE(&GameState);
+						MOVE(&GameState,DataBangunan);
 
 
                     }   // $ ######### UNDO ########
