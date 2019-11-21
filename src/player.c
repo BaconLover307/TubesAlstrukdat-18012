@@ -172,18 +172,18 @@ void InstantReinforcement(Player *P, Bangunan *B) {
     Tentara(ElmtBan(*B, Info(A))) += 5;
 }
 
-void Barrage(Player *P, Bangunan *B) {
+void Barrage(Player *P, Palyer *E, Bangunan *B) {
     // $ Kamus Lokal
     address A;
     // $ Algoritma
-    A = First(ListBan(*P));
+    A = First(ListBan(*E));
     while (Next(A) != Nil){
         if (Tentara(ElmtBan(*B, Info(A))) >= 10){
             Tentara(ElmtBan(*B, Info(A))) -= 10;
         }
 
         else{
-            Tentara(ElmtBan(*B, Info(A))) = 0;
+            Tentara(ElmtBan(*B, Info(A))) = 0;          
         }
         A = Next(A);
     }
