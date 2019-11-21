@@ -21,9 +21,7 @@
 #include "includes.c"
 #include "command.c"
 #include "string.h"
-/*
-#include "configure.h"
-*/
+#include "mesinkata_faris.h"
 
 // $ ***** Variables *****
 char menu[100];
@@ -89,12 +87,22 @@ do {
             Player PlayerOne, PlayerTwo;
 			Bangunan *DataBangunan;
             TabColor Pallete;
-            int config; // todo MASUKIN CONFIGURASI
+            MATRIKS MapBlueprint;
+            Graph RelasiBan;
+            int Baris,Kolom,CountBan;
             CreatePlayer(&PlayerOne);
             CreatePlayer(&PlayerTwo);
             MakeBukuWarna(&Pallete);
-            MakeEmptyBangunan(DataBangunan,config);
-            int Turn = 1;
+            STARTKATA();
+            Baris = KataToInt(CKata);
+            ADVKATA();
+            Kolom = KataToInt(CKata);
+            ADVKATA();
+            CountBan = KataToInt(CKata);
+            ADVKATA();
+            DataBangunan = KataToBangunan(CountBan);
+            MapBlueprint = KataToMatriks(Baris, Kolom, DataBangunan);
+            RelasiBan = KataToGraph(CountBan);
 
             // todo Load Game
             printf("Do you want to load a previous game? ");

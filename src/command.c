@@ -181,16 +181,37 @@ void UNDO(Stack *gamestate) {
 }
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Stack *gamestate) { // todo
-    printf("Daftar bangunan\n");
-    // Menampilkan daftar Bangunan
-    printf("Pilih bangunan : ");
+void MOVE(Stack *gamestate, Bangunan *databuild) { // todo
+    // $ Kamus Lokal
+    Player *CurrP;
+    Player *EnemyP;
+    List *Lcurr;
+    List *Lenemy;
+    if (TurnInfo(Curr(*gamestate)) == 1) {
+        CurrP = &P1Info(Curr(*gamestate));
+        EnemyP = &P2Info(Curr(*gamestate));
+    }
+    else {
+        CurrP = &P2Info(Curr(*gamestate));
+        EnemyP = &P1Info(Curr(*gamestate));
+    }
+    // $ Algoritma
+    // * Bangunan Pemain
+    printf(" __\n[__] ==== Daftar Bangunan  ==== [P%d]\n", TurnInfo(Curr(*gamestate)));
+    PrintInfo(*Lcurr,*databuild);
+    int giliran = TurnInfo(Curr(*gamestate));
+    printf("Bangunan yang digunakan untuk menyerang : ");
     int nomorBangunan;
-    scanf("%d", &nomorBangunan);
-    // melakukan validasi input
-    // while () {
-    //
-    // }
+    do {
+        scanf("%d", &nomorBangunan);
+        if (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1) {
+            printf("Masukan tidak valid! Silakan input index bangunan yang tersedia.\n");
+            printf("Bangunan yang digunakan untuk menyerang : ");
+        } else {printf("\n");}
+    } while (nomorBangunan > NbElmtList(*Lcurr) || nomorBangunan < 1);
+    // * Ambil Bangunan Pemain
+    address Pcurr = Search(*Lcurr,nomorBangunan);
+    int idxBangunanCurr = Info(Pcurr);
 
     printf("Daftar bangunan terdekat :\n");
     // Menampilkan daftar bangunan terdekat
