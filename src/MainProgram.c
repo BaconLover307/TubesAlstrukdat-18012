@@ -247,11 +247,11 @@ do {
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
-                    printf("Top = %d\n",Top(GameState));
+                        printf("Top = %d\n",Top(GameState));
                         Push(&GameState,InfoTop(GameState));
-                    printf("Top = %d\n",Top(GameState));
+                        printf("Top = %d\n",Top(GameState));
                         Pop(&GameState,&Current);
-                    printf("Top = %d\n",Top(GameState));
+                        printf("Top = %d\n",Top(GameState));
                         
                         printf("==============INFOTOP BEFORE================\n");
                         PrintCondition(InfoTop(GameState));

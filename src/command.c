@@ -22,6 +22,23 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
     Ltop = &ListBan(*TopP);
     Lenemy = &ListBan(*EnemyP);
 
+    /*
+    // $ Kamus Lokal
+    Player *CurrP;
+    List *Ltop;
+    if (TurnInfo(*state) == 1) {
+        CurrP = &P1Info(*state);
+    } else {
+        CurrP = &P2Info(*state);
+    }
+    Ltop = &ListBan(*CurrP);
+    // $ Algoritma
+    // * Bangunan Pemain
+    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(*state));
+    PrintInfo(*Ltop,*databuild);
+    printf("\n");
+    */
+
     int idxBangunanCurr, nomorBangunan;
     address Pcurr;
     int giliran;
@@ -35,7 +52,7 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
     do {
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1) {
-            printf("Input is not valid! Please input an avai index bangunan yang tersedia.\n");
+            printf("Input is not valid! Please input the available indexes.\n");
             printf("Choose a building to attack : ");
         } else {
                 Pcurr = Search(*Ltop,nomorBangunan);
@@ -53,7 +70,7 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
 
     PrintAttack(relasi, *Ltop, *databuild, idxBangunanCurr);
     // * Bangunan Lawan
-    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state)%2+1);
+    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state) % 2 + 1);
     PrintInfo(*Lenemy,*databuild);
     printf("\nChoose a building you want to attack : ");
     int nomorBangunanDiserang;
@@ -265,7 +282,6 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1) {
             printf("Input is not valid! Please input given index of buildings.\n");
-            Moved(ElmtBan(*databuild, idxBangunanCurr))
         } else {printf("\n");}
     } while (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1);
     // * Ambil Bangunan Pemain

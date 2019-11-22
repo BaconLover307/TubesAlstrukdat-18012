@@ -18,14 +18,13 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild) {
 void ClearStack(Stack *S) {
     Sinfotype temp;
     while(!IsFirstAct(*S)) {
-        puts("PASS");
         Pop(S,&temp);
     }
 }
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
 boolean IsFirstAct(Stack S) {
-    return ((Top(S)-1) == SNil);
+    return ((Top(S) - 1) == SNil);
 }
 
 boolean IsFull(Stack S) {
@@ -34,14 +33,14 @@ boolean IsFull(Stack S) {
 
 // $ ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack *S, Sinfotype X) {
-    Top(*S) += 1;
+    Top(*S)++;
     InfoTop(*S) = X;
 }
 
 // $ ************ Menghapus sebuah elemen Stack ************
 void Pop(Stack *S, Sinfotype *X) {
     *X = InfoTop(*S);
-    Top(*S) -= 1;
+    Top(*S)--;
 }
 
 // $ ************ Turn Handling ************

@@ -130,11 +130,6 @@ boolean IsFullBan (Bangunan B) {
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaBangunan (Bangunan * B) {
-// Todo Menunggu yang kerjain Configure
-
-}
 
 //$ ******************** Tentara Attack ****************************/
 boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
