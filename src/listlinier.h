@@ -70,70 +70,70 @@ address Search (List L, urutan X);
 
 urutan GetInfo(List L, int i);
 
-    /****************** PRIMITIF BERDASARKAN NILAI ******************/
-    /*** PENAMBAHAN ELEMEN ***/
+/****************** PRIMITIF BERDASARKAN NILAI ******************/
+/*** PENAMBAHAN ELEMEN ***/
 
-    /* I.S. L mungkin kosong */
-    /* F.S. Melakukan alokasi sebuah elemen dan */
-    /* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
-    /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    void InsVPrio(List * L, urutan X);
-    // ! Tambah bangunan selalu pakai prosedur ini
+/* I.S. L mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
+/* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+void InsVPrio(List * L, urutan X);
+// ! Tambah bangunan selalu pakai prosedur ini
 
-    /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
-    /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
+/****************** PRIMITIF BERDASARKAN ALAMAT ******************/
+/*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
 
-    /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
-    /*      P sudah dialokasi  */
-    /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-    void InsertAfter(List * L, address P, address Prec);
+/* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
+/*      P sudah dialokasi  */
+/* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
+void InsertAfter(List * L, address P, address Prec);
 
-    /* I.S. P sudah dialokasi */
-    /* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
-    void InsertPrio(List * L, address P);
+/* I.S. P sudah dialokasi */
+/* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
+void InsertPrio(List * L, address P);
 
-    /*** PENGHAPUSAN SEBUAH ELEMEN ***/
+/*** PENGHAPUSAN SEBUAH ELEMEN ***/
 
-    /* I.S. L terdefinisi
-        X pasti ada di dalam List */
-    /* F.S. X dihilangkan dari List  */
-    /* List mungkin menjadi kosong karena penghapusan */
-    void DelP(List * L, urutan X);
+/* I.S. L terdefinisi
+    X pasti ada di dalam List */
+/* F.S. X dihilangkan dari List  */
+/* List mungkin menjadi kosong karena penghapusan */
+void DelP(List * L, urutan X);
 
-    /****************** PROSES SEMUA ELEMEN LIST ******************/
+/****************** PROSES SEMUA ELEMEN LIST ******************/
 
-    /* I.S. List tidak kosong */
-    /* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan
-        elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
-    /* Contoh :
-    1. Castle (1,15) 20 lv. 3
-    2. Tower (1,13) 50 lv. 1
-    3. Castle (3,14) 30 lv. 2                                        */
-    void PrintInfo(List L, Bangunan B);
+/* I.S. List tidak kosong */
+/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan
+    elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
+/* Contoh :
+1. Castle (1,15) 20 lv. 3
+2. Tower (1,13) 50 lv. 1
+3. Castle (3,14) 30 lv. 2                                        */
+void PrintInfo(List L, Bangunan B);
 
-    /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-    int NbElmtList(List L);
+/* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
+int NbElmtList(List L);
 
-    /*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
+/*************** PENAMBAHAN TENTARA TIAP RONDE *********************/
 
-    /* X pasti ada di dalam List */
-    /* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah
-   melewati maksimum penambahan pasukan atau belum */
-    /* Jika belum maka true dan sebaliknya */
-    boolean CheckTambahTentara(Bangunan B, urutan X);
+/* X pasti ada di dalam List */
+/* Mengecek apakah bangunan ke-X yang dimiliki oleh pemain tertentu sudah
+melewati maksimum penambahan pasukan atau belum */
+/* Jika belum maka true dan sebaliknya */
+boolean CheckTambahTentara(Bangunan B, urutan X);
 
-    /* I.S. List L terdefinisi
-        Bangunan B terdefinisi
-        X pasti ada di dalam List
-        CheckTentara bernilai true */
-    /* F.S. Bangunan ke-X ditambah jumlah sesuai dengan tipe bangunan itu */
-    void TambahTentara(Bangunan * B, urutan X);
+/* I.S. List L terdefinisi
+    Bangunan B terdefinisi
+    X pasti ada di dalam List
+    CheckTentara bernilai true */
+/* F.S. Bangunan ke-X ditambah jumlah sesuai dengan tipe bangunan itu */
+void TambahTentara(Bangunan * B, urutan X);
 
-    /* I.S. List L terdefinisi
-        Bangunan B terdefinisi */
-    /* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya
-        bertambah */
-    void TambahAllTentara(List L, Bangunan * B);
+/* I.S. List L terdefinisi
+    Bangunan B terdefinisi */
+/* F.S. Bangunan yang dimiliki oleh pemain mengalami jumlah tentaranya
+    bertambah */
+void TambahAllTentara(List L, Bangunan * B);
 
 
 #endif
