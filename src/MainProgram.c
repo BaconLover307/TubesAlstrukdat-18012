@@ -240,6 +240,7 @@ do {
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
+                        PrintTop(InfoTop(GameState));
                         Push(&GameState,Curr(GameState));
                         printf("==============INFOTOP BEFORE================\n");
                         PrintTop(InfoTop(GameState));
