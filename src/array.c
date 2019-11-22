@@ -288,3 +288,12 @@ void LevelUp (Bangunan * B, IdxType X) {
 void ResetLevel (Bangunan * B, IdxType X) {
   Level(ElmtBan(*B, X)) == 1;
 }
+
+Bangunan CopyBangunan(Bangunan B) {
+  Bangunan ret;
+  MakeEmptyBangunan(&ret, MaxEl(B));
+  for (int i = 1; i <= Neff(B); i++) {
+    ElmtBan(ret, i) = ElmtBan(B, i);
+  }
+  return ret;
+}

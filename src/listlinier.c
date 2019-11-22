@@ -168,6 +168,17 @@ void DelP (List * L, urutan X) {
   Dealokasi(&P);
 }
 
+List CopyList(List L) {
+  List ret;
+  CreateEmptyList(&ret);
+  address P = First(L);
+  while (P != Nil) {
+    InsVPrio(&ret, Info(P));
+    P = Next(P);
+  }
+  return ret;
+}
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L, Bangunan B) {
   /* KAMUS LOKAL */

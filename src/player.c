@@ -293,3 +293,16 @@ void CheckGetBA(Player P, Queue *Q) {
     if (NbElmtList(ListBan(P)) == 10)
     QAdd(Q, "BA");
 }
+
+Player copyPlayer(Player P) {
+    Player ret;
+    CreatePlayer(&ret);
+    ListBan(ret) = CopyList(ListBan(P));
+    Skill(ret) = CopyQueue(Skill(P));
+    Color(ret) = Color(P);
+    AU(FX(ret)) = AU(FX(P));
+    ET(FX(ret)) = ET(FX(P));
+    ActiveSH(SH(FX(ret))) = ActiveSH(SH(FX(P)));
+    Duration(SH(FX(ret))) = Duration(SH(FX(P)));
+    return ret;
+}

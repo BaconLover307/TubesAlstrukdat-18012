@@ -192,4 +192,6 @@ void LevelUp(Bangunan * B, IdxType X);
 // * F.S. Bangunan ke-X mengalami pengembalian level menjadi level 1
 void ResetLevel(Bangunan *B, IdxType X);
 
+Bangunan CopyBangunan(Bangunan B);
+
 #endif
