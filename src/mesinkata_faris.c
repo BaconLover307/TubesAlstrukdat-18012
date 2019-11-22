@@ -106,6 +106,9 @@ info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
   else if (Name(info) == 'V') {
     Tentara(info) = 20;
   }
+  Moved(info) = false;
+  Attacked(info) = false;
+  Defense(info) = false;
   return info;
 }
 
@@ -126,7 +129,8 @@ Bangunan KataToBangunan(int MaxEl)
   }
     Neff(B) = MaxEl;
     return B;
-}
+  }
+
 
 MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
 {

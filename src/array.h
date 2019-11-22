@@ -28,6 +28,8 @@ typedef struct {
   int tentara;          /* jumlah tentara yang dimiliki bangunan */
   boolean hasmoved;     /* status sudah move atau belum */
   boolean hasattacked;    /* status sudah attack atau belum */
+  boolean defense;      /* status memiliki pertahanan atau tidak */
+
 } info_bangunan;
 
 typedef struct {
@@ -76,14 +78,15 @@ typedef struct {
 #define BI(B)         (B).BI
 #define ElmtBan(B,i)  (B).BI[(i)]
 #define MaxEl(B)      (B).MaxEl
-#define Moved(B)      (B).hasmoved
-#define Attacked(B)      (B).hasattacked
 
 /* e adalah info_bangunan */
 #define Name(e)       (e).name
 #define Posisi(e)     (e).posisi
 #define Level(e)      (e).level
 #define Tentara(e)    (e).tentara
+#define Moved(e)      (e).hasmoved
+#define Attacked(e)   (e).hasattacked
+#define Defense(e)    (e).defense
 
 // $ ********** KONSTRUKTOR **********
 
