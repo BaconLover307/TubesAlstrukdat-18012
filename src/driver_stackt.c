@@ -80,9 +80,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 puts("P1");
@@ -100,9 +100,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 puts("======Push kedua======");
 puts("Top:");
@@ -111,9 +111,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 Push(&S, Curr(S));
@@ -128,9 +128,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 puts("======Pop pertama, harusnya kondisi sama seperti Push pertama======");
@@ -140,9 +140,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 Pop(&S, &Curr(S));
@@ -157,9 +157,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 puts("======Pop kedua, harusnya Top kosong, Curr sama seperti set awal======");
@@ -169,9 +169,9 @@ printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 Pop(&S, &Curr(S));
@@ -188,9 +188,9 @@ if (IsFirstAct(S)) {
 //puts("Curr:");
 //PrintCurr((S));
 puts("Curr:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
+print_warna(Color(P1Info(Curr(S))), '1');
 printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
+print_warna(Color(P2Info(Curr(S))), '2');
 printf("\n");
 
 }
