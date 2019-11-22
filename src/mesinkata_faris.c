@@ -97,13 +97,13 @@ info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
   if (Name(info) == 'C') {
     Tentara(info) = 40;
   }
-  if (Name(info) == 'T') {
+  else if (Name(info) == 'T') {
     Tentara(info) = 30;
   }
-  if (Name(info) == 'F') {
+  else if (Name(info) == 'F') {
     Tentara(info) = 80;
   }
-  if (Name(info) == 'V') {
+  else if (Name(info) == 'V') {
     Tentara(info) = 20;
   }
   return info;
