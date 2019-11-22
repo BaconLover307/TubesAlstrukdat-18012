@@ -11,10 +11,10 @@
 
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi);
+void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi);
 
 // Prosedur untuk Melakukan LEVEL UP
-void LEVEL_UP(Stack *gamestate);
+void LEVEL_UP(Sinfotype *state);
 
 // Prosedur untuk mamakai skill yang sedang dimiliki pemain
 void SKILL(Stack *gamestate, Bangunan *databuild);
@@ -23,15 +23,15 @@ void SKILL(Stack *gamestate, Bangunan *databuild);
 void UNDO(Stack *gamestate);
 
 // Prosedur untuk melakukan END_TURN
-boolean END_TURN(Stack *gamestate);
+boolean END_TURN(Sinfotype *state);
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Stack *gamestate, Bangunan *databuild, Graph relasi);
+void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi);
 
 // Prosedur untuk melakukan SAVE
-void SAVE(Stack *gamestate);
+void SAVE(Sinfotype *state);
 
 // Prosedur untuk melakukan EXIT Game
-boolean EXIT(Stack *gamestate);
+boolean EXIT(Sinfotype *state);
 
 #endif
