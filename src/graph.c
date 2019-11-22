@@ -444,23 +444,30 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count) {
   C = FirstChild(Q);
   i = 1;
 
+
   while ((C != Nil) && (P != Nil)) {
     if (InfoG2(C) == Info(P)) {
-      printf("%d. ", i);
+      printf(" || - [%d.] ", i);
 
       if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
-        printf("Castle ");
+        printf("Castle  ");
       } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
         printf("Village ");
       } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
-        printf("Tower ");
+        printf("Tower   ");
       } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
-        printf("Fort ");
+        printf("Fort    ");
       }
 
+      if (Tentara(ElmtBan(B, Info(P))) < 10) {
+    	printf("0");
+      }
+      printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
+      printf("/%d ", GetMaxTentara(B, InfoG2(C)));
+
+      printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
       TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
-      printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
-      printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
+      printf("\n");
 
       i++;
       C = NextChild(C);

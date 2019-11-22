@@ -54,7 +54,7 @@ Player GetTopPlayer(Stack S) {
     }
 }
 
-void ChangeTurn(Stack *S, Bangunan *B) {
+void ChangeTurn(Stack *S) {
     // $ Kamus Lokal
     Player *TopP, *EnemyP;
     List *Ltop, *Lenemy;
@@ -82,31 +82,8 @@ void ChangeTurn(Stack *S, Bangunan *B) {
     ClearStack(S);
 }
 
-void PrintCurr(Stack S) {
-    // $ Kamus Lokal
-    Player TopP = GetTopPlayer(S);
-    Bangunan DataBuild = DataB(InfoTop(S));
-    List Ltop = ListBan(TopP);
-    // $ Algoritma
-    printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(InfoTop(S))),
-    //printbuilding
-    printf("  <= Active Effects =>\n");
-    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
-    if (AU(FX(TopP))) printf(" [AU] "); else printf(" [  ] ");
-    if (CH(FX(TopP))) printf(" [CH] "); else printf(" [  ] ");
-    if (ActiveSH(SH(FX(TopP)))) printf(" [SH] "); else printf(" [  ] ");
-    if (ET(FX(TopP))) printf(" [ET] "); else printf(" [  ] ");
-    printf("    || SKILL ");
-    PrintQueue(Skill(TopP));
-    printf("\n");
-    printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
-    printf("\n");
-    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(InfoTop(S)));
-    PrintInfo(Ltop, DataBuild);
-    printf("\n");
-}
-void PrintTop(Sinfotype top)
-{   
+
+void PrintCondition(Sinfotype top) {   
     // $ Kamus Lokal
     Player TopP;
     if (TurnInfo(top) == 1) {
@@ -118,8 +95,7 @@ void PrintTop(Sinfotype top)
     List Ltop = ListBan(TopP);
     // $ Algoritma
     printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(top)),
-        //printbuilding
-        printf("  <= Active Effects =>\n");
+    printf("   <= Active Effects =>\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
     if (AU(FX(TopP)))
         printf(" [AU] ");
@@ -142,7 +118,7 @@ void PrintTop(Sinfotype top)
     printf("\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
     printf("\n");
-    printf(" __\n[__] ==== Daftar Bangunan ==== [P%d]\n", TurnInfo(top));
+    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(top));
     PrintInfo(Ltop, DataBuild);
     printf("\n");
 }

@@ -195,7 +195,7 @@ void PrintInfo (List L, Bangunan B) {
     	printf("0");
     }
     printf("%d", Tentara(ElmtBan(B, Info(P))));
-	printf("/%d ", GetMaxTentara(B,Info(P)));
+	  printf("/%d ", GetMaxTentara(B,Info(P)));
 
     printf("lv. %d ", Level(ElmtBan(B, Info(P))));
     TulisPOINT(Posisi(ElmtBan(B, Info(P))));

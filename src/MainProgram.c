@@ -165,6 +165,7 @@ do {
                     // * Bangunan pertama pemain
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
+                    InsVPrio(&ListBan(PlayerTwo),4);
 
                     // * AKHIRNYA MULAI
                     Turn = 1;
@@ -223,7 +224,7 @@ do {
                     //StateDataB = &DataB(InfoTop(GameState));
                     // $ Display Status
                     PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
-                    PrintTop(InfoTop(GameState));
+                    PrintCondition(InfoTop(GameState));
                     if (IsFirstAct(GameState))
                         puts("First act");
                     printf("Top = %d\n",Top(GameState));
@@ -253,15 +254,15 @@ do {
                     printf("Top = %d\n",Top(GameState));
                         
                         printf("==============INFOTOP BEFORE================\n");
-                        PrintTop(InfoTop(GameState));
-                        PrintTop(Current);
+                        PrintCondition(InfoTop(GameState));
+                        PrintCondition(Current);
                     	LEVEL_UP(&Current);
                         printf("==============INFOTOP AFTER================\n");
-                        PrintTop(InfoTop(GameState));
-                        PrintTop(Current);
+                        PrintCondition(InfoTop(GameState));
+                        PrintCondition(Current);
                         printf("==============INFOTOP AFTER AFTER================\n");
                         Push(&GameState,Current);
-                        PrintTop(InfoTop(GameState));
+                        PrintCondition(InfoTop(GameState));
                         getchar();
 
                     }   // $ ######### SKILL ########
@@ -272,7 +273,7 @@ do {
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
-						MOVE(&Current,StateDataB, RelasiBan);
+						MOVE(&Current, &DataB(Current), RelasiBan);
                         Push(&GameState,Current);
                         getchar();
 
@@ -304,7 +305,7 @@ do {
 
             	} while (!EndTurn);
                 if (!ExitMenu) {
-					ChangeTurn(&GameState,StateDataB);
+					ChangeTurn(&GameState);
 					EndTurn = false;
 				}
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);

@@ -22,10 +22,12 @@ typedef int IdxType;  /* type indeks */
 typedef int ElType;   /* type elemen tabel */ // ! Untuk Relate (sementara)
 
 typedef struct {
-  char name; /* tipe bangunan */
-  POINT posisi; /* posisi bangunan */
-  int level; /* level bangunan */
-  int tentara; /* jumlah tentara yang dimiliki bangunan */
+  char name;            /* tipe bangunan */
+  POINT posisi;         /* posisi bangunan */
+  int level;            /* level bangunan */
+  int tentara;          /* jumlah tentara yang dimiliki bangunan */
+  boolean hasmoved;     /* status sudah move atau belum */
+  boolean hasattacked;    /* status sudah attack atau belum */
 } info_bangunan;
 
 typedef struct {
@@ -74,7 +76,10 @@ typedef struct {
 #define BI(B)         (B).BI
 #define ElmtBan(B,i)  (B).BI[(i)]
 #define MaxEl(B)      (B).MaxEl
+#define Moved(B)      (B).hasmoved
+#define Attacked(B)      (B).hasattacked
 
+/* e adalah info_bangunan */
 #define Name(e)       (e).name
 #define Posisi(e)     (e).posisi
 #define Level(e)      (e).level
