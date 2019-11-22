@@ -1,10 +1,10 @@
 /* Program          : driver_stackt.c */
 /* Deskripsi        : Driver Stackt */
 
-//#include "stackt.h"
-//#include "graph.h"
-//#include "mesinkata_faris.h"
-#include "includes.c"
+#include "stackt.h"
+#include "graph.h"
+#include "mesinkata_faris.h"
+//#include "includes.c"
 #include <stdio.h>
 
 // $ Kamus
@@ -22,6 +22,8 @@ puts("======Inisiasi Bangunan======");
 char load;
 char command[100];
 Stack GameState;
+Sinfotype Current; // ! BUAT TEMP
+Sinfotype Buang; // ! BUANGAN
 Player PlayerOne, PlayerTwo;
 Bangunan DataBangunan;
 TabColor Pallete;
@@ -46,152 +48,128 @@ puts("======Inisiasi Stack======");
 MakeBukuWarna(&BukuWarna);
 CreatePlayer(&P1);
 CreatePlayer(&P2);
-P1Info(Curr(S)) = P1;
-P2Info(Curr(S)) = P2;
+P1Info(InfoTop(S)) = P1;
+P2Info(InfoTop(S)) = P2;
 Turn = 1;
 
 StartTurn(&S, P1, P2,Turn, Build);
 
 
 puts("======Set Warna Player======");
-if (IsFirstAct(S)) puts("Stack masih kosong");
+Current = InfoTop(S);
+
+if (IsFirstAct(S)) puts("Stack masih isi 1");
 puts("P1");
-SetPlayerWarna(&P1Info(Curr(S)), &BukuWarna);
+SetPlayerWarna(&P1Info(Current), &BukuWarna);
 puts("P2");
-SetPlayerWarna(&P2Info(Curr(S)), &BukuWarna);
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))),'1');
+SetPlayerWarna(&P2Info(Current), &BukuWarna);
+puts("Current:");
+print_warna(Color(P1Info(Current)),'1');
 printf("\n");
-print_warna(Color(P2Info(Curr(S))),'2');
+print_warna(Color(P2Info(Current)),'2');
+printf("\n");
+puts("InfoTop:");
+print_warna(Color(P1Info(InfoTop(S))), '1');
+printf("\n");
+print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
 
 puts("======Push pertama======");
-Push(&S, Curr(S));
+Push(&S, Current);
 if (IsFirstAct(S)) puts("Stack masih kosong");
+puts("Current:");
+print_warna(Color(P1Info(Current)), '1');
+printf("\n");
+print_warna(Color(P2Info(Current)), '2');
+printf("\n");
+puts("InfoTop:");
+print_warna(Color(P1Info(InfoTop(S))), '1');
+printf("\n");
+print_warna(Color(P2Info(InfoTop(S))), '2');
+printf("\n");
 //puts("Top:");
 //PrintTop(InfoTop(S));
-//puts("Curr:");
-//PrintCurr((S));
+//puts("InfoTop:");
+//PrintInfoTop((S));
 
 puts("======Update warna pertama======");
-puts("Top:");
+puts("InfoTop:");
 print_warna(Color(P1Info(InfoTop(S))), '1');
 printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
+// ! TEMP
 
+// ! AKSI
+Current = InfoTop(S);
 puts("P1");
-SetPlayerWarna(&P1Info(Curr(S)), &BukuWarna);
+SetPlayerWarna(&P1Info(Current), &BukuWarna);
 puts("P2");
-SetPlayerWarna(&P2Info(Curr(S)), &BukuWarna);
-print_warna(Color(P1Info(Curr(S))), '1');
+SetPlayerWarna(&P2Info(Current), &BukuWarna);
+print_warna(Color(P1Info(Current)), '1');
 printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
+print_warna(Color(P2Info(Current)), '2');
 printf("\n");
 
-puts("Top:");
+puts("Current:");
+print_warna(Color(P1Info(Current)), '1');
+printf("\n");
+print_warna(Color(P2Info(Current)), '2');
+printf("\n");
+puts("InfoTop:");
 print_warna(Color(P1Info(InfoTop(S))), '1');
 printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
+
 puts("======Push kedua======");
-puts("Top:");
+// ! PUSH
+Push(&S, Current);
+
+puts("Current:");
+print_warna(Color(P1Info(Current)), '1');
+printf("\n");
+print_warna(Color(P2Info(Current)), '2');
+printf("\n");
+puts("InfoTop:");
 print_warna(Color(P1Info(InfoTop(S))), '1');
 printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
 
-Push(&S, Curr(S));
+
 //puts("Top:");
 //PrintTop(InfoTop(S));
-//puts("Curr:");
-//PrintCurr((S));
-
-puts("Top:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
-printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
+//puts("InfoTop:");
+//PrintInfoTop((S));
 
 puts("======Pop pertama, harusnya kondisi sama seperti Push pertama======");
-puts("Top:");
+Pop(&S, &Buang);
+puts("InfoTop:");
 print_warna(Color(P1Info(InfoTop(S))), '1');
 printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
 
-Pop(&S, &Curr(S));
-if (IsFirstAct(S)) puts("Stack masih kosong");
+if (IsFirstAct(S)) puts("Stack isi 1");
 //puts("Top:");
 //PrintTop(InfoTop(S));
-//puts("Curr:");
-//PrintCurr((S));
-puts("Top:");
+//puts("InfoTop:");
+//PrintInfoTop((S));
+
+puts("======Pop kedua, harusnya Top kosong, InfoTop sama seperti set awal======");
+Pop(&S, &Buang);
+puts("InfoTop:");
 print_warna(Color(P1Info(InfoTop(S))), '1');
 printf("\n");
 print_warna(Color(P2Info(InfoTop(S))), '2');
 printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
 
-puts("======Pop kedua, harusnya Top kosong, Curr sama seperti set awal======");
-puts("Top:");
-print_warna(Color(P1Info(InfoTop(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(InfoTop(S))), '2');
-printf("\n");
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
-
-Pop(&S, &Curr(S));
-if (IsFirstAct(S)) {
-    puts("Stack masih kosong");
-    puts("Top:");
-    print_warna(Color(P1Info(InfoTop(S))), '1');
-    printf("\n");
-    print_warna(Color(P2Info(InfoTop(S))), '2');
-    printf("\n");
-}
+if (IsFirstAct(S))
+    puts("Stack isi 1");
 //puts("Top:");
 //PrintTop(InfoTop(S));
-//puts("Curr:");
-//PrintCurr((S));
-puts("Curr:");
-print_warna(Color(P1Info(Curr(S))), '1');
-printf("\n");
-print_warna(Color(P2Info(Curr(S))), '2');
-printf("\n");
-
+//puts("InfoTop:");
+//PrintInfoTop((S));
 }
 

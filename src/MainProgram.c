@@ -125,6 +125,8 @@ do {
             char load;
             char command[100];
             Stack GameState;
+            Sinfotype Current; // * Kondisi yg berlangsung (temp)
+            Sinfotype Buang; // * Kondisi buangan
             Player PlayerOne, PlayerTwo;
 			Bangunan DataBangunan;
             TabColor Pallete;
@@ -189,40 +191,43 @@ do {
                 // $$ Inisiasi Turn
                 // $ Kamus Turn
                 EndTurn = false;
-                Player *CurrP;
+                Player *TopP;
                 Player *EnemyP;
-                Queue *Qcurr;
+                Queue *Qtop;
                 Queue *Qenemy;
-                List *Lcurr;
+                List *Ltop;
                 Bangunan *StateDataB;
-                if (TurnInfo(Curr(GameState)) == 1) {
-                    CurrP = &P1Info(Curr(GameState));
-                    EnemyP = &P2Info(Curr(GameState));
+                if (TurnInfo(InfoTop(GameState)) == 1) {
+                    TopP = &P1Info(InfoTop(GameState));
+                    EnemyP = &P2Info(InfoTop(GameState));
                 } else {
-                    CurrP = &P2Info(Curr(GameState));
-                    EnemyP = &P1Info(Curr(GameState));
+                    TopP = &P2Info(InfoTop(GameState));
+                    EnemyP = &P1Info(InfoTop(GameState));
                 }
-                Qcurr = &Skill(*CurrP);
+                Qtop = &Skill(*TopP);
                 Qenemy = &Skill(*EnemyP);
-                Lcurr = &ListBan(*CurrP);
-                StateDataB = &DataB(Curr(GameState));
-                TambahAllTentara(*Lcurr, StateDataB);
+                Ltop = &ListBan(*TopP);
+                //StateDataB = &DataB(InfoTop(GameState));
+                TambahAllTentara(*Ltop, &DataB(InfoTop(GameState)));
                 do {
-                    if (TurnInfo(Curr(GameState)) == 1) {
-                        CurrP = &P1Info(Curr(GameState));
-                        EnemyP = &P2Info(Curr(GameState));
+                    if (TurnInfo(InfoTop(GameState)) == 1) {
+                        TopP = &P1Info(InfoTop(GameState));
+                        EnemyP = &P2Info(InfoTop(GameState));
                     } else {
-                        CurrP = &P2Info(Curr(GameState));
-                        EnemyP = &P1Info(Curr(GameState));
+                        TopP = &P2Info(InfoTop(GameState));
+                        EnemyP = &P1Info(InfoTop(GameState));
                     }
-                    Qcurr = &Skill(*CurrP);
+                    Qtop = &Skill(*TopP);
                     Qenemy = &Skill(*EnemyP);
-                    Lcurr = &ListBan(*CurrP);
-                    StateDataB = &DataB(Curr(GameState));
+                    Ltop = &ListBan(*TopP);
+                    //StateDataB = &DataB(InfoTop(GameState));
                     // $ Display Status
-                    PrintMap(MapBlueprint, *StateDataB, PlayerOne, PlayerTwo);
-                    PrintCurr(GameState);
-                    
+                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
+                    PrintTop(InfoTop(GameState));
+                    if (IsFirstAct(GameState))
+                        puts("First act");
+                    printf("Top = %d\n",Top(GameState));
+
                     Command();
                     int idxCommand = 0;
                     do {
@@ -231,33 +236,44 @@ do {
                     command[--idxCommand] = '\0';
 					printf("\n");
 
-
                         // $ ######### ATTACK ########
                     if (strcmpi(command,"ATTACK") == 0) {
-                        Push(&GameState,Curr(GameState));
-                        ATTACK(&GameState,StateDataB, RelasiBan);
+                        Push(&GameState,InfoTop(GameState));
+                        Pop(&GameState,&Current);
+                        ATTACK(&Current,StateDataB, RelasiBan);
+                        Push(&GameState,Current);
                         getchar();
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
-                        PrintTop(InfoTop(GameState));
-                        Push(&GameState,Curr(GameState));
+                    printf("Top = %d\n",Top(GameState));
+                        Push(&GameState,InfoTop(GameState));
+                    printf("Top = %d\n",Top(GameState));
+                        Pop(&GameState,&Current);
+                    printf("Top = %d\n",Top(GameState));
+                        
                         printf("==============INFOTOP BEFORE================\n");
                         PrintTop(InfoTop(GameState));
-                    	LEVEL_UP(&GameState);
+                        PrintTop(Current);
+                    	LEVEL_UP(&Current);
                         printf("==============INFOTOP AFTER================\n");
+                        PrintTop(InfoTop(GameState));
+                        PrintTop(Current);
+                        printf("==============INFOTOP AFTER AFTER================\n");
+                        Push(&GameState,Current);
                         PrintTop(InfoTop(GameState));
                         getchar();
 
                     }   // $ ######### SKILL ########
                     else if (strcmpi(command, "SKILL") == 0) {
-                        Push(&GameState,Curr(GameState));
-                    	SKILL(&GameState,StateDataB);
+                    	SKILL(&GameState,&DataB(InfoTop(GameState)));
 
                     }   // $ ######### MOVE ########
                     else if (strcmpi(command, "MOVE") == 0) {
-                        Push(&GameState,Curr(GameState));
-						MOVE(&GameState,StateDataB, RelasiBan);
+                        Push(&GameState,InfoTop(GameState));
+                        Pop(&GameState,&Current);
+						MOVE(&Current,StateDataB, RelasiBan);
+                        Push(&GameState,Current);
                         getchar();
 
 
@@ -269,16 +285,16 @@ do {
                     else if (strcmpi(command, "END_TURN") == 0) {
 						EndTurn = true;
                         // ! Detector Skill Instant Reinforcement
-                        CheckGetIR(CurrP,StateDataB);
+                        CheckGetIR(TopP,&DataB(InfoTop(GameState)));
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {
-						SAVE(&GameState);
+						SAVE(&InfoTop(GameState));
                         getchar();
 
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
-						ExitMenu = EXIT(&GameState);
+						ExitMenu = EXIT(&InfoTop(GameState));
 						EndTurn = ExitMenu;
                         getchar();
 
