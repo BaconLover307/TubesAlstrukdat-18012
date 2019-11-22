@@ -94,7 +94,18 @@ info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
   Name(info) = KataToChar(K1);
   MakePOINT(&Posisi(info),KataToInt(K2), KataToInt(K3));
   Level(info) = 1;
-  Tentara(info) = 0;
+  if (Name(info) == 'C') {
+    Tentara(info) = 40;
+  }
+  else if (Name(info) == 'T') {
+    Tentara(info) = 30;
+  }
+  else if (Name(info) == 'F') {
+    Tentara(info) = 80;
+  }
+  else if (Name(info) == 'V') {
+    Tentara(info) = 20;
+  }
   return info;
 }
 
