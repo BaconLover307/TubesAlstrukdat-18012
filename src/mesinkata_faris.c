@@ -108,7 +108,6 @@ info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
   }
   Moved(info) = false;
   Attacked(info) = false;
-  Defense(info) = false;
   return info;
 }
 
