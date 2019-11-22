@@ -82,7 +82,7 @@ void ChangeTurn(Stack *S) {
 }
 
 
-void PrintCondition(Sinfotype top) {   
+void PrintCondition(Sinfotype top) {
     // $ Kamus Lokal
     Player TopP;
     if (TurnInfo(top) == 1) {
@@ -122,12 +122,11 @@ void PrintCondition(Sinfotype top) {
     printf("\n");
 }
 
-Stack CopyStack(Stack S) {
-    Stack ret;
-    Top(ret) = Top(S);
-    P1Info(InfoTop(ret)) = CopyPlayer(P1Info(InfoTop(S)));
-    P2Info(InfoTop(ret)) = CopyPlayer(P2Info(InfoTop(S)));
-    TurnInfo(InfoTop(ret)) = TurnInfo(InfoTop(S));
-    DataB(InfoTop(ret)) = CopyBangunan(DataB(InfoTop(S)));
+Sinfotype CopyState(Sinfotype S) {
+    Sinfotype ret;
+    P1Info(ret) = CopyPlayer(P1Info(S));
+    P2Info(ret) = CopyPlayer(P2Info(S));
+    TurnInfo(ret) = TurnInfo(S);
+    DataB(ret) = CopyBangunan(DataB(S));
     return ret;
 }
