@@ -108,13 +108,8 @@ void LEVEL_UP(Sinfotype *state) {
         TopP = &P2Info(*state);
         EnemyP = &P1Info(*state);
     }
-<<<<<<< HEAD
-    printf("----- Turn %d -----\n", TurnInfo(Curr(*gamestate)));
-    Lcurr = &ListBan(*CurrP);
-=======
     printf("+++++ Turn %d +++++", TurnInfo(*state));
     Ltop = &ListBan(*TopP);
->>>>>>> e2bf919c4a04604565bbb6b71da3c61e5588f917
     Lenemy = &ListBan(*EnemyP);
     databuild = &DataB(*state);
 
