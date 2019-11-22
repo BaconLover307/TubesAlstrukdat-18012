@@ -28,6 +28,7 @@ char menu[100];
 boolean Exit; // = false;
 boolean ExitMenu; // = false;
 boolean EndTurn; // = false;
+boolean AksiValid; 
 
 // $ ******* MAP PRINTING FUNCTION ********
 void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
@@ -295,8 +296,7 @@ do {
 
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
-						ExitMenu = EXIT(&InfoTop(GameState));
-						EndTurn = ExitMenu;
+						EXIT(&InfoTop(GameState));
                         getchar();
 
 					}

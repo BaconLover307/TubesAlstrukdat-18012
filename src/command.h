@@ -9,6 +9,9 @@
 #include "stackt.h"
 #include "graph.h"
 
+extern boolean ExitMenu; // = false;
+extern boolean EndTurn;  // = false;
+extern boolean AksiValid;
 
 // Prosedur untuk melakukan ATTACK
 void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi);
@@ -23,7 +26,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild);
 void UNDO(Stack *gamestate);
 
 // Prosedur untuk melakukan END_TURN
-boolean END_TURN(Sinfotype *state);
+void END_TURN(Sinfotype *state);
 
 // Prosedur untuk melakukan MOVE
 void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi);
@@ -32,6 +35,6 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi);
 void SAVE(Sinfotype *state);
 
 // Prosedur untuk melakukan EXIT Game
-boolean EXIT(Sinfotype *state);
+void EXIT(Sinfotype *state);
 
 #endif
