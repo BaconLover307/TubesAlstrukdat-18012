@@ -105,7 +105,7 @@ void PrintCurr(Stack S) {
     printf("\n");
 }
 void PrintTop(Sinfotype top)
-{
+{   
     // $ Kamus Lokal
     Player CurrP;
     if (TurnInfo(top) == 1) {
