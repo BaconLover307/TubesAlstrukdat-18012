@@ -108,7 +108,7 @@ void LEVEL_UP(Stack *gamestate) {
         CurrP = &P2Info(Curr(*gamestate));
         EnemyP = &P1Info(Curr(*gamestate));
     }
-    printf("+++++ Turn %d +++++", TurnInfo(Curr(*gamestate)));
+    printf("----- Turn %d -----\n", TurnInfo(Curr(*gamestate)));
     Lcurr = &ListBan(*CurrP);
     Lenemy = &ListBan(*EnemyP);
     databuild = &DataB(Curr(*gamestate));
