@@ -67,20 +67,22 @@ void ATTACK(Stack *gamestate, Bangunan *databuild, Graph relasi) {
         }
         puts("Amount of soldiers is not valid!");
     }
-    int idx = 1;
-    TentaraAttack(databuild, idx, jumlahPasukan);
-    /*
-    -- A hint from driver_list.c
-    TentaraInvaded(&B, false, false, 0, 3, 30);
-    if (CanCapture(B, 3)) {
-      if (Search(L1, 3)) {
+    int idxEnemy = 1;
+    TentaraAttack(databuild, idxEnemy, jumlahPasukan);
+    boolean criticalHit = CH(FX(*EnemyP));
+    boolean attackUp = AU(FX(*EnemyP));
+    boolean shield = ActiveSH(SH(FX(*EnemyP)));
+
+    TentaraInvaded(databuild, criticalHit, attackUp, shield, idxEnemy, jumlahPasukan);
+    if (CanCapture(*databuild, idxEnemy)) {
+      /*if (Search(L1, 3)) {
         printf("Bangunan ke-3 yang dimiliki oleh Pemain ke-1 telah dikuasai oleh Pemain ke-2.\n\n");
         DelP(&L1, 3);
       }
       InsVPrio(&L2, 3);
-      TentaraAbsolute(&B, 3);
+      TentaraAbsolute(&B, 3);*/
     }
-    */
+
     // cek apakah berhasil diambil atau tidak
     if (1) {
         printf("The building is yours now!\n");
@@ -116,14 +118,14 @@ void LEVEL_UP(Stack *gamestate) {
     printf(" __\n[__] ==== List of Buildings ==== [P%d]\n",TurnInfo(Curr(*gamestate)));
     PrintInfo(*Lcurr, *databuild);
     printf("\n");
-    
+
     // * User Input
     int nomorBangunan;
     printf("Choose the building you want to level-up : ");
     scanf("%d", &nomorBangunan);
 
     urutan nopilihan = GetInfo(*Lcurr, nomorBangunan);
-    
+
     // * Melakukan pengecekan keberhasilan level up
     char namaBuilding = Name(ElmtBan(*databuild, nopilihan));
     if (CheckLevelUp(*databuild,nopilihan)) {
@@ -209,7 +211,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             Barrage(CurrP, EnemyP, databuild);
             int bangunanmusuh2 = NbElmtList(*Lenemy);
             printf("Soldiers in all your enemy's buildings have been decreased by 10!!\n");
-            if (bangunanmusuh1 > bangunanmusuh2) 
+            if (bangunanmusuh1 > bangunanmusuh2)
                 printf("You've managed to snag a few buildings as well, impressive...\n");
         }
         ClearStack(gamestate);
