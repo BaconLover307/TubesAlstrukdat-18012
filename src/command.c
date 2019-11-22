@@ -100,6 +100,7 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
     } else {
         printf("You failed to grab the building.\n");
     }
+    Attacked(ElmtBan(*databuild, idxBangunanCurr)) = true;
 }
 
 // Prosedur untuk Melakukan LEVEL UP
@@ -252,30 +253,38 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
         CurrP = &P2Info(*state);
     }
     Ltop = &ListBan(*CurrP);
+
+    int giliran = TurnInfo(*state);
+    int nomorBangunan, idxBangunanCurr;
+    address Pcurr;
     // $ Algoritma
     // * Bangunan Pemain
     printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(*state));
     PrintInfo(*Ltop,*databuild);
     printf("\n");
 
-    int giliran = TurnInfo(*state);
-    int nomorBangunan;
     do {
         printf("Choose a building to move soldiers from: ");
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1) {
             printf("Input is not valid! Please input given index of buildings.\n");
-            Moved(ElmtBan(*databuild, idxBangunanCurr))
-        } else {printf("\n");}
-    } while (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1);
-    // * Ambil Bangunan Pemain
-    address Pcurr = First(*Ltop);
-    for (int i = 1; i< nomorBangunan; i++) {
-        Pcurr = Next(Pcurr);
-    }
-    int idxBangunanCurr = Info(Pcurr);
+        } else {
+            // * Ambil Bangunan Pemain
+            Pcurr = First(*Ltop);
+            for (int i = 1; i< nomorBangunan; i++) {
+                Pcurr = Next(Pcurr); }
+            idxBangunanCurr = Info(Pcurr);
 
-    // Menampilkan daftar bangunan terdekat
+            if (Moved(ElmtBan(*databuild, idxBangunanCurr))) {
+                printf("This building has moved soldiers before!\n");
+                AksiValid = false;
+                return;
+            } else { printf("\n");}
+        }
+    } while (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1);
+    
+
+    // *Menampilkan daftar bangunan terdekat
     int jumlahBangunanTerdekat;
     printf(" __\n[__] == List of Nearest Buildings == [P%d]\n", TurnInfo(*state));
     PrintMove(relasi, *Ltop, *databuild, idxBangunanCurr, &jumlahBangunanTerdekat);
@@ -336,6 +345,7 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
 
         TulisPOINT(Posisi(ElmtBan(*databuild, idxBangunanAcc)));
         puts("!");
+        Moved(ElmtBan(*databuild, idxBangunanCurr)) = true;
     } else {
         puts("....");
         sleep(1);
@@ -343,8 +353,6 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
         puts("Press enter to go back to the main menu.");
         getchar();
     }
-
-
 }
 
 // Prosedur untuk melakukan SAVE
@@ -354,9 +362,8 @@ void SAVE(Sinfotype *state) {
 }
 
 
-
 // Prosedur untuk melakukan EXIT Game
-boolean EXIT(Sinfotype *state) {
+void EXIT(Sinfotype *state) {
     char inp;
     printf("Do you want to save the game before exiting the game? ");
     do {
@@ -364,11 +371,13 @@ boolean EXIT(Sinfotype *state) {
         scanf(" %c", &inp);
         if (inp == 'Y') {
             SAVE(state);
-            return true;
+            ExitMenu = true;
+            EndTurn = true;
         } else if (inp == 'N') {
-            return true;
+            ExitMenu = true;
+            EndTurn = true;
         } else if (inp == 'C') {
-            return false;
+            ExitMenu = false;
         }
     } while (inp != 'Y' && inp != 'N' && inp != 'C');
 }

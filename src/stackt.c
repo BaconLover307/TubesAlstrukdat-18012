@@ -18,7 +18,6 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild) {
 void ClearStack(Stack *S) {
     Sinfotype temp;
     while(!IsFirstAct(*S)) {
-        puts("PASS");
         Pop(S,&temp);
     }
 }
