@@ -121,3 +121,13 @@ void PrintCondition(Sinfotype top) {
     PrintInfo(Ltop, DataBuild);
     printf("\n");
 }
+
+Stack CopyStack(Stack S) {
+    Stack ret;
+    Top(ret) = Top(S);
+    P1Info(InfoTop(ret)) = CopyPlayer(P1Info(InfoTop(S)));
+    P2Info(InfoTop(ret)) = CopyPlayer(P2Info(InfoTop(S)));
+    TurnInfo(InfoTop(ret)) = TurnInfo(InfoTop(S));
+    DataB(InfoTop(ret)) = CopyBangunan(DataB(InfoTop(S)));
+    return ret;
+}

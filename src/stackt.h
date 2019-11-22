@@ -97,4 +97,6 @@ void ChangeTurn(Stack *S);
 // * Menuliskan kondisi yang sedang berlangsung
 void PrintCondition(Sinfotype top);
 
+Stack CopyStack(Stack S);
+
 #endif

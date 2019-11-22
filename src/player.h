@@ -173,7 +173,7 @@ void CheckGetIR(Player *P, Bangunan *B);
 void CheckGetBA(Player P, Queue *Q);
 
 // * menyalin semua informasi dari player P
-Player copyPlayer(Player P);
+Player CopyPlayer(Player P);
 
 
 #endif

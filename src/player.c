@@ -294,7 +294,7 @@ void CheckGetBA(Player P, Queue *Q) {
     QAdd(Q, "BA");
 }
 
-Player copyPlayer(Player P) {
+Player CopyPlayer(Player P) {
     Player ret;
     CreatePlayer(&ret);
     ListBan(ret) = CopyList(ListBan(P));
