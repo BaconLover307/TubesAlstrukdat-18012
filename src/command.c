@@ -61,7 +61,7 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
                     printf("This building has attacked before!\n");
                     return;
                 } else {
-                    printf("\n"); 
+                    printf("\n");
                 }
         }
     } while (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1 );
@@ -285,9 +285,6 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
         scanf("%d", &nomorBangunan);
         if (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1) {
             printf("Input is not valid! Please input given index of buildings.\n");
-<<<<<<< HEAD
-        } else {printf("\n");}
-=======
         } else {
             // * Ambil Bangunan Pemain
             Pcurr = First(*Ltop);
@@ -301,9 +298,8 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
                 return;
             } else { printf("\n");}
         }
->>>>>>> d465130924a9ff50a68ae6de18a8e3dc477b20c5
     } while (nomorBangunan > NbElmtList(*Ltop) || nomorBangunan < 1);
-    
+
 
     // *Menampilkan daftar bangunan terdekat
     int jumlahBangunanTerdekat;
