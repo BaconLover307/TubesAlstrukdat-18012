@@ -27,7 +27,7 @@ typedef struct {
 typedef struct {
   Sinfotype T[MaxSEl+1]; /* tabel penyimpan elemen */
   Saddress TOP;  /* alamat TOP: elemen puncak */
-  Sinfotype curr; /* kondisi turn yang sedang berlangsung */
+  //Sinfotype curr; /* kondisi turn yang sedang berlangsung */
 } Stack;
 /* Definisi stack S kosong : S.TOP = SNil */
 /* Elemen yang dipakai menyimpan nilai Stack T[1]..T[MaxSEl] */
@@ -39,7 +39,7 @@ typedef struct {
 // $ Jika S adalah Stack dan I adalah Infotype, maka akses elemen :
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
-#define Curr(S) (S).curr
+//#define Curr(S) (S).curr
 
 #define P1Info(I) (I).pemain1
 #define P2Info(I) (I).pemain2
