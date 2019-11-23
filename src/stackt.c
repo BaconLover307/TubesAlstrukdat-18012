@@ -50,7 +50,6 @@ void Pop(Stack *S, Sinfotype *X) {
     Top(*S)--;
 }
 
-<<<<<<< HEAD
 // $ ************ Turn Handling ************
 
 Player GetTopPlayer(Stack S) {
@@ -91,9 +90,8 @@ void ChangeTurn(Stack *S) {
     ReduceDurationSH(EnemyP);
     // * Clear Stack
 }
-=======
+
 // $ ************ State Handling ************
->>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
 
 void ResetBuildingStatus(List L, Bangunan *B) {
     // $ Kamus Lokal
@@ -111,11 +109,7 @@ boolean CheckAllMoved(List L, Bangunan B) {
     address P = First(L);
     // $ Algoritma
     while (P != Nil) {
-<<<<<<< HEAD
         if (Moved(ElmtBan(B,Info(P))) == false)
-=======
-        if (Moved(ElmtBan(B,Info(P))) == false) 
->>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
             return false;
         P = Next(P);
     }
@@ -127,14 +121,8 @@ boolean CheckAllAttacked(List L, Bangunan B) {
     address P = First(L);
     // $ Algoritma
     while (P != Nil) {
-<<<<<<< HEAD
         if (Attacked(ElmtBan(B,Info(P))) == false)
             return false;
-
-=======
-        if (Attacked(ElmtBan(B,Info(P))) == false) 
-            return false;
->>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
         P = Next(P);
     }
     return true;
@@ -151,7 +139,7 @@ void PrintCondition(Sinfotype top) {
     Bangunan DataBuild = DataB(top);
     List Ltop = ListBan(TopP);
     // $ Algoritma
-    
+
     // * Display Header
     switch (Color(TopP)) {
     case 'R': printf("%s", RED); break;
@@ -163,7 +151,7 @@ void PrintCondition(Sinfotype top) {
     }
     printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(top)),
     printf("%s", NORMAL);
-    
+
     // * Display Effects
     printf("   <= Active Effects =>\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
@@ -172,20 +160,20 @@ void PrintCondition(Sinfotype top) {
 
     if (CH(FX(TopP))) printf(" [CH] ");
     else printf(" [  ] ");
-    
+
     if (ActiveSH(SH(FX(TopP)))) printf(" [SH] ");
     else printf(" [  ] ");
-    
+
     if (ET(FX(TopP))) printf(" [ET] ");
     else printf(" [  ] ");
-    
+
     // * Display Skill
     printf("    || SKILL ");
     PrintQueue(Skill(TopP));
     printf("\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
     printf("\n");
-    
+
     // * Display Buildings
     printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(top));
     PrintInfo(Ltop, DataBuild);

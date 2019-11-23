@@ -64,12 +64,8 @@ do {
             ExitMenu = true;
 
         }   // $ ######### CREDITS ########
-<<<<<<< HEAD
         else if (strcmpi(menu, "CREDITS") == 0) {
             clrscrn();
-=======
-        else if (strcmp(menu, "CREDITS") == 0) {
->>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
             Credits();
             printf("\n");
             printf("Press enter to go back to the main menu...");
@@ -186,14 +182,10 @@ do {
                     AksiValid = true;
 
                     // * Display Status
-<<<<<<< HEAD
                     puts("[#]---- MAP ----[#]");
                     PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
-=======
-                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), P1Info(InfoTop(GameState)), P2Info(InfoTop(GameState)));
->>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
                     PrintCondition(InfoTop(GameState));
-                    
+
 
                     // * Nerima Input
                     Command();
@@ -260,7 +252,6 @@ do {
 						END_TURN(&GameState);
 
                     }   // $ ######### SAVE ########
-<<<<<<< HEAD
                     else if (strcmpi(command, "SAVE") == 0) {
 						SAVE(&InfoTop(GameState), RelasiBan);
                         getchar();
@@ -268,15 +259,6 @@ do {
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
 						EXIT(&InfoTop(GameState), RelasiBan);
-=======
-                    else if (strcmp(command, "SAVE") == 0) {
-						SAVE(&InfoTop(GameState));
-                        getchar();
-
-                    }   // $ ######### EXIT ########
-                    else if (strcmp(command, "EXIT") == 0) {
-						EXIT(&InfoTop(GameState));
->>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
                         getchar();
 
 					}
