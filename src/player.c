@@ -4,8 +4,6 @@
 #include "player.h"
 #include "string.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 /*
 ? typedef struct {
@@ -171,6 +169,7 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
 	Queue *QP, *QE;
 	QP = &Skill(*P);
 	QE = &Skill(*E);
+
   	// $ Algoritma
 	TentaraAbsolute(B, A);
 	if (Search(*LE,A) != Nil) {
@@ -335,6 +334,7 @@ void CheckGetBA(Player P, Queue *Q) {
     QAdd(Q, "BA");
 }
 
+// $ ******* COPY FUNCTION *******
 Player CopyPlayer(Player P) {
     Player ret;
     CreatePlayer(&ret);
@@ -347,4 +347,47 @@ Player CopyPlayer(Player P) {
     Duration(SH(FX(ret))) = Duration(SH(FX(P)));
     ET(FX(ret)) = ET(FX(P));
     return ret;
+}
+
+// $ ******* MAP PRINTING FUNCTION ********
+void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
+    int i, j;
+    for (i = 1; i <= (MaxBrs(M) + 2); i++) {
+        for (j = 1; j < (MaxKol(M) + 3); j++) {
+            //printf("%d%d",i,j);
+            if (i == 1) {
+                printf("+");
+                if(j == (MaxKol(M) + 2)) {
+                    printf("++\n");
+                }
+            }
+            else if (i == (MaxBrs(M) + 2)) {
+                printf("+");
+                if(j == (MaxKol(M) + 2)) printf("++\n");
+            }
+            else if (j == 1) {
+                printf("+ ");
+            }
+            else if (j == (MaxKol(M) + 2)) {
+                printf(" +\n");
+            }
+            else if ((Elmt(M,(i-1),(j-1))) == 0) {
+                printf(" ");
+            }
+            else {
+                ElType Mem = Elmt(M,(i-1),(j-1));
+                char C = Name(ElmtBan(B,Mem));
+                if (Search(ListBan(One), Mem) != Nil) {
+                    print_warna(Color(One), C);
+                }
+                else if (Search(ListBan(Two), Mem) != Nil) {
+                    print_warna(Color(Two), C);
+                }
+                else {
+                    print_warna('Y', C);
+                }
+            }
+        }
+    }
+    printf("\n");
 }

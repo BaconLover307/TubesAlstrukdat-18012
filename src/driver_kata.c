@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "mesinkata_faris.h"
+#include "mesinkata_config.h"
 
 int main() {
 	MATRIKS M;
