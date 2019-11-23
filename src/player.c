@@ -133,30 +133,28 @@ void CaptureBarrage(Player *P, Player *E, address A, Bangunan *B) {
   	// $ Algoritma
 	TentaraAbsolute(B, Info(A));
 	DelP(LE, Info(A));
-  	InsertPrio(LP, A);
+  	InsVPrio(LP, Info(A));
     ResetLevel(B, Info(A));
     
 	// ! DEBUG SKILL
-	printf("TO DELETE!! Jumlah Bangunanmu : %d\n", NbElmtList(*LP));
-	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*LE));
 	// ! Deteksi Skill SH, ilangin ifnya
 	if (NbElmtList(*LE) == 2) {
-		printf("\n The enemy has gained the skill: SH!!\n");
+		printf("\n > The enemy has gained the skill: SH!! < \n\n");
 		CheckGetSH(*E, QE);
 	}
 	// ! Deteksi Skill ET
 	if (Name(ElmtBan(*B,Info(A))) == 'F') {
-		printf("\n The enemy has gained the skill: ET!!\n");
+		printf("\n > The enemy has gained the skill: ET!! < \n\n");
 		CheckGetET(QE);
 	}
 	// ! Deteksi Skill AU
 	if (Name(ElmtBan(*B,Info(A))) == 'T') {
-		printf("\n You have gained the skill: AU!!\n");
+		printf("\n > You have gained the skill: AU!! < \n\n");
 		CheckGetAU(*P, QP, *B);
 	}
 	// ! Deteksi Skill BA, ilangin ifnya
 	if (NbElmtList(*LE) == 10) {
-		printf("\n The enemy has gained the skill: BA!!\n");
+		printf("\n > The enemy has gained the skill: BA!! < \n\n");
 		CheckGetBA(*P, QE);
 	}	
 }
@@ -176,17 +174,17 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
         DelP(LE, A);
 	    // ! Deteksi Skill SH
         if (NbElmtList(*LE) == 2) {
-            printf("\n The enemy has gained the skill: SH!!\n");
+            printf("\n > The enemy has gained the skill: SH!! < \n");
             CheckGetSH(*E, QE);
         }
         // ! Deteksi Skill ET
         if (Name(ElmtBan(*B,A)) == 'F') {
-            printf("\n The enemy has gained the skill: ET!!\n");
+            printf("\n > The enemy has gained the skill: ET!! < \n");
             CheckGetET(QE);
         }
         // ! Deteksi Skill AU
         if (Name(ElmtBan(*B,A)) == 'T') {
-            printf("\n You have gained the skill: AU!!\n");
+            printf("\n > You have gained the skill: AU!! < \n");
             CheckGetAU(*P, QP, *B);
         }
     }
@@ -195,12 +193,10 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
     
 	// ! Deteksi Skill BA, ilangin ifnya
 	if (NbElmtList(*LP) == 10) {
-		printf("\n The enemy has gained the skill: BA!!\n");
+		printf("\n > The enemy has gained the skill: BA!! < \n");
 		CheckGetBA(*P, QE);
 	}	
 	// ! DEBUG SKILL
-	printf("TO DELETE!! Jumlah Bangunanmu : %d\n", NbElmtList(*LP));
-	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*LE));
 }
 
 
@@ -256,15 +252,19 @@ void InstantReinforcement(Player *P, Bangunan *B) {
 
 void Barrage(Player *P, Player *E, Bangunan *B) {
     // $ Kamus Lokal
-    address A;
+    address A, temp;
     // $ Algoritma
     A = First(ListBan(*E));
     while (A != Nil) {
         Tentara(ElmtBan(*B, Info(A))) -= 10;
+        
         if (CanCapture(*B, Info(A))) {
+            //temp = A;
             CaptureBarrage(P, E, A, B);
+            //A = Next(temp);
+        } else {
         }
-        A = Next(A);
+            A = Next(A);
     }
 }
 
@@ -305,6 +305,7 @@ void CheckGetAU(Player P, Queue *Q, Bangunan databuild) {
 
 void CheckGetCH(Queue *Q) {
     QAdd(Q, "CH");
+    printf("\n > You have gained the skill : CH!! < \n\n");
 }
 
 void CheckGetIR(Player *P, Bangunan *B) {
@@ -326,6 +327,7 @@ void CheckGetIR(Player *P, Bangunan *B) {
 
     if (get == true){
         QAdd(&Skill(*P), "IR");
+        printf("\n > You have gained the skill : IR!! < \n\n");
     }
 }
 

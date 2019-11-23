@@ -34,6 +34,17 @@ int main(){
     QAdd(&Skill(P1), "BC");
     QAdd(&Skill(P1), "CD");
     PrintQueue(Skill(P1));
-
+    puts("");
+    QAdd(&Skill(P1), "AB");
+    QAdd(&Skill(P1), "BC");
+    QAdd(&Skill(P1), "CD");
+    PrintQueue(Skill(P1));
+    puts("");
+    QDel(&Skill(P1),&temp);
+    PrintQueue(Skill(P1));
+    puts("");
+    QDel(&Skill(P1),&temp);
+    PrintQueue(Skill(P1));
+    puts("");
     
 }

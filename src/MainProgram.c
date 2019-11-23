@@ -126,9 +126,16 @@ do {
                     // ! DEBUG
                     InsVPrio(&ListBan(PlayerOne),17);
                     InsVPrio(&ListBan(PlayerOne),13);
+
                     InsVPrio(&ListBan(PlayerTwo),4);
+                    InsVPrio(&ListBan(PlayerTwo),5);
+                    InsVPrio(&ListBan(PlayerTwo),6);
                     InsVPrio(&ListBan(PlayerTwo),7);
                     InsVPrio(&ListBan(PlayerTwo),8);
+                    InsVPrio(&ListBan(PlayerTwo),9);
+                    InsVPrio(&ListBan(PlayerTwo),10);
+
+                    QAdd(&Skill(PlayerOne),"BA");
 
                     // * AKHIRNYA MULAI
                     Turn = 1;
@@ -171,7 +178,7 @@ do {
                     AksiValid = true;
 
                     // * Display Status
-                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
+                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), P1Info(InfoTop(GameState)), P2Info(InfoTop(GameState)));
                     PrintCondition(InfoTop(GameState));
                     
 
@@ -204,6 +211,7 @@ do {
                         if (AksiValid)
                             Push(&GameState, Current);
                         getchar();
+                        puts("");
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmp(command, "LEVEL_UP") == 0) {
@@ -213,10 +221,12 @@ do {
                         if (AksiValid)
                             Push(&GameState,Current);
                         getchar();
+                        puts("");
 
                     }   // $ ######### SKILL ########
                     else if (strcmp(command, "SKILL") == 0) {
                     	SKILL(&GameState,&DataB(InfoTop(GameState)));
+                        puts("");
 
                     }   // $ ######### MOVE ########
                     else if (strcmp(command, "MOVE") == 0) {
@@ -260,7 +270,13 @@ do {
                     printf("%s", NORMAL);
 
             	} while (!EndTurn);
-                
+                address A = First(ListBan(P2Info(InfoTop(GameState))));
+                while (A != Nil)
+                {
+                    Tentara(ElmtBan(DataB(InfoTop(GameState)), Info(A))) = 10;
+                    A = Next(A);
+                }
+
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
             if (IsLose(PlayerTwo)) {
                 P1Wins();

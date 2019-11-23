@@ -70,6 +70,8 @@ void ATTACK(Sinfotype *state, Graph relasi) {
 
     // * Menampilkan daftar bangunan yang dapat diserang
     int jumlahBangunanTerdekat;
+    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state)%2+1);
+    PrintAttack(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
     
     // * Jika tidak ada yang bisa diserang
     if (jumlahBangunanTerdekat == 0) {
@@ -82,8 +84,6 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         return;
     }
     
-    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state)%2+1);
-    PrintAttack(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
     do { // * Memilih bangunan yang akan diserang
         printf("\nChoose a building you want to attack : ");
         scanf("%d", &nomorBangunanDiserang);
@@ -98,12 +98,21 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         printf("Enter your desired amount of soldiers used to attack : ");
         scanf("%d", &jumlahPasukan);
         //if (CheckAttackTentara(*databuild,idxCurr,jumlahPasukan)) {
-        if (jumlahPasukan > 0 && CheckAttackTentara(*databuild, idxCurr, jumlahPasukan)) {
+        if (jumlahPasukan >= 0 && CheckAttackTentara(*databuild, idxCurr, jumlahPasukan)) {
             break;
         }
         puts("Amount of soldiers is not valid!");
     }
-	puts("");
+
+	if (jumlahPasukan == 0) { //  * Menyerang dengan 0 pasukan
+		puts("....");
+		sleep(1);
+		puts("You didn't send anyone to attack... Oh well.");
+		puts("Press enter to go back to the command center.");
+		getchar();
+		AksiValid = false;
+		return;
+	}
 
 	// * Mengambil status effect
     boolean criticalHit = CH(FX(*EnemyP));
@@ -208,9 +217,11 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
     } else {
         // * Use Skill
         QDel(Qtop, &usedskill);
-        // * Switch
-        if (strcmpi(usedskill,"IU") == 0) {
-            printf("!!! INSTANT UPGRADE !!!\n");
+		printf("%c%c\n", usedskill[0], usedskill[1]);
+			// * Switch
+			if (strcmpi(usedskill, "IU") == 0)
+		{
+			printf("!!! INSTANT UPGRADE !!!\n");
             InstantUpgrade(TopP,databuild);
             printf("All your buildings have been Leveled Up!!\n");
 
@@ -248,10 +259,10 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             int bangunanmusuh2 = NbElmtList(*Lenemy);
             printf("Soldiers in all your enemy's buildings have been decreased by 10!!\n");
             if (bangunanmusuh1 > bangunanmusuh2)
-                printf("You've managed to snag a few buildings as well, impressive...\n");
+            printf("You've managed to snag a few buildings as well, impressive...\n");
         }
-        ResetStack(gamestate);
 
+        ResetStack(gamestate);
     }
 }
 
