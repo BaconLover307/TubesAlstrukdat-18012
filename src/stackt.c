@@ -179,7 +179,7 @@ void PrintCondition(Sinfotype top) {
     printf("\n");
 
     // * Display Buildings
-    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(top));
+    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(top));
     PrintInfo(Ltop, DataBuild);
     printf("\n");
 }

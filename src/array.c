@@ -155,7 +155,6 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
 
 void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType p, IdxType e, int N) {
   /* KAMUS LOKAL */
-
   /* ALGORITMA */
   if (Critical_Hit) {
       TentaraAttack(B, e, 2*N);
@@ -276,10 +275,7 @@ void LevelUp (Bangunan * B, IdxType X) {
 }
 
 void ResetLevel (Bangunan * B, IdxType X) {
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
-  Level(ElmtBan(*B, X)) == 1;
+  Level(ElmtBan(*B, X)) = 1;
 }
 
 Bangunan CopyBangunan(Bangunan B) {

@@ -163,10 +163,7 @@ void DelP (List * L, urutan X) {
   } else /* Prec != Nil */ {
     Next(Prec) = Next(P);
   }
-
-  Next(P) = Nil;
-  Dealokasi(&P);
-}
+} 
 
 List CopyList(List L) {
   List ret;

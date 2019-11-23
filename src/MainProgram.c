@@ -17,7 +17,7 @@
  */
 // $ ******* INCLUDE FILES ********
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <unistd.h>
 
 #include "includes.c"
@@ -28,7 +28,7 @@ char menu[100];
 boolean Exit;       // = false;
 boolean ExitMenu;   // = false;
 boolean EndTurn;    // = false;
-boolean AksiValid;
+boolean AksiValid;	// = true
 
 // $ ******* MAIN PROGRAM ********
 int main() {
@@ -36,7 +36,6 @@ do {
     Exit = false;
     clrscrn();
     MainM();
-    // ASCII Art: MainMenu
     do {
         ExitMenu = false;
         Menu();
@@ -46,8 +45,6 @@ do {
             scanf("%c", menu + idxMenu);
         } while (menu[idxMenu++] != '\n');
         menu[--idxMenu] = '\0';
-        //printf("Your choice is %s\n",menu);
-        //getchar();
 
             // $ ######### TUTORIAL ########
         if (strcmp(menu,"TUTORIAL") == 0) {
@@ -133,10 +130,11 @@ do {
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
                     // ! DEBUG
-                    InsVPrio(&ListBan(PlayerOne),17);
+                    InsVPrio(&ListBan(PlayerOne),4);
+                    /*
+					InsVPrio(&ListBan(PlayerOne),17);
                     InsVPrio(&ListBan(PlayerOne),13);
 
-                    InsVPrio(&ListBan(PlayerTwo),4);
                     InsVPrio(&ListBan(PlayerTwo),5);
                     InsVPrio(&ListBan(PlayerTwo),6);
                     InsVPrio(&ListBan(PlayerTwo),7);
@@ -145,6 +143,11 @@ do {
                     InsVPrio(&ListBan(PlayerTwo),10);
 
                     QAdd(&Skill(PlayerOne),"BA");
+                    QAdd(&Skill(PlayerTwo),"IU");
+                    QAdd(&Skill(PlayerTwo),"IU");
+                    QAdd(&Skill(PlayerTwo),"IU");
+                    QAdd(&Skill(PlayerTwo),"IU");
+					*/
 
                     // * AKHIRNYA MULAI
                     Turn = 1;
@@ -154,7 +157,6 @@ do {
 
             // todo maen game
             // * Countdown
-            /*
             clrscrn();
             printf("              Starting game in...\n\n");
             sleep(0.5);
@@ -164,7 +166,6 @@ do {
             sleep(0.5);
             printf("                             1...\n");
             sleep(0.5);
-            */
             clrscrn();
             getchar();
 
@@ -188,11 +189,11 @@ do {
 
                     // * Display Status
                     puts("[#]---- MAP ----[#]");
-                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
+                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), P1Info(InfoTop(GameState)), P2Info(InfoTop(GameState)));
                     PrintCondition(InfoTop(GameState));
 
 
-                    // * Nerima Input
+                    // * Menerima Input
                     Command();
                     int idxCommand = 0;
                     do {
@@ -211,7 +212,7 @@ do {
                     default: printf("%s", NORMAL); break;
                     }
                     printf("[] V ===== V ===== V ===== V ===== V ===== V []\n\n", TurnInfo(InfoTop(GameState))),
-                        printf("%s", NORMAL);
+                    printf("%s", NORMAL);
 
                         // $ ######### ATTACK ########
                     if (strcmp(command,"ATTACK") == 0) {
@@ -267,7 +268,7 @@ do {
                         getchar();
 
 					}
-					else Invalid();
+					else { Invalid(); getchar(); }
                     switch (Color(*TopP)) {
                         case 'R': printf("%s", RED); break;
                         case 'G': printf("%s", GREEN); break;
@@ -280,18 +281,16 @@ do {
                     printf("%s", NORMAL);
 
             	} while (!EndTurn);
-                address A = First(ListBan(P2Info(InfoTop(GameState))));
-                while (A != Nil)
-                {
-                    Tentara(ElmtBan(DataB(InfoTop(GameState)), Info(A))) = 10;
-                    A = Next(A);
-                }
 
-            } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
-            if (IsLose(PlayerTwo)) {
+            } while (!IsLose(P1Info(InfoTop(GameState))) && !IsLose(P2Info(InfoTop(GameState))) && !ExitMenu);
+            if (IsLose(P2Info(InfoTop(GameState)))) {
                 P1Wins();
-            } else if (IsLose(PlayerOne)) {
+                getchar();
+                ExitMenu = true;
+            } else if (IsLose(P1Info(InfoTop(GameState)))) {
                 P2Wins();
+                getchar();
+                ExitMenu = true;
 			}
 
         } else {

@@ -70,7 +70,9 @@ void ATTACK(Sinfotype *state, Graph relasi) {
 
     // * Menampilkan daftar bangunan yang dapat diserang
     int jumlahBangunanTerdekat;
-    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state)%2+1);
+    printf(" __\n[__] ====  List of Buildings to Attack  ==== [P%d]", TurnInfo(*state)%2+1);
+	if (ActiveSH(SH(FX(*EnemyP)))) printf (" [SH]");
+	puts("");
     PrintAttack(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
 
     // * Jika tidak ada yang bisa diserang
@@ -90,7 +92,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         if (0 < nomorBangunanDiserang && nomorBangunanDiserang <= jumlahBangunanTerdekat)
             break;
         puts("Index input is invalid!");
-    } while (nomorBangunanDiserang > NbElmtList(*Ltop) || nomorBangunanDiserang < 1);
+    } while (nomorBangunanDiserang < 1 || jumlahBangunanTerdekat < nomorBangunanDiserang);
     idxEnemy = GetIdxAttack(relasi, *Ltop, *databuild, idxCurr, nomorBangunanDiserang);
 
     // * Jumlah Pasukan
@@ -115,8 +117,8 @@ void ATTACK(Sinfotype *state, Graph relasi) {
 	}
 
 	// * Mengambil status effect
-    boolean criticalHit = CH(FX(*EnemyP));
-    boolean attackUp = AU(FX(*EnemyP));
+    boolean criticalHit = CH(FX(*TopP));
+    boolean attackUp = AU(FX(*TopP));
     boolean shield = ActiveSH(SH(FX(*EnemyP)));
 
     TentaraInvaded(databuild, criticalHit, attackUp, shield, idxCurr, idxEnemy, jumlahPasukan);
@@ -157,7 +159,7 @@ void LEVEL_UP(Sinfotype *state) {
 
     // $ Algoritma
     // * Menampilkan daftar Bangunan
-    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n",TurnInfo(*state));
+    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n",TurnInfo(*state));
     PrintInfo(*Ltop, *databuild);
     printf("\n");
 
@@ -174,7 +176,14 @@ void LEVEL_UP(Sinfotype *state) {
 
     // * Melakukan pengecekan keberhasilan level up
     namaBuilding = Name(ElmtBan(*databuild, idxCurr));
-    if (CheckLevelUp(*databuild,idxCurr)) {
+    if (Level(ElmtBan(*databuild,idxCurr)) == 4) {
+        if (namaBuilding == 'C') { printf("Your Castle ");
+        } else if (namaBuilding == 'V') { printf("Your Village ");
+        } else if (namaBuilding == 'T') { printf("Your Tower ");
+        } else /*(namaBuilding == 'T')*/ {printf("Your Fort ");}
+        printf("is at maximum level!\n", Name(ElmtBan(*databuild,idxCurr)));
+        AksiValid = false;
+	} else if (CheckLevelUp(*databuild,idxCurr)) {
         LevelUp(databuild,idxCurr);
         if (namaBuilding == 'C') { printf("Your Castle ");
         } else if (namaBuilding == 'V') { printf("Your Village ");
@@ -220,7 +229,6 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
     } else {
         // * Use Skill
         QDel(Qtop, &usedskill);
-		printf("%c%c\n", usedskill[0], usedskill[1]);
 			// * Switch
 			if (strcmpi(usedskill, "IU") == 0)
 		{
@@ -253,7 +261,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         } else if (strcmpi(usedskill,"IR") == 0) {
             printf("!!! INSTANT REINFORCEMENT !!!\n");
             InstantReinforcement(TopP, databuild);
-            printf("All your buildings have been added by 5 soldiers!!\n");
+            printf("All your buildings have been reinforced by 5 soldiers!!\n");
 
         } else if (strcmpi(usedskill,"BA") == 0) {
             int bangunanmusuh1 = NbElmtList(*Lenemy);
@@ -305,7 +313,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
     }
 
     // * Bangunan Pemain
-    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", giliran);
+    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", giliran);
     PrintInfo(*Ltop,*databuild);
 
     do {
@@ -334,7 +342,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
 
 
     // *Menampilkan daftar bangunan terdekat
-    printf(" __\n[__] == List of Nearest Buildings == [P%d]\n", TurnInfo(*state));
+    printf(" __\n[__] ==  List of Nearest Buildings  == [P%d]\n", TurnInfo(*state));
     PrintMove(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
 
     // * Jika tidak ada bangunan yang adjacent
