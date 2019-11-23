@@ -9,13 +9,12 @@ Created at: 17/10/2019
 #include "pcolor.h"
 
 void MakeBukuWarna(TabColor * ArrWarna) {
-    ColNeff(*ArrWarna) = 6;
+    ColNeff(*ArrWarna) = 5;
     ColElmt(*ArrWarna,1) = 'R';
     ColElmt(*ArrWarna,2) = 'G';
     ColElmt(*ArrWarna,3) = 'B';
     ColElmt(*ArrWarna,4) = 'C';
     ColElmt(*ArrWarna,5) = 'M';
-    ColElmt(*ArrWarna,6) = 'Y';
 }
 
 void PrintBukuWarna(TabColor ArrWarna) {
@@ -54,11 +53,11 @@ void print_warna(Warna Col, char c) {
     case 'M':
         printf("%s%c", MAGENTA, c);
         break;
-    
+
     case 'Y':
         printf("%s%c", YELLOW, c);
         break;
-    
+        
     default:
         printf("%s%c", NORMAL, c);
         break;

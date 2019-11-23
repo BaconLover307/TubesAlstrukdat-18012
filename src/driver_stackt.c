@@ -3,7 +3,7 @@
 
 #include "stackt.h"
 #include "graph.h"
-#include "mesinkata_faris.h"
+#include "mesinkata_config.h"
 #include "includes.c"
 #include <stdio.h>
 

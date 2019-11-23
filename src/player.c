@@ -4,8 +4,6 @@
 #include "player.h"
 #include "string.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 /*
 ? typedef struct {
@@ -135,30 +133,28 @@ void CaptureBarrage(Player *P, Player *E, address A, Bangunan *B) {
   	// $ Algoritma
 	TentaraAbsolute(B, Info(A));
 	DelP(LE, Info(A));
-  	InsertPrio(LP, A);
+  	InsVPrio(LP, Info(A));
     ResetLevel(B, Info(A));
     
 	// ! DEBUG SKILL
-	printf("TO DELETE!! Jumlah Bangunanmu : %d\n", NbElmtList(*LP));
-	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*LE));
 	// ! Deteksi Skill SH, ilangin ifnya
 	if (NbElmtList(*LE) == 2) {
-		printf("\n The enemy has gained the skill: SH!!\n");
+		printf("\n > The enemy has gained the skill: SH!! < \n\n");
 		CheckGetSH(*E, QE);
 	}
 	// ! Deteksi Skill ET
 	if (Name(ElmtBan(*B,Info(A))) == 'F') {
-		printf("\n The enemy has gained the skill: ET!!\n");
+		printf("\n > The enemy has gained the skill: ET!! < \n\n");
 		CheckGetET(QE);
 	}
 	// ! Deteksi Skill AU
 	if (Name(ElmtBan(*B,Info(A))) == 'T') {
-		printf("\n You have gained the skill: AU!!\n");
+		printf("\n > You have gained the skill: AU!! < \n\n");
 		CheckGetAU(*P, QP, *B);
 	}
 	// ! Deteksi Skill BA, ilangin ifnya
 	if (NbElmtList(*LE) == 10) {
-		printf("\n The enemy has gained the skill: BA!!\n");
+		printf("\n > The enemy has gained the skill: BA!! < \n\n");
 		CheckGetBA(*P, QE);
 	}	
 }
@@ -171,23 +167,24 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
 	Queue *QP, *QE;
 	QP = &Skill(*P);
 	QE = &Skill(*E);
+
   	// $ Algoritma
 	TentaraAbsolute(B, A);
 	if (Search(*LE,A) != Nil) {
         DelP(LE, A);
 	    // ! Deteksi Skill SH
         if (NbElmtList(*LE) == 2) {
-            printf("\n The enemy has gained the skill: SH!!\n");
+            printf("\n > The enemy has gained the skill: SH!! < \n");
             CheckGetSH(*E, QE);
         }
         // ! Deteksi Skill ET
         if (Name(ElmtBan(*B,A)) == 'F') {
-            printf("\n The enemy has gained the skill: ET!!\n");
+            printf("\n > The enemy has gained the skill: ET!! < \n");
             CheckGetET(QE);
         }
         // ! Deteksi Skill AU
         if (Name(ElmtBan(*B,A)) == 'T') {
-            printf("\n You have gained the skill: AU!!\n");
+            printf("\n > You have gained the skill: AU!! < \n");
             CheckGetAU(*P, QP, *B);
         }
     }
@@ -196,12 +193,10 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
     
 	// ! Deteksi Skill BA, ilangin ifnya
 	if (NbElmtList(*LP) == 10) {
-		printf("\n The enemy has gained the skill: BA!!\n");
+		printf("\n > The enemy has gained the skill: BA!! < \n");
 		CheckGetBA(*P, QE);
 	}	
 	// ! DEBUG SKILL
-	printf("TO DELETE!! Jumlah Bangunanmu : %d\n", NbElmtList(*LP));
-	printf("TO DELETE!! Jumlah Bangunanlawan : %d\n", NbElmtList(*LE));
 }
 
 
@@ -257,15 +252,19 @@ void InstantReinforcement(Player *P, Bangunan *B) {
 
 void Barrage(Player *P, Player *E, Bangunan *B) {
     // $ Kamus Lokal
-    address A;
+    address A, temp;
     // $ Algoritma
     A = First(ListBan(*E));
     while (A != Nil) {
         Tentara(ElmtBan(*B, Info(A))) -= 10;
+        
         if (CanCapture(*B, Info(A))) {
+            //temp = A;
             CaptureBarrage(P, E, A, B);
+            //A = Next(temp);
+        } else {
         }
-        A = Next(A);
+            A = Next(A);
     }
 }
 
@@ -306,6 +305,7 @@ void CheckGetAU(Player P, Queue *Q, Bangunan databuild) {
 
 void CheckGetCH(Queue *Q) {
     QAdd(Q, "CH");
+    printf("\n > You have gained the skill : CH!! < \n\n");
 }
 
 void CheckGetIR(Player *P, Bangunan *B) {
@@ -327,6 +327,7 @@ void CheckGetIR(Player *P, Bangunan *B) {
 
     if (get == true){
         QAdd(&Skill(*P), "IR");
+        printf("\n > You have gained the skill : IR!! < \n\n");
     }
 }
 
@@ -335,6 +336,7 @@ void CheckGetBA(Player P, Queue *Q) {
     QAdd(Q, "BA");
 }
 
+// $ ******* COPY FUNCTION *******
 Player CopyPlayer(Player P) {
     Player ret;
     CreatePlayer(&ret);
@@ -347,4 +349,47 @@ Player CopyPlayer(Player P) {
     Duration(SH(FX(ret))) = Duration(SH(FX(P)));
     ET(FX(ret)) = ET(FX(P));
     return ret;
+}
+
+// $ ******* MAP PRINTING FUNCTION ********
+void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
+    int i, j;
+    for (i = 1; i <= (MaxBrs(M) + 2); i++) {
+        for (j = 1; j < (MaxKol(M) + 3); j++) {
+            //printf("%d%d",i,j);
+            if (i == 1) {
+                printf("+");
+                if(j == (MaxKol(M) + 2)) {
+                    printf("++\n");
+                }
+            }
+            else if (i == (MaxBrs(M) + 2)) {
+                printf("+");
+                if(j == (MaxKol(M) + 2)) printf("++\n");
+            }
+            else if (j == 1) {
+                printf("+ ");
+            }
+            else if (j == (MaxKol(M) + 2)) {
+                printf(" +\n");
+            }
+            else if ((Elmt(M,(i-1),(j-1))) == 0) {
+                printf(" ");
+            }
+            else {
+                ElType Mem = Elmt(M,(i-1),(j-1));
+                char C = Name(ElmtBan(B,Mem));
+                if (Search(ListBan(One), Mem) != Nil) {
+                    print_warna(Color(One), C);
+                }
+                else if (Search(ListBan(Two), Mem) != Nil) {
+                    print_warna(Color(Two), C);
+                }
+                else {
+                    print_warna('Y', C);
+                }
+            }
+        }
+    }
+    printf("\n");
 }

@@ -94,8 +94,7 @@ void QDel (Queue * Q, Qinfotype * X) {
             Head(*Q)++;
         }
     }
-
-    else{
+    else {
         printf("Your Skill queue is empty...\n");
     }
 
@@ -137,15 +136,14 @@ void PrintQueue(Queue Q) {
 }
 
 Queue CopyQueue(Queue Q) {
-
-    /* KAMUS LOKAL */
+    // $ KAMUS LOKAL
     Queue ret;
     int i;
 
-    /* ALGORITMA */
+    // $ ALGORITMA
     CreateQueue(&ret, MaxQEl(Q));
     if (IsQEmpty(Q)) return ret;
-    for (i = Head(Q); i<= NBQElmt(Q); i++) {
+    for (i = Head(Q); i <= Tail(Q); i++) {
             QAdd(&ret, Q.T[i]);
     }
     return ret;

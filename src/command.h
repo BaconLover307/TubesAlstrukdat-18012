@@ -26,11 +26,11 @@ void SKILL(Stack *gamestate, Bangunan *databuild);
 // Prosedur untuk melakukan UNDO
 void UNDO(Stack *gamestate);
 
-// Prosedur untuk melakukan END_TURN
-void END_TURN(Sinfotype *state);
-
 // Prosedur untuk melakukan MOVE
 void MOVE(Sinfotype *state, Graph relasi);
+
+// Prosedur untuk melakukan END_TURN
+void END_TURN(Stack *gamestate);
 
 // Prosedur untuk melakukan SAVE
 void SAVE(Sinfotype *state, Graph relasi);

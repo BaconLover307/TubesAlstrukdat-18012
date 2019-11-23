@@ -9,6 +9,7 @@
 #include "queue.h"
 #include "pcolor.h"
 #include "listlinier.h"
+#include "matriks.h"
 
 typedef struct {
     int duration;       // Durasi (turn) efektif Shield
@@ -178,8 +179,11 @@ void CheckGetIR(Player *P, Bangunan *B);
 // * Selipin di Capture. Masukin P sendiri, Q lawan
 void CheckGetBA(Player P, Queue *Q);
 
+// $ ******* COPY FUNCTION *******
 // * menyalin semua informasi dari player P
 Player CopyPlayer(Player P);
 
+// $ ******* MAP PRINTING FUNCTION ********
+void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two);
 
 #endif

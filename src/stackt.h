@@ -8,6 +8,7 @@
 #include "boolean.h"
 #include "player.h"
 #include "matriks.h"
+#include "pcolor.h"
 
 #define SNil 0
 #define MaxSEl 100
@@ -87,16 +88,7 @@ void Push(Stack *S, Sinfotype X);
 // * F.S. X adalah Snilai elemen TOP yang lama, TOP berkurang 1
 void Pop(Stack *S, Sinfotype *X);
 
-// $ ************ Turn Handling ************
-
-// * Mengembalikan Player yang sedang berjalan turn-nya
-Player GetCurrPlayer(Stack S);
-
-// * Mengganti giliran pemain
-// * I.S. Game sedang berlangsung
-// * F.S. Jika salah satu pemain memiliki skill Extra Turn, maka giliran
-// * 	  tidak berubah. Jika tidak, maka giliran akan berubah
-void ChangeTurn(Stack *S);
+// $ ************ State Handling ************
 
 // * Mereset status bangunan yang sudah MOVE atau ATTACK
 void ResetBuildingStatus(List L, Bangunan *B);
@@ -109,10 +101,10 @@ boolean CheckAllMoved(List L, Bangunan B);
 // * Mengirimkan true jika semua sudah ATTACK
 boolean CheckAllAttacked(List L, Bangunan B);
 
-  // * Menuliskan kondisi yang sedang berlangsung
-  void PrintCondition(Sinfotype top);
+// * Menuliskan kondisi yang sedang berlangsung
+void PrintCondition(Sinfotype top);
 
-  // * S terdefinisi, mengembalikan isi state S
-  Sinfotype CopyState(Sinfotype S);
+// * S terdefinisi, mengembalikan isi state S
+Sinfotype CopyState(Sinfotype S);
 
 #endif

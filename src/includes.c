@@ -12,5 +12,5 @@
 #include "queue.c"
 #include "save.c"
 #include "stackt.c"
-#include "mesinkar_faris.c"
-#include "mesinkata_faris.c"
+#include "mesinkar_config.c"
+#include "mesinkata_config.c"

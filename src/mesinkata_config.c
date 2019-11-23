@@ -1,7 +1,7 @@
 /* File: mesinkata.c */
 /* Implementasi Mesin Kata: Model Akuisisi Versi I */
 
-#include "mesinkata_faris.h"
+#include "mesinkata_config.h"
 #include <stdio.h>
 
 boolean EndKata;

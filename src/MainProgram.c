@@ -30,50 +30,6 @@ boolean ExitMenu;   // = false;
 boolean EndTurn;    // = false;
 boolean AksiValid;
 
-// $ ******* MAP PRINTING FUNCTION ********
-void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
-    int i, j;
-    for (i = 1; i <= (MaxBrs(M) + 2); i++) {
-        for (j = 1; j < (MaxKol(M) + 3); j++) {
-            //printf("%d%d",i,j);
-            if (i == 1) {
-                printf("+");
-                if(j == (MaxKol(M) + 2)) {
-                    printf("++\n");
-                }
-            }
-            else if (i == (MaxBrs(M) + 2)) {
-                printf("+");
-                if(j == (MaxKol(M) + 2)) printf("++\n");
-            }
-            else if (j == 1) {
-                printf("+ ");
-            }
-            else if (j == (MaxKol(M) + 2)) {
-                printf(" +\n");
-            }
-            else if ((Elmt(M,(i-1),(j-1))) == 0) {
-                printf(" ");
-            }
-            else {
-                ElType Mem = Elmt(M,(i-1),(j-1));
-                char C = Name(ElmtBan(B,Mem));
-                if (Search(ListBan(One), Mem) != Nil) {
-                    print_warna(Color(One), C);
-                }
-                else if (Search(ListBan(Two), Mem) != Nil) {
-                    print_warna(Color(Two), C);
-                }
-                else {
-                    printf("%c", C);
-                }
-            }
-        }
-    }
-    printf("\n");
-}
-
-
 // $ ******* MAIN PROGRAM ********
 int main() {
 do {
@@ -94,7 +50,7 @@ do {
         //getchar();
 
             // $ ######### TUTORIAL ########
-        if (strcmpi(menu,"TUTORIAL") == 0) {
+        if (strcmp(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
             clrscrn();
@@ -108,8 +64,12 @@ do {
             ExitMenu = true;
 
         }   // $ ######### CREDITS ########
+<<<<<<< HEAD
         else if (strcmpi(menu, "CREDITS") == 0) {
             clrscrn();
+=======
+        else if (strcmp(menu, "CREDITS") == 0) {
+>>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
             Credits();
             printf("\n");
             printf("Press enter to go back to the main menu...");
@@ -117,20 +77,20 @@ do {
             ExitMenu = true;
 
         }   // $ ######### QUIT ########
-        else if (strcmpi(menu, "QUIT") == 0) {
+        else if (strcmp(menu, "QUIT") == 0) {
             QuitImg();
             ExitMenu = true;
             Exit = true;
 
         } // $ ######### PLAY GAME ########
-        else if (strcmpi(menu, "PLAY") == 0) {
+        else if (strcmp(menu, "PLAY") == 0) {
             // $ Kamus Lokal : Start Game
             clrscrn();
             char load;
             char command[100];
             Stack GameState;
             Sinfotype Current; // * Kondisi yg berlangsung (temp)
-            Sinfotype Buang; // * Kondisi buangan
+            Sinfotype Buang;   // * Kondisi buangan
             Player PlayerOne, PlayerTwo;
 			Bangunan DataBangunan;
             TabColor Pallete;
@@ -149,6 +109,7 @@ do {
                 printf("\n[#]---- Starting A New Game ----[#]\n\n");
                 if (load == 'Y') {
                     LoadFile(GameState);
+
                 } else if (load == 'N') {
                     MakeEmptyBangunan(&DataBangunan, 100);
                     printf("\nChoose building color for Player 1! \n");
@@ -166,14 +127,23 @@ do {
                     DataBangunan = KataToBangunan(CountBan);
                     MapBlueprint = KataToMatriks(Baris, Kolom, DataBangunan);
                     RelasiBan = KataToGraph(CountBan);
+
                     // * Bangunan pertama pemain
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
                     // ! DEBUG
                     InsVPrio(&ListBan(PlayerOne),17);
+                    InsVPrio(&ListBan(PlayerOne),13);
+
                     InsVPrio(&ListBan(PlayerTwo),4);
+                    InsVPrio(&ListBan(PlayerTwo),5);
+                    InsVPrio(&ListBan(PlayerTwo),6);
                     InsVPrio(&ListBan(PlayerTwo),7);
                     InsVPrio(&ListBan(PlayerTwo),8);
+                    InsVPrio(&ListBan(PlayerTwo),9);
+                    InsVPrio(&ListBan(PlayerTwo),10);
+
+                    QAdd(&Skill(PlayerOne),"BA");
 
                     // * AKHIRNYA MULAI
                     Turn = 1;
@@ -186,55 +156,44 @@ do {
             /*
             clrscrn();
             printf("              Starting game in...\n\n");
-            sleep(1);
+            sleep(0.5);
             printf("              3...\n\n");
-            sleep(1);
+            sleep(0.5);
             printf("                     2...\n\n");
-            sleep(1);
+            sleep(0.5);
             printf("                             1...\n");
-            sleep(1);
+            sleep(0.5);
             */
             clrscrn();
             getchar();
+
             do {
-                // $$ Inisiasi Turn
-                // $ Kamus Turn
+                // ** Inisiasi Turn
+                // * Kamus Turn
                 EndTurn = false;
                 Player *TopP;
-                Player *EnemyP;
-                Queue *Qtop;
-                Queue *Qenemy;
                 List *Ltop;
-                Bangunan *StateDataB;
                 if (TurnInfo(InfoTop(GameState)) == 1) {
                     TopP = &P1Info(InfoTop(GameState));
-                    EnemyP = &P2Info(InfoTop(GameState));
                 } else {
                     TopP = &P2Info(InfoTop(GameState));
-                    EnemyP = &P1Info(InfoTop(GameState));
                 }
-                Qtop = &Skill(*TopP);
-                Qenemy = &Skill(*EnemyP);
                 Ltop = &ListBan(*TopP);
-                //StateDataB = &DataB(InfoTop(GameState));
                 TambahAllTentara(*Ltop, &DataB(InfoTop(GameState)));
+
                 do {
-                    if (TurnInfo(InfoTop(GameState)) == 1) {
-                        TopP = &P1Info(InfoTop(GameState));
-                        EnemyP = &P2Info(InfoTop(GameState));
-                    } else {
-                        TopP = &P2Info(InfoTop(GameState));
-                        EnemyP = &P1Info(InfoTop(GameState));
-                    }
-                    Qtop = &Skill(*TopP);
-                    Qenemy = &Skill(*EnemyP);
-                    Ltop = &ListBan(*TopP);
+                    // * Inisiasi Command Center
                     AksiValid = true;
 
                     // * Display Status
+<<<<<<< HEAD
                     puts("[#]---- MAP ----[#]");
                     PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
+=======
+                    PrintMap(MapBlueprint, DataB(InfoTop(GameState)), P1Info(InfoTop(GameState)), P2Info(InfoTop(GameState)));
+>>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
                     PrintCondition(InfoTop(GameState));
+                    
 
                     // * Nerima Input
                     Command();
@@ -245,30 +204,45 @@ do {
                     command[--idxCommand] = '\0';
 					printf("\n");
 
+                    // * Proses Input
+                    switch (Color(*TopP)) {
+                    case 'R': printf("%s", RED); break;
+                    case 'G': printf("%s", GREEN); break;
+                    case 'B': printf("%s", BLUE); break;
+                    case 'C': printf("%s", CYAN); break;
+                    case 'M': printf("%s", MAGENTA); break;
+                    default: printf("%s", NORMAL); break;
+                    }
+                    printf("[] V ===== V ===== V ===== V ===== V ===== V []\n\n", TurnInfo(InfoTop(GameState))),
+                        printf("%s", NORMAL);
+
                         // $ ######### ATTACK ########
-                    if (strcmpi(command,"ATTACK") == 0) {
+                    if (strcmp(command,"ATTACK") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
                         ATTACK(&Current, RelasiBan);
                         if (AksiValid)
                             Push(&GameState, Current);
                         getchar();
+                        puts("");
 
                     }   // $ ######### LEVEL_UP ########
-                    else if (strcmpi(command, "LEVEL_UP") == 0) {
+                    else if (strcmp(command, "LEVEL_UP") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
                     	LEVEL_UP(&Current);
                         if (AksiValid)
                             Push(&GameState,Current);
                         getchar();
+                        puts("");
 
                     }   // $ ######### SKILL ########
-                    else if (strcmpi(command, "SKILL") == 0) {
+                    else if (strcmp(command, "SKILL") == 0) {
                     	SKILL(&GameState,&DataB(InfoTop(GameState)));
+                        puts("");
 
                     }   // $ ######### MOVE ########
-                    else if (strcmpi(command, "MOVE") == 0) {
+                    else if (strcmp(command, "MOVE") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
 						MOVE(&Current, RelasiBan);
@@ -277,16 +251,16 @@ do {
                         getchar();
 
                     }   // $ ######### UNDO ########
-                    else if (strcmpi(command, "UNDO") == 0) {
+                    else if (strcmp(command, "UNDO") == 0) {
 						UNDO(&GameState);
+                        puts("");
 
                     }   // $ ######### END_TURN ########
-                    else if (strcmpi(command, "END_TURN") == 0) {
-						EndTurn = true;
-                        // ! Detector Skill Instant Reinforcement
-                        CheckGetIR(TopP,&DataB(InfoTop(GameState)));
+                    else if (strcmp(command, "END_TURN") == 0) {
+						END_TURN(&GameState);
 
                     }   // $ ######### SAVE ########
+<<<<<<< HEAD
                     else if (strcmpi(command, "SAVE") == 0) {
 						SAVE(&InfoTop(GameState), RelasiBan);
                         getchar();
@@ -294,17 +268,38 @@ do {
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
 						EXIT(&InfoTop(GameState), RelasiBan);
+=======
+                    else if (strcmp(command, "SAVE") == 0) {
+						SAVE(&InfoTop(GameState));
+                        getchar();
+
+                    }   // $ ######### EXIT ########
+                    else if (strcmp(command, "EXIT") == 0) {
+						EXIT(&InfoTop(GameState));
+>>>>>>> 5dffbdca2ff2202688d7fe655447c54b83b63f09
                         getchar();
 
 					}
 					else Invalid();
-					printf("\n");
+                    switch (Color(*TopP)) {
+                    case 'R': printf("%s", RED); break;
+                    case 'G': printf("%s", GREEN); break;
+                    case 'B': printf("%s", BLUE); break;
+                    case 'C': printf("%s", CYAN); break;
+                    case 'M': printf("%s", MAGENTA); break;
+                    default: printf("%s", NORMAL); break;
+                    }
+                    printf("[] ^ ===== ^ ===== ^ ===== ^ ===== ^ ===== ^ []\n\n", TurnInfo(InfoTop(GameState))),
+                    printf("%s", NORMAL);
 
             	} while (!EndTurn);
-                if (!ExitMenu) {
-					ChangeTurn(&GameState);
-					EndTurn = false;
-				}
+                address A = First(ListBan(P2Info(InfoTop(GameState))));
+                while (A != Nil)
+                {
+                    Tentara(ElmtBan(DataB(InfoTop(GameState)), Info(A))) = 10;
+                    A = Next(A);
+                }
+
             } while (!IsLose(PlayerOne) && !IsLose(PlayerTwo) && !ExitMenu);
             if (IsLose(PlayerTwo)) {
                 P1Wins();
