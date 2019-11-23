@@ -78,8 +78,6 @@ typedef struct {
 #define BI(B)         (B).BI
 #define ElmtBan(B,i)  (B).BI[(i)]
 #define MaxEl(B)      (B).MaxEl
-#define Moved(B)      (B).hasmoved
-#define Attacked(B)   (B).hasattacked
 
 /* e adalah info_bangunan */
 #define Name(e)       (e).name

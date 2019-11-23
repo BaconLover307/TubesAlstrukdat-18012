@@ -120,7 +120,6 @@ int main() {
   Level(ElmtBan(B, 5)) = 1;
   Tentara(ElmtBan(B, 5)) = 40;
 
-  
   InsVPrio(&L1, 1);
   InsVPrio(&L1, 3);
   InsVPrio(&L2, 2);
