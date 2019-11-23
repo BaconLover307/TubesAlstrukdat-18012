@@ -15,8 +15,6 @@
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmptyList (List L) {
-/* Mengirim true jika list kosong */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -26,9 +24,6 @@ boolean IsEmptyList (List L) {
 /****************** PEMBUATAN LIST KOSONG ******************/
 void CreateEmptyList (List * L) {
 // ! Ingat taruh di awal program (untuk 2 player)
-/* I.S. sembarang             */
-/* F.S. Terbentuk list kosong */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -37,16 +32,12 @@ void CreateEmptyList (List * L) {
 
 /****************** Manajemen Memori ******************/
 address Alokasi (urutan X) {
-/* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   address P;
 
   /* ALGORITMA */
-  P = malloc (sizeof(address));
+  P = (address) malloc (sizeof(ElmtList));
+  //P = malloc (sizeof(address));
   if (P != NULL) {
     Info(P) = X;
     Next(P) = Nil;
@@ -57,10 +48,6 @@ address Alokasi (urutan X) {
 }
 
 void Dealokasi (address * P) {
-/* I.S. P terdefinisi */
-/* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian address P */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -69,10 +56,6 @@ void Dealokasi (address * P) {
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address Search (List L, urutan X) {
-/* Mencari apakah ada elemen list dengan Info(P)= X */
-/* Jika ada, mengirimkan address elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   address P;
 
@@ -93,15 +76,20 @@ address Search (List L, urutan X) {
   }
 }
 
+urutan GetInfo(List L, int i) {
+	address P = First(L);
+	i--;
+	while (i>0) {
+		P = Next(P);
+		i--;
+	}
+	return Info(P);
+}
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVPrio (List * L, urutan X) {
 // ! Tambah bangunan selalu pakai prosedur ini
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list sesuai urutan X menaik: elemen yang baru */
-/* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-
   /* KAMUS LOKAL */
   address P;
 
@@ -115,10 +103,6 @@ void InsVPrio (List * L, urutan X) {
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
 void InsertAfter (List *L, address P, address Prec) {
-/* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
-/*      P sudah dialokasi  */
-/* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -127,9 +111,6 @@ void InsertAfter (List *L, address P, address Prec) {
 }
 
 void InsertPrio (List * L, address P) {
-/* I.S. P sudah dialokasi dan L mungkin kosong */
-/* F.S. Insert P sebagai elemen yang tersusun berdasarkan urutan X */
-
   /* KAMUS LOKAL */
   address PrecLast, Last;
 
@@ -187,16 +168,19 @@ void DelP (List * L, urutan X) {
   Dealokasi(&P);
 }
 
+List CopyList(List L) {
+  List ret;
+  CreateEmptyList(&ret);
+  address P = First(L);
+  while (P != Nil) {
+    InsVPrio(&ret, Info(P));
+    P = Next(P);
+  }
+  return ret;
+}
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L, Bangunan B) {
-/* I.S. List tidak kosong */
-/* F.S. Mencetak bangunan-bangunan yang dimiliki ke layar dengan
-        elemen-elemen tertentu (Nama, Posisi, Jumlah Tentara, Level) */
-/* Contoh :
-    1. Castle (1,15) 20 lv. 3
-    2. Tower (1,13) 50 lv. 1
-    3. Castle (3,14) 30 lv. 2                                        */
-
   /* KAMUS LOKAL */
   address P;
   int i;
@@ -206,21 +190,27 @@ void PrintInfo (List L, Bangunan B) {
   i = 1; //inisialisasi
 
   while (P != Nil) {
-    printf("%d. ", i);
+    printf(" || - [%d.] ", i);
 
     if (Name(ElmtBan(B, Info(P))) == 'C') {
-      printf("Castle ");
+      printf("Castle  ");
     } else if (Name(ElmtBan(B, Info(P))) == 'V') {
       printf("Village ");
     } else if (Name(ElmtBan(B, Info(P))) == 'T') {
-      printf("Tower ");
+      printf("Tower   ");
     } else /* (Name(ElmtBan(B, Info(P))) == 'F') */ {
-      printf("Fort ");
+      printf("Fort    ");
     }
 
+    if (Tentara(ElmtBan(B, Info(P))) < 10) {
+    	printf("0");
+    }
+    printf("%d", Tentara(ElmtBan(B, Info(P))));
+	  printf("/%d ", GetMaxTentara(B,Info(P)));
+
+    printf("lv. %d ", Level(ElmtBan(B, Info(P))));
     TulisPOINT(Posisi(ElmtBan(B, Info(P))));
-    printf(" %d ", Tentara(ElmtBan(B, Info(P))));
-    printf("lv. %d\n", Level(ElmtBan(B, Info(P))));
+    printf("\n");
 
     i++;
     P = Next(P);
@@ -260,58 +250,58 @@ boolean CheckTambahTentara (Bangunan B, urutan X) {
   /* ALGORITMA */
   if (Name(ElmtBan(B, X)) == 'C') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxC1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 60);
+      return (Tentara(ElmtBan(B, X)) < MaxC2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 80);
+      return (Tentara(ElmtBan(B, X)) < MaxC3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 100);
+      return (Tentara(ElmtBan(B, X)) < MaxC3);
 
     }
   } else if (Name(ElmtBan(B, X)) == 'T') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxT1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 30);
+      return (Tentara(ElmtBan(B, X)) < MaxT2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxT3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 50);
+      return (Tentara(ElmtBan(B, X)) < MaxT4);
 
     }
   } else if (Name(ElmtBan(B, X)) == 'F') {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxF1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxF2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 60);
+      return (Tentara(ElmtBan(B, X)) < MaxF3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 80);
+      return (Tentara(ElmtBan(B, X)) < MaxF4);
 
     }
   } else /* Name(ElmtBan(B, X)) == 'V' */ {
     if (Level(ElmtBan(B, X)) == 1) {
-      return (Tentara(ElmtBan(B, X)) < 20);
+      return (Tentara(ElmtBan(B, X)) < MaxV1);
 
     } else if (Level(ElmtBan(B, X)) == 2) {
-      return (Tentara(ElmtBan(B, X)) < 30);
+      return (Tentara(ElmtBan(B, X)) < MaxV2);
 
     } else if (Level(ElmtBan(B, X)) == 3) {
-      return (Tentara(ElmtBan(B, X)) < 40);
+      return (Tentara(ElmtBan(B, X)) < MaxV3);
 
     } else /* Level(ElmtBan(B, X)) == 4 */ {
-      return (Tentara(ElmtBan(B, X)) < 50);
+      return (Tentara(ElmtBan(B, X)) < MaxV4);
 
     }
   }
@@ -407,3 +397,4 @@ void TambahAllTentara (List L, Bangunan * B) {
     P = Next(P);
   }
 }
+

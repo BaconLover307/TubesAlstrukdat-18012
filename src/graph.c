@@ -15,9 +15,6 @@
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create Graph kosong  */
 void MakeEmptyGraph (Graph * G) {
-/* I.S. sembarang */
-/* F.S. Terbentuk graph kosong */
-
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
@@ -26,16 +23,11 @@ void MakeEmptyGraph (Graph * G) {
 
 /****************** Manajemen Memori ******************/
 addrGraph AlokasiGraph1 (urutan X) {
-/* Mengirimkan addrGraph hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka addrGraph tidak Nil, dan misalnya */
-/* menghasilkan P, maka InfoG(P)=X, NextP(P)=Nil, FirstChild(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
-
   /* KAMUS LOKAL */
   addrGraph P;
-
   /* ALGORITMA */
-  P = malloc (sizeof(addrGraph));
+  P = (addrGraph) malloc (sizeof(ElmtGraph));
+  //P = malloc (sizeof(addrGraph));
   if (P != NULL) {
     InfoG(P) = X;
     NextP(P) = Nil;
@@ -56,7 +48,8 @@ addrGraph2 AlokasiGraph2 (urutan X) {
   addrGraph2 P;
 
   /* ALGORITMA */
-  P = malloc (sizeof(addrGraph2));
+  P = (addrGraph2) malloc (sizeof(ElmtGraph2));
+  //P = malloc (sizeof(addrGraph2));
   if (P != NULL) {
     InfoG2(P) = X;
     NextChild(P) = Nil;
@@ -66,7 +59,7 @@ addrGraph2 AlokasiGraph2 (urutan X) {
   return P;
 }
 
-void DealokasiGraph1 (addrGraph * P) {
+void DealokasiGraph1 (addrGraph * G) {
 /* I.S. P terdefinisi; */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addrGraph P */
@@ -74,10 +67,10 @@ void DealokasiGraph1 (addrGraph * P) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  free(*P);
+  free(*G);
 }
 
-void DealokasiGraph2 (addrGraph2 * P) {
+void DealokasiGraph2 (addrGraph2 * G2) {
 /* I.S. P terdefinisi; */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addrGraph2 P */
@@ -85,7 +78,7 @@ void DealokasiGraph2 (addrGraph2 * P) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  free(*P);
+  free(*G2);
 }
 
 /* ********** TEST GRAPH KOSONG ********** */
@@ -116,16 +109,6 @@ void BacaGraph (Graph * G);
 
 void TulisGraph (Graph G) {
 // ? Untuk debugging doang kayaknya
-/* I.S. G terdefinisi */
-/* F.S. Hubungan antar bangunan ditampilkan ke layar.
-        Jika tidak ada hubungan maka muncul '0' di layar.
-        Jika ada hubungan maka muncul '1' di layar.       */
-/* Contoh: menulis matriks 3x3
-0 1 1
-1 0 0
-1 0 0
-*/
-
   /* KAMUS LOKAL */
   IdxType i, j;
   addrGraph P;
@@ -325,7 +308,7 @@ boolean CheckAttack (Graph G, List L, urutan X) {
   return (same);
 }
 
-void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
+void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count) {
 /* I.S. Graph G terdefinisi
         List L terdefinisi
         Bangunan B terdefinisi
@@ -351,21 +334,23 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
   while ((C != Nil) && (P != Nil)) {
     if (InfoG2(C) != Info(P)) {
       if (InfoG2(C) < Info(P)) {
-        printf("%d. ", i);
+        printf(" || - [%d.] ", i);
 
         if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
-          printf("Castle ");
+          printf("Castle  ");
         } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
           printf("Village ");
         } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
-          printf("Tower ");
+          printf("Tower   ");
         } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
-          printf("Fort ");
+          printf("Fort    ");
         }
 
+        printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
+        printf("/%d ", GetMaxTentara(B, InfoG2(C)));
+        printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
         TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
-        printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
-        printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
+        printf("\n");
 
         i++;
         C = NextChild(C);
@@ -381,28 +366,70 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
   }
 
   while (C != Nil) {
-    printf("%d. ", i);
+    printf(" || - [%d.] ", i);
 
     if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
-      printf("Castle ");
+      printf("Castle  ");
     } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
       printf("Village ");
     } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
-      printf("Tower ");
+      printf("Tower   ");
     } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
-      printf("Fort ");
+      printf("Fort    ");
     }
 
+    printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
+    printf("/%d ", GetMaxTentara(B, InfoG2(C)));
+    printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
     TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
-    printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
-    printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
-
+    printf("\n");
     i++;
     C = NextChild(C);
   }
+  *Count = i - 1;
+  //P = Alokasi(X);
+  //InsertPrio(&L, P);
+}
 
-  P = Alokasi(X);
-  InsertPrio(&L, P);
+int GetIdxAttack(Graph G, List L, Bangunan B, urutan X, int pos)
+{
+  // Fungsi untuk mendapatkan Idx bangunan move yang diinginkan
+
+  /* KAMUS LOKAL */
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
+  int i;
+
+  /* ALGORITMA */
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
+  i = 1;
+
+  while ((C != Nil) && (P != Nil)) {
+    if (InfoG2(C) != Info(P)) {
+      if (InfoG2(C) < Info(P)) {
+        if (i == pos) {
+          return InfoG2(C);
+        }
+        i++;
+        C = NextChild(C);
+      } else /* InfoG2(C) > Info(P) */ {
+        P = Next(P);
+      }
+
+    } else /* InfoG2(C) = Info(P) */ {
+        P = Next(P);
+        C = NextChild(C);
+    }
+  }
+  
+  while (C != Nil) {
+    if (i == pos) {
+          return InfoG2(C);
+    }
+  }
 }
 
 /************ MOVE TENTARA ******************/
@@ -438,7 +465,7 @@ boolean CheckMove (Graph G, List L, urutan X) {
   return (same);
 }
 
-void PrintMove (Graph G, List L, Bangunan B, urutan X) {
+void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count) {
 /* I.S. Graph G terdefinisi
         List L terdefinisi
         Bangunan B terdefinisi
@@ -461,23 +488,30 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X) {
   C = FirstChild(Q);
   i = 1;
 
+
   while ((C != Nil) && (P != Nil)) {
     if (InfoG2(C) == Info(P)) {
-      printf("%d. ", i);
+      printf(" || - [%d.] ", i);
 
       if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
-        printf("Castle ");
+        printf("Castle  ");
       } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
         printf("Village ");
       } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
-        printf("Tower ");
+        printf("Tower   ");
       } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
-        printf("Fort ");
+        printf("Fort    ");
       }
 
+      if (Tentara(ElmtBan(B, Info(P))) < 10) {
+    	printf("0");
+      }
+      printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
+      printf("/%d ", GetMaxTentara(B, InfoG2(C)));
+
+      printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
       TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
-      printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
-      printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
+      printf("\n");
 
       i++;
       C = NextChild(C);
@@ -491,4 +525,42 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X) {
       }
     }
   }
+  *Count = i - 1;
+}
+
+
+int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos) {
+    // Fungsi untuk mendapatkan Idx bangunan move yang diinginkan
+
+    /* KAMUS LOKAL */
+    address P;
+    addrGraph Q;
+    addrGraph2 C;
+    int i;
+
+    /* ALGORITMA */
+    P = First(L);
+    Q = SearchP(G, X);
+    C = FirstChild(Q);
+    i = 1;
+
+    while ((C != Nil) && (P != Nil)) {
+      if (InfoG2(C) == Info(P)) {
+
+        if (i == pos) {
+            return InfoG2(C);
+        }
+        i++;
+
+        C = NextChild(C);
+        P = Next(P);
+
+      } else /* InfoG2(C) != Info(P) */ {
+        if (InfoG2(C) < Info(P)) {
+          C = NextChild(C);
+        } else /* InfoG2(C) > Info(P) */ {
+          P = Next(P);
+        }
+      }
+    }
 }
