@@ -35,7 +35,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
     do {
         printf("\nChoose a building to attack from : ");
         scanf("%d", &nomorBangunan);
-        if (1 < nomorBangunan || NbElmtList(*Ltop) < nomorBangunan) {
+        if (nomorBangunan < 1 || NbElmtList(*Ltop) < nomorBangunan) {
             printf("Input is not valid! Please input given index of buildings.\n");
         } else {
                 // * Ambil Bangunan Pemain
@@ -56,9 +56,6 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         }
     } while (1 < nomorBangunan || NbElmtList(*Ltop) < nomorBangunan );
 
-    
-    printf(" Anda akan menyerang dengan %c yang mempunyai %d tentara.\n", Name(ElmtBan(*databuild,idxCurr)), Tentara(ElmtBan(*databuild,idxCurr)));
-
     // * Menampilkan daftar bangunan yang dapat diserang
     int jumlahBangunanTerdekat;
     printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state)%2+1);
@@ -69,7 +66,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         puts("....");
         sleep(1);
         puts("It seems that this building does not have any other connected buildings to attack.");
-        puts("Press enter to go back to the main menu.");
+        puts("Press enter to go back to the command center.");
         getchar();
         AksiValid = false;
         return;
@@ -263,15 +260,15 @@ void UNDO(Stack *gamestate) {
 // Prosedur untuk melakukan MOVE
 void MOVE(Sinfotype *state, Graph relasi) { // todo
     // $ Kamus Lokal
-    Player *CurrP;
+    Player *TopP;
     List *Ltop;
     Bangunan *databuild;
     if (TurnInfo(*state) == 1) {
-        CurrP = &P1Info(*state);
+        TopP = &P1Info(*state);
     } else {
-        CurrP = &P2Info(*state);
+        TopP = &P2Info(*state);
     }
-    Ltop = &ListBan(*CurrP);
+    Ltop = &ListBan(*TopP);
     databuild = &DataB(*state);
 
     int giliran = TurnInfo(*state);
@@ -279,12 +276,11 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
     address Pcurr;
     // $ Algoritma
     // * Bangunan Pemain
-    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(*state));
+    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", giliran);
     PrintInfo(*Ltop,*databuild);
-    printf("\n");
 
     do {
-        printf("Choose a building to move soldiers from: ");
+        printf("\nChoose a building to move soldiers from: ");
         scanf("%d", &nomorBangunan);
         if (nomorBangunan < 1 || NbElmtList(*Ltop) < nomorBangunan ) {
             printf("Input is not valid! Please input given index of buildings.\n");

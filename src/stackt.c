@@ -76,7 +76,7 @@ void ChangeTurn(Stack *S) {
     // $ Algoritma
     if (!ET(FX(*TopP))) {
         TurnInfo(InfoTop(*S)) = TurnInfo(InfoTop(*S)) % 2 + 1;
-        //printf("Changing turns"); sleep(1);printf(".");sleep(1);printf(".");sleep(1);printf("\n\n");
+        //printf("Changing turns"); sleep(0.3);printf(".");sleep(0.3);printf(".");sleep(0.3);printf("\n\n");
     }
     ResetStack(S);
     
@@ -85,10 +85,22 @@ void ChangeTurn(Stack *S) {
     // ! Reset FX Attack Up
     AU(FX(*TopP)) = false;
     // ! Reduce Shield
+    ResetBuildingStatus(*Ltop, &DataB(InfoTop(*S)));
     ReduceDurationSH(EnemyP);
     // * Clear Stack
 }
 
+void ResetBuildingStatus(List L, Bangunan *B) {
+    // $ Kamus Lokal
+    address P = First(L);
+    // $ Algoritma
+    while (P != Nil) {
+        Moved(ElmtBan(*B,Info(P))) = false;
+        Attacked(ElmtBan(*B,Info(P))) = false;
+        P = Next(P);
+    }
+
+}
 
 void PrintCondition(Sinfotype top) {
     // $ Kamus Lokal

@@ -98,10 +98,13 @@ Player GetCurrPlayer(Stack S);
 // * 	  tidak berubah. Jika tidak, maka giliran akan berubah
 void ChangeTurn(Stack *S);
 
-// * Menuliskan kondisi yang sedang berlangsung
-void PrintCondition(Sinfotype top);
+// * Mereset status bangunan yang sudah MOVE atau ATTACK
+void ResetBuildingStatus(List L, Bangunan *B);
 
-// * S terdefinisi, mengembalikan isi state S
-Sinfotype CopyState(Sinfotype S);
+// * Menuliskan kondisi yang sedang berlangsung
+ void PrintCondition(Sinfotype top);
+
+ // * S terdefinisi, mengembalikan isi state S
+ Sinfotype CopyState(Sinfotype S);
 
 #endif

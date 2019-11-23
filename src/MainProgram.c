@@ -224,14 +224,13 @@ do {
                     Qtop = &Skill(*TopP);
                     Qenemy = &Skill(*EnemyP);
                     Ltop = &ListBan(*TopP);
-                    
-                    // $ Display Status
+                    AksiValid = true;
+
+                    // * Display Status
                     PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
                     PrintCondition(InfoTop(GameState));
-                    if (IsFirstAct(GameState))
-                        puts("First act");
-                    printf("Top = %d\n",Top(GameState));
 
+                    // * Nerima Input
                     Command();
                     int idxCommand = 0;
                     do {
