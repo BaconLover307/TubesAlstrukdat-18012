@@ -117,6 +117,8 @@ void PrintInfoHead (Queue Q){
 void PrintQueue(Queue Q) {
     // $ Kamus Lokal
     Qinfotype skil;
+    int i;
+
     // $ Algoritma
     if (IsQEmpty(Q)){
         printf("|| -- ||");
@@ -125,7 +127,7 @@ void PrintQueue(Queue Q) {
         PrintInfoHead(Q);
         printf(" ||");
         if (NBQElmt(Q) > 1) {
-            for (int i = Head(Q)+1; i <= Tail(Q); i++) {
+            for (i = Head(Q)+1; i <= Tail(Q); i++) {
                 printf(" <- ");
                 strcpy(skil, Q.T[i]);
                 printf("%s", skil);
@@ -135,10 +137,15 @@ void PrintQueue(Queue Q) {
 }
 
 Queue CopyQueue(Queue Q) {
+
+    /* KAMUS LOKAL */
     Queue ret;
+    int i;
+
+    /* ALGORITMA */
     CreateQueue(&ret, MaxQEl(Q));
     if (IsQEmpty(Q)) return ret;
-    for (int i = Head(Q); i<= NBQElmt(Q); i++) {
+    for (i = Head(Q); i<= NBQElmt(Q); i++) {
             QAdd(&ret, Q.T[i]);
     }
     return ret;

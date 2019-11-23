@@ -283,10 +283,14 @@ void ResetLevel (Bangunan * B, IdxType X) {
 }
 
 Bangunan CopyBangunan(Bangunan B) {
+  /* KAMUS LOKAL */
   Bangunan ret;
+  int i;
+
+  /* ALGORITMA */
   MakeEmptyBangunan(&ret, MaxEl(B));
   //printf("Maxel :%d  NbElmt: %d\n", MaxEl(B), NbElmtBan(B));
-  for (int i = 1; i <= NbElmtBan(B); i++) {
+  for (i = 1; i <= NbElmtBan(B); i++) {
     Name(ElmtBan(ret, i)) = Name(ElmtBan(B, i));
     Posisi(ElmtBan(ret, i)) = CopyPOINT(Posisi(ElmtBan(B, i)));
     Level(ElmtBan(ret, i)) = Level(ElmtBan(B, i));

@@ -19,9 +19,13 @@ void MakeBukuWarna(TabColor * ArrWarna) {
 }
 
 void PrintBukuWarna(TabColor ArrWarna) {
+    /* KAMUS LOKAL */
+    int i;
+
+    /* ALGORITMA */
     printf("[ ");
     print_warna(ColElmt(ArrWarna,1), ColElmt(ArrWarna,1));
-    for (int i = 2; i<= ColNeff(ArrWarna); i++) {
+    for (i = 2; i<= ColNeff(ArrWarna); i++) {
         printf(" | ");
         print_warna(ColElmt(ArrWarna,i), ColElmt(ArrWarna,i));
     }

@@ -161,9 +161,7 @@ boolean CheckAttack (Graph G, List L, urutan X);
         Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang bisa diserang maka akan muncul pilihan-
-        pilihan bangunan yang dapat diserang
-        Jika tidak ada maka muncul "Tidak ada bangunan yang dapat
-        diserang" di layar */
+        pilihan bangunan yang dapat diserang */
 void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count);
 
 int GetIdxAttack (Graph G, List L, Bangunan B, urutan X, int pos);
@@ -180,9 +178,7 @@ boolean CheckMove (Graph G, List L, urutan X);
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang memiliki hungan dengan bangunan ke-X
         yang dimiliki oleh pemain itu maka muncul pilihan-pilihan bangunan
-        yang dapat ditambahkan jumlah tentaranya.
-        Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di
-        layar */
+        yang dapat ditambahkan jumlah tentaranya. */
 void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count);
 
 int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos);

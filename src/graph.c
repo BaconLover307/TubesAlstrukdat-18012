@@ -311,9 +311,7 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count) {
         Bangunan B terdefinisi
         X pasti ada di dalam L */
 /* F.S. Jika ada bangunan yang bisa diserang maka akan muncul pilihan-
-        pilihan bangunan yang dapat diserang
-        Jika tidak ada maka muncul "Tidak ada bangunan yang dapat
-        diserang" di layar */
+        pilihan bangunan yang dapat diserang */
 
   /* KAMUS LOKAL */
   address P;

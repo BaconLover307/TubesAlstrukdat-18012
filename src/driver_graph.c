@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "graph.h"
-#include "includes.c"
 
 boolean ExitMenu;
 boolean EndTurn;
@@ -128,12 +127,11 @@ int main() {
   PrintInfo(L1, B);
   PrintInfo(L2, B);
 
-  X = 1;
-  if (CheckAttack(G, L1, X))
+  if (CheckAttack(G, L1, 1))
   {
     printf("Bangunan ke-1 dapat menyerang lawan.\n");
   }
-  if (CheckAttack(G, L1, 2))
+  if (CheckAttack(G, L2, 2))
   {
     printf("Bangunan ke-2 dapat menyerang lawan.\n");
   }
@@ -141,33 +139,38 @@ int main() {
   {
     printf("Bangunan ke-3 dapat menyerang lawan.\n");
   }
-  if (CheckAttack(G, L1, 4))
+  if (CheckAttack(G, L2, 4))
   {
     printf("Bangunan ke-4 dapat menyerang lawan.\n");
   }
-  if (CheckAttack(G, L1, 5))
-  {
-    printf("Bangunan ke-5 dapat menyerang lawan.\n");
-  }
-  if (CheckAttack(G, L1, 6))
-  {
-    printf("Bangunan ke-6 dapat menyerang lawan.\n");
-  }
-  if (CheckAttack(G, L1, 7))
-  {
-    printf("Bangunan ke-7 dapat menyerang lawan.\n");
-  }
 
- int jml = 3;
+// Gakbisa dijalankan karena gak ada masuk di List Pemain */  
+  // if (CheckAttack(G, L1, 5))
+  // {
+  //   printf("Bangunan ke-5 dapat menyerang lawan.\n");
+  // }
+  // if (CheckAttack(G, L1, 6))
+  // {
+  //   printf("Bangunan ke-6 dapat menyerang lawan.\n");
+  // }
+  // if (CheckAttack(G, L1, 7))
+  // {
+  //   printf("Bangunan ke-7 dapat menyerang lawan.\n");
+  // }
+
+  int jml = 3;
   printf("Daftar bangunan yang dapat diserang oleh bangunan ke-1:\n");
-  PrintAttack(G, L1, B, X);
+  PrintAttack(G, L1, B, 1, &X);
 
   printf("Daftar bangunan terdekat dengan bangunan ke-2:\n");
   PrintMove(G, L1, B, 2, &jml);
-  printf("Daftar bangunan yang dapat diserang oleh bangunan ke-1:\n");
-  PrintAttack(G, L1, B, X);
+  printf("Daftar bangunan yang dapat diserang oleh bangunan ke-3:\n");
+  PrintAttack(G, L1, B, 3, &X);
   printf("Daftar bangunan terdekat dengan bangunan ke-1:\n");
-  PrintMove(G, L1, B, X, &jml);
+  PrintMove(G, L1, B, 1, &jml);
+
+  X = GetIdxAttack(G, L2, B, 4, 3);
+  printf("%d\n", X);
 
   return 0;
 }
