@@ -424,6 +424,7 @@ int GetIdxAttack(Graph G, List L, Bangunan B, urutan X, int pos)
       return InfoG2(C);
     } else /* i != pos */ {
       i++;
+      C = NextChild(C);
     }
   }
 }
@@ -505,7 +506,7 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count) {
       printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
       printf("/%d ", GetMaxTentara(B, InfoG2(C)));
 
-      printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
+      printf("lv. %d ", Level(ElmtBan(B, InfoG2(C))));
       TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
       printf("\n");
 

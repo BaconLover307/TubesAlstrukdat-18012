@@ -136,27 +136,18 @@ void CaptureBarrage(Player *P, Player *E, address A, Bangunan *B) {
   	InsVPrio(LP, Info(A));
     ResetLevel(B, Info(A));
     
-	// ! DEBUG SKILL
-	// ! Deteksi Skill SH, ilangin ifnya
-	if (NbElmtList(*LE) == 2) {
-		printf("\n > The enemy has gained the skill: SH!! < \n\n");
-		CheckGetSH(*E, QE);
-	}
+	// ! Deteksi Skill SH
+	CheckGetSH(*E, QE);
 	// ! Deteksi Skill ET
 	if (Name(ElmtBan(*B,Info(A))) == 'F') {
-		printf("\n > The enemy has gained the skill: ET!! < \n\n");
 		CheckGetET(QE);
 	}
 	// ! Deteksi Skill AU
 	if (Name(ElmtBan(*B,Info(A))) == 'T') {
-		printf("\n > You have gained the skill: AU!! < \n\n");
 		CheckGetAU(*P, QP, *B);
 	}
-	// ! Deteksi Skill BA, ilangin ifnya
-	if (NbElmtList(*LE) == 10) {
-		printf("\n > The enemy has gained the skill: BA!! < \n\n");
-		CheckGetBA(*P, QE);
-	}	
+	// ! Deteksi Skill BA
+	CheckGetBA(*P, QE);
 }
 
 void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
@@ -173,30 +164,21 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
 	if (Search(*LE,A) != Nil) {
         DelP(LE, A);
 	    // ! Deteksi Skill SH
-        if (NbElmtList(*LE) == 2) {
-            printf("\n > The enemy has gained the skill: SH!! < \n");
-            CheckGetSH(*E, QE);
-        }
+        CheckGetSH(*E, QE);
         // ! Deteksi Skill ET
         if (Name(ElmtBan(*B,A)) == 'F') {
-            printf("\n > The enemy has gained the skill: ET!! < \n");
             CheckGetET(QE);
         }
         // ! Deteksi Skill AU
         if (Name(ElmtBan(*B,A)) == 'T') {
-            printf("\n > You have gained the skill: AU!! < \n");
             CheckGetAU(*P, QP, *B);
         }
     }
   	InsVPrio(LP, A);
     ResetLevel(B, A);
     
-	// ! Deteksi Skill BA, ilangin ifnya
-	if (NbElmtList(*LP) == 10) {
-		printf("\n > The enemy has gained the skill: BA!! < \n");
-		CheckGetBA(*P, QE);
-	}	
-	// ! DEBUG SKILL
+	// ! Deteksi Skill BA
+	CheckGetBA(*P, QE);
 }
 
 
@@ -207,18 +189,14 @@ void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B) {
 void InstantUpgrade(Player *P, Bangunan *B) {
     // $ Kamus Lokal
     address A;
-    // $ Algoritma
     
+    // $ Algoritma
     A = First(ListBan(*P));
-    while (Next(A) != Nil) {
-        if (Level(ElmtBan(*B, Info(A))) < 4) {
+    while (A != Nil) {
+        if (Level(ElmtBan(*B, Info(A))) < 4)
             Level(ElmtBan(*B, Info(A)))++;
-        }
         A = Next(A);
     }
-    if (Level(ElmtBan(*B, Info(A))) <= 4){
-            Level(ElmtBan(*B, Info(A)))++;
-        }
 }
 
 void Shield(Player *P) {
@@ -256,16 +234,12 @@ void Barrage(Player *P, Player *E, Bangunan *B) {
     // $ Algoritma
     A = First(ListBan(*E));
     while (A != Nil) {
-        PrintInfo(ListBan(*E),*B); puts("");
         Tentara(ElmtBan(*B, Info(A))) -= 10;
         
         if (CanCapture(*B, Info(A))) {
             CaptureBarrage(P, E, A, B);
         }
         A = Next(A);
-        puts("!");
-        PrintInfo(ListBan(*E), *B);
-        puts("");
     }
 }
 
@@ -276,12 +250,15 @@ void CheckGetIU(Queue *Q) {
 }
 
 void CheckGetSH(Player P, Queue *Q) {
-    if (NbElmtList(ListBan(P)) == 2) 
-    QAdd(Q, "SH");
+    if (NbElmtList(ListBan(P)) == 2) {
+        QAdd(Q, "SH");
+        printf("\n > The enemy has gained the skill: SH!! < \n\n");
+    }
 }
 
 void CheckGetET(Queue *Q) {
     QAdd(Q, "ET");
+    printf("\n > The enemy has gained the skill: ET!! < \n");
 }
 
 void CheckGetAU(Player P, Queue *Q, Bangunan databuild) {
@@ -300,7 +277,10 @@ void CheckGetAU(Player P, Queue *Q, Bangunan databuild) {
             Adr = Next(Adr);
         }
     }
-    if (totalT == 3) QAdd(Q, "AU");
+    if (totalT == 3) {
+        QAdd(Q, "AU");
+        printf("\n > You have gained the skill: AU!! < \n\n");
+    }
 }
 
 
@@ -333,8 +313,10 @@ void CheckGetIR(Player *P, Bangunan *B) {
 }
 
 void CheckGetBA(Player P, Queue *Q) {
-    if (NbElmtList(ListBan(P)) == 10)
-    QAdd(Q, "BA");
+    if (NbElmtList(ListBan(P)) == 10) {
+        QAdd(Q, "BA");
+        printf("\n > The enemy has gained the skill: BA!! < \n");
+    }
 }
 
 // $ ******* COPY FUNCTION *******

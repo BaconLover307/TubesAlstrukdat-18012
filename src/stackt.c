@@ -50,6 +50,47 @@ void Pop(Stack *S, Sinfotype *X) {
     Top(*S)--;
 }
 
+// $ ************ Turn Handling ************
+
+Player GetTopPlayer(Stack S) {
+    if (TurnInfo(InfoTop(S)) == 1) {
+        return (P1Info(InfoTop(S)));
+    } else if (TurnInfo(InfoTop(S)) == 2) {
+        return (P2Info(InfoTop(S)));
+    }
+}
+
+void ChangeTurn(Stack *S) {
+    // $ Kamus Lokal
+    Player *TopP, *EnemyP;
+    List *Ltop, *Lenemy;
+    Sinfotype Temp;
+    if (TurnInfo(InfoTop(*S)) == 1) {
+        TopP = &P1Info(InfoTop(*S));
+        EnemyP = &P2Info(InfoTop(*S));
+    } else {
+        TopP = &P2Info(InfoTop(*S));
+        EnemyP = &P1Info(InfoTop(*S));
+    }
+    Ltop = &ListBan(*TopP);
+    Lenemy = &ListBan(*EnemyP);
+    // $ Algoritma
+    if (!ET(FX(*TopP))) {
+        TurnInfo(InfoTop(*S)) = TurnInfo(InfoTop(*S)) % 2 + 1;
+        //printf("Changing turns"); sleep(0.3);printf(".");sleep(0.3);printf(".");sleep(0.3);printf("\n\n");
+    }
+    ResetStack(S);
+
+    // ! Reset FX Extra Turn
+    ET(FX(*TopP)) = false;
+    // ! Reset FX Attack Up
+    AU(FX(*TopP)) = false;
+    // ! Reduce Shield
+    ResetBuildingStatus(*Ltop, &DataB(InfoTop(*S)));
+    ReduceDurationSH(EnemyP);
+    // * Clear Stack
+}
+
 // $ ************ State Handling ************
 
 void ResetBuildingStatus(List L, Bangunan *B) {
@@ -68,7 +109,7 @@ boolean CheckAllMoved(List L, Bangunan B) {
     address P = First(L);
     // $ Algoritma
     while (P != Nil) {
-        if (Moved(ElmtBan(B,Info(P))) == false) 
+        if (Moved(ElmtBan(B,Info(P))) == false)
             return false;
         P = Next(P);
     }
@@ -80,7 +121,7 @@ boolean CheckAllAttacked(List L, Bangunan B) {
     address P = First(L);
     // $ Algoritma
     while (P != Nil) {
-        if (Attacked(ElmtBan(B,Info(P))) == false) 
+        if (Attacked(ElmtBan(B,Info(P))) == false)
             return false;
         P = Next(P);
     }
@@ -98,7 +139,7 @@ void PrintCondition(Sinfotype top) {
     Bangunan DataBuild = DataB(top);
     List Ltop = ListBan(TopP);
     // $ Algoritma
-    
+
     // * Display Header
     switch (Color(TopP)) {
     case 'R': printf("%s", RED); break;
@@ -110,7 +151,7 @@ void PrintCondition(Sinfotype top) {
     }
     printf("[] ==== ==== ====  Player %d  ==== ==== ==== []\n\n", TurnInfo(top)),
     printf("%s", NORMAL);
-    
+
     // * Display Effects
     printf("   <= Active Effects =>\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n ");
@@ -119,22 +160,22 @@ void PrintCondition(Sinfotype top) {
 
     if (CH(FX(TopP))) printf(" [CH] ");
     else printf(" [  ] ");
-    
+
     if (ActiveSH(SH(FX(TopP)))) printf(" [SH] ");
     else printf(" [  ] ");
-    
+
     if (ET(FX(TopP))) printf(" [ET] ");
     else printf(" [  ] ");
-    
+
     // * Display Skill
     printf("    || SKILL ");
     PrintQueue(Skill(TopP));
     printf("\n");
     printf("<> == <> == <> == <> == <>   [] ===== [] == []\n");
     printf("\n");
-    
+
     // * Display Buildings
-    printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(top));
+    printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(top));
     PrintInfo(Ltop, DataBuild);
     printf("\n");
 }
