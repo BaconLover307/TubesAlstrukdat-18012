@@ -77,9 +77,7 @@ typedef struct {
 #define Neff(B)       (B).Neff
 #define BI(B)         (B).BI
 #define ElmtBan(B,i)  (B).BI[(i)]
-#define MaxEl(B)      (B).MaxEl
-#define Moved(B)      (B).hasmoved
-#define Attacked(B)   (B).hasattacked
+#define MaxEl(B) (B).MaxEl
 
 /* e adalah info_bangunan */
 #define Name(e)       (e).name

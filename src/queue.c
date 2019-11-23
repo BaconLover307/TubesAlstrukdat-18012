@@ -138,10 +138,8 @@ Queue CopyQueue(Queue Q) {
     Queue ret;
     CreateQueue(&ret, MaxQEl(Q));
     if (IsQEmpty(Q)) return ret;
-    for (int i = Head(Q); i <= Tail(Q); i++) {
-        for (int j = 0; j < 9; j++) {
-            ret.T[i][j] = Q.T[i][j];
-        }
+    for (int i = Head(Q); i<= NBQElmt(Q); i++) {
+            QAdd(&ret, Q.T[i]);
     }
     return ret;
 }

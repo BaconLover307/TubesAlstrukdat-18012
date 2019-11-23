@@ -38,3 +38,9 @@ void TulisPOINT (POINT P) {
   /* ALGORITMA */
   printf("(%d, %d)", Absis(P), Ordinat(P));
 }
+
+POINT CopyPOINT (POINT P) {
+  POINT ret;
+  MakePOINT(&ret,Absis(P),Ordinat(P));
+  return ret;
+}

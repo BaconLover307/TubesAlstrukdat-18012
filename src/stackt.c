@@ -13,18 +13,24 @@ void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild) {
     P1Info(InfoTop(*S)) = P1;
     P2Info(InfoTop(*S)) = P2;
     TurnInfo(InfoTop(*S)) = Turn;
-    DataB(InfoTop(*S)) = DataBuild;
+    DataB(InfoTop(*S)) = CopyBangunan(DataBuild);
 }
-void ClearStack(Stack *S) {
-    Sinfotype temp;
-    while(!IsFirstAct(*S)) {
-        Pop(S,&temp);
+void ResetStack(Stack *S) {
+    Sinfotype temp, buang;
+    Pop(S,&temp);
+    while(!IsEmptyStack(*S)) {
+        Pop(S,&buang);
     }
+    Push(S,temp);
 }
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
 boolean IsFirstAct(Stack S) {
     return ((Top(S) - 1) == SNil);
+}
+
+boolean IsEmptyStack(Stack S) {
+    return (Top(S) == SNil);
 }
 
 boolean IsFull(Stack S) {
@@ -34,12 +40,12 @@ boolean IsFull(Stack S) {
 // $ ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack *S, Sinfotype X) {
     Top(*S)++;
-    InfoTop(*S) = X;
+    InfoTop(*S) = CopyState(X);
 }
 
 // $ ************ Menghapus sebuah elemen Stack ************
 void Pop(Stack *S, Sinfotype *X) {
-    *X = InfoTop(*S);
+    *X = CopyState(InfoTop(*S));
     Top(*S)--;
 }
 
@@ -57,6 +63,7 @@ void ChangeTurn(Stack *S) {
     // $ Kamus Lokal
     Player *TopP, *EnemyP;
     List *Ltop, *Lenemy;
+    Sinfotype Temp;
     if (TurnInfo(InfoTop(*S)) == 1) {
         TopP = &P1Info(InfoTop(*S));
         EnemyP = &P2Info(InfoTop(*S));
@@ -71,6 +78,8 @@ void ChangeTurn(Stack *S) {
         TurnInfo(InfoTop(*S)) = TurnInfo(InfoTop(*S)) % 2 + 1;
         //printf("Changing turns"); sleep(1);printf(".");sleep(1);printf(".");sleep(1);printf("\n\n");
     }
+    ResetStack(S);
+    
     // ! Reset FX Extra Turn
     ET(FX(*TopP)) = false;
     // ! Reset FX Attack Up
@@ -78,7 +87,6 @@ void ChangeTurn(Stack *S) {
     // ! Reduce Shield
     ReduceDurationSH(EnemyP);
     // * Clear Stack
-    ClearStack(S);
 }
 
 

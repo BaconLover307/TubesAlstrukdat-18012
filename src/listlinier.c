@@ -188,7 +188,6 @@ void PrintInfo (List L, Bangunan B) {
   /* ALGORITMA */
   P = First(L);
   i = 1; //inisialisasi
-
   while (P != Nil) {
     printf(" || - [%d.] ", i);
 

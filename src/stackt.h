@@ -58,13 +58,17 @@ typedef struct {
 void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild);
 
 // * I.S. Stack terdefinisi, mungkin kosong
-// * F.S. Menghabiskan isi sebuah stack S
-void ClearStack(Stack *S);
+// * F.S. Menghabiskan isi sebuah stack S, dan mengisinya dengan InfoTop saat
+// *      sebelum dihabisi
+void ResetStack(Stack *S);
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
 
 // * Mengirim true jika gamestate paling awal
 boolean IsFirstAct(Stack S);
+
+// * Mengirim true jika stack kosong
+boolean IsEmptyStack(Stack S);
 
 // * Mengirim true jika tabel penampung Snilai elemen stack penuh
 boolean IsFull(Stack S);
@@ -97,6 +101,7 @@ void ChangeTurn(Stack *S);
 // * Menuliskan kondisi yang sedang berlangsung
 void PrintCondition(Sinfotype top);
 
+// * S terdefinisi, mengembalikan isi state S
 Sinfotype CopyState(Sinfotype S);
 
 #endif

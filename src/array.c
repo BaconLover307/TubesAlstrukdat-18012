@@ -282,8 +282,23 @@ void ResetLevel (Bangunan * B, IdxType X) {
 Bangunan CopyBangunan(Bangunan B) {
   Bangunan ret;
   MakeEmptyBangunan(&ret, MaxEl(B));
-  for (int i = 1; i <= Neff(B); i++) {
-    ElmtBan(ret, i) = ElmtBan(B, i);
+  //printf("Maxel :%d  NbElmt: %d\n", MaxEl(B), NbElmtBan(B));
+  for (int i = 1; i <= NbElmtBan(B); i++) {
+    Name(ElmtBan(ret, i)) = Name(ElmtBan(B, i));
+    Posisi(ElmtBan(ret, i)) = CopyPOINT(Posisi(ElmtBan(B, i)));
+    Level(ElmtBan(ret, i)) = Level(ElmtBan(B, i));
+    Tentara(ElmtBan(ret, i)) = Tentara(ElmtBan(B, i));
+    Moved(ElmtBan(ret, i)) = Moved(ElmtBan(B, i));
+    Attacked(ElmtBan(ret, i)) = Attacked(ElmtBan(B, i));
+    /*
+    printf("B %d: %c, lv %d, t %d\n", i, Name(ElmtBan(B, i)), Level(ElmtBan(B, i)), Tentara(ElmtBan(B, i)));
+    TulisPOINT(Posisi(ElmtBan(B, i)));
+    puts("");
+    printf("ret %d: %c, lv %d, t %d\n", i, Name(ElmtBan(ret, i)), Level(ElmtBan(ret, i)), Tentara(ElmtBan(ret, i)));
+    TulisPOINT(Posisi(ElmtBan(ret, i)));
+    puts("");
+    */
   }
+  Neff(ret) = Neff(B);
   return ret;
 }

@@ -342,8 +342,9 @@ Player CopyPlayer(Player P) {
     Skill(ret) = CopyQueue(Skill(P));
     Color(ret) = Color(P);
     AU(FX(ret)) = AU(FX(P));
-    ET(FX(ret)) = ET(FX(P));
+    CH(FX(ret)) = CH(FX(P));
     ActiveSH(SH(FX(ret))) = ActiveSH(SH(FX(P)));
     Duration(SH(FX(ret))) = Duration(SH(FX(P)));
+    ET(FX(ret)) = ET(FX(P));
     return ret;
 }

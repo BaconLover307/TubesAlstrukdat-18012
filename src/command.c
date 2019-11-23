@@ -5,15 +5,16 @@
 #include "string.h"
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
+void ATTACK(Sinfotype *state, Graph relasi) {
     // $ Kamus Lokal
     Player *TopP;
     Player *EnemyP;
     List *Ltop;
     List *Lenemy;
+    Bangunan *databuild;
     if (TurnInfo(*state) == 1) {
-        *TopP = P1Info(*state);
-        *EnemyP = P2Info(*state);
+        TopP = &P1Info(*state);
+        EnemyP = &P2Info(*state);
     }
     else {
         TopP = &P2Info(*state);
@@ -21,6 +22,7 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
     }
     Ltop = &ListBan(*TopP);
     Lenemy = &ListBan(*EnemyP);
+    databuild = &DataB(*state);
 
     int idxCurr, nomorBangunan;
     address Pcurr;
@@ -34,20 +36,17 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
         printf("\nChoose a building to attack from : ");
         scanf("%d", &nomorBangunan);
         if (1 < nomorBangunan || NbElmtList(*Ltop) < nomorBangunan) {
-            printf("Input is not valid! Please input from the available index.\n");
+            printf("Input is not valid! Please input given index of buildings.\n");
         } else {
                 // * Ambil Bangunan Pemain
-                Pcurr = First(*Ltop);
-                for (int i = 1; i< nomorBangunan; i++) {
-                    Pcurr = Next(Pcurr); }
-                idxCurr = Info(Pcurr);
+                idxCurr = GetInfo(*Ltop,nomorBangunan);
                     // * Jika sudah pernah Attack
                 if (Attacked(ElmtBan(*databuild,idxCurr))) {
                     printf("This building has attacked before!\n");
                     AksiValid = false;
                     return;
                 } else { // * Jika isinya kosong
-                    if (Tentara(ElmtBan(*databuild,idxCurr)) = 0) {
+                    if (Tentara(ElmtBan(*databuild,idxCurr)) == 0) {
                         puts("You cannot attack with an empty building!");
                         AksiValid = false;
                         return;
@@ -58,7 +57,7 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
     } while (1 < nomorBangunan || NbElmtList(*Ltop) < nomorBangunan );
 
     
-    printf(" Anda akan menyerang dengan %c yang mempunyai %d tentara", Name(ElmtBan(*databuild,idxCurr)), Tentara(ElmtBan(*databuild,idxCurr)));
+    printf(" Anda akan menyerang dengan %c yang mempunyai %d tentara.\n", Name(ElmtBan(*databuild,idxCurr)), Tentara(ElmtBan(*databuild,idxCurr)));
 
     // * Menampilkan daftar bangunan yang dapat diserang
     int jumlahBangunanTerdekat;
@@ -83,7 +82,6 @@ void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi) {
         if (0 < nomorBangunanDiserang && nomorBangunanDiserang <= jumlahBangunanTerdekat)
             break;
         puts("Index input is invalid!");
-        printf("Choose a building you want to attack : ");
     } while (nomorBangunanDiserang > NbElmtList(*Ltop) || nomorBangunanDiserang < 1);
    
     int idxEnemy = GetIdxAttack(relasi, *Ltop, *databuild, idxCurr, nomorBangunanDiserang);
@@ -132,10 +130,11 @@ void LEVEL_UP(Sinfotype *state) {
         TopP = &P2Info(*state);
         EnemyP = &P1Info(*state);
     }
-    printf("+++++ Turn %d +++++", TurnInfo(*state));
     Ltop = &ListBan(*TopP);
     Lenemy = &ListBan(*EnemyP);
     databuild = &DataB(*state);
+    int nomorBangunan;
+    urutan idxCurr;
 
     // $ Algoritma
     // * Menampilkan daftar Bangunan
@@ -144,28 +143,33 @@ void LEVEL_UP(Sinfotype *state) {
     printf("\n");
 
     // * User Input
-    int nomorBangunan;
-    printf("Choose the building you want to level-up : ");
-    scanf("%d", &nomorBangunan);
+    do {
+        printf("Choose the building you want to level-up : ");
+        scanf("%d", &nomorBangunan);
+        if (nomorBangunan < 1 || NbElmtList(*Ltop) < nomorBangunan ) {
+            printf("Input is not valid! Please input given index of buildings.\n");
+        }
+    } while (nomorBangunan < 1 || NbElmtList(*Ltop) < nomorBangunan );
 
-    urutan nopilihan = GetInfo(*Ltop, nomorBangunan);
+    idxCurr = GetInfo(*Ltop, nomorBangunan);
 
     // * Melakukan pengecekan keberhasilan level up
-    char namaBuilding = Name(ElmtBan(*databuild, nopilihan));
-    if (CheckLevelUp(*databuild,nopilihan)) {
-        LevelUp(databuild,nopilihan);
+    char namaBuilding = Name(ElmtBan(*databuild, idxCurr));
+    if (CheckLevelUp(*databuild,idxCurr)) {
+        LevelUp(databuild,idxCurr);
         if (namaBuilding == 'C') { printf("Your Castle ");
         } else if (namaBuilding == 'V') { printf("Your Village ");
         } else if (namaBuilding == 'T') { printf("Your Tower ");
         } else /*(namaBuilding == 'T')*/ {printf("Your Fort ");}
-        printf("has been leveled up to level %d!\n", Level(ElmtBan(*databuild,nopilihan)));
+        printf("has been leveled up to level %d!\n", Level(ElmtBan(*databuild,idxCurr)));
     } else {
         printf("You don't have enough soldiers at ");
         if (namaBuilding == 'C') { printf("your Castle ");
         } else if (namaBuilding == 'V') { printf("your Village ");
         } else if (namaBuilding == 'T') { printf("your Tower ");
         } else /*(namaBuilding == 'T')*/ {printf("your Fort ");}
-        printf("to Level Up the building!\n", Name(ElmtBan(*databuild,nopilihan)));
+        printf("to Level Up the building!\n", Name(ElmtBan(*databuild,idxCurr)));
+        AksiValid = false;
     }
 }
 
@@ -238,7 +242,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
             if (bangunanmusuh1 > bangunanmusuh2)
                 printf("You've managed to snag a few buildings as well, impressive...\n");
         }
-        ClearStack(gamestate);
+        ResetStack(gamestate);
 
     }
 }
@@ -257,19 +261,21 @@ void UNDO(Stack *gamestate) {
 }
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
+void MOVE(Sinfotype *state, Graph relasi) { // todo
     // $ Kamus Lokal
     Player *CurrP;
     List *Ltop;
+    Bangunan *databuild;
     if (TurnInfo(*state) == 1) {
         CurrP = &P1Info(*state);
     } else {
         CurrP = &P2Info(*state);
     }
     Ltop = &ListBan(*CurrP);
+    databuild = &DataB(*state);
 
     int giliran = TurnInfo(*state);
-    int nomorBangunan, idxBangunanCurr;
+    int nomorBangunan, idxCurr;
     address Pcurr;
     // $ Algoritma
     // * Bangunan Pemain
@@ -284,17 +290,15 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
             printf("Input is not valid! Please input given index of buildings.\n");
         } else {
             // * Ambil Bangunan Pemain
-            Pcurr = First(*Ltop);
-            for (int i = 1; i< nomorBangunan; i++) {
-                Pcurr = Next(Pcurr); }
-            idxBangunanCurr = Info(Pcurr);
+            idxCurr = GetInfo(*Ltop, nomorBangunan);
+                
                 // * Jika sudah pernah Move
-            if (Moved(ElmtBan(*databuild, idxBangunanCurr))) {
+            if (Moved(ElmtBan(*databuild, idxCurr))) {
                 printf("This building has moved soldiers before!\n");
                 AksiValid = false;
                 return;
             } else { // * Jika bangunan kosong
-                if (Tentara(ElmtBan(*databuild,idxBangunanCurr)) = 0) {
+                if (Tentara(ElmtBan(*databuild,idxCurr)) == 0) {
                     puts("You cannot move soldiers from an empty building!");
                     AksiValid = false;
                     return;
@@ -307,7 +311,7 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
     // *Menampilkan daftar bangunan terdekat
     int jumlahBangunanTerdekat;
     printf(" __\n[__] == List of Nearest Buildings == [P%d]\n", TurnInfo(*state));
-    PrintMove(relasi, *Ltop, *databuild, idxBangunanCurr, &jumlahBangunanTerdekat);
+    PrintMove(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
     
     // * Jika tidak ada yang adjacent
     if (jumlahBangunanTerdekat == 0) {
@@ -329,20 +333,20 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
             break;
         puts("Index input is invalid!");
     }
-    int idxBangunanAcc = GetIdxMove(relasi, *Ltop, *databuild, idxBangunanCurr, nomorBangunanDiterima);
+    int idxBangunanAcc = GetIdxMove(relasi, *Ltop, *databuild, idxCurr, nomorBangunanDiterima);
     int jumlahPasukan;
     while (1) {
         printf("Enter your desired amount of soldiers to move : ");
         scanf("%d", &jumlahPasukan);
-        if (0 <= jumlahPasukan && jumlahPasukan <= Tentara(ElmtBan(*databuild, idxBangunanCurr)))
+        if (0 <= jumlahPasukan && jumlahPasukan <= Tentara(ElmtBan(*databuild, idxCurr)))
             break;
         puts("Soldier amount is invalid!");
     }
-    Tentara(ElmtBan(*databuild, idxBangunanCurr)) -= jumlahPasukan;
+    Tentara(ElmtBan(*databuild, idxCurr)) -= jumlahPasukan;
     Tentara(ElmtBan(*databuild, idxBangunanAcc)) += jumlahPasukan;
     if (jumlahPasukan != 0) {
         printf("%d soldier(s) from ", jumlahPasukan);
-        char namaBuilding = Name(ElmtBan(*databuild, idxBangunanCurr));
+        char namaBuilding = Name(ElmtBan(*databuild, idxCurr));
         if (namaBuilding == 'C') {
         printf("Castle ");
         } else if (namaBuilding == 'V') {
@@ -352,7 +356,7 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
         } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
         printf("Fort ");
         }
-        TulisPOINT(Posisi(ElmtBan(*databuild, idxBangunanCurr)));
+        TulisPOINT(Posisi(ElmtBan(*databuild, idxCurr)));
 
         printf(" has been moved to ");
 
@@ -369,7 +373,7 @@ void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi) { // todo
 
         TulisPOINT(Posisi(ElmtBan(*databuild, idxBangunanAcc)));
         puts("!");
-        Moved(ElmtBan(*databuild, idxBangunanCurr)) = true;
+        Moved(ElmtBan(*databuild, idxCurr)) = true;
     } else {
         puts("....");
         sleep(1);

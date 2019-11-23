@@ -224,7 +224,7 @@ do {
                     Qtop = &Skill(*TopP);
                     Qenemy = &Skill(*EnemyP);
                     Ltop = &ListBan(*TopP);
-                    //StateDataB = &DataB(InfoTop(GameState));
+                    
                     // $ Display Status
                     PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
                     PrintCondition(InfoTop(GameState));
@@ -244,28 +244,18 @@ do {
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
-                        ATTACK(&Current,&DataB(Current), RelasiBan);
-                        Push(&GameState,Current);
+                        ATTACK(&Current, RelasiBan);
+                        if (AksiValid)
+                            Push(&GameState, Current);
                         getchar();
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
-                        //printf("Top = %d\n",Top(GameState));
                         Push(&GameState,InfoTop(GameState));
-                        //printf("Top = %d\n",Top(GameState));
                         Pop(&GameState,&Current);
-                        //printf("Top = %d\n",Top(GameState));
-
-                        //printf("==============INFOTOP BEFORE================\n");
-                        //PrintCondition(InfoTop(GameState));
-                        //PrintCondition(Current);
                     	LEVEL_UP(&Current);
-                        //printf("==============INFOTOP AFTER================\n");
-                        //PrintCondition(InfoTop(GameState));
-                        //PrintCondition(Current);
-                        //printf("==============INFOTOP AFTER AFTER================\n");
-                        Push(&GameState,Current);
-                        //PrintCondition(InfoTop(GameState));
+                        if (AksiValid)
+                            Push(&GameState,Current);
                         getchar();
 
                     }   // $ ######### SKILL ########
@@ -276,10 +266,10 @@ do {
                     else if (strcmpi(command, "MOVE") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
-						MOVE(&Current, &DataB(Current), RelasiBan);
-                        Push(&GameState,Current);
+						MOVE(&Current, RelasiBan);
+                        if (AksiValid)
+                            Push(&GameState, Current);
                         getchar();
-
 
                     }   // $ ######### UNDO ########
                     else if (strcmpi(command, "UNDO") == 0) {

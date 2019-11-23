@@ -14,7 +14,7 @@ extern boolean EndTurn;  // = false;
 extern boolean AksiValid;
 
 // Prosedur untuk melakukan ATTACK
-void ATTACK(Sinfotype *state, Bangunan *databuild, Graph relasi);
+void ATTACK(Sinfotype *state, Graph relasi);
 
 // Prosedur untuk Melakukan LEVEL UP
 void LEVEL_UP(Sinfotype *state);
@@ -29,7 +29,7 @@ void UNDO(Stack *gamestate);
 void END_TURN(Sinfotype *state);
 
 // Prosedur untuk melakukan MOVE
-void MOVE(Sinfotype *state, Bangunan *databuild, Graph relasi);
+void MOVE(Sinfotype *state, Graph relasi);
 
 // Prosedur untuk melakukan SAVE
 void SAVE(Sinfotype *state);
