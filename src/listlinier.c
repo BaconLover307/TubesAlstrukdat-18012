@@ -146,27 +146,33 @@ void DelP (List * L, urutan X) {
 /* F.S. X dihilangkan dari List dan didealokasi */
 /* List mungkin menjadi kosong karena penghapusan */
 
-  /* KAMUS LOKAL */
-  address P, Prec, PDel;
-
-  /* ALGORITMA */
-  P = First(*L);
-  Prec = Nil;
-
-  while (Info(P) != X) {
-    Prec = P;
-    P = Next(P);
+  // $ KAMUS LOKAL
+  address P, Prec, Phead;
+  // $ ALGORITMA
+  P = Search(*L,X);
+  puts("pass");
+  if (P == First(*L)) {
+    P = First(*L);
+    First(*L) = Next(First(*L));
+    Next(P) = Nil;
+  puts("pass1");
+    Dealokasi(&P);
+  puts("pass1");
+  } else if (P != Nil) {
+  puts("pass2");
+    Prec = First(*L);
+    Phead = Next(First(*L));
+    while (P != Phead) {
+      Phead = Next(Phead); // Jika not Found maka P = Nil
+      Prec = Next(Prec); // Jika not Found maka P = Nil
+    }
+  puts("pass2");
+    P = Next(Prec);
+    Next(Prec) = Next(Next(Prec));
+    Next(P) = Nil;
+  puts("pass2");
   }
-
-  if (Prec == Nil) {
-    First(*L) = Nil;
-  } else /* Prec != Nil */ {
-    Next(Prec) = Next(P);
-  }
-
-  Next(P) = Nil;
-  Dealokasi(&P);
-}
+} 
 
 List CopyList(List L) {
   List ret;

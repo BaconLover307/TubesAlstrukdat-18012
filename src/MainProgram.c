@@ -257,7 +257,7 @@ do {
                         getchar();
 
 					}
-					else Invalid();
+					else { Invalid(); getchar(); }
                     switch (Color(*TopP)) {
                     case 'R': printf("%s", RED); break;
                     case 'G': printf("%s", GREEN); break;

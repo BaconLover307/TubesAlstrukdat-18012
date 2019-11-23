@@ -217,7 +217,6 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
     } else {
         // * Use Skill
         QDel(Qtop, &usedskill);
-		printf("%c%c\n", usedskill[0], usedskill[1]);
 			// * Switch
 			if (strcmpi(usedskill, "IU") == 0)
 		{

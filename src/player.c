@@ -256,15 +256,16 @@ void Barrage(Player *P, Player *E, Bangunan *B) {
     // $ Algoritma
     A = First(ListBan(*E));
     while (A != Nil) {
+        PrintInfo(ListBan(*E),*B); puts("");
         Tentara(ElmtBan(*B, Info(A))) -= 10;
         
         if (CanCapture(*B, Info(A))) {
-            //temp = A;
             CaptureBarrage(P, E, A, B);
-            //A = Next(temp);
-        } else {
         }
-            A = Next(A);
+        A = Next(A);
+        puts("!");
+        PrintInfo(ListBan(*E), *B);
+        puts("");
     }
 }
 
