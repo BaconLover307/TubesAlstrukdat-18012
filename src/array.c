@@ -15,7 +15,7 @@
 /* Konstruktor : create tabel kosong  */
 void MakeEmptyBangunan (Bangunan * B, int maxel) {
   /* KAMUS LOKAL */
-
+  
   /* ALGORITMA */
   if (maxel > 0) {
     BI(*B) = (info_bangunan *) malloc ((maxel + 1)* sizeof(info_bangunan));
@@ -165,7 +165,7 @@ void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, bool
       TentaraAttack(B, e, N);
 
     } else /* !Attack_Up */ {
-      if (Shield) { 
+      if (Shield) {
         InvadedShield(B, e, N);
 
       } else /* !Shield */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack

@@ -102,11 +102,15 @@ do {
             do {
                 printf("Enter your input (Y/N) : ");
                 scanf(" %c", &load);
-                printf("\n[#]---- Starting A New Game ----[#]\n\n");
                 if (load == 'Y') {
                     LoadFile(&Current, &RelasiBan, &MapBlueprint);
-
+                    PlayerOne = P1Info(Current);
+                    PlayerTwo = P2Info(Current);
+                    Turn = TurnInfo(Current);
+                    DataBangunan = CopyBangunan(DataB(Current));
+                    StartTurn(&GameState,PlayerOne,PlayerTwo,Turn,DataBangunan);
                 } else if (load == 'N') {
+                    printf("\n[#]---- Starting A New Game ----[#]\n\n");
                     MakeEmptyBangunan(&DataBangunan, 100);
                     printf("\nChoose building color for Player 1! \n");
                     SetPlayerWarna(&PlayerOne,&Pallete);

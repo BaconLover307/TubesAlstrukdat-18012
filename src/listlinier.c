@@ -396,4 +396,3 @@ void TambahAllTentara (List L, Bangunan * B) {
     P = Next(P);
   }
 }
-

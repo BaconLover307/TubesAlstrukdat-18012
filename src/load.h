@@ -5,6 +5,7 @@
 #define load_H
 
 #include "stackt.h"
+#include "save.h"
 #include "mesinkata_config.h"
 
 void loadFile(Sinfotype * state, Graph * relasi, MATRIKS * map);

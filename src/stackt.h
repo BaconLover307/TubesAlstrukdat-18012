@@ -53,6 +53,8 @@ typedef struct {
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
 
+void EmptyState(Sinfotype * S);
+
 // * I.S. sembarang
 // * F.S. Membuat sebuah stack S yang kosong berkapasitas MaxSEl
 // * Memulai turn

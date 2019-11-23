@@ -131,6 +131,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         printf("You failed to grab the building.\n");
     }
     Attacked(ElmtBan(*databuild, idxCurr)) = true;
+    getchar();
 }
 
 // Prosedur untuk Melakukan LEVEL UP
@@ -189,6 +190,7 @@ void LEVEL_UP(Sinfotype *state) {
         printf("to Level Up the building!\n", Name(ElmtBan(*databuild,idxCurr)));
         AksiValid = false;
     }
+    getchar();
 }
 
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
@@ -265,6 +267,7 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
 
         ResetStack(gamestate);
     }
+    getchar();
 }
 
 // Prosedur untuk melakukan MOVE
@@ -395,7 +398,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         TulisPOINT(Posisi(ElmtBan(*databuild, idxAcc)));
         puts("!");
         Moved(ElmtBan(*databuild, idxCurr)) = true;
-
+        getchar();
     } else {	// * Tidak memindahkan tentara
         puts("....");
         sleep(1);
@@ -417,6 +420,7 @@ void UNDO(Stack *gamestate) {
         printf("You have undone your past action!\n");
         Pop(gamestate, &buang);
     }
+    getchar();
 }
 
 void END_TURN(Stack *gamestate) {
@@ -453,6 +457,7 @@ void END_TURN(Stack *gamestate) {
     ReduceDurationSH(EnemyP);
     ResetBuildingStatus(*Ltop, &DataB(InfoTop(*gamestate)));
     ResetStack(gamestate);
+    getchar();
 }
 
 // Prosedur untuk melakukan SAVE
@@ -466,7 +471,7 @@ void EXIT(Sinfotype *state, Graph relasi, MATRIKS map) {
     char inp;
     printf("Do you want to save the game before exiting the game? ");
     do {
-        printf("Y/N/C\n");
+        printf("\nEnter your input (Y/N/C) : \n");
         scanf(" %c", &inp);
         if (inp == 'Y') {
             SAVE(state, relasi, map);

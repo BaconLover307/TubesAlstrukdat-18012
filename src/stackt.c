@@ -6,6 +6,10 @@
 #include "string.h"
 #include <stdio.h>
 
+void EmptyState(Sinfotype * S) {
+    TurnInfo(*S) = 0;
+}
+
 // $ ************ Prototype ************
 // $ *** Konstruktor/Kreator ***
 void StartTurn(Stack *S, Player P1, Player P2, int Turn, Bangunan DataBuild) {
