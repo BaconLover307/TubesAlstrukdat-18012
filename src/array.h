@@ -86,6 +86,7 @@ typedef struct {
 #define Tentara(e)    (e).tentara
 #define Moved(e)      (e).hasmoved
 #define Attacked(e)   (e).hasattacked
+#define Defensed(e)   (e).defense
 
 // $ ********** KONSTRUKTOR **********
 

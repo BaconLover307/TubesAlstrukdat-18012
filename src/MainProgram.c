@@ -28,7 +28,7 @@ char menu[100];
 boolean Exit;       // = false;
 boolean ExitMenu;   // = false;
 boolean EndTurn;    // = false;
-boolean AksiValid; 
+boolean AksiValid;
 
 // $ ******* MAP PRINTING FUNCTION ********
 void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
@@ -78,6 +78,7 @@ void PrintMap(MATRIKS M, Bangunan B, Player One, Player Two) {
 int main() {
 do {
     Exit = false;
+    clrscrn();
     MainM();
     // ASCII Art: MainMenu
     do {
@@ -108,6 +109,7 @@ do {
 
         }   // $ ######### CREDITS ########
         else if (strcmpi(menu, "CREDITS") == 0) {
+            clrscrn();
             Credits();
             printf("\n");
             printf("Press enter to go back to the main menu...");
@@ -123,6 +125,7 @@ do {
         } // $ ######### PLAY GAME ########
         else if (strcmpi(menu, "PLAY") == 0) {
             // $ Kamus Lokal : Start Game
+            clrscrn();
             char load;
             char command[100];
             Stack GameState;
@@ -139,18 +142,18 @@ do {
             MakeBukuWarna(&Pallete);
 
             // todo Load Game
-            printf("Do you want to load a previous game? ");
+            printf("Do you want to load a previous game?\n");
             do {
-                printf("Y/N\n");
+                printf("Enter your input (Y/N) : ");
                 scanf(" %c", &load);
+                printf("\n[#]---- Starting A New Game ----[#]\n\n");
                 if (load == 'Y') {
                     LoadFile(GameState);
                 } else if (load == 'N') {
-                    //LoadData();
                     MakeEmptyBangunan(&DataBangunan, 100);
-                    printf("Choose building color for Player 1! \n");
+                    printf("\nChoose building color for Player 1! \n");
                     SetPlayerWarna(&PlayerOne,&Pallete);
-                    printf("Choose building color for Player 2! \n");
+                    printf("\nChoose building color for Player 2! \n");
                     SetPlayerWarna(&PlayerTwo,&Pallete);
                     // * CONFIGURE
                     STARTKATA();
@@ -229,6 +232,7 @@ do {
                     AksiValid = true;
 
                     // * Display Status
+                    puts("[#]---- MAP ----[#]");
                     PrintMap(MapBlueprint, DataB(InfoTop(GameState)), PlayerOne, PlayerTwo);
                     PrintCondition(InfoTop(GameState));
 
@@ -284,12 +288,12 @@ do {
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {
-						SAVE(&InfoTop(GameState));
+						SAVE(&InfoTop(GameState), RelasiBan);
                         getchar();
 
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
-						EXIT(&InfoTop(GameState));
+						EXIT(&InfoTop(GameState), RelasiBan);
                         getchar();
 
 					}

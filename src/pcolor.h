@@ -13,10 +13,10 @@ We only provide 8 colors. Feel free to modify/add colors if you want to.
 #ifndef PCOLOR_H
 #define PCOLOR_H
 
-    // ?  Definisi elemen dan koleksi objek
-    typedef char Warna; // * tipe warna
+// ?  Definisi elemen dan koleksi objek
+typedef char Warna; // * tipe warna
 typedef int IdxType;  // * tipe indeks
-#define TotalColor 6 
+#define TotalColor 6
 
 // ? Array untuk menampung warna yang ada
 typedef struct {

@@ -79,7 +79,7 @@ void ChangeTurn(Stack *S) {
         //printf("Changing turns"); sleep(0.3);printf(".");sleep(0.3);printf(".");sleep(0.3);printf("\n\n");
     }
     ResetStack(S);
-    
+
     // ! Reset FX Extra Turn
     ET(FX(*TopP)) = false;
     // ! Reset FX Attack Up
@@ -106,7 +106,7 @@ boolean CheckAllMoved(List L, Bangunan B) {
     address P = First(L);
     // $ Algoritma
     while (P != Nil) {
-        if (Moved(ElmtBan(*B,Info(P))) == false) 
+        if (Moved(ElmtBan(B,Info(P))) == false)
             return false;
         P = Next(P);
     }
@@ -118,9 +118,9 @@ boolean CheckAllAttacked(List L, Bangunan B) {
     address P = First(L);
     // $ Algoritma
     while (P != Nil) {
-        if (Attacked(ElmtBan(*B,Info(P))) == false) 
+        if (Attacked(ElmtBan(B,Info(P))) == false)
             return false;
-        
+
         P = Next(P);
     }
     return true;

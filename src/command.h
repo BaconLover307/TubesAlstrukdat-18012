@@ -8,10 +8,11 @@
 #include "boolean.h"
 #include "stackt.h"
 #include "graph.h"
+#include "save.h"
 
-extern boolean ExitMenu; // = false;
-extern boolean EndTurn;  // = false;
-extern boolean AksiValid;
+boolean ExitMenu; // = false;
+boolean EndTurn;  // = false;
+boolean AksiValid;
 
 // Prosedur untuk melakukan ATTACK
 void ATTACK(Sinfotype *state, Graph relasi);
@@ -32,9 +33,9 @@ void END_TURN(Sinfotype *state);
 void MOVE(Sinfotype *state, Graph relasi);
 
 // Prosedur untuk melakukan SAVE
-void SAVE(Sinfotype *state);
+void SAVE(Sinfotype *state, Graph relasi);
 
 // Prosedur untuk melakukan EXIT Game
-void EXIT(Sinfotype *state);
+void EXIT(Sinfotype *state, Graph relasi);
 
 #endif

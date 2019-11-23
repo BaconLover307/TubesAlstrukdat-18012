@@ -4,6 +4,8 @@
 #ifndef save_H
 #define save_H
 
-void saveData();
+#include "stackt.h"
+
+void saveData(Sinfotype state, Graph relasi);
 
 #endif

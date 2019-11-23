@@ -61,7 +61,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
                         puts("You cannot attack with an empty building!");
                         AksiValid = false;
                         return;
-                    } else { printf("\n"); } 
+                    } else { printf("\n"); }
                 }
 
         }
@@ -71,7 +71,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
     int jumlahBangunanTerdekat;
     printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", TurnInfo(*state)%2+1);
     PrintAttack(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
-    
+
     // * Jika tidak ada yang bisa diserang
     if (jumlahBangunanTerdekat == 0) {
         puts("....");
@@ -82,7 +82,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         AksiValid = false;
         return;
     }
-    
+
     int nomorBangunanDiserang;
     do { // * Memilih bangunan yang akan diserang
         printf("\nChoose a building you want to attack : ");
@@ -91,7 +91,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
             break;
         puts("Index input is invalid!");
     } while (nomorBangunanDiserang > NbElmtList(*Ltop) || nomorBangunanDiserang < 1);
-   
+
     int idxEnemy = GetIdxAttack(relasi, *Ltop, *databuild, idxCurr, nomorBangunanDiserang);
 
     // * Jumlah Pasukan
@@ -109,7 +109,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
     boolean criticalHit = CH(FX(*EnemyP));
     boolean attackUp = AU(FX(*EnemyP));
     boolean shield = ActiveSH(SH(FX(*EnemyP)));
-    
+
     TentaraInvaded(databuild, criticalHit, attackUp, shield, idxCurr, idxEnemy, jumlahPasukan);
     // ! Reset Status Critical Hit
     CH(FX(*TopP)) = false;
@@ -308,7 +308,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         } else {
             // * Ambil Bangunan Pemain
             idxCurr = GetInfo(*Ltop, nomorBangunan);
-                
+
                 // * Jika sudah pernah Move
             if (Moved(ElmtBan(*databuild, idxCurr))) {
                 printf("This building has moved soldiers before!\n");
@@ -319,17 +319,17 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
                     puts("You cannot move soldiers from an empty building!");
                     AksiValid = false;
                     return;
-                } else { printf("\n"); } 
+                } else { printf("\n"); }
             }
         }
     } while (nomorBangunan < 1 || NbElmtList(*Ltop) < nomorBangunan );
-    
+
 
     // *Menampilkan daftar bangunan terdekat
     int jumlahBangunanTerdekat;
     printf(" __\n[__] == List of Nearest Buildings == [P%d]\n", TurnInfo(*state));
     PrintMove(relasi, *Ltop, *databuild, idxCurr, &jumlahBangunanTerdekat);
-    
+
     // * Jika tidak ada yang adjacent
     if (jumlahBangunanTerdekat == 0) {
         puts("....");
@@ -402,21 +402,20 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
 }
 
 // Prosedur untuk melakukan SAVE
-void SAVE(Sinfotype *state) {
-    printf("Lokasi save file: ");
-    // todo SAVEFILE
+void SAVE(Sinfotype *state, Graph relasi) {
+    saveData(*state, relasi);
 }
 
 
 // Prosedur untuk melakukan EXIT Game
-void EXIT(Sinfotype *state) {
+void EXIT(Sinfotype *state, Graph relasi) {
     char inp;
     printf("Do you want to save the game before exiting the game? ");
     do {
         printf("Y/N/C\n");
         scanf(" %c", &inp);
         if (inp == 'Y') {
-            SAVE(state);
+            SAVE(state, relasi);
             ExitMenu = true;
             EndTurn = true;
         } else if (inp == 'N') {
