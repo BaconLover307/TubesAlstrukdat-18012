@@ -4,9 +4,10 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "mesinkar.h"
+#include "mesinkar_config.h"
 #include "matriks.h"
 #include "graph.h"
+#include "string.h"
 
 #define NMax 500
 #define BLANK1 ' '
@@ -30,7 +31,7 @@ void IgnoreBlank();
    F.S. : EndKata = true, dan CC = MARK;
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
-void STARTKATA();
+void STARTKATA(char * C);
 
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,

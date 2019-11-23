@@ -104,7 +104,7 @@ do {
                 scanf(" %c", &load);
                 printf("\n[#]---- Starting A New Game ----[#]\n\n");
                 if (load == 'Y') {
-                    LoadFile(GameState);
+                    LoadFile(&Current, &RelasiBan, &MapBlueprint);
 
                 } else if (load == 'N') {
                     MakeEmptyBangunan(&DataBangunan, 100);
@@ -113,7 +113,8 @@ do {
                     printf("\nChoose building color for Player 2! \n");
                     SetPlayerWarna(&PlayerTwo,&Pallete);
                     // * CONFIGURE
-                    STARTKATA();
+                    char konf[20] = "config.txt";
+                    STARTKATA(konf);
                     Baris = KataToInt(CKata);
                     ADVKATA();
                     Kolom = KataToInt(CKata);
@@ -253,23 +254,23 @@ do {
 
                     }   // $ ######### SAVE ########
                     else if (strcmpi(command, "SAVE") == 0) {
-						SAVE(&InfoTop(GameState), RelasiBan);
+						SAVE(&InfoTop(GameState), RelasiBan, MapBlueprint);
                         getchar();
 
                     }   // $ ######### EXIT ########
                     else if (strcmpi(command, "EXIT") == 0) {
-						EXIT(&InfoTop(GameState), RelasiBan);
+						EXIT(&InfoTop(GameState), RelasiBan, MapBlueprint);
                         getchar();
 
 					}
 					else Invalid();
                     switch (Color(*TopP)) {
-                    case 'R': printf("%s", RED); break;
-                    case 'G': printf("%s", GREEN); break;
-                    case 'B': printf("%s", BLUE); break;
-                    case 'C': printf("%s", CYAN); break;
-                    case 'M': printf("%s", MAGENTA); break;
-                    default: printf("%s", NORMAL); break;
+                        case 'R': printf("%s", RED); break;
+                        case 'G': printf("%s", GREEN); break;
+                        case 'B': printf("%s", BLUE); break;
+                        case 'C': printf("%s", CYAN); break;
+                        case 'M': printf("%s", MAGENTA); break;
+                        default: printf("%s", NORMAL); break;
                     }
                     printf("[] ^ ===== ^ ===== ^ ===== ^ ===== ^ ===== ^ []\n\n", TurnInfo(InfoTop(GameState))),
                     printf("%s", NORMAL);

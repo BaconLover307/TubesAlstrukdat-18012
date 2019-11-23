@@ -1,20 +1,10 @@
 #include <stdio.h>
-#include "stackt.h"
+#include "load.h"
 
-void LoadFile(Stack gamestate) {
+void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     // Kamus Lokal
-    char loadfile[100];
+    char loadfile[100] = "coba.txt";
     // Algoritma
-    printf("Please enter the filename to load: ");
-    scanf(" %s", &loadfile);
-    // todo LoadFile
-}
-
-void LoadData(Stack gamestate) {
-    // Kamus Lokal
-    char loadfile[100];
-    // Algoritma
-    printf("Please enter the filename to load game configuration: ");
-    scanf(" %s", &loadfile);
+    STARTKATA(loadfile);
     // todo LoadFile
 }

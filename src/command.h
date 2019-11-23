@@ -33,9 +33,9 @@ void MOVE(Sinfotype *state, Graph relasi);
 void END_TURN(Stack *gamestate);
 
 // Prosedur untuk melakukan SAVE
-void SAVE(Sinfotype *state, Graph relasi);
+void SAVE(Sinfotype *state, Graph relasi, MATRIKS map);
 
 // Prosedur untuk melakukan EXIT Game
-void EXIT(Sinfotype *state, Graph relasi);
+void EXIT(Sinfotype *state, Graph relasi, MATRIKS map);
 
 #endif

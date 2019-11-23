@@ -456,20 +456,20 @@ void END_TURN(Stack *gamestate) {
 }
 
 // Prosedur untuk melakukan SAVE
-void SAVE(Sinfotype *state, Graph relasi) {
-    saveData(*state, relasi);
+void SAVE(Sinfotype *state, Graph relasi, MATRIKS map) {
+    saveData(*state, relasi, map);
 }
 
 
 // Prosedur untuk melakukan EXIT Game
-void EXIT(Sinfotype *state, Graph relasi) {
+void EXIT(Sinfotype *state, Graph relasi, MATRIKS map) {
     char inp;
     printf("Do you want to save the game before exiting the game? ");
     do {
         printf("Y/N/C\n");
         scanf(" %c", &inp);
         if (inp == 'Y') {
-            SAVE(state, relasi);
+            SAVE(state, relasi, map);
             ExitMenu = true;
             EndTurn = true;
         } else if (inp == 'N') {
