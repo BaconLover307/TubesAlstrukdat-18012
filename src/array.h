@@ -77,7 +77,7 @@ typedef struct {
 #define ElmtBan(B,i)  (B).BI[(i)]
 #define MaxEl(B)      (B).MaxEl
 #define Moved(B)      (B).hasmoved
-#define Attacked(B)      (B).hasattacked
+#define Attacked(B)   (B).hasattacked
 
 /* e adalah info_bangunan */
 #define Name(e)       (e).name
@@ -161,7 +161,7 @@ void InvadedShield(Bangunan * B, IdxType i, int N);
       i pasti ada di dalam indeks bangunan B
       Mengetahui skill-skill tertentu aktif atau tidak*/
 /* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus) */
-void TentaraInvaded(Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType i, int N);
+void TentaraInvaded(Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType p, IdxType e, int N);
 
 /* Mengecek apakah Bangunan ke-i memiliki jumlah tentara yang <= 0 */
 /* Jika iya maka true dan sebaliknya */

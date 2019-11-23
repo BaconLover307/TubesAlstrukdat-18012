@@ -142,12 +142,9 @@ boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
 }
 
 void TentaraAttack (Bangunan * B, IdxType X, int N) {
-  /* KAMUS LOKAL */
-
-  /* ALGORITMA */
   Tentara(ElmtBan(*B, X)) -= N;
-
 }
+
 
 //$ ******************** Tentara Invaded **************************/
 void InvadedShield (Bangunan * B, IdxType i, int N) {
@@ -155,52 +152,45 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
 
   /* ALGORITMA */
   if (Tentara(ElmtBan(*B, i)) > N * 3 / 4) {
-    Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - N * 3 / 4;
+    Tentara(ElmtBan(*B, i)) -= N * 3 / 4;
   } else /* Tentara(ElmtBan(*B, i)) <= N * 3 / 4 */ {
     Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) * 4 / 3);
   }
 }
 
-void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType i, int N) {
+void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType p, IdxType e, int N) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
   if (Critical_Hit) {
-    if (Tentara(ElmtBan(*B, i)) > 2 * N) {
-      Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - 2 * N;
-    } else /* Tentara(ElmtBan(*B, i) <= 2 * N */ {
-      if (Tentara(ElmtBan(*B, i)) % 2 == 1) {
-        Tentara(ElmtBan(*B, i)) += 1;
-      }
-
-      Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) / 2);
-    }
+      TentaraAttack(B, e, 2*N);
 
   } else /* !Critical_Hit */ {
     if (Attack_Up) {
-      Tentara(ElmtBan(*B, i)) -= N;
+      TentaraAttack(B, e, N);
 
     } else /* !Attack_Up */ {
       if (Shield) { 
-        InvadedShield(B, i, N);
+        InvadedShield(B, e, N);
 
       } else /* !Shield */ { //* Skill apapun tidak aktif yang berhubungan dengan Attack
-        if (Name(ElmtBan(*B, i)) == 'T') {
-          InvadedShield(B, i, N);
-        } else if (Name(ElmtBan(*B, i)) == 'F') {
-          if ((Level(ElmtBan(*B, i)) == 3) || (Level(ElmtBan(*B, i)) == 4)) {
-            InvadedShield(B, i, N);
+        if (Name(ElmtBan(*B, e)) == 'T') {
+          InvadedShield(B, e, N);
+        } else if (Name(ElmtBan(*B, e)) == 'F') {
+          if ((Level(ElmtBan(*B, e)) == 3) || (Level(ElmtBan(*B, e)) == 4)) {
+            InvadedShield(B, e, N);
 
           } else /* (Level(ElmtBan(*B, i)) == 1) || (Level(ElmtBan(*B, i)) == 2) */ {
-            Tentara(ElmtBan(*B, i)) -= N;
+            TentaraAttack(B, e, N);
           }
 
         } else /* (Name(ElmtBan(*B, i)) == 'C') || (Name(ElmtBan(*B, i)) == 'V') */ {
-          Tentara(ElmtBan(*B, i)) -= N;
+          TentaraAttack(B, e, N);
         }
       }
     }
   }
+  TentaraAttack(B, p, N);
 }
 
 boolean CanCapture (Bangunan B, IdxType i) {

@@ -90,11 +90,17 @@ void SetPlayerWarna(Player *P, TabColor * Palet);
 
 // $ ************* Special Function: Capture *************
 
-// * I.S. P1, P2, B terdefinisi, A menunjuk address list di ListBan(P1)
+// * I.S. P, E, B terdefinisi, A menunjuk address list di ListBan(P)
 // *      yang akan di capture, jumlah tentara di bangunannya negatif
-// * F.S. Bangunan beraddress A di ListBan(P1) menjadi milik P2,
+// * F.S. Bangunan beraddress A di ListBan(P) menjadi milik E,
 // *      jumlah tentara menjadi positif, terdapat pemicu skill
-void Capture(Player *P1, Player *P2, address A, Bangunan *B);
+void CaptureBarrage(Player *P, Player *E, address A, Bangunan *B);
+
+// * I.S. P1, B terdefinisi, A menunjuk index di array *B
+// *      yang akan di capture, jumlah tentara di bangunannya negatif
+// * F.S. Bangunan berindex A di array *B menjadi milik P1,
+// *      jumlah tentara menjadi positif, terdapat pemicu skill
+void CaptureAttack(Player *P, Player *E, IdxType A, Bangunan *B);
 
 // $ ***** Skills ******
 

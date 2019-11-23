@@ -308,7 +308,7 @@ boolean CheckAttack (Graph G, List L, urutan X) {
   return (same);
 }
 
-void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
+void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count) {
 /* I.S. Graph G terdefinisi
         List L terdefinisi
         Bangunan B terdefinisi
@@ -334,7 +334,7 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
   while ((C != Nil) && (P != Nil)) {
     if (InfoG2(C) != Info(P)) {
       if (InfoG2(C) < Info(P)) {
-        printf("%d. ", i);
+        printf(" || - [%d.] ", i);
 
         if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
           printf("Castle  ");
@@ -346,9 +346,11 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
           printf("Fort    ");
         }
 
+        printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
+        printf("/%d ", GetMaxTentara(B, InfoG2(C)));
+        printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
         TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
-        printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
-        printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
+        printf("\n");
 
         i++;
         C = NextChild(C);
@@ -364,28 +366,70 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X) {
   }
 
   while (C != Nil) {
-    printf("%d. ", i);
+    printf(" || - [%d.] ", i);
 
     if (Name(ElmtBan(B, InfoG2(C))) == 'C') {
-      printf("Castle ");
+      printf("Castle  ");
     } else if (Name(ElmtBan(B, InfoG2(C))) == 'V') {
       printf("Village ");
     } else if (Name(ElmtBan(B, InfoG2(C))) == 'T') {
-      printf("Tower ");
+      printf("Tower   ");
     } else /* (Name(ElmtBan(B, InfoG2(C))) == 'F') */ {
-      printf("Fort ");
+      printf("Fort    ");
     }
 
+    printf("%d", Tentara(ElmtBan(B, InfoG2(C))));
+    printf("/%d ", GetMaxTentara(B, InfoG2(C)));
+    printf("lv. %d", Level(ElmtBan(B, InfoG2(C))));
     TulisPOINT(Posisi(ElmtBan(B, InfoG2(C))));
-    printf(" %d ", Tentara(ElmtBan(B, InfoG2(C))));
-    printf("lv. %d\n", Level(ElmtBan(B, InfoG2(C))));
-
+    printf("\n");
     i++;
     C = NextChild(C);
   }
+  *Count = i - 1;
+  //P = Alokasi(X);
+  //InsertPrio(&L, P);
+}
 
-  P = Alokasi(X);
-  InsertPrio(&L, P);
+int GetIdxAttack(Graph G, List L, Bangunan B, urutan X, int pos)
+{
+  // Fungsi untuk mendapatkan Idx bangunan move yang diinginkan
+
+  /* KAMUS LOKAL */
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
+  int i;
+
+  /* ALGORITMA */
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
+  i = 1;
+
+  while ((C != Nil) && (P != Nil)) {
+    if (InfoG2(C) != Info(P)) {
+      if (InfoG2(C) < Info(P)) {
+        if (i == pos) {
+          return InfoG2(C);
+        }
+        i++;
+        C = NextChild(C);
+      } else /* InfoG2(C) > Info(P) */ {
+        P = Next(P);
+      }
+
+    } else /* InfoG2(C) = Info(P) */ {
+        P = Next(P);
+        C = NextChild(C);
+    }
+  }
+  
+  while (C != Nil) {
+    if (i == pos) {
+          return InfoG2(C);
+    }
+  }
 }
 
 /************ MOVE TENTARA ******************/

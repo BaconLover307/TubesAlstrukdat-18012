@@ -15,6 +15,7 @@
 
 boolean ExitMenu;
 boolean EndTurn;
+boolean AksiValid;
 
 int main() {
   /* KAMUS */
@@ -119,25 +120,53 @@ int main() {
   Level(ElmtBan(B, 5)) = 1;
   Tentara(ElmtBan(B, 5)) = 40;
 
+  
   InsVPrio(&L1, 1);
   InsVPrio(&L1, 3);
   InsVPrio(&L2, 2);
   InsVPrio(&L2, 4);
+
+  PrintInfo(L1, B);
+  PrintInfo(L2, B);
 
   X = 1;
   if (CheckAttack(G, L1, X))
   {
     printf("Bangunan ke-1 dapat menyerang lawan.\n");
   }
+  if (CheckAttack(G, L1, 2))
+  {
+    printf("Bangunan ke-2 dapat menyerang lawan.\n");
+  }
+  if (CheckAttack(G, L1, 3))
+  {
+    printf("Bangunan ke-3 dapat menyerang lawan.\n");
+  }
+  if (CheckAttack(G, L1, 4))
+  {
+    printf("Bangunan ke-4 dapat menyerang lawan.\n");
+  }
+  if (CheckAttack(G, L1, 5))
+  {
+    printf("Bangunan ke-5 dapat menyerang lawan.\n");
+  }
+  if (CheckAttack(G, L1, 6))
+  {
+    printf("Bangunan ke-6 dapat menyerang lawan.\n");
+  }
+  if (CheckAttack(G, L1, 7))
+  {
+    printf("Bangunan ke-7 dapat menyerang lawan.\n");
+  }
 
+ int jml = 3;
   printf("Daftar bangunan yang dapat diserang oleh bangunan ke-1:\n");
   PrintAttack(G, L1, B, X);
 
   printf("Daftar bangunan terdekat dengan bangunan ke-2:\n");
-  PrintMove(G, L1, B, 2);
+  PrintMove(G, L1, B, 2, &jml);
   printf("Daftar bangunan yang dapat diserang oleh bangunan ke-1:\n");
   PrintAttack(G, L1, B, X);
- int jml = 3;
   printf("Daftar bangunan terdekat dengan bangunan ke-1:\n");
   PrintMove(G, L1, B, X, &jml);
 

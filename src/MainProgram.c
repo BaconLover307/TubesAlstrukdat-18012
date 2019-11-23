@@ -25,9 +25,9 @@
 
 // $ ***** Variables *****
 char menu[100];
-boolean Exit; // = false;
-boolean ExitMenu; // = false;
-boolean EndTurn; // = false;
+boolean Exit;       // = false;
+boolean ExitMenu;   // = false;
+boolean EndTurn;    // = false;
 boolean AksiValid; 
 
 // $ ******* MAP PRINTING FUNCTION ********
@@ -167,6 +167,8 @@ do {
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
                     InsVPrio(&ListBan(PlayerTwo),4);
+                    InsVPrio(&ListBan(PlayerTwo),7);
+                    InsVPrio(&ListBan(PlayerTwo),8);
 
                     // * AKHIRNYA MULAI
                     Turn = 1;
@@ -242,28 +244,32 @@ do {
                     if (strcmpi(command,"ATTACK") == 0) {
                         Push(&GameState,InfoTop(GameState));
                         Pop(&GameState,&Current);
-                        ATTACK(&Current,StateDataB, RelasiBan);
+                        ATTACK(&Current,&DataB(Current), RelasiBan);
                         Push(&GameState,Current);
                         getchar();
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmpi(command, "LEVEL_UP") == 0) {
-                    printf("Top = %d\n",Top(GameState));
                         Push(&GameState,InfoTop(GameState));
-                    printf("Top = %d\n",Top(GameState));
                         Pop(&GameState,&Current);
+                    /*
+                    printf("Top = %d\n",Top(GameState));
+                    printf("Top = %d\n",Top(GameState));
                     printf("Top = %d\n",Top(GameState));
                         
                         printf("==============INFOTOP BEFORE================\n");
                         PrintCondition(InfoTop(GameState));
                         PrintCondition(Current);
+                        */
                     	LEVEL_UP(&Current);
+                        Push(&GameState,Current);
+                       /*
                         printf("==============INFOTOP AFTER================\n");
                         PrintCondition(InfoTop(GameState));
                         PrintCondition(Current);
                         printf("==============INFOTOP AFTER AFTER================\n");
-                        Push(&GameState,Current);
                         PrintCondition(InfoTop(GameState));
+                        */
                         getchar();
 
                     }   // $ ######### SKILL ########

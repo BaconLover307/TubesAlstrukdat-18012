@@ -164,8 +164,9 @@ boolean CheckAttack (Graph G, List L, urutan X);
         pilihan bangunan yang dapat diserang
         Jika tidak ada maka muncul "Tidak ada bangunan yang dapat
         diserang" di layar */
-void PrintAttack (Graph G, List L, Bangunan B, urutan X);
+void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count);
 
+int GetIdxAttack (Graph G, List L, Bangunan B, urutan X, int pos);
 /************ MOVE TENTARA ******************/
 
 /* Mengecek apakah bangunan ke-X yang dimiliki oleh suatu pemain dapat
