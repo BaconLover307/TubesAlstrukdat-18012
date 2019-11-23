@@ -36,5 +36,5 @@ void TulisPOINT (POINT P) {
   /* KAMUS LOKAL */
 
   /* ALGORITMA */
-  printf("(%d,%d)", Absis(P), Ordinat(P));
+  printf("(%d, %d)", Absis(P), Ordinat(P));
 }

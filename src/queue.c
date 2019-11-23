@@ -96,7 +96,7 @@ void QDel (Queue * Q, Qinfotype * X) {
     }
 
     else{
-        printf("Anda tidak mempunyai skill apa pun\n");
+        printf("Your Skill queue is empty...\n");
     }
 
 }
@@ -134,16 +134,14 @@ void PrintQueue(Queue Q) {
     }
 }
 
-void ReplaceQueue(Queue Q, Queue *Qnew) {
-    // $ Kamus Lokal
-    Queue Qtemp = Q;
-    Qinfotype temp, buang;
-    // $ Algoritma
-    while (!IsQEmpty(*Qnew)) {
-        QDel(Qnew,&buang);
+Queue CopyQueue(Queue Q) {
+    Queue ret;
+    CreateQueue(&ret, MaxQEl(Q));
+    if (IsQEmpty(Q)) return ret;
+    for (int i = Head(Q); i <= Tail(Q); i++) {
+        for (int j = 0; j < 9; j++) {
+            ret.T[i][j] = Q.T[i][j];
+        }
     }
-    while (!IsQEmpty(Qtemp)) {
-        QDel(&Qtemp,&temp);
-        QAdd(Qnew,temp);
-    }
+    return ret;
 }

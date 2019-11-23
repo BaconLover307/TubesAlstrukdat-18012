@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "includes.c"
 #include "listlinier.h"
 
 int main() {
@@ -55,13 +56,14 @@ int main() {
   InsVPrio(&L2, 2); InsVPrio(&L2, 4);
   printf("Pemain ke-1\n");
   printf("Memiliki %d bangunan.\n", NbElmtList(L1));
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L1, B);
   printf("\n");
 
   printf("Pemain ke-2 mau menyerang bangunan ke-3 yang dimiliki oleh Pemain 1.\n");
   printf("Tentara sebesar 30 orang dari Bangunan ke-4.\n");
 
-  /* Udah ada CheckAttackTentara untuk penvalidasian jumlah tentara */ 
+  /* Udah ada CheckAttackTentara untuk penvalidasian jumlah tentara */
   TentaraAttack(&B, 4, 30);
   TentaraInvaded(&B, false, false, 0, 3, 30);
   if (CanCapture(B, 3)) {
@@ -74,20 +76,24 @@ int main() {
   }
 
   printf("Pemain ke-1\n");
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L1, B);
   printf("\n");
 
   printf("Pemain ke-2\n");
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L2, B);
   printf("\n");
 
   TambahAllTentara(L2, &B);
   printf("Setelah pemain ke-2 mengalami penaikan jumlah tentara.\n");
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L2, B);
   printf("\n");
 
   printf("Pemain ke-1 mau melakukan Level Up pada bangunan ke-1.\n");
   LevelUp(&B, 1);
+  printf(" __\n[__] ===== Daftar Bangunan ===== [ ]\n");
   PrintInfo(L1, B);
 
   return 0;

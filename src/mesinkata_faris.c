@@ -94,7 +94,20 @@ info_bangunan KataToInfo(Kata K1, Kata K2, Kata K3)
   Name(info) = KataToChar(K1);
   MakePOINT(&Posisi(info),KataToInt(K2), KataToInt(K3));
   Level(info) = 1;
-  Tentara(info) = 0;
+  if (Name(info) == 'C') {
+    Tentara(info) = 40;
+  }
+  else if (Name(info) == 'T') {
+    Tentara(info) = 30;
+  }
+  else if (Name(info) == 'F') {
+    Tentara(info) = 80;
+  }
+  else if (Name(info) == 'V') {
+    Tentara(info) = 20;
+  }
+  Moved(info) = false;
+  Attacked(info) = false;
   return info;
 }
 
@@ -115,7 +128,8 @@ Bangunan KataToBangunan(int MaxEl)
   }
     Neff(B) = MaxEl;
     return B;
-}
+  }
+
 
 MATRIKS KataToMatriks(int MaxNB, int MaxNK, Bangunan B)
 {
@@ -130,30 +144,15 @@ Graph KataToGraph(int MaxEl)
 {
   Graph G;
   int i, j;
-  MakeEmptyGraph(&G, MaxEl);
-  NeffG(G) = (MaxEl);
+  MakeEmptyGraph(&G);
+  AddParent(&G,MaxEl);
   for (i = 1; i <= MaxEl; i++) {
     for (j = 1; j <= MaxEl; j++) {
       if (KataToInt(CKata) == 1) {
-        TambahRelation (&G, i, j);
+        AddRelation(&G, i, j);
       }
         ADVKATA();
     }
   }
   return G;
-}
-
-void ExecuteAll() {
-  MATRIKS M;
-  STARTKATA();
-  int NB = KataToInt(CKata);
-  ADVKATA();
-  int NK = KataToInt(CKata);
-  ADVKATA();
-  int MaxEl = KataToInt(CKata);
-  ADVKATA();
-  Bangunan B = KataToBangunan(MaxEl);
-  M = KataToMatriks(NB, NK, B);
-  TulisMATRIKS(M);
-  Graph G = KataToGraph(MaxEl);
 }

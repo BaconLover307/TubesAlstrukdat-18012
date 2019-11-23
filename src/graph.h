@@ -52,55 +52,58 @@ typedef struct {
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create Graph kosong  */
-void MakeEmptyGraph (Graph * G);
+
 /* I.S. sembarang */
 /* F.S. Terbentuk graph kosong */
+void MakeEmptyGraph (Graph * G);
 
 /****************** Manajemen Memori ******************/
-addrGraph AlokasiGraph1 (urutan X);
+
 /* Mengirimkan addrGraph hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addrGraph tidak Nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil, FirstChild(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
+addrGraph AlokasiGraph1 (urutan X);
 
-addrGraph2 AlokasiGraph2 (urutan X);
 /* Mengirimkan addrGraph2 hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka addrGraph2 tidak Nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
+addrGraph2 AlokasiGraph2 (urutan X);
 
-void DealokasiGraph1 (addrGraph * P);
 /* I.S. P terdefinisi; */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addrGraph P */
+void DealokasiGraph1 (addrGraph * G);
 
-void DealokasiGraph2 (addrGraph2 * P);
 /* I.S. P terdefinisi; */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addrGraph2 P */
+void DealokasiGraph2 (addrGraph2 * G2);
 
 /* ********** TEST GRAPH KOSONG ********** */
-boolean IsEmptyGraph (Graph G);
+
 /* Mengirimkan true jika Graph G kosong, mengirimkan false jika tidak */
+boolean IsEmptyGraph (Graph G);
 
 /* *** Test tabel penuh *** */
+
+/* Mengirimkan true jika Graph G penuh, mengirimkan false jika tidak */
 boolean IsFullGraph (Graph G);
 // ? Entah perlu fungsi ini gak ya?
-/* Mengirimkan true jika Graph G penuh, mengirimkan false jika tidak */
 
-boolean IsEmptyParent (addrGraph P);
 /* Mengirimkan true jika addrGraph P kosong, mengirimkan false jika tidak */
+boolean IsEmptyParent (addrGraph P);
 
 
 /* ********** KELOMPOK BACA/TULIS ********** */
+
+/* I.S. Graph G terdefinisi */
+/* F.S. Graph G berisi hubungan-hubungan antar bangunan */
 void BacaGraph (Graph * G);
 // ! Ingat MakeEmptyGraph dan AddParent dulu
 // TODO: Prosedur ini dimasukkan ke ADT Mesin Kata
-/* I.S. Graph G terdefinisi */
-/* F.S. Graph G berisi hubungan-hubungan antar bangunan */
 
-void TulisGraph (Graph G);
-// ? Untuk debugging doang kayaknya
 /* I.S. G terdefinisi */
 /* F.S. Hubungan antar bangunan ditampilkan ke layar.
         Jika tidak ada hubungan maka muncul '0' di layar.
@@ -110,44 +113,49 @@ void TulisGraph (Graph G);
 1 0 0
 1 0 0
 */
+void TulisGraph (Graph G);
+// ? Untuk debugging doang kayaknya
 
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void AddParent (Graph * G, int N);
+
 /* I.S. Graph G terdefinisi */
 /* F.S. Semua elemen parent dimasukkan ke graph secara berurut */
+void AddParent (Graph * G, int N);
 
-void AddRelation (Graph * G, urutan X, urutan Y);
 /* I.S. Graph G terdefinisi */
 /* F.S. Bangunan ke-X dinyatakan memiliki hubungan dengan bangunan ke-Y */
+void AddRelation (Graph * G, urutan X, urutan Y);
 
 /****************** PROSES SEMUA ELEMEN PARENT GRAPH ******************/
-int NbElmtGraph (Graph G);
+
 /* Mengirimkan banyaknya elemen parent graph; mengirimkan 0 jika graph kosong */
+int NbElmtGraph (Graph G);
 
 /****************** PENCARIAN SEBUAH GRAPH CHILD ******************/
-addrGraph SearchP (Graph G, urutan X);
 /* Mencari apakah ada elemen parent graph dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
+addrGraph SearchP (Graph G, urutan X);
 
-addrGraph2 SearchChild (addrGraph P, urutan X);
 /* Mencari apakah ada elemen anak graph dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
+addrGraph2 SearchChild (addrGraph P, urutan X);
 
 /******************* RELATION **********************/
-boolean CheckRelation (Graph G, urutan X, urutan Y);
+
 /* Mengecek apakah bangunan ke-X memiliki hubungan dengan bangunan ke-Y
    atau tidak */
 /* Jika iya maka True dan sebaliknya */
+boolean CheckRelation (Graph G, urutan X, urutan Y);
 
 /******************* ATTACK *********************/
-boolean CheckAttack (Graph G, List L, urutan X);
+
 /* Mengecek apakah bangunan ke-X yang dimiliki oleh suatu pemain dapat
    menyerang bangunan yang tidak dimilikinya atau tidak */
 /* Jika iya maka True dan sebaliknya */
+boolean CheckAttack (Graph G, List L, urutan X);
 
-void PrintAttack (Graph G, List L, Bangunan B, urutan X);
 /* I.S. Graph G terdefinisi
         List L terdefinisi
         Bangunan B terdefinisi
@@ -156,14 +164,16 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X);
         pilihan bangunan yang dapat diserang
         Jika tidak ada maka muncul "Tidak ada bangunan yang dapat
         diserang" di layar */
+void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count);
 
+int GetIdxAttack (Graph G, List L, Bangunan B, urutan X, int pos);
 /************ MOVE TENTARA ******************/
-boolean CheckMove (Graph G, List L, urutan X);
+
 /* Mengecek apakah bangunan ke-X yang dimiliki oleh suatu pemain dapat
    mengirimkan tentara bangunan lain yang dimilikinya atau tidak */
 /* Jika iya maka True dan sebaliknya */
+boolean CheckMove (Graph G, List L, urutan X);
 
-void PrintMove (Graph G, List L, Bangunan B, urutan X);
 /* I.S. Graph G terdefinisi
         List L terdefinisi
         Bangunan B terdefinisi
@@ -173,5 +183,8 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X);
         yang dapat ditambahkan jumlah tentaranya.
         Jika tidak ada maka muncul "Tidak ada bangunan terdekat" di
         layar */
+void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count);
+
+int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos);
 
 #endif

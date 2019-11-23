@@ -2,6 +2,7 @@
 /* Definisi Modul print aset-aset ASCII Art */
 #include <stdio.h>
 #include <stdlib.h>
+#include "pcolor.h"
 #define MAX_LEN 128
 
 // $ ********** HEADER **********
@@ -34,7 +35,9 @@ void clrscrn() {
 }
 
 void MainM() {
+    printf("%s",YELLOW);
     print_image("assets//img_mainmenu.txt");
+    printf("%s",NORMAL);
 }
 void Menu() {
     print_image("assets//img_menu.txt");
@@ -49,5 +52,14 @@ void Invalid() {
     print_image("assets//img_invalid.txt");
 }
 void Quit() {
+    print_image("assets//img_quit.txt");
+}
+void P1Wins() {
+    print_image("assets//img_p1wins.txt");
+}
+void P2Wins() {
+    print_image("assets//img_p2wins.txt");
+}
+void QuitImg(){
     print_image("assets//img_quit.txt");
 }

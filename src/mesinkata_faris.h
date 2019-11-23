@@ -8,7 +8,7 @@
 #include "matriks.h"
 #include "graph.h"
 
-#define NMax 50
+#define NMax 500
 #define BLANK1 ' '
 #define BLANK2 '\n'
 
