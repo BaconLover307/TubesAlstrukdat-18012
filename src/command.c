@@ -54,7 +54,7 @@ void ATTACK(Sinfotype *state, Graph relasi) {
                 }
 
         }
-    } while (1 < nomorBangunan || NbElmtList(*Ltop) < nomorBangunan );
+    } while (nomorBangunan < 1 || NbElmtList(*Ltop) < nomorBangunan );
 
     // * Menampilkan daftar bangunan yang dapat diserang
     int jumlahBangunanTerdekat;
@@ -375,6 +375,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         sleep(1);
         printf("You didn't move anyone... Oh well.\n");
         puts("Press enter to go back to the main menu.");
+        AksiValid = false;
         getchar();
     }
 }
