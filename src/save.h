@@ -6,6 +6,6 @@
 
 #include "stackt.h"
 
-void saveData(Sinfotype state, Graph relasi);
+void saveData(Sinfotype state, Graph relasi, MATRIKS M);
 
 #endif

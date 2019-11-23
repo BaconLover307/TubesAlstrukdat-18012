@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "save.h"
 
-void saveData(Sinfotype state, Graph relasi) {
+void saveData(Sinfotype state, Graph relasi, MATRIKS M) {
 
     /* Local Dictionary */
     int i, j, neff, maks1, maks2;
@@ -166,7 +166,7 @@ void saveData(Sinfotype state, Graph relasi) {
         P = Next(P);
     }
 
-    // Last but not least (I hope...) is the connection between buildings
+    // Information about the connection between buildings
     addrGraph PG;
     addrGraph2 C;
 
@@ -196,6 +196,21 @@ void saveData(Sinfotype state, Graph relasi) {
             printf("0\n");
         }
         i++;
+    }
+
+    /* Lastly, The Map :( */
+    // MaxBrs Map
+    fprintf(fp, "%d\n", MaxBrs(M));
+    printf("Max Baris : %d\n", MaxBrs(M));
+    fprintf(fp, "%d\n", MaxKol(M));
+    printf("Max Kolom : %d\n", MaxKol(M));
+    for (i = 1; i <= MaxBrs(M); i++) {
+        for (j = 1; j <= MaxKol(M); j++) {
+            fprintf(fp, "%d ", Elmt(M, i, j));
+            printf("%d ", Elmt(M, i, j));
+        }
+        fprintf(fp, "\n");
+        printf("\n");
     }
 
     fclose(fp);

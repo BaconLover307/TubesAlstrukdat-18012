@@ -14,9 +14,9 @@ void IgnoreBlank()
   }
 }
 
-void STARTKATA()
+void STARTKATA(char * C)
 {
-  START();
+  START(C);
   IgnoreBlank();
   SalinKata();
 }
