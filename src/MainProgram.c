@@ -166,6 +166,8 @@ do {
                     // * Bangunan pertama pemain
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
+                    // ! DEBUG
+                    InsVPrio(&ListBan(PlayerOne),17);
                     InsVPrio(&ListBan(PlayerTwo),4);
                     InsVPrio(&ListBan(PlayerTwo),7);
                     InsVPrio(&ListBan(PlayerTwo),8);

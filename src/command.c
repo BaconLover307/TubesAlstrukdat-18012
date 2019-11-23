@@ -29,6 +29,17 @@ void ATTACK(Sinfotype *state, Graph relasi) {
     int giliran = TurnInfo(*state);
     // $ Algoritma
 
+    // * Check Status Attacked
+    if (CheckAllAttacked(*Ltop, *databuild)) {
+        puts("....");
+        sleep(1);
+        puts("It seems that all your building have attacked before.");
+        puts("Press enter to go back to the command center.");
+        getchar();
+        AksiValid = false;
+        return;
+    }
+
     // * Bangunan Pemain
     printf(" __\n[__] ====  List of Buildings  ==== [P%d]\n", giliran);
     PrintInfo(*Ltop,*databuild);
@@ -276,6 +287,16 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
     address Pcurr;
     // $ Algoritma
     // * Bangunan Pemain
+    if (CheckAllMoved(*Ltop,*databuild)) {
+        puts("....");
+        sleep(1);
+        puts("It seems that all your building have moved soldiers before.");
+        puts("Press enter to go back to the command center.");
+        getchar();
+        AksiValid = false;
+        return;
+    }
+
     printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", giliran);
     PrintInfo(*Ltop,*databuild);
 
@@ -314,7 +335,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         puts("....");
         sleep(1);
         puts("It seems that this building does not have any other connected building.");
-        puts("Press enter to go back to the main menu.");
+        puts("Press enter to go back to the command center.");
         getchar();
         AksiValid = false;
         return;
@@ -374,7 +395,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         puts("....");
         sleep(1);
         printf("You didn't move anyone... Oh well.\n");
-        puts("Press enter to go back to the main menu.");
+        puts("Press enter to go back to the command center.");
         AksiValid = false;
         getchar();
     }

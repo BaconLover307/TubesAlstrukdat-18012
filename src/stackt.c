@@ -99,8 +99,33 @@ void ResetBuildingStatus(List L, Bangunan *B) {
         Attacked(ElmtBan(*B,Info(P))) = false;
         P = Next(P);
     }
-
 }
+
+boolean CheckAllMoved(List L, Bangunan B) {
+    // $ Kamus Lokal
+    address P = First(L);
+    // $ Algoritma
+    while (P != Nil) {
+        if (Moved(ElmtBan(*B,Info(P))) == false) 
+            return false;
+        P = Next(P);
+    }
+    return true;
+}
+
+boolean CheckAllAttacked(List L, Bangunan B) {
+    // $ Kamus Lokal
+    address P = First(L);
+    // $ Algoritma
+    while (P != Nil) {
+        if (Attacked(ElmtBan(*B,Info(P))) == false) 
+            return false;
+        
+        P = Next(P);
+    }
+    return true;
+}
+
 
 void PrintCondition(Sinfotype top) {
     // $ Kamus Lokal

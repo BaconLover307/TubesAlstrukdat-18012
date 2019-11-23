@@ -101,10 +101,18 @@ void ChangeTurn(Stack *S);
 // * Mereset status bangunan yang sudah MOVE atau ATTACK
 void ResetBuildingStatus(List L, Bangunan *B);
 
-// * Menuliskan kondisi yang sedang berlangsung
- void PrintCondition(Sinfotype top);
+// * Memeriksa apakah semua bangunan di List L telah MOVE
+// * Mengirimkan true jika semua sudah MOVE
+boolean CheckAllMoved(List L, Bangunan B);
 
- // * S terdefinisi, mengembalikan isi state S
- Sinfotype CopyState(Sinfotype S);
+// * Memeriksa apakah semua bangunan di List L telah ATTACK
+// * Mengirimkan true jika semua sudah ATTACK
+boolean CheckAllAttacked(List L, Bangunan B);
+
+  // * Menuliskan kondisi yang sedang berlangsung
+  void PrintCondition(Sinfotype top);
+
+  // * S terdefinisi, mengembalikan isi state S
+  Sinfotype CopyState(Sinfotype S);
 
 #endif
