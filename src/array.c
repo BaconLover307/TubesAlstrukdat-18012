@@ -130,11 +130,6 @@ boolean IsFullBan (Bangunan B) {
 }
 
 /* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaBangunan (Bangunan * B) {
-// Todo Menunggu yang kerjain Configure
-
-}
 
 //$ ******************** Tentara Attack ****************************/
 boolean CheckAttackTentara (Bangunan B, IdxType X, int N) {
@@ -282,4 +277,13 @@ void LevelUp (Bangunan * B, IdxType X) {
 
 void ResetLevel (Bangunan * B, IdxType X) {
   Level(ElmtBan(*B, X)) == 1;
+}
+
+Bangunan CopyBangunan(Bangunan B) {
+  Bangunan ret;
+  MakeEmptyBangunan(&ret, MaxEl(B));
+  for (int i = 1; i <= Neff(B); i++) {
+    ElmtBan(ret, i) = ElmtBan(B, i);
+  }
+  return ret;
 }

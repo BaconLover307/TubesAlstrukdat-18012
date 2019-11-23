@@ -100,6 +100,8 @@ void InsertPrio(List * L, address P);
 /* List mungkin menjadi kosong karena penghapusan */
 void DelP(List * L, urutan X);
 
+List CopyList(List L); 
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 
 /* I.S. List tidak kosong */

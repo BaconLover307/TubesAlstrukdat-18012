@@ -78,5 +78,6 @@ void PrintInfoHead (Queue Q);
 // * seluruh elemen Queue ke layar
 void PrintQueue(Queue Q);
 
+Queue CopyQueue(Queue Q);
 
 #endif

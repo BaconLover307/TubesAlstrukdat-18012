@@ -24,7 +24,7 @@ void ClearStack(Stack *S) {
 
 // $ ************ Predikat Untuk test keadaan KOLEKSI ************
 boolean IsFirstAct(Stack S) {
-    return ((Top(S)-1) == SNil);
+    return ((Top(S) - 1) == SNil);
 }
 
 boolean IsFull(Stack S) {
@@ -33,14 +33,14 @@ boolean IsFull(Stack S) {
 
 // $ ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack *S, Sinfotype X) {
-    Top(*S) += 1;
+    Top(*S)++;
     InfoTop(*S) = X;
 }
 
 // $ ************ Menghapus sebuah elemen Stack ************
 void Pop(Stack *S, Sinfotype *X) {
     *X = InfoTop(*S);
-    Top(*S) -= 1;
+    Top(*S)--;
 }
 
 // $ ************ Turn Handling ************
@@ -82,7 +82,7 @@ void ChangeTurn(Stack *S) {
 }
 
 
-void PrintCondition(Sinfotype top) {   
+void PrintCondition(Sinfotype top) {
     // $ Kamus Lokal
     Player TopP;
     if (TurnInfo(top) == 1) {
@@ -120,4 +120,13 @@ void PrintCondition(Sinfotype top) {
     printf(" __\n[__] ==== List of Buildings ==== [P%d]\n", TurnInfo(top));
     PrintInfo(Ltop, DataBuild);
     printf("\n");
+}
+
+Sinfotype CopyState(Sinfotype S) {
+    Sinfotype ret;
+    P1Info(ret) = CopyPlayer(P1Info(S));
+    P2Info(ret) = CopyPlayer(P2Info(S));
+    TurnInfo(ret) = TurnInfo(S);
+    DataB(ret) = CopyBangunan(DataB(S));
+    return ret;
 }

@@ -178,4 +178,8 @@ void CheckGetIR(Player *P, Bangunan *B);
 // * Selipin di Capture. Masukin P sendiri, Q lawan
 void CheckGetBA(Player P, Queue *Q);
 
+// * menyalin semua informasi dari player P
+Player CopyPlayer(Player P);
+
+
 #endif

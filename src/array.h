@@ -28,6 +28,8 @@ typedef struct {
   int tentara;          /* jumlah tentara yang dimiliki bangunan */
   boolean hasmoved;     /* status sudah move atau belum */
   boolean hasattacked;    /* status sudah attack atau belum */
+  boolean defense;      /* status memiliki pertahanan atau tidak */
+
 } info_bangunan;
 
 typedef struct {
@@ -84,6 +86,8 @@ typedef struct {
 #define Posisi(e)     (e).posisi
 #define Level(e)      (e).level
 #define Tentara(e)    (e).tentara
+#define Moved(e)      (e).hasmoved
+#define Attacked(e)   (e).hasattacked
 
 // $ ********** KONSTRUKTOR **********
 
@@ -191,5 +195,7 @@ void LevelUp(Bangunan * B, IdxType X);
 // * I.S. Bangunan B terdefinisi
 // * F.S. Bangunan ke-X mengalami pengembalian level menjadi level 1
 void ResetLevel(Bangunan *B, IdxType X);
+
+Bangunan CopyBangunan(Bangunan B);
 
 #endif
