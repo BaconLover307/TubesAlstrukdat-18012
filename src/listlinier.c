@@ -159,7 +159,7 @@ void DelP (List * L, urutan X) {
   }
 
   if (Prec == Nil) {
-    First(*L) = Nil;
+    First(*L) = Next(P);
   } else /* Prec != Nil */ {
     Next(Prec) = Next(P);
   }
