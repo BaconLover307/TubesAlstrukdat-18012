@@ -280,7 +280,6 @@ boolean CheckAttack (Graph G, List L, urutan X) {
   boolean same;
 
   /* ALGORITMA */
-  DelP(&L, X);
   P = First(L);
   Q = SearchP(G, X);
   C = FirstChild(Q);
@@ -292,7 +291,7 @@ boolean CheckAttack (Graph G, List L, urutan X) {
         same = true;
       } else /* InfoG2(C) > Info(P) */ {
         if (Next(P) == Nil) {
-          return true;
+          same = true;
         } else /* Next(P) != Nil */ {
           P = Next(P);
         }
@@ -303,8 +302,6 @@ boolean CheckAttack (Graph G, List L, urutan X) {
     }
   }
 
-  P = Alokasi(X);
-  InsertPrio(&L, P);
   return (same);
 }
 
@@ -325,7 +322,6 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count) {
   int i;
 
   /* ALGORITMA */
-  DelP(&L, X);
   P = First(L);
   Q = SearchP(G, X);
   C = FirstChild(Q);
@@ -386,9 +382,8 @@ void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count) {
     i++;
     C = NextChild(C);
   }
+
   *Count = i - 1;
-  //P = Alokasi(X);
-  //InsertPrio(&L, P);
 }
 
 int GetIdxAttack(Graph G, List L, Bangunan B, urutan X, int pos)
@@ -412,22 +407,25 @@ int GetIdxAttack(Graph G, List L, Bangunan B, urutan X, int pos)
       if (InfoG2(C) < Info(P)) {
         if (i == pos) {
           return InfoG2(C);
+        } else /* i != pos */ {
+          i++;
+          C = NextChild(C);
         }
-        i++;
-        C = NextChild(C);
       } else /* InfoG2(C) > Info(P) */ {
         P = Next(P);
       }
 
     } else /* InfoG2(C) = Info(P) */ {
-        P = Next(P);
-        C = NextChild(C);
+      P = Next(P);
+      C = NextChild(C);
     }
   }
   
   while (C != Nil) {
     if (i == pos) {
-          return InfoG2(C);
+      return InfoG2(C);
+    } else /* i != pos */ {
+      i++;
     }
   }
 }
@@ -530,37 +528,37 @@ void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count) {
 
 
 int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos) {
-    // Fungsi untuk mendapatkan Idx bangunan move yang diinginkan
+  // Fungsi untuk mendapatkan Idx bangunan move yang diinginkan
 
-    /* KAMUS LOKAL */
-    address P;
-    addrGraph Q;
-    addrGraph2 C;
-    int i;
+  /* KAMUS LOKAL */
+  address P;
+  addrGraph Q;
+  addrGraph2 C;
+  int i;
 
-    /* ALGORITMA */
-    P = First(L);
-    Q = SearchP(G, X);
-    C = FirstChild(Q);
-    i = 1;
+  /* ALGORITMA */
+  P = First(L);
+  Q = SearchP(G, X);
+  C = FirstChild(Q);
+  i = 1;
 
-    while ((C != Nil) && (P != Nil)) {
-      if (InfoG2(C) == Info(P)) {
+  while ((C != Nil) && (P != Nil)) {
+    if (InfoG2(C) == Info(P)) {
 
-        if (i == pos) {
-            return InfoG2(C);
-        }
+      if (i == pos) {
+        return InfoG2(C);
+      } else /* i != pos */ {        
         i++;
-
         C = NextChild(C);
         P = Next(P);
+      }
 
-      } else /* InfoG2(C) != Info(P) */ {
-        if (InfoG2(C) < Info(P)) {
-          C = NextChild(C);
-        } else /* InfoG2(C) > Info(P) */ {
-          P = Next(P);
-        }
+    } else /* InfoG2(C) != Info(P) */ {
+      if (InfoG2(C) < Info(P)) {
+        C = NextChild(C);
+      } else /* InfoG2(C) > Info(P) */ {
+        P = Next(P);
       }
     }
+  }
 }

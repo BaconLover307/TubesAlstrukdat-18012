@@ -276,6 +276,9 @@ void LevelUp (Bangunan * B, IdxType X) {
 }
 
 void ResetLevel (Bangunan * B, IdxType X) {
+  /* KAMUS LOKAL */
+
+  /* ALGORITMA */
   Level(ElmtBan(*B, X)) == 1;
 }
 
