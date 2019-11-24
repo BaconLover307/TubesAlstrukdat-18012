@@ -12,8 +12,8 @@
 #ifndef listlinier_H
 #define listlinier_H
 
-#include "boolean.h"
-#include "array.h"
+#include "../boolean/boolean.h"
+#include "../array/array.h"
 
 #define Nil NULL
 

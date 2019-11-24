@@ -4,12 +4,12 @@
 #ifndef player_H
 #define player_H
 
-#include "boolean.h"
-#include "array.h"
-#include "queue.h"
-#include "pcolor.h"
-#include "listlinier.h"
-#include "matriks.h"
+#include "../boolean/boolean.h"
+#include "../array/array.h"
+#include "../queue/queue.h"
+#include "../pcolor/pcolor.h"
+#include "../listlinier/listlinier.h"
+#include "../matriks/matriks.h"
 
 typedef struct {
     int duration;       // Durasi (turn) efektif Shield

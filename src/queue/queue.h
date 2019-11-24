@@ -5,7 +5,7 @@
 #ifndef queue_H
 #define queue_H
 
-#include "boolean.h"
+#include "../boolean/boolean.h"
 
 #define QNil ' '
 /* Konstanta untuk mendefinisikan Qaddress tak terdefinisi */

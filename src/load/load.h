@@ -4,9 +4,9 @@
 #ifndef load_H
 #define load_H
 
-#include "stackt.h"
-#include "save.h"
-#include "mesinkata_config.h"
+#include "../stackt/stackt.h"
+#include "../save/save.h"
+#include "../mesinkata_config/mesinkata_config.h"
 
 void loadFile(Sinfotype * state, Graph * relasi, MATRIKS * map);
 

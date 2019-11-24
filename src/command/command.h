@@ -5,10 +5,10 @@
 #ifndef command_H
 #define command_H
 
-#include "boolean.h"
-#include "stackt.h"
-#include "graph.h"
-#include "save.h"
+#include "../boolean/boolean.h"
+#include "../stackt/stackt.h"
+#include "../graph/graph.h"
+#include "../save/save.h"
 
 boolean ExitMenu; // = false;
 boolean EndTurn;  // = false;

@@ -5,10 +5,10 @@
 #ifndef stackt_H
 #define stackt_H
 
-#include "boolean.h"
-#include "player.h"
-#include "matriks.h"
-#include "pcolor.h"
+#include "../boolean/boolean.h"
+#include "../player/player.h"
+#include "../matriks/matriks.h"
+#include "../pcolor/pcolor.h"
 
 #define SNil 0
 #define MaxSEl 100

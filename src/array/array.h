@@ -10,8 +10,8 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
-#include "boolean.h"
-#include "point.h"
+#include "../boolean/boolean.h"
+#include "../point/point.h"
 
 /*  Kamus Umum */
 #define IdxMin 1

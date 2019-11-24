@@ -12,8 +12,8 @@
 #ifndef MATRIKS_H
 #define MATRIKS_H
 
-#include "boolean.h"
-#include "array.h"
+#include "../boolean/boolean.h"
+#include "../array/array.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define BrsMin 1

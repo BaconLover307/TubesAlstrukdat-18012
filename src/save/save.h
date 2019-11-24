@@ -4,7 +4,7 @@
 #ifndef save_H
 #define save_H
 
-#include "stackt.h"
+#include "../stackt/stackt.h"
 
 void saveData(Sinfotype state, Graph relasi, MATRIKS M);
 

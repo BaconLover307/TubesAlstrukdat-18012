@@ -2,7 +2,7 @@
 /* Definisi Modul print aset-aset ASCII Art */
 #include <stdio.h>
 #include <stdlib.h>
-#include "pcolor.h"
+#include "../pcolor/pcolor.h"
 #define MAX_LEN 128
 
 // $ ********** HEADER **********

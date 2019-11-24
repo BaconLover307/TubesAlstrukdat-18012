@@ -4,9 +4,9 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "mesinkar_config.h"
-#include "matriks.h"
-#include "graph.h"
+#include "../mesinkar_config/mesinkar_config.h"
+#include "../matriks/matriks.h"
+#include "../graph/graph.h"
 #include "string.h"
 
 #define NMax 500

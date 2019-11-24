@@ -10,8 +10,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "boolean.h"
-#include "listlinier.h"
+#include "../boolean/boolean.h"
+#include "../listlinier/listlinier.h"
 
 #define Nil NULL
 
