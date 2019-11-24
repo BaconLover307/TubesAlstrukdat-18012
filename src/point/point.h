@@ -38,6 +38,7 @@ void TulisPOINT (POINT P);
 /* I.S. P terdefinisi */
 /* F.S. P tertulis di layar dengan format "(X,Y)" */
 
+/* Me-copy data-data Point */
 POINT CopyPOINT(POINT P);
 
 #endif

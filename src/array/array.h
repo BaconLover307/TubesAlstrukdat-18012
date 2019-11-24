@@ -146,22 +146,24 @@ void BacaBangunan(Bangunan * B);
 boolean CheckAttackTentara(Bangunan B, IdxType X, int N);
 
 /* I.S. Bangunan B terdefinisi
-      X pasti ada di dalam List
-      Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
+        X pasti ada di dalam List
+        Jumlah N pasti normal (sudah dicek pakai CheckAttackTentara) */
 /* F.S. Bangunan ke-X mengalami pengurangan jumlah tentara sebesar N */
 void TentaraAttack(Bangunan * B, IdxType X, int N);
 
 /*********************** Tentara Invaded **************************/
 
 /* I.S. Bangunan B terdefinisi
-      i pasti ada di dalam indeks bangunan B
-      Skill Shield itu aktif sekali          */
+        i pasti ada di dalam indeks bangunan B
+        Skill Shield itu aktif sekali          */
 /* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus)
       dengan perhitungan adanya pertahanan */
 void InvadedShield(Bangunan * B, IdxType i, int N);
 
 /* I.S. Bangunan B terdefinisi
       i pasti ada di dalam indeks bangunan B
+      p adalah indeks bangunan milik Pemain yang dipilih untuk Attack
+      e adalah indeks bangunan milik Lawan yang dipilih untuk di-Attack
       Mengetahui skill-skill tertentu aktif atau tidak*/
 /* F.S. Bangunan ke-i mengalami pengurangan jumlah tentara (mungkin minus) */
 void TentaraInvaded(Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType p, IdxType e, int N);
@@ -195,6 +197,7 @@ void LevelUp(Bangunan * B, IdxType X);
 // * F.S. Bangunan ke-X mengalami pengembalian level menjadi level 1
 void ResetLevel(Bangunan *B, IdxType X);
 
+/* Me-copy data-data bangunan */
 Bangunan CopyBangunan(Bangunan B);
 
 #endif

@@ -164,7 +164,10 @@ boolean CheckAttack (Graph G, List L, urutan X);
         pilihan bangunan yang dapat diserang */
 void PrintAttack (Graph G, List L, Bangunan B, urutan X, int * Count);
 
+/* Mendapatkan indeks bangunan yang dipilih dari pilihan-pilihan 
+   bangunan yang dapat di-Attack */
 int GetIdxAttack (Graph G, List L, Bangunan B, urutan X, int pos);
+
 /************ MOVE TENTARA ******************/
 
 /* Mengecek apakah bangunan ke-X yang dimiliki oleh suatu pemain dapat
@@ -181,6 +184,8 @@ boolean CheckMove (Graph G, List L, urutan X);
         yang dapat ditambahkan jumlah tentaranya. */
 void PrintMove (Graph G, List L, Bangunan B, urutan X, int * Count);
 
+/* Mendapatkan indeks bangunan yang dipilih dari pilihan-pilihan 
+   bangunan yang dapat di-Move */
 int GetIdxMove (Graph G, List L, Bangunan B, urutan X, int pos);
 
 #endif
