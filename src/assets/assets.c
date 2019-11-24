@@ -19,11 +19,6 @@ void print_image(char *filename) {
     fclose(fptr);
 }
 
-void clrscrn() {
-    system("@cls");
-    system("clear");
-}
-
 void MainM() {
     printf("%s",YELLOW);
     print_image("assets//img_mainmenu.txt");

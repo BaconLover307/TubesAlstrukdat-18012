@@ -36,7 +36,7 @@ boolean AksiValid;	// = true
 int main() {
 do {
     Exit = false;
-    clrscrn();
+    puts("");
     MainM();
     do {
         ExitMenu = false;
@@ -52,19 +52,19 @@ do {
         if (strcmp(menu,"TUTORIAL") == 0) {
             printf("\n");
             // todo Tutorial1();
-            clrscrn();
+            puts("");
             printf("#TUT1 PLACEHOLDER#\n");
             getchar();
-            clrscrn();
+            puts("");
             // todo Tutorial2();
             printf("#TUT2 PLACEHOLDER#\n");
             getchar();
-            clrscrn();
+            puts("");
             ExitMenu = true;
 
         }   // $ ######### CREDITS ########
         else if (strcmp(menu, "CREDITS") == 0) {
-            clrscrn();
+            puts("");
             Credits();
             printf("\n");
             printf("Press enter to go back to the main menu...");
@@ -80,7 +80,7 @@ do {
         } // $ ######### PLAY GAME ########
         else if (strcmp(menu, "PLAY") == 0) {
             // $ Kamus Lokal : Start Game
-            clrscrn();
+            puts("");
             char load;
             char command[100];
             Stack GameState;
@@ -144,8 +144,8 @@ do {
             } while (load != 'Y' && load != 'N');
 
             // * Countdown
-            clrscrn();
-            printf("              Starting game in...\n\n");
+            puts("");
+            printf("\n              Starting game in...\n\n");
             sleep(1);
             printf("              3...\n\n");
             sleep(1);
@@ -153,7 +153,7 @@ do {
             sleep(1);
             printf("                             1...\n");
             sleep(1);
-            clrscrn();
+            puts("");
             getchar();
 
             do {
@@ -209,7 +209,6 @@ do {
                         if (AksiValid)
                             Push(&GameState, Current);
                         getchar();
-                        puts("");
 
                     }   // $ ######### LEVEL_UP ########
                     else if (strcmp(command, "LEVEL_UP") == 0) {
@@ -219,12 +218,13 @@ do {
                         if (AksiValid)
                             Push(&GameState,Current);
                         getchar();
-                        puts("");
+                        getchar();
 
                     }   // $ ######### SKILL ########
                     else if (strcmp(command, "SKILL") == 0) {
                     	SKILL(&GameState,&DataB(InfoTop(GameState)));
-                        puts("");
+                        getchar();
+                        getchar();
 
                     }   // $ ######### MOVE ########
                     else if (strcmp(command, "MOVE") == 0) {
@@ -238,7 +238,7 @@ do {
                     }   // $ ######### UNDO ########
                     else if (strcmp(command, "UNDO") == 0) {
 						UNDO(&GameState);
-                        puts("");
+                        getchar();
 
                     }   // $ ######### END_TURN ########
                     else if (strcmp(command, "END_TURN") == 0) {

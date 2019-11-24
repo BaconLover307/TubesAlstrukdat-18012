@@ -37,8 +37,6 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         puts("....");
         sleep(1);
         puts("It seems that all your building have attacked before.");
-        puts("Press enter to go back to the command center.");
-        getchar();
         AksiValid = false;
         return;
     }
@@ -56,12 +54,14 @@ void ATTACK(Sinfotype *state, Graph relasi) {
             idxCurr = GetInfo(*Ltop,nomorBangunan);
                 // * Jika sudah pernah Attack
             if (Attacked(ElmtBan(*databuild,idxCurr))) {
-                printf("This building has attacked before!\n");
+                puts("This building has attacked before!");
                 AksiValid = false;
+                getchar();
                 return;
             } else { // * Jika isinya kosong
                 if (Tentara(ElmtBan(*databuild,idxCurr)) == 0) {
                     puts("You cannot attack with an empty building!");
+                    getchar();
                     AksiValid = false;
                     return;
                 } else { printf("\n"); }
@@ -81,7 +81,6 @@ void ATTACK(Sinfotype *state, Graph relasi) {
         puts("....");
         sleep(1);
         puts("It seems that this building does not have any other connected buildings to attack.");
-        puts("Press enter to go back to the command center.");
         getchar();
         AksiValid = false;
         return;
@@ -111,9 +110,8 @@ void ATTACK(Sinfotype *state, Graph relasi) {
 		puts("....");
 		sleep(1);
 		puts("You didn't send anyone to attack... Oh well.");
-		puts("Press enter to go back to the command center.");
-		getchar();
-		AksiValid = false;
+        getchar();
+        AksiValid = false;
 		return;
 	}
 
@@ -128,10 +126,10 @@ void ATTACK(Sinfotype *state, Graph relasi) {
     CH(FX(*TopP)) = false;
 
     if (CanCapture(*databuild, idxEnemy)) {
-        printf("The building is yours now!");
+        puts("The building is yours now!");
         CaptureAttack(TopP, EnemyP, idxEnemy, databuild);
     } else {
-        printf("You failed to grab the building.");
+        puts("You failed to grab the building.");
     }
     Attacked(ElmtBan(*databuild, idxCurr)) = true;
     getchar();
@@ -200,7 +198,6 @@ void LEVEL_UP(Sinfotype *state) {
         printf("to Level Up the building!\n");
         AksiValid = false;
     }
-    getchar();
 }
 
 // Prosedur untuk memakai skill yang sedang dimiliki pemain
@@ -276,7 +273,6 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
 
         ResetStack(gamestate);
     }
-    getchar();
 }
 
 // Prosedur untuk melakukan MOVE
@@ -307,8 +303,6 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         puts("....");
         sleep(1);
         puts("It seems that all your building have moved soldiers before.");
-        puts("Press enter to go back to the command center.");
-        getchar();
         AksiValid = false;
         return;
     }
@@ -330,11 +324,13 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
             if (Moved(ElmtBan(*databuild, idxCurr))) {
                 printf("This building has moved soldiers before!\n");
                 AksiValid = false;
+                getchar();
                 return;
             } else { // * Jika bangunan kosong
                 if (Tentara(ElmtBan(*databuild,idxCurr)) == 0) {
                     puts("You cannot move soldiers from an empty building!");
                     AksiValid = false;
+                    getchar();
                     return;
                 } else { printf("\n"); }
             }
@@ -351,9 +347,8 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         puts("....");
         sleep(1);
         puts("It seems that this building does not have any other connected buildings.");
-        puts("Press enter to go back to the command center.");
-        getchar();
         AksiValid = false;
+        getchar();
         return;
     }
 
@@ -405,17 +400,15 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         printf("Fort ");
         }
         TulisPOINT(Posisi(ElmtBan(*databuild, idxAcc)));
-        printf("!");
+        puts("!");
         Moved(ElmtBan(*databuild, idxCurr)) = true;
-        getchar();
     } else {	// * Tidak memindahkan tentara
         puts("....");
         sleep(1);
         puts("You didn't move anyone... Oh well.");
-        puts("Press enter to go back to the command center.");
         AksiValid = false;
-        getchar();
     }
+    getchar();
 }
 
 // Prosedur untuk melakukan UNDO
@@ -424,12 +417,11 @@ void UNDO(Stack *gamestate) {
     Sinfotype buang;
     // $ Algoritma
     if (IsFirstAct(*gamestate)) {
-        printf("You cannot Undo at the moment!\n");
+        puts("You cannot Undo at the moment!");
     } else {
-        printf("You have undone your past action!\n");
         Pop(gamestate, &buang);
+        puts("You have undone your past action!");
     }
-    getchar();
 }
 
 void END_TURN(Stack *gamestate) {
@@ -490,6 +482,7 @@ void EXIT(Sinfotype *state, Graph relasi, MATRIKS map) {
             EndTurn = true;
         } else if (inp == 'C') {
             ExitMenu = false;
+            puts("");
         }
     } while (inp != 'Y' && inp != 'N' && inp != 'C');
 }
