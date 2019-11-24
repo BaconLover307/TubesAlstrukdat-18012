@@ -4,6 +4,7 @@
 
 void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     // Kamus Lokal
+    int i, j;
     char input[100] = "savefile/";
 
     printf("Enter the name of your load file : ");
@@ -22,7 +23,7 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
         return;
     }
 
-    for (int i = 1; i <= Neff(B); i++) {
+    for (i = 1; i <= Neff(B); i++) {
         Name(ElmtBan(B, i)) = KataToChar(CKata);
         ADVKATA();
         Posisi(ElmtBan(B, i)).X = KataToInt(CKata);
@@ -68,18 +69,18 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     QDel(&Skill(P1), &temp);
     int q = KataToInt(CKata); ADVKATA();
 
-    for (int i = 1; i <= q; i++) {
+    for (i = 1; i <= q; i++) {
         char skl[10];
-        for (int j = 1; j <= CKata.Length; j++) {
+        for (j = 1; j <= CKata.Length; j++) {
             skl[j - 1] = CKata.TabKata[j];
         }
         QAdd(&Skill(P1), skl); ADVKATA();
     }
     q = KataToInt(CKata); ADVKATA();
     QDel(&Skill(P2), &temp);
-    for (int i = 1; i <= q; i++) {
+    for (i = 1; i <= q; i++) {
         char skl[10];
-        for (int j = 1; j <= CKata.Length; j++) {
+        for (j = 1; j <= CKata.Length; j++) {
             skl[j - 1] = CKata.TabKata[j];
         }
         QAdd(&Skill(P2), skl); ADVKATA();
@@ -87,12 +88,12 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
 
     // listbuildings
     q = KataToInt(CKata); ADVKATA();
-    for (int i = 1; i <= q; i++) {
+    for (i = 1; i <= q; i++) {
         int x = KataToInt(CKata); ADVKATA();
         InsVPrio(&ListBan(P1), x);
     }
     q = KataToInt(CKata); ADVKATA();
-    for (int i = 1; i <= q; i++) {
+    for (i = 1; i <= q; i++) {
         int x = KataToInt(CKata); ADVKATA();
         InsVPrio(&ListBan(P2), x);
     }
@@ -102,8 +103,8 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     MakeEmptyGraph(relasi);
     AddParent(relasi, makz);
 
-    for (int i = 1; i <= makz; i++) {
-        for (int j = 1; j <= makz; j++) {
+    for (i = 1; i <= makz; i++) {
+        for (j = 1; j <= makz; j++) {
             int x = KataToInt(CKata); ADVKATA();
             if (x == 1) {
                 AddRelation(relasi, i, j);
@@ -115,8 +116,8 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     int kol = KataToInt(CKata); ADVKATA();
     // printf("brs = %d and kol = %d\n", brs, kol);
     MakeMATRIKS(brs, kol, map);
-    for (int i = 1; i <= brs; i++) {
-        for (int j = 1; j <= kol; j++) {
+    for (i = 1; i <= brs; i++) {
+        for (j = 1; j <= kol; j++) {
             Elmt(*map, i, j) = KataToInt(CKata); ADVKATA();
         }
     }
