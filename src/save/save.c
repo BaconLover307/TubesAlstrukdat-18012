@@ -33,6 +33,8 @@ void saveData(Sinfotype state, Graph relasi, MATRIKS M) {
         //printf("position : %d %d\n", Posisi(ElmtBan(DataB(state), i)).X, Posisi(ElmtBan(DataB(state), i)).Y);
         fprintf(fp, "%d\n", Level(ElmtBan(DataB(state), i)));
         //printf("level : %d\n", Level(ElmtBan(DataB(state), i)));
+        fprintf(fp, "%d\n", Tentara(ElmtBan(DataB(state), i)));
+        //printf("souldiers : %d\n", Tentara(ElmtBan(DataB(state), i)));
         fprintf(fp, "%d\n", Moved(ElmtBan(DataB(state), i)));
         //printf("moved : %d\n", Moved(ElmtBan(DataB(state), i)));
         fprintf(fp, "%d\n", Attacked(ElmtBan(DataB(state), i)));
