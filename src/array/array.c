@@ -147,7 +147,7 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
 
   /* ALGORITMA */
   if (Tentara(ElmtBan(*B, i)) > N * 3 / 4) {
-    Tentara(ElmtBan(*B, i)) -= N * 3 / 4;
+    Tentara(ElmtBan(*B, i)) = Tentara(ElmtBan(*B, i)) - N * 3 / 4;
   } else /* Tentara(ElmtBan(*B, i)) <= N * 3 / 4 */ {
     Tentara(ElmtBan(*B, i)) = (-1) * (N - Tentara(ElmtBan(*B, i)) * 4 / 3);
   }
@@ -155,9 +155,18 @@ void InvadedShield (Bangunan * B, IdxType i, int N) {
 
 void TentaraInvaded (Bangunan * B, boolean Critical_Hit, boolean Attack_Up, boolean Shield, IdxType p, IdxType e, int N) {
   /* KAMUS LOKAL */
+
   /* ALGORITMA */
   if (Critical_Hit) {
-      TentaraAttack(B, e, 2*N);
+    if (Tentara(ElmtBan(*B, e)) > 2 * N) {
+      Tentara(ElmtBan(*B, e)) = Tentara(ElmtBan(*B, e)) - N * 2;
+      
+    } else /* Tentara(ElmtBan(*B, e)) <= 2 * N */ {
+      if (Tentara(ElmtBan(*B, e)) % 2 == 1) {
+        Tentara(ElmtBan(*B, e)) += 1;
+      }
+      Tentara(ElmtBan(*B, e)) = (-1) * (N - Tentara(ElmtBan(*B, e)) / 2);
+    }
 
   } else /* !Critical_Hit */ {
     if (Attack_Up) {
