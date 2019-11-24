@@ -128,10 +128,10 @@ void ATTACK(Sinfotype *state, Graph relasi) {
     CH(FX(*TopP)) = false;
 
     if (CanCapture(*databuild, idxEnemy)) {
-        printf("The building is yours now!\n");
+        printf("The building is yours now!");
         CaptureAttack(TopP, EnemyP, idxEnemy, databuild);
     } else {
-        printf("You failed to grab the building.\n");
+        printf("You failed to grab the building.");
     }
     Attacked(ElmtBan(*databuild, idxCurr)) = true;
     getchar();
@@ -405,7 +405,7 @@ void MOVE(Sinfotype *state, Graph relasi) { // todo
         printf("Fort ");
         }
         TulisPOINT(Posisi(ElmtBan(*databuild, idxAcc)));
-        puts("!");
+        printf("!");
         Moved(ElmtBan(*databuild, idxCurr)) = true;
         getchar();
     } else {	// * Tidak memindahkan tentara
@@ -450,7 +450,7 @@ void END_TURN(Stack *gamestate) {
     // $ Algoritma
     if (!ET(FX(*TopP))) {
         TurnInfo(InfoTop(*gamestate)) = TurnInfo(InfoTop(*gamestate)) % 2 + 1;
-        printf("Changing turns"); sleep(0.3);printf(".");sleep(0.3);printf(".");sleep(0.3);printf("\n\n");
+        printf("Changing turns"); sleep(0.5);printf(".");sleep(0.5);printf(".");sleep(0.5);printf("\n\n");
     }
 
     // ! Detector Skill Instant Reinforcement
@@ -466,7 +466,6 @@ void END_TURN(Stack *gamestate) {
     ReduceDurationSH(EnemyP);
     ResetBuildingStatus(*Ltop, &DataB(InfoTop(*gamestate)));
     ResetStack(gamestate);
-    getchar();
 }
 
 // Prosedur untuk melakukan SAVE

@@ -264,7 +264,7 @@ do {
                         case 'B': printf("%s", BLUE); break;
                         case 'C': printf("%s", CYAN); break;
                         case 'M': printf("%s", MAGENTA); break;
-                        default: printf("%s", NORMAL); break;
+                        default : printf("%s", NORMAL); break;
                     }
                     printf("[] ^ ===== ^ ===== ^ ===== ^ ===== ^ ===== ^ []\n\n", TurnInfo(InfoTop(GameState))),
                     printf("%s", NORMAL);

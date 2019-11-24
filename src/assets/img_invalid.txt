@@ -4,4 +4,3 @@
        |_|      Press enter to       |_|
         _         try again!          _
        [_]                           [_]
-`
