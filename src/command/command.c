@@ -182,7 +182,7 @@ void LEVEL_UP(Sinfotype *state) {
         } else if (namaBuilding == 'V') { printf("Your Village ");
         } else if (namaBuilding == 'T') { printf("Your Tower ");
         } else /*(namaBuilding == 'T')*/ {printf("Your Fort ");}
-        printf("is at maximum level!\n", Name(ElmtBan(*databuild,idxCurr)));
+        printf("is at maximum level!\n");
         AksiValid = false;
 	} else if (CheckLevelUp(*databuild,idxCurr)) {
         LevelUp(databuild,idxCurr);
@@ -197,7 +197,7 @@ void LEVEL_UP(Sinfotype *state) {
         } else if (namaBuilding == 'V') { printf("your Village ");
         } else if (namaBuilding == 'T') { printf("your Tower ");
         } else /*(namaBuilding == 'T')*/ {printf("your Fort ");}
-        printf("to Level Up the building!\n", Name(ElmtBan(*databuild,idxCurr)));
+        printf("to Level Up the building!\n");
         AksiValid = false;
     }
     getchar();
@@ -231,40 +231,40 @@ void SKILL(Stack *gamestate, Bangunan *databuild) {
         // * Use Skill
         QDel(Qtop, &usedskill);
 			// * Switch
-			if (strcmpi(usedskill, "IU") == 0)
+			if (strcmp(usedskill, "IU") == 0)
 		{
 			printf("!!! INSTANT UPGRADE !!!\n");
             InstantUpgrade(TopP,databuild);
             printf("All your buildings have been Leveled Up!!\n");
 
-        } else if (strcmpi(usedskill,"SH") == 0) {
+        } else if (strcmp(usedskill,"SH") == 0) {
             printf("!!! SHIELD UP !!!\n");
             Shield(TopP);
             printf("All your buildings have been Shielded for 2 turns!!\n");
 
-        } else if (strcmpi(usedskill,"ET") == 0) {
+        } else if (strcmp(usedskill,"ET") == 0) {
             printf("You have gained an Extra Turn!!\n");
             ExtraTurn(TopP);
             // ! Detector Skill Critical Hit
             CheckGetCH(Qenemy);
 
-        } else if (strcmpi(usedskill,"AU") == 0) {
+        } else if (strcmp(usedskill,"AU") == 0) {
             printf("!!! ATTACK UP !!!\n");
             AttackUp(TopP);
             printf("Your attacks for this turn ignore building defenses!!\n");
 
-        } else if (strcmpi(usedskill,"CH") == 0) {
+        } else if (strcmp(usedskill,"CH") == 0) {
             printf("!!! CRITICAL HIT IMMINENT !!!\n");
             CriticalHit(TopP);
             printf("Your next attack will be twice as effective!!\n");
 
 
-        } else if (strcmpi(usedskill,"IR") == 0) {
+        } else if (strcmp(usedskill,"IR") == 0) {
             printf("!!! INSTANT REINFORCEMENT !!!\n");
             InstantReinforcement(TopP, databuild);
             printf("All your buildings have been reinforced by 5 soldiers!!\n");
 
-        } else if (strcmpi(usedskill,"BA") == 0) {
+        } else if (strcmp(usedskill,"BA") == 0) {
             int bangunanmusuh1 = NbElmtList(*Lenemy);
             printf("!!! BARRAGE !!!\n");
             Barrage(TopP, EnemyP, databuild);

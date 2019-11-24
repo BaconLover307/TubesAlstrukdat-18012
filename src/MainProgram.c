@@ -17,10 +17,8 @@
  */
 // $ ******* INCLUDE FILES ********
 #include <stdio.h>
-//#include <stdlib.h>
 #include <unistd.h>
 
-//#include "includes.c"
 #include "command/command.h"
 #include "load/load.h"
 #include "save/save.h"
@@ -65,7 +63,7 @@ do {
             ExitMenu = true;
 
         }   // $ ######### CREDITS ########
-        else if (strcmpi(menu, "CREDITS") == 0) {
+        else if (strcmp(menu, "CREDITS") == 0) {
             clrscrn();
             Credits();
             printf("\n");
@@ -200,7 +198,7 @@ do {
                     case 'M': printf("%s", MAGENTA); break;
                     default: printf("%s", NORMAL); break;
                     }
-                    printf("[] V ===== V ===== V ===== V ===== V ===== V []\n\n", TurnInfo(InfoTop(GameState))),
+                    printf("[] V ===== V ===== V ===== V ===== V ===== V []\n\n"),
                     printf("%s", NORMAL);
 
                         // $ ######### ATTACK ########
@@ -247,12 +245,12 @@ do {
 						END_TURN(&GameState);
 
                     }   // $ ######### SAVE ########
-                    else if (strcmpi(command, "SAVE") == 0) {
+                    else if (strcmp(command, "SAVE") == 0) {
 						SAVE(&InfoTop(GameState), RelasiBan, MapBlueprint);
                         getchar();
 
                     }   // $ ######### EXIT ########
-                    else if (strcmpi(command, "EXIT") == 0) {
+                    else if (strcmp(command, "EXIT") == 0) {
 						EXIT(&InfoTop(GameState), RelasiBan, MapBlueprint);
                         getchar();
 
@@ -266,7 +264,7 @@ do {
                         case 'M': printf("%s", MAGENTA); break;
                         default : printf("%s", NORMAL); break;
                     }
-                    printf("[] ^ ===== ^ ===== ^ ===== ^ ===== ^ ===== ^ []\n\n", TurnInfo(InfoTop(GameState))),
+                    printf("[] ^ ===== ^ ===== ^ ===== ^ ===== ^ ===== ^ []\n\n"),
                     printf("%s", NORMAL);
 
             	} while (!EndTurn);
