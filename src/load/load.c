@@ -32,6 +32,8 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
         ADVKATA();
         Level(ElmtBan(B, i)) = KataToInt(CKata);
         ADVKATA();
+        Tentara(ElmtBan(B, i)) = KataToInt(CKata);
+        ADVKATA();
         Moved(ElmtBan(B, i)) = KataToInt(CKata);
         ADVKATA();
         Attacked(ElmtBan(B, i)) = KataToInt(CKata);
@@ -122,5 +124,4 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
         }
     }
     puts("File loaded succesfully!");
-    sleep(1);
 }
