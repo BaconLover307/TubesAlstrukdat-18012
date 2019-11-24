@@ -5,17 +5,6 @@
 #include "../pcolor/pcolor.h"
 #define MAX_LEN 128
 
-// $ ********** HEADER **********
-/*
-void print_image(char *filename);
-// Fungsi utama untuk mencetak aset-aset
-void clrscrn();
-// Fungsi untuk menghapus layar CMD
-void MainM();
-void Menu();
-void Credits();
-void Invalid();
-*/
 // $ ********** IMPLEMENTASI **********
 
 void print_image(char *filename) {

@@ -450,7 +450,7 @@ void END_TURN(Stack *gamestate) {
     // $ Algoritma
     if (!ET(FX(*TopP))) {
         TurnInfo(InfoTop(*gamestate)) = TurnInfo(InfoTop(*gamestate)) % 2 + 1;
-        printf("Changing turns"); sleep(0.5);printf(".");sleep(0.5);printf(".");sleep(0.5);printf("\n\n");
+        printf("Changing turns."); sleep(1);printf(".");sleep(1);printf("\n\n");
     }
 
     // ! Detector Skill Instant Reinforcement

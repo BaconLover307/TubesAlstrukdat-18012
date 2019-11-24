@@ -41,7 +41,7 @@ do {
     do {
         ExitMenu = false;
         Menu();
-        // Lakukan Input dengan 'mesinkata'
+        // * Lakukan Input dengan 'mesinkata'
         int idxMenu = 0;
         do {
             scanf("%c", menu + idxMenu);
@@ -146,13 +146,13 @@ do {
             // * Countdown
             clrscrn();
             printf("              Starting game in...\n\n");
-            sleep(0.5);
+            sleep(1);
             printf("              3...\n\n");
-            sleep(0.5);
+            sleep(1);
             printf("                     2...\n\n");
-            sleep(0.5);
+            sleep(1);
             printf("                             1...\n");
-            sleep(0.5);
+            sleep(1);
             clrscrn();
             getchar();
 

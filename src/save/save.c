@@ -24,7 +24,7 @@ void saveData(Sinfotype state, Graph relasi, MATRIKS M) {
     fprintf(fp, "%d\n", Neff(DataB(state)));
     //printf("number buildings : %d\n", Neff(DataB(state)));
 
-    // Printing Name, Position, level, souldiers, hasMoved, hasAttacked, and defense of every building
+    // Printing Name, Position, level, soldiers, hasMoved, hasAttacked, and defense of every building
     for (i = 1; i <= neff; i++) {
         //printf("%d :\n", i);
         fprintf(fp, "%c\n", Name(ElmtBan(DataB(state), i)));
