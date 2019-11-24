@@ -5,7 +5,8 @@
 int main() {
     Sinfotype State;
     Graph RelasiBan;
-    saveData(State, RelasiBan);
+    Matriks M;
+    saveData(State, RelasiBan, M);
 
     return 0;
 }
