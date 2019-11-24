@@ -20,7 +20,11 @@
 //#include <stdlib.h>
 #include <unistd.h>
 
-#include "includes.c"
+//#include "includes.c"
+#include "command/command.h"
+#include "load/load.h"
+#include "save/save.h"
+#include "assets/assets.c"
 #include "string.h"
 
 // $ ***** Variables *****
@@ -132,25 +136,6 @@ do {
                     // * Bangunan pertama pemain
                     InsVPrio(&ListBan(PlayerOne),1);
                     InsVPrio(&ListBan(PlayerTwo),2);
-                    // ! DEBUG
-                    InsVPrio(&ListBan(PlayerOne),4);
-                    /*
-					InsVPrio(&ListBan(PlayerOne),17);
-                    InsVPrio(&ListBan(PlayerOne),13);
-
-                    InsVPrio(&ListBan(PlayerTwo),5);
-                    InsVPrio(&ListBan(PlayerTwo),6);
-                    InsVPrio(&ListBan(PlayerTwo),7);
-                    InsVPrio(&ListBan(PlayerTwo),8);
-                    InsVPrio(&ListBan(PlayerTwo),9);
-                    InsVPrio(&ListBan(PlayerTwo),10);
-
-                    QAdd(&Skill(PlayerOne),"BA");
-                    QAdd(&Skill(PlayerTwo),"IU");
-                    QAdd(&Skill(PlayerTwo),"IU");
-                    QAdd(&Skill(PlayerTwo),"IU");
-                    QAdd(&Skill(PlayerTwo),"IU");
-					*/
 
                     // * AKHIRNYA MULAI
                     Turn = 1;

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include "load.h"
 
 void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {

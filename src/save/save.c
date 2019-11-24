@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #include "save.h"
 
 void saveData(Sinfotype state, Graph relasi, MATRIKS M) {
