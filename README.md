@@ -1,7 +1,7 @@
 # Tugas Besar Alstrukdat - Avatar World War
 ## Kelas K3 Kelompok 8
 
-Program ini adalah contoh penerapan ADT dalam pembuatan sebuah text based-game
+Program ini adalah contoh penerapan ADT dalam pembuatan sebuah text based-game.
 
 ## Derivables
 * src: folder-folder modul berisi script C, file konfigurasi, program utama, dan assets
@@ -10,7 +10,7 @@ Program ini adalah contoh penerapan ADT dalam pembuatan sebuah text based-game
 ## Instalasi Program
 
 Program ini dibuat menggunakan bahasa pemrograman C oleh karena itu dibutuhkan C compiler GCC versi 5.4.0 atau lebih tinggi. Compiler dapat diunduh melalui https://sourceforge.net/projects/tdm-gcc/files/
-Setelah Python diinstall, lakukan clone pada repository ini, atau download dalam file .zip dan extract ke folder yang diinginkan.
+Setelah compiler GCC diinstall, lakukan clone pada repository ini, atau download dalam file .zip dan extract ke folder yang diinginkan.
 
 ### Cara Kompilasi Program
 
@@ -39,9 +39,12 @@ Setelah program dijalankan, akan muncul sebuah tampilan menu utama. Untuk memaha
 ## Kontributor
 Program ini dibuat untuk memenuhi salah satu Tugas Besar IF2110 Algoritma dan Struktur Data Teknik Informatika ITB. Adapun pembuat dari program ini adalah :
 [ Kelas K3, Kelompok 08 ]
-* Muhammad Daru Darmakusuma - 13518057
-* Arthur Edgar Yunanto      - 13518090
-* Gregorius Jovan Kresnadi  - 13518135
+* Muhammad Hasan           - 13518012
+* Anna Elvira Hartoyo      - 13518045
+* Daniel Riyanto           - 13518075
+* Faris Muhammad Kautsar   - 13518105
+* Gregorius Jovan Kresnadi - 13518135
 
-https://github.com/BaconLover307/TubesAl
+NOTE : Program stable in Windows and Linux, best used bash terminal
 
+https://github.com/BaconLover307/TubesAlstrukdat-18012

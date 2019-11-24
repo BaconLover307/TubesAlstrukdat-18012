@@ -32,6 +32,7 @@ void print_image(char *filename) {
 
 void clrscrn() {
     system("@cls");
+    system("clear");
 }
 
 void MainM() {
