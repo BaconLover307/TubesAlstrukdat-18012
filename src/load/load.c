@@ -3,10 +3,10 @@
 
 void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     // Kamus Lokal
-    char input[100];
+    char input[100] = "savefile/";
 
     printf("Enter the name of your load file : ");
-    scanf("%s", input);
+    scanf("%s", input + 9);
 
     // Algoritma
     STARTKATA(input);
@@ -15,6 +15,11 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
     // Neff
     Neff(B) = KataToInt(CKata); ADVKATA();
     int makz = Neff(B);
+    if (makz == 0) {
+        printf("Load Failed! There seems to be no file named %s\n", (input + 9));
+        TurnInfo(*state) = -1;
+        return;
+    }
 
     for (int i = 1; i <= Neff(B); i++) {
         Name(ElmtBan(B, i)) = KataToChar(CKata);
@@ -114,5 +119,6 @@ void LoadFile(Sinfotype * state, Graph * relasi, MATRIKS * map) {
             Elmt(*map, i, j) = KataToInt(CKata); ADVKATA();
         }
     }
-
+    puts("File loaded succesfully!");
+    sleep(1);
 }

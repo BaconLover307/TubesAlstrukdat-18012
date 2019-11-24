@@ -101,6 +101,9 @@ do {
                 scanf(" %c", &load);
                 if (load == 'Y') {
                     LoadFile(&Current, &RelasiBan, &MapBlueprint);
+                    while (TurnInfo(Current) == -1) {
+                        LoadFile(&Current, &RelasiBan, &MapBlueprint);
+                    }
                     PlayerOne = P1Info(Current);
                     PlayerTwo = P2Info(Current);
                     Turn = TurnInfo(Current);
@@ -152,10 +155,11 @@ do {
                     // * AKHIRNYA MULAI
                     Turn = 1;
                     StartTurn(&GameState,PlayerOne,PlayerTwo,Turn,DataBangunan);
+                } else {
+                    puts("Input is invalid!");
                 }
             } while (load != 'Y' && load != 'N');
 
-            // todo maen game
             // * Countdown
             clrscrn();
             printf("              Starting game in...\n\n");

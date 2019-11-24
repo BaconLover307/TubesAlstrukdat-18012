@@ -479,7 +479,7 @@ void EXIT(Sinfotype *state, Graph relasi, MATRIKS map) {
     char inp;
     printf("Do you want to save the game before exiting the game? ");
     do {
-        printf("\nEnter your input (Y/N/C) : \n");
+        printf("\nEnter your input (Y/N/C) : ");
         scanf(" %c", &inp);
         if (inp == 'Y') {
             SAVE(state, relasi, map);

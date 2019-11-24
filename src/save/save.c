@@ -5,14 +5,14 @@ void saveData(Sinfotype state, Graph relasi, MATRIKS M) {
 
     /* Local Dictionary */
     int i, j, neff, maks1, maks2;
-    char input[100] = "coba.txt";
+    char input[100] = "savefile/";
     address P;
 
     /* Algorithm */
     /* Taking input of the desired name with "mesinkata" */
 
-    printf("Enter the name of your save file : ");
-    scanf("%s", input);
+    printf("Enter the name of your save file (without .txt/.dat) : ");
+    scanf("%s", input + 9);
 
     FILE * fp = fopen(input, "w");
 
@@ -199,6 +199,6 @@ void saveData(Sinfotype state, Graph relasi, MATRIKS M) {
 
     fclose(fp);
 
-    puts("File saved succesfully!");
+    printf("File has been saved succesfully!\n");
     getchar();
 }
