@@ -25,6 +25,7 @@ Instruksi di atas akan membuat sebuah file executable bernama "main", jika naman
 
 Setelah file MainProgram berhasil dicompile, maka program dapat dijalankan. Untuk menjalankan programnya, bukalah terminal dari directory src dan silakan jalankan programnya. Berikut adalah instruksi untuk menjalankan programnya :
 
+gcc -o main MainProgram.c array//array.c command//command.c graph//graph.c listlinier//listlinier.c load//load.c matriks//matriks.c pcolor//pcolor.c player//player.c point//point.c queue//queue.c save//save.c stackt//stackt.c mesinkar_config//mesinkar_config.c mesinkata_config//mesinkata_config.c
 ```
 ./main
 ```
